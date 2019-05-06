@@ -1,23 +1,3 @@
-const m = require('mithril');
-const root = document.body;
-import './style.css';
-
-//functions
-m.route.prefix('?')
-
-//Views
-import LoginPage from "./views/LoginPage/LoginPage";
-import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
-
-
-m.route(root, "/", {
-    "/": LoginPage,
-    "/add":AddLeadPage
-})
-
-
-//try connecting to the database
-
 const { Database, aql } = require('arangojs');
 
 // ## Const variables for connecting to ArangoDB database
@@ -57,4 +37,3 @@ result.then(
     data=>data.map(doc=>console.log(doc)),
     e=>console.error(e)
 );
-
