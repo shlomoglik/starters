@@ -7,11 +7,11 @@
     "dev": "webpack -d --config webpack.dev.js --watch",
     "prod": "webpack --config webpack.prod.js",
     "size": "webpack -p --config ‏‏webpack.size.js",
-    "devserver": "liveserver",
+    "devserver": "nodemon",
     "open": "start chrome  w:public/index.html ",
     "watch:sass": "node-sass src/sass/main.scss src/style.css -w",
     "server":"node app",
-    "start": "npm-run-all --parallel watch:sass dev server  nodemon",
+    "start": "npm-run-all --parallel watch:sass dev server  devserver",
     "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' src/sass/style.css -o public/style.prefix.css",
     "compress:css": "node-sass public/style.prefix.css public/style.comp.css --output-style compressed",
     "build:css": "npm-run-all  prefix:css compress:css"
