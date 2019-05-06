@@ -3,7 +3,7 @@ const root = document.body;
 import './style.css';
 
 //functions
-m.route.prefix('?')
+// m.route.prefix('?')
 
 //Views
 import LoginPage from "./views/LoginPage/LoginPage";
