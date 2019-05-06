@@ -1,0 +1,72 @@
+.menu{
+    &__check {
+        display: none;
+    }
+
+    &__button {
+        background-color: var(--color-grey-light-1);
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        z-index: 2000;
+        box-shadow: var(--box-shadow-1);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    &__icon{
+        position: relative;
+        display: flex;
+
+        &,
+        &::after,
+        &::before{
+            height: 2px;
+            width: 3rem;
+            background-color: var(--color-grey-dark-2);
+        }
+  
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            transition: all .2s;
+        }
+
+        &::before { top: -.8rem; }
+        &::after { top: .8rem; }
+    }
+
+    //HOVER EFECT
+    &__button:hover &__icon::before {
+        top: -1rem;
+    }
+
+    &__button:hover &__icon::after {
+        top: 1rem;
+    }
+
+    &__button:hover{
+        box-shadow: var(--box-shadow-2);
+        transform: translateY(-.1rem);
+        cursor: pointer;
+    }
+
+    //CHECK EFECT
+    &__check:checked + &__button &__icon {
+        background-color: transparent;
+    }
+
+    &__check:checked + &__button &__icon::before {
+        top: 0;
+        transform: rotate(135deg);
+    }
+
+    &__check:checked + &__button &__icon::after {
+        top: 0;
+        transform: rotate(-135deg);
+    }
+}

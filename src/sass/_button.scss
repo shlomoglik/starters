@@ -1,0 +1,44 @@
+.btn {
+    &,
+    &:link,
+    &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block;
+        border-radius: 10rem;
+        position: relative;
+        font-family: 'Rubic' , sans-serif;
+        font-size: var(--def-font-size);  
+        
+        transition: all .2s;
+
+        //Change for the <button> element
+        border: none;
+        cursor: pointer;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--box-shadow-1);
+    }
+    &:active{
+        transform: translateY(-1px);
+        box-shadow: var(--box-shadow-2);
+    }
+    &:focus {
+        outline: none;
+    }
+    
+
+
+    &--white {
+        background-color: var(--color-white);
+        color: var(--color-grey-dark-1);
+    }
+
+    &--def {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+    }
+}
