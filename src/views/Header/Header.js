@@ -14,7 +14,7 @@ module.exports = {
           {vnode.attrs.title}
         </div>
         <div class="header__logo-box">
-          <img src="/public/img/logo.png" alt="logo image" class="header__logo"/>
+          <img src="img/logo.png" alt="logo image" class="header__logo"/>
         </div>
       </div>
     )

@@ -1,8 +1,17 @@
 import m from "mithril"
 import Header from '../Header/Header'
-import {loginUser} from '/src/functions/login'
+import {loginUser} from '../../functions/login'
 
 var loginPage = {
+  invalid:(vnode)=>{
+    console.log('start function form invalid!!');
+    let inputs = vnode.form.elements;
+    console.log(inputs);
+    // inputs.map(input=>{console.log('TODO=> clear element',input)});
+    // vnode.form.animate( 
+    //   {animation: "shake 0.82s cubic-bezier(.36,.07,.19,.97) both",
+    //   transform: "translate3d(0, 0, 0)"});
+  },
   view: (vnode) => {
     return (
       <div class="login">
@@ -39,6 +48,7 @@ function login(e) {
     }
   }
   loginUser(data);
+  // console.log('test shake form ',loginPage.invalid);
 }
 
   module.exports = loginPage;

@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 // Setup express server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 9999;
 const app = express();
 
 // middleware
@@ -16,7 +16,7 @@ app.listen(port, function () {
     console.log('connection on port ' + port);
 });
 
-
+// LOGIN POST AND AUTH
 app.post('/loginUserApi', (req, res, next) => {
     console.log('start function post login');
     const dbConfig = {
@@ -31,35 +31,48 @@ app.post('/loginUserApi', (req, res, next) => {
     });
     db.useDatabase(`${dbConfig.database}`);
     db.useBasicAuth(`${dbConfig.username}`, `${dbConfig.password}`);
-    // console.log(db.get());
     // db.useBearerAuth(genereteToken());
-    let prom =  db.get();
-    let isAuth = {};
+
+    let prom = db.get();
+    let auth = {};
     prom.then(
-        ok=>isAuth.auth = "ok",
-        err=>{
-            console.error('err on login = ');
-            console.log('should send msg to client');
-            isAuth.auth = "not";
+        ok => {
+            auth.isAuth = "ok";
+            // auth.token = getToken();
+            auth.myToken = genereteToken();
+        },
+        err => {
+            // console.log(err);
+            auth.isAuth = "not";
         }
     ).then(
-        result=>{
-            console.log(isAuth);
-            res.send(isAuth);
+        result => {
+            console.log(auth.isAuth);
+            res.send(auth);
         }
     )
 });
-    // function rand(){
-    //     return Math.random().toString(36).substr(2); // remove `0.`
-    // };
-    // function genereteToken() {
-    //     return rand() + rand(); // to make it longer
-    // };
 
-// function getToken() {
-//     var token = db._connection.config.headers.authorization;
-//     var len = token.length; //total length of string
-//     return token.substr(6, len - 7); //remove Basic and =
+function rand() {
+    return Math.random().toString(36).substr(2); // remove `0.`
+};
+function genereteToken() {
+    return rand() + rand(); // to make it longer
+};
+
+// async function getToken() {
+//     try{
+//         var token = await db._connection.config.headers.authorization;
+//     }catch(e){
+//         console.error(e);
+//     }
+//     token.then(
+//         t=>{
+//             var len = token.length; //total length of string
+//             return token.substr(6, len - 7); //remove Basic and =
+//         },
+//         err=>console.error(err)
+//     )
 // }
 
 // console.log(getToken());

@@ -12,6 +12,15 @@ import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
 
 m.route(root, "/", {
     "/": LoginPage,
-    "/add":AddLeadPage
-})
+    // "/add/:token":AddLeadPage
+    "/add": {
+        onmatch: function() {
+            if(!localStorage.getItem('auth-token')){
+                m.route.set("/");
+            }else{
+                return AddLeadPage;
+            }
+        }
+    }
+});
 
