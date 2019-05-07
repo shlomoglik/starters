@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 // Setup express server
-const port = process.env.PORT || 9999;
+const port = process.env.PORT || 3000;
 const app = express();
 
 // middleware

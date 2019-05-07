@@ -22,7 +22,6 @@ function loginUser(uData) {
                     m.route.set("/add")
                 } else if (res.isAuth == 'not') {
                     alert('please check your login details');
-                    console.log(LoginPage.map(item=>console.log(item)));
                 }
             }, err => {
                 console.error(err);
