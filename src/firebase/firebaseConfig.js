@@ -13,6 +13,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+console.log('start init app');
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();

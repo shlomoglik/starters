@@ -1,3 +1,4 @@
+import '../src/firebase/firebaseConfig'
 const m = require('mithril');
 const root = document.body;
 import './style.css';

@@ -2,17 +2,27 @@ import m from "mithril"
 import Header from '../Header/Header'
 import User from '../../data/Login'
 
-var LoginPage = {
+let LoginPage = {
   oninit:(vnode)=>{
     console.log('initialize login page');
+    vnode.state.valid = true;
     User.logoutUser();
+  },
+  onupdate:(vnode)=>{
+    let dom = vnode.dom;
+    if(!vnode.state.valid){
+      dom.querySelector('.login__form').classList.add("shake");
+      return new Promise(function(resolve) {
+          vnode.dom.addEventListener("animationend", resolve)
+      })
+    }
   },
   view: (vnode) => {
     return (
       <div class="login">
         <Header title="התחבר למערכת" />
         <form class="login__form"
-        onsubmit={(e) => { login(e) }} 
+        onsubmit={(e) => { login(e,vnode) }} 
         >
           <div class="login__row">
             <input type="email" id="uMail" name="uMail" class="login__input" placeholder="אימייל" required autofocus
@@ -35,10 +45,10 @@ var LoginPage = {
   }
 }
 
-function login(e) {
+
+function login(e,vnode) {
   e.preventDefault();
-  User.loginUser();
-  // TODO => invalid behavior
+  User.loginUser(vnode);
 }
 
-  module.exports = LoginPage;
+module.exports =  LoginPage;

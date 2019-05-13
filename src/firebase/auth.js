@@ -10,20 +10,14 @@ function signIn(email, password) {
 }
 
 function logout() {
-    return _auth.signOut();
+    _auth.signOut().then(
+        ()=>{
+            console.log('user is logout');
+            console.log(`user is: ${_auth.currentUser}`)
+        },
+        err=>console.error(err)
+    );
 }
-
-
-_auth.onAuthStateChanged(user => {
-    if (user) {
-        user.getIdTokenResult().then(token=>{
-            console.log('user token is',token);
-        })
-    } else {
-        console.log('user logged out so route to / page');
-        m.route.set('/');
-    }
-})
 
 module.exports = { signIn, logout };
 

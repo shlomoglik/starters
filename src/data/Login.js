@@ -11,7 +11,7 @@ let User = {
         name: "",
         phone: ""
     },
-    loginUser: () => {
+    loginUser: (vnode) => {
         console.log('start User.loginUser')
         let login = signIn(User.data.email, User.data.password); // return Promise
         login.then(
@@ -22,7 +22,12 @@ let User = {
                 // console.log(user)
                 User._user = cred.user;
             },
-            err => console.error('error on login', err)
+            err => {
+                console.error('error on login', err);
+                console.log(`TODO => change state valid = from ${vnode.state.valid} to false ?m.redrew()?`);
+                vnode.state.valid = false;
+                m.redraw();
+            }
         )
     },
     logoutUser: () => {
