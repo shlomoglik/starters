@@ -16,9 +16,9 @@ function loginUser(uData) {
                     let token = res.myToken;
                     store.token = token;
                     store.user = uData;
-                    localStorage.setItem("auth-token", token);
+                    sessionStorage.setItem("auth-token", token);
                     console.log(store);
-                    console.log(localStorage.getItem("auth-token"));
+                    console.log(sessionStorage.getItem("auth-token"));
                     m.route.set("/add")
                 } else if (res.isAuth == 'not') {
                     alert('please check your login details');

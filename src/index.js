@@ -15,7 +15,8 @@ m.route(root, "/", {
     // "/add/:token":AddLeadPage
     "/add": {
         onmatch: function() {
-            if(!localStorage.getItem('auth-token')){
+            if(!sessionStorage.getItem('auth-token')){
+                console.log('not find auth token ')
                 m.route.set("/");
             }else{
                 return AddLeadPage;
