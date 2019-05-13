@@ -1,7 +1,7 @@
 import m from 'mithril'
 import db from '../firebase/firebaseConfig'
-import _user from '../firebase/auth'
-import {signIn} from '../firebase/auth'
+// import _user from '../firebase/auth'
+import { signIn, logout } from '../firebase/auth'
 import store from './store'
 import LoginPage from '../views/LoginPage/LoginPage'
 
@@ -14,16 +14,18 @@ let User = {
     },
     loginUser: () => {
         console.log('start User.loginUser')
-        var success = signIn(User.data.email , User.data.password);
-        // if(success){
-        //     sessionStorage.setItem('uid','asdfasdf');
-        //     m.route.set("/add");
-        // }
+        let login = signIn(User.data.email, User.data.password); // return Promise
+        login.then(
+            cred => {
+                m.route.set("/add");
+                User._user = cred.user;
+            },
+            err => console.error('error on login', err)
+        )
     },
     logoutUser: () => {
         console.log('start User.logoutUser')
-        console.log(_user);
-        // logout();
+        logout();
     }
 }
 

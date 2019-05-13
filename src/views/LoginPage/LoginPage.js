@@ -21,7 +21,7 @@ var LoginPage = {
             <label for="uMail" class="login__label">שם משתמש</label>
           </div>
           <div class="login__row">
-            <input type="password" id="uPass" name="uPass" class="login__input" minLength="4" placeholder="סיסמא" required
+            <input type="password" id="uPass" name="uPass" class="login__input" minLength="4" autocomplete="current-password" placeholder="סיסמא" required
             oninput={e=>User.data.password = e.target.value}
             />
             <label for="uPass" class="login__label">סיסמא</label>
@@ -37,7 +37,7 @@ var LoginPage = {
 
 function login(e) {
   e.preventDefault();
-  User.loginUser;
+  User.loginUser();
   // TODO => invalid behavior
 }
 

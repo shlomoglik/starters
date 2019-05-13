@@ -1,44 +1,29 @@
 import firebase from 'firebase/app'
 import auth from 'firebase/auth'
+import m from 'mithril'
 
 var _auth = firebase.auth();
 
-//login
-// const loginForm = document.querySelector('#login-form');
-// loginForm.addEventListener('submit', e => {
-//     e.preventDefault();
-//     const email = loginForm['login-email'].value;
-//     const password = loginForm['login-password'].value;
+function signIn(email, password) {
+    return _auth.signInWithEmailAndPassword(email, password);
+}
 
-//     auth.signInWithEmailAndPassword(email, password).then(
-//         cred => {
-//             console.log(cred.user);
-//             const modal = document.querySelector('#modal-login');
-//             M.Modal.getInstance(modal).close();
-//             loginForm.reset();
-//             loginForm.querySelector('.error').innerHTML = '';
-//         },
-//         err => {
-//             console.error(err);
-//             loginForm.querySelector('.error').innerHTML = err.message;
-//         }
-//     )
-// });
-function signIn(email,password){
-    _auth.signInWithEmailAndPassword(email, password).then(
-        cred => {
-            console.log(cred.user);
-            return true;
-        },
-        err => {
-            console.error(err);
-        }
-    )
+function logout() {
+    return _auth.signOut();
 }
 
 
-var _user = _auth.currentUser;
+_auth.onAuthStateChanged(user => {
+    if (user) {
+        console.log('user is logged in - uid');
+        user.getIdTokenResult().then(id=>{
+            console.log(id);
+        })
+    } else {
+        console.log('user logged out so route to / page');
+        m.route.set('/');
+    }
+})
 
-
-module.exports = [_user,{signIn}];
+module.exports = { signIn, logout };
 

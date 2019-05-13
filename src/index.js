@@ -8,18 +8,18 @@ import './style.css';
 //Views
 import LoginPage from "./views/LoginPage/LoginPage";
 import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
+import User from "./data/Login";
 
 
 m.route(root, "/", {
     "/": LoginPage,
-    // "/add/:token":AddLeadPage
     "/add": {
         onmatch: function() {
-            if(!sessionStorage.getItem('uid')){
-                console.log('not find uid')
-                m.route.set("/");
-            }else{
+            console.log(User._user);
+            if (User._user){
                 return AddLeadPage;
+            }else{
+                m.route.set("/");
             }
         }
     }
