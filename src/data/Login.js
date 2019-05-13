@@ -1,6 +1,6 @@
 import m from 'mithril'
 import { signIn, logout } from '../firebase/auth'
-import {getDoc} from '../firebase/qry'
+import db from '../firebase/firebaseConfig'
 import store from './store'
 import LoginPage from '../views/LoginPage/LoginPage'
 
@@ -18,8 +18,8 @@ let User = {
             cred => {
                 m.route.set("/add");
                 console.log('TODO: append data to User model - get from db',cred.user.uid);
-                var user = getDoc(cred.user.uid);
-                console.log(user)
+                // var user = getDoc(cred.user.uid);
+                // console.log(user)
                 User._user = cred.user;
             },
             err => console.error('error on login', err)

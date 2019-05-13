@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import 'firebase/firestore'
 import auth from 'firebase/auth'
 import m from 'mithril'
 
