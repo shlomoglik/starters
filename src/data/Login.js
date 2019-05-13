@@ -1,13 +1,12 @@
 import m from 'mithril'
 import { signIn, logout } from '../firebase/auth'
+import {getDoc} from '../firebase/qry'
 import db from '../firebase/firebaseConfig'
 import store from './store'
-import LoginPage from '../views/LoginPage/LoginPage'
 
 let User = {
     data: {
         email: "",
-        password: "",
         name: "",
         phone: ""
     },
@@ -17,14 +16,23 @@ let User = {
         login.then(
             cred => {
                 m.route.set("/add");
-                console.log('TODO: append data to User model - get from db',cred.user.uid);
-                // var user = getDoc(cred.user.uid);
-                // console.log(user)
-                User._user = cred.user;
+                var doc = getDoc('users',cred.user.uid);
+                console.log('doc return is:',doc);
+                if(doc){
+                    doc.then(
+                        res=>{
+                            if(res.exists){
+                                console.log('TODO: append data to User model')
+                                console.log(res.data());
+                            }
+                        },err=>{
+                            console.error(err)
+                        }
+                    );
+                }
             },
             err => {
                 console.error('error on login', err);
-                console.log(`TODO => change state valid = from ${vnode.state.valid} to false ?m.redrew()?`);
                 vnode.state.valid = false;
                 m.redraw();
             }
