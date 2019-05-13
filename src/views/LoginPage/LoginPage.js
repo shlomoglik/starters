@@ -1,28 +1,29 @@
 import m from "mithril"
 import Header from '../Header/Header'
-import {loginUser} from '../../functions/login'
+import User from '../../data/Login'
 
-var loginPage = {
-  invalid:(vnode)=>{
-    console.log('start function form invalid!!');
-    let inputs = vnode.form.elements;
-    console.log(inputs);
-    // inputs.map(input=>{console.log('TODO=> clear element',input)});
-    // vnode.form.animate( 
-    //   {animation: "shake 0.82s cubic-bezier(.36,.07,.19,.97) both",
-    //   transform: "translate3d(0, 0, 0)"});
+var LoginPage = {
+  oninit:(vnode)=>{
+    console.log('initialize login page');
+    User.logoutUser();
   },
   view: (vnode) => {
     return (
       <div class="login">
         <Header title="התחבר למערכת" />
-        <form class="login__form" onsubmit={(e) => { login(e) }} >
+        <form class="login__form"
+        onsubmit={(e) => { login(e) }} 
+        >
           <div class="login__row">
-            <input type="text" id="uName" name="uName" class="login__input" minLength="4" placeholder="שם משתמש" required autofocus />
-            <label for="uName" class="login__label">שם משתמש</label>
+            <input type="email" id="uMail" name="uMail" class="login__input" placeholder="אימייל" required autofocus
+            oninput={e=>User.data.email = e.target.value}
+            />
+            <label for="uMail" class="login__label">שם משתמש</label>
           </div>
           <div class="login__row">
-            <input type="password" id="uPass" name="uPass" class="login__input" minLength="4" placeholder="סיסמא" required />
+            <input type="password" id="uPass" name="uPass" class="login__input" minLength="4" placeholder="סיסמא" required
+            oninput={e=>User.data.password = e.target.value}
+            />
             <label for="uPass" class="login__label">סיסמא</label>
           </div>
           <div class="login__row">
@@ -36,19 +37,8 @@ var loginPage = {
 
 function login(e) {
   e.preventDefault();
-  let form = e.target;
-  let elements = form.elements;
-  let data = {};
-  for (var el in elements) {
-    let elem = elements[el]
-    if (elem.value) {
-      let key = elem.name;
-      let val = elem.value;
-      data[key] = val;
-    }
-  }
-  loginUser(data);
-  // console.log('test shake form ',loginPage.invalid);
+  User.loginUser;
+  // TODO => invalid behavior
 }
 
-  module.exports = loginPage;
+  module.exports = LoginPage;
