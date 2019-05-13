@@ -15,9 +15,8 @@ function logout() {
 
 _auth.onAuthStateChanged(user => {
     if (user) {
-        console.log('user is logged in - uid');
-        user.getIdTokenResult().then(id=>{
-            console.log(id);
+        user.getIdTokenResult().then(token=>{
+            console.log('user token is',token);
         })
     } else {
         console.log('user logged out so route to / page');
