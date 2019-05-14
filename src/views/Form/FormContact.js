@@ -16,16 +16,16 @@ let FormContact = (init) => {
             return (
                 <form
                     class="form addLead__form addLead__form--contact"
-                    onsubmit={function (e) {
-                        e.preventDefault();
-                        let form = e.target.elements;
-                        for (let i in form) {
-                            let el = form[i]
-                            if (el.value)
-                                Contact.data[el.name] = el.value;
-                        }
-                        Contact.addContact(e, vnode);
-                    }}
+                    // oninput={function (e) {
+                    //     e.preventDefault();
+                    //     let form = e.target.elements;
+                    //     for (let i in form) {
+                    //         let el = form[i]
+                    //         if (el.value)
+                    //             Contact.data[el.name] = el.value;
+                    //     }
+                    //     Contact.addContact(e, vnode);
+                    // }}
                 >
                     <div class="form__row">
                         <input type="text" name="name" class="form__input" id="contactName" placeholder="שם" />

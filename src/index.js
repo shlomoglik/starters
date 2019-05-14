@@ -9,7 +9,7 @@ import './style.css';
 //Views
 import LoginPage from "./views/LoginPage/LoginPage";
 import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
-import User from "./data/Login";
+import User from "./data/User";
 
 
 // let isUserLogin = User.email ? true : false;
@@ -17,8 +17,8 @@ m.route(root, "/", {
     "/": LoginPage,
     "/add": {
         onmatch: () => {
-            console.log('check if user log in ? ',User.isLoggedIn)
-            if (!User.isLoggedIn) m.route.set('/')
+            console.log('check if user log in ? ')
+            if (!User.isLoggedIn()) m.route.set('/')
             else return AddLeadPage
         }
     }

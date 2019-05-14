@@ -1,20 +1,17 @@
 import m from "mithril"
 import store from '../../data/store'
 import Header from '../Header/Header'
-import FormContact from '../Form/FormContact'
-import FormLead from '../Form/FormLead'
-import Submit from '../Form/Submit'
+import FormContactLead from '../Form/FormContactLead'
+
 
 
 module.exports = {
   view: (vnode) => {
     return (
       <div class="container">
-        <Header title="הוסף פנייה חדשה"/>
+        <Header title="פנייה חדשה"/>
         <main class="addLead">
-          <FormContact mode="add" />
-          <FormLead mode="add" />
-          <Submit />
+          <FormContactLead/>
         </main>
       </div>
     )

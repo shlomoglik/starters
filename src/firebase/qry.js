@@ -9,6 +9,7 @@ function getDoc(col, id) {
     return doc || false;
 }
 
+
 function insertDoc(col, doc) {
     let ref = db.collection(col);
     let prom = ref.add(doc);

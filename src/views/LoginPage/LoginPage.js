@@ -1,6 +1,6 @@
 import m from "mithril"
 import Header from '../Header/Header'
-import User from '../../data/Login'
+import User from '../../data/User'
 
 let LoginPage = {
   oninit:(vnode)=>{

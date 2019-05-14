@@ -8,7 +8,11 @@ module.exports = {
         return (
             <div class="form addLead__submit" >
                 <div class="form__row">
-                    <button type="button" class="btn btn--def" >הוסף</button>
+                    <button type="button" class="btn btn--def"
+                    onclick={addData()}
+                    >
+                    הוסף
+                    </button>
                 </div>
             </div>
         )

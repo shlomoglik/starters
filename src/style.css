@@ -65,6 +65,15 @@ body {
   background-color: var(--color-primary);
   color: var(--color-white); }
 
+.heading {
+  display: block;
+  height: 5rem; }
+  .heading__secondary {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    font-family: Tahoma;
+    margin-bottom: 1rem; }
+
 .menu__check {
   display: none; }
 
@@ -218,8 +227,8 @@ body {
       border-bottom: 3px solid var(--color-primary); }
       .form__input:focus::placeholder {
         opacity: .6; }
-    .form__input:invalid {
-      border-bottom: 3px solid var(--color-secondary); }
+      .form__input:focus:invalid {
+        border-bottom: 3px solid var(--color-secondary); }
   .form__input:placeholder-shown + .form__label {
     transform: translateY(-4rem);
     opacity: 0;

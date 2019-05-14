@@ -23,5 +23,6 @@ function isUserLoggedIn(){
     return _auth.currentUser?true:false;
 }
 
+
 module.exports = { signIn, logout ,isUserLoggedIn};
 

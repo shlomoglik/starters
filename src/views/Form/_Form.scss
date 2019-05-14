@@ -40,9 +40,9 @@
             &::placeholder{
             opacity: .6;
             }
-        }
-        &:invalid {
-            border-bottom: 3px solid var(--color-secondary);
+            &:invalid {
+                border-bottom: 3px solid var(--color-secondary);
+            }
         }
     }
 
