@@ -11,9 +11,13 @@ let LoginPage = {
   onupdate:(vnode)=>{
     let dom = vnode.dom;
     if(!vnode.state.valid){
-      dom.querySelector('.login__form').classList.add("shake");
-      return new Promise(function(resolve) {
-          vnode.dom.addEventListener("animationend", resolve)
+      let ref = dom.querySelector('.login__form')
+      ref.classList.add("shake");
+      return new Promise((resolve,reject)=> {
+          vnode.dom.addEventListener("animationend", ()=>{
+            ref.classList.remove("shake");
+            resolve;
+          })
       })
     }
   },
@@ -26,13 +30,13 @@ let LoginPage = {
         >
           <div class="login__row">
             <input type="email" id="uMail" name="uMail" class="login__input" placeholder="אימייל" required autofocus
-            oninput={e=>User.data.email = e.target.value}
+            // oninput={e=>User.data.email = e.target.value}
             />
             <label for="uMail" class="login__label">שם משתמש</label>
           </div>
           <div class="login__row">
             <input type="password" id="uPass" name="uPass" class="login__input" minLength="4" autocomplete="current-password" placeholder="סיסמא" required
-            oninput={e=>User.data.password = e.target.value}
+            // oninput={e=>User.data.password = e.target.value}
             />
             <label for="uPass" class="login__label">סיסמא</label>
           </div>
@@ -48,7 +52,10 @@ let LoginPage = {
 
 function login(e,vnode) {
   e.preventDefault();
-  User.loginUser(vnode);
+  let form = e.target.elements;
+  let email = form.uMail.value;
+  let password = form.uPass.value;
+  User.loginUser(email,password,vnode);
 }
 
 module.exports =  LoginPage;

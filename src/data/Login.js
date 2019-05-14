@@ -1,7 +1,6 @@
 import m from 'mithril'
-import { signIn, logout } from '../firebase/auth'
+import { signIn, logout,isUserLoggedIn } from '../firebase/auth'
 import {getDoc} from '../firebase/qry'
-import db from '../firebase/firebaseConfig'
 import store from './store'
 
 let User = {
@@ -10,20 +9,18 @@ let User = {
         name: "",
         phone: ""
     },
-    loginUser: (vnode) => {
+    loginUser: (email,pass,vnode) => {
         console.log('start User.loginUser')
-        let login = signIn(User.data.email, User.data.password); // return Promise
+        let login = signIn(email, pass); // return Promise
         login.then(
             cred => {
                 m.route.set("/add");
-                var doc = getDoc('users',cred.user.uid);
-                console.log('doc return is:',doc);
+                let doc = getDoc('users',cred.user.uid);
                 if(doc){
                     doc.then(
                         res=>{
                             if(res.exists){
-                                console.log('TODO: append data to User model')
-                                console.log(res.data());
+                                User.data = res.data();
                             }
                         },err=>{
                             console.error(err)
@@ -41,6 +38,10 @@ let User = {
     logoutUser: () => {
         console.log('start User.logoutUser')
         logout();
+    },
+    isLoggedIn:()=>{
+        let logged = isUserLoggedIn();
+        return logged;
     }
 }
 

@@ -1,15 +1,14 @@
 .container{
-    margin-top: 8rem;
-}
-.addLead{
+    margin-top: 8rem; 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: var(--color-grey-light-3);
+}
+.addLead{
     &__form{
         &:first-child{
             margin-top: 5rem;
         }
     }
-
 }

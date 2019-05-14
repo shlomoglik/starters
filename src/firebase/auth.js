@@ -18,6 +18,10 @@ function logout() {
         err=>console.error(err)
     );
 }
+function isUserLoggedIn(){
+    console.log('check if user is logged in: ',_auth.currentUser);
+    return _auth.currentUser?true:false;
+}
 
-module.exports = { signIn, logout };
+module.exports = { signIn, logout ,isUserLoggedIn};
 

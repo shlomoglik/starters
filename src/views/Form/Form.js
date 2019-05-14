@@ -2,7 +2,7 @@ import m from 'mithril'
 
 module.exports = {
     oninit:(vnode)=>{
-        console.log('form component is init the form data is');
+        console.log('form');
     },
     view: (vnode) => {
         return (
