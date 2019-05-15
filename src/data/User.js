@@ -5,13 +5,17 @@ import store from './store'
 
 
 let User = {
-    id: "",
+    token: "",
+    uid: "",
     path: "",
     data: {
         email: "",
         name: "",
         phone: ""
-    },
+    }
+}
+
+let UserFunc = {
     loginUser: (email, pass, vnode) => {
         console.log('start User.loginUser')
         let login = signIn(email, pass); // return Promise
@@ -26,19 +30,22 @@ let User = {
                         if (doc.exists) {
                             // console.log('step 3- doc found so get toekt!')
                             cred.user.getIdToken().then(
-                                res => {
+                                token => {
                                     // console.log('step 4- token is here - put it on local storage!')
-                                    localStorage.setItem('token', res);
-                                    User.data = doc.data();
+                                    User.token = token;
                                     User.path = docRef.path;
-                                    User.id = docRef.id;
+                                    User.uid = cred.user.uid;
+                                    User.data = doc.data();
+                                    sessionStorage.setItem('User',JSON.stringify(User))
                                     m.route.set("/add");
+                                    console.log('this is the User data after appending all', User) // localStorage('users/{currentUID}/email', User.email)
                                 }, err => {
                                     console.error(err)
-                            });// https://firebase.google.com/docs/reference/js/firebase.User.html#getidtoken
+                                });// https://firebase.google.com/docs/reference/js/firebase.User.html#getidtoken
                         } else {
                             console.log('not find such user so logout!!')
-                            logoutUser();
+                            logOut();
+                            m.route.set("/login");
                         }
                     }, err => {
                         console.error(err)
@@ -52,17 +59,26 @@ let User = {
             }
         )
     },
-    logoutUser: () => {
+    logOut: () => {
         console.log('start User.logoutUser')
         logout();
-        // m.route.set('/');
+        m.route.set('/login');
     },
     isLoggedIn: () => {
         console.log('start User.isLoggedIn')
         let logged = isUserLoggedIn();
         return logged;
+    },getUser:(data,field)=>{
+        let user = JSON.parse(sessionStorage.getItem('User'));
+        if(arguments && arguments.length ==1){ // only metedata like id , path etc
+            return user.data;
+        }else if(arguments && arguments.length ==2){ // only specific field
+            return user.field
+        }else{
+            return user; // all
+        }
     }
 }
 
-module.exports = User;
+module.exports = UserFunc;
 

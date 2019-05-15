@@ -3,6 +3,7 @@ import Contact from '../../data/Contact'
 import Lead from '../../data/User'
 
 let FormLead = (init) => {
+    console.log('start initilize FormLead Component!!')
     return {
         view: (vnode) => {
             if (vnode.attrs.mode == 'add') {
@@ -13,8 +14,9 @@ let FormLead = (init) => {
                     class="form addLead__form"
                     onsubmit={function (e) {
                         e.preventDefault();
-                        appendDataToModel(vnode, "Contact",Contact);
-                        appendDataToModel(vnode, "Lead",Lead);
+                        // appendDataToModel(vnode, "Contact",Contact);
+                        // appendDataToModel(vnode, "Lead",Lead);
+                        Lead.addLeadAndContact();
                         // for (let i in form) {
                         //     let el = form[i]
                         //     if (el.value)
@@ -54,10 +56,7 @@ let FormLead = (init) => {
                         <input type="date" name="duedate"  class="form__input Lead" id="lead_duedate" placeholder="תאריך יעד" />
                         <label for="lead_duedate" class="form__label">תאריך יעד</label>
                     </div>
-                    <div class="form__row">
-                        <input type="text" class="form__input Lead" name="assign" id="lead_assign" placeholder="בטיפול" required />
-                        <label for="lead_assign" class="form__label">בטיפול</label>
-                    </div>
+
                     <div class="form__row">
                         <textarea class="form__input Lead" name="description" id="lead_description " placeholder="תיאור והערות *" required />
                     </div>
@@ -73,13 +72,17 @@ let FormLead = (init) => {
 
 let appendDataToModel = (vnode, modelName,Model) => {
     let elements = vnode.dom.querySelectorAll("."+modelName);
-    console.log(elements);
     for (let i in elements) {
         let el = elements[i]
-        if (el.value)
-        Model.data[el.name] = el.value;
+        if (el.value){
+            try{
+                Model.add(el.name,el.value); 
+            }catch(err){
+                console.error(err);
+            }
+        }
     }
-    console.log('the Mode data afrer appending is: ',Model);
+    console.log(`the ${modelName} data now is:`);
 };
 
 module.exports = FormLead

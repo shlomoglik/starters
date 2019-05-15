@@ -13,7 +13,7 @@ import User from "./data/User";
 
 
 // let isUserLogin = User.email ? true : false;
-m.route(root, "/add", {
+m.route(root, "/login", {
     "/login": LoginPage,
     "/add": {
         onmatch: () => {

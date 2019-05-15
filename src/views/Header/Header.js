@@ -14,9 +14,9 @@ module.exports = {
         <div class="header__title">
           {vnode.attrs.title}
         </div>
-        <div class="header__signOut">
-          <button onclick={User.logoutUser()}>signOut</button>
-        </div>
+        {/* <div class="header__signOut"> 
+          <button onclick={User.logOut()}>signOut</button>
+        </div> */}
         <div class="header__logo-box">
           <img src="img/logo.png" alt="logo image" class="header__logo" />
         </div>

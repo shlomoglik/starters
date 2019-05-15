@@ -9,10 +9,15 @@ function getDoc(col, id) {
     return docRef;
 }
 
-
+/**
+ * insertDoc insert new document to specific collection
+ * @param {String} col insert collection name to where insert document
+ * @param {Object} doc document object to insert
+ * @return {Promise} return new Promise with DocoumentReference
+ */
 function insertDoc(col, doc) {
-    let ref = db.collection(col);
-    let prom = ref.add(doc);
+    let colRef = db.collection(col);
+    let prom = colRef.add(doc);
     return prom;
 }
 
@@ -25,3 +30,5 @@ function followChanges(col,id,elem) {
         });
 }
 module.exports = { getDoc, insertDoc , followChanges };
+
+
