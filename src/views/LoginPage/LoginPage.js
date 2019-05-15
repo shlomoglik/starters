@@ -6,11 +6,10 @@ let LoginPage = {
   oninit:(vnode)=>{
     console.log('initialize login page');
     vnode.state.valid = true;
-    User.logoutUser();
   },
   onupdate:(vnode)=>{
-    let dom = vnode.dom;
     if(!vnode.state.valid){
+      let dom = vnode.dom;
       let ref = dom.querySelector('.login__form')
       ref.classList.add("shake");
       return new Promise((resolve,reject)=> {

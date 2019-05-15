@@ -14,13 +14,17 @@ function logout() {
         ()=>{
             console.log('user is logout');
             console.log(`user is: ${_auth.currentUser}`)
+            localStorage.removeItem('token');
         },
         err=>console.error(err)
     );
 }
 function isUserLoggedIn(){
-    console.log('check if user is logged in: ',_auth.currentUser);
-    return _auth.currentUser?true:false;
+    // console.log('check if user is logged in: ',_auth.currentUser);
+    // return _auth.currentUser?true:false;
+    let token = localStorage.getItem('token');
+    console.log('token is : ',token)
+    return  token ? true : false;
 }
 
 

@@ -5,8 +5,8 @@ import firebase from 'firebase/app'
 let db = firebase.firestore()
 
 function getDoc(col, id) {
-    let doc = db.collection(col).doc(id).get();
-    return doc || false;
+    let docRef = db.collection(col).doc(id);
+    return docRef;
 }
 
 

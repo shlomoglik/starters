@@ -1,7 +1,6 @@
 import m from 'mithril'
 import Contact from '../../data/Contact'
 import Lead from '../../data/User'
-import User from '../../data/User'
 
 let FormLead = (init) => {
     return {
@@ -44,7 +43,7 @@ let FormLead = (init) => {
                         <h1 className="heading__secondary">פרטי פנייה</h1>
                     </div>
                     <div class="form__row" >
-                        <input type="text" class="form__input Lead" id="leadType" placeholder="סוג פנייה" />
+                        <input type="text" name="type" class="form__input Lead" id="leadType" placeholder="סוג פנייה" />
                         <label for="leadType" class="form__label">סוג פנייה</label>
                     </div>
                     <div class="form__row" >
@@ -52,7 +51,7 @@ let FormLead = (init) => {
                         <label for="contactPhone" class="form__label">מקור הגעה</label>
                     </div>
                     <div class="form__row">
-                        <input type="date" class="form__input Lead" name="duedate" id="lead_duedate" placeholder="תאריך יעד" />
+                        <input type="date" name="duedate"  class="form__input Lead" id="lead_duedate" placeholder="תאריך יעד" />
                         <label for="lead_duedate" class="form__label">תאריך יעד</label>
                     </div>
                     <div class="form__row">

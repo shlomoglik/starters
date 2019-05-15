@@ -13,13 +13,15 @@ import User from "./data/User";
 
 
 // let isUserLogin = User.email ? true : false;
-m.route(root, "/", {
-    "/": LoginPage,
+m.route(root, "/add", {
+    "/login": LoginPage,
     "/add": {
         onmatch: () => {
-            console.log('check if user log in ? ')
-            if (!User.isLoggedIn()) m.route.set('/')
-            else return AddLeadPage
+            let logged = User.isLoggedIn();
+            console.log(logged);
+            if (logged)
+                return AddLeadPage
+            else m.route.set('/login')
         }
     }
 });
