@@ -2,32 +2,35 @@ import m from 'mithril'
 import { signIn, logout, isUserLoggedIn } from '../firebase/auth'
 import { getDoc } from '../firebase/qry'
 import store from './store'
+import Model from '../data/Model'
 
-class User {
-    constructor(id, data, options) {
-        this.uid = id,
-        this.data = data;
-        this.path = options.path,
-        this.token = options.token
-    }
+class User extends Model {
+    // constructor(id, data, options) {
+    //     this.uid = id,
+    //     this.data = data;
+    //     this.path = options.path,
+    //     this.token = options.token
+    //     console.log('new User created - data is: ',this)
+    // }
     static loginUser(email, pass, vnode){
         console.log('start User.loginUser')
         let login = signIn(email, pass); // return Promise
         login.then(
             cred => {
-                // console.log('step 1- login success!')
+                console.log('step 1- login success!')
                 let docRef = getDoc('users', cred.user.uid);
                 let snap = docRef.get();
                 snap.then(
                     doc => {
-                        // console.log('step 2- search doc!')
+                        console.log('step 2- search doc!')
                         if (doc.exists) {
-                            // console.log('step 3- doc found so get toekt!')
+                            console.log('step 3- doc found so get toekt!')
                             cred.user.getIdToken().then(
                                 token => {
-                                    // console.log('step 4- token is here - put it on local storage!')
+                                    console.log('step 4- token is here - put it on local storage!')
                                     let user = new User(cred.user.uid  ,  doc.data()  ,  {token:token,path:docRef.path} )
                                     sessionStorage.setItem('User', JSON.stringify(user))
+                                    sessionStorage.setItem('token', token)
                                     m.route.set("/add");
                                     console.log('this is the User data after appending all', User) // localStorage('users/{currentUID}/email', User.email)
                                 }, err => {

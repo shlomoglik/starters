@@ -1,12 +1,12 @@
 import m from 'mithril'
 import { insertDoc, followChanges } from '../firebase/qry'
 import User from '../data/User'
+import Model from '../data/Model'
 
 let Leads = {};
-
-let Lead = {
-    id: "",
-    data: {
+class Lead extends Model{
+    id= "";
+    data= {
         title: "",
         type: "",
         description: "",
@@ -15,7 +15,25 @@ let Lead = {
         assignRef: User.getUser('path'),
         contactsRef: [],
     }
+    constructor(){
+        super();
+    }
+    
+
 }
+
+// let Lead = {
+//     id: "",
+//     data: {
+//         title: "",
+//         type: "",
+//         description: "",
+//         duedate: "",
+//         source: "",
+//         assignRef: User.getUser('path'),
+//         contactsRef: [],
+//     }
+// }
 
 let LeadFunc = {
     add: (key, value) => {
