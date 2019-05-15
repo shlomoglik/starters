@@ -15,6 +15,7 @@ function insertDoc(col, doc) {
     let prom = ref.add(doc);
     return prom;
 }
+
 function followChanges(col,id,elem) {
     db.collection(col).doc(id)
         .onSnapshot(function (doc) {
