@@ -5,13 +5,10 @@ import store from './store'
 import Model from '../data/Model'
 
 class User extends Model {
-    // constructor(id, data, options) {
-    //     this.uid = id,
-    //     this.data = data;
-    //     this.path = options.path,
-    //     this.token = options.token
-    //     console.log('new User created - data is: ',this)
-    // }
+    // ***default constructor**:
+    // constructor(...args) {
+    //     super(...args);
+    //   }
     static loginUser(email, pass, vnode){
         console.log('start User.loginUser')
         let login = signIn(email, pass); // return Promise
@@ -64,11 +61,12 @@ class User extends Model {
         return logged;
     }
     static getUser(data, field){
+        console.log('start User.getUser')
         let user = JSON.parse(sessionStorage.getItem('User'));
-        if (arguments && arguments.length == 1) { // only metedata like id , path etc
-            return user.data;
-        } else if (arguments && arguments.length == 2) { // only specific field
-            return user.field
+        if (arguments && arguments.length == 1) { 
+            return user[data]; // only metedata like id , path etc
+        } else if (arguments && arguments.length == 2) { 
+            return user.data[field] // only specific field
         } else {
             return user; // all
         }

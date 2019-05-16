@@ -1,9 +1,10 @@
 import m from 'mithril'
 import Contact from '../../data/Contact'
-import Lead from '../../data/User'
+import Lead from '../../data/Lead'
 
 let FormLead = (init) => {
     console.log('start initilize FormLead Component!!')
+    // console.log(new Lead)
     return {
         view: (vnode) => {
             if (vnode.attrs.mode == 'add') {
@@ -14,9 +15,11 @@ let FormLead = (init) => {
                     class="form addLead__form"
                     onsubmit={function (e) {
                         e.preventDefault();
-                        // appendDataToModel(vnode, "Contact",Contact);
-                        // appendDataToModel(vnode, "Lead",Lead);
-                        Lead.addLeadAndContact();
+                        let newContactData = getDataByClass(vnode, 'Contact')
+                        let newLeadData = getDataByClass(vnode, 'Lead')
+                        let newContact = new Contact('', newContactData)
+                        let newLead = new Lead('', newLeadData);
+                        Lead.addLeadAndContact(newContact,newLead);
                         // for (let i in form) {
                         //     let el = form[i]
                         //     if (el.value)
@@ -53,7 +56,7 @@ let FormLead = (init) => {
                         <label for="contactPhone" class="form__label">מקור הגעה</label>
                     </div>
                     <div class="form__row">
-                        <input type="date" name="duedate"  class="form__input Lead" id="lead_duedate" placeholder="תאריך יעד" />
+                        <input type="date" name="duedate" class="form__input Lead" id="lead_duedate" placeholder="תאריך יעד" />
                         <label for="lead_duedate" class="form__label">תאריך יעד</label>
                     </div>
 
@@ -70,19 +73,16 @@ let FormLead = (init) => {
     }
 }
 
-let appendDataToModel = (vnode, modelName,Model) => {
-    let elements = vnode.dom.querySelectorAll("."+modelName);
+function getDataByClass(vnode, className) {
+    let elements = vnode.dom.querySelectorAll("." + className);
+    let data = {};
     for (let i in elements) {
         let el = elements[i]
-        if (el.value){
-            try{
-                Model.add(el.name,el.value); 
-            }catch(err){
-                console.error(err);
-            }
+        if (el.name) {
+            data[el.name] = el.value || ""
         }
     }
-    console.log(`the ${modelName} data now is:`);
+    return data;
 };
 
 module.exports = FormLead

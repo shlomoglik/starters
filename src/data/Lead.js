@@ -4,80 +4,36 @@ import User from '../data/User'
 import Model from '../data/Model'
 
 let Leads = {};
-class Lead extends Model{
-    id= "";
-    data= {
-        title: "",
-        type: "",
-        description: "",
-        duedate: "",
-        source: "",
-        assignRef: User.getUser('path'),
-        contactsRef: [],
+class Lead extends Model {
+    // id = "";
+    // data = {
+    //     title: "",
+    //     type: "",
+    //     description: "",
+    //     duedate: "",
+    //     source: "",
+    //     contactsRef: [],
+    // }
+    constructor(...args) {
+        super(...args);
+        this._data['assignRef'] =User.getUser('path');
     }
-    constructor(){
-        super();
-    }
-    
-
-}
-
-// let Lead = {
-//     id: "",
-//     data: {
-//         title: "",
-//         type: "",
-//         description: "",
-//         duedate: "",
-//         source: "",
-//         assignRef: User.getUser('path'),
-//         contactsRef: [],
-//     }
-// }
-
-let LeadFunc = {
-    add: (key, value) => {
-        console.log(Lead.data)
-        Lead.data[key] = value;
-    },
-    addLeadAndContact: (e, vnode) => {
-        for(Model in [Contact,Lead]){
-            let elements = vnode.dom.querySelectorAll("." + Model.name);
-            for (let i in elements) {
-                let el = elements[i]
-                if (el.value) {
-                    try {
-                        Model.add(el.name, el.value);
-                    } catch (err) {
-                        console.error(err);
-                    }
-                }
-            }
-        }
-        // console.log('add data to database=>',Lead.data);
-        let contactRef = Contact.AddContact(); // return path
-        let prom = insertDoc('leads', Lead.data);
-        prom.then(
-            doc => {
-                Lead.id = doc.path;
-                Lead.data = doc.data();
-                contactsRef[0] = {
-                    role: "main",
-                    contactRef: contactRef
-                }
-            }, err => {
-                console.log(err)
-            }
-        );
-    },
-    editLead: () => {
-        console.log('TODO edit data =>', Lead.data);
-    },
-    removeLead: () => {
-        console.log('TODO remove data based on doc id=>', Lead.id);
+    static addLeadAndContact(newContact ,newLead ){
+        console.log('step 1: add Contact data=>',newContact._data);
+        newContact.add('contacts');
+        let path = newContact.getID();
+        console.log('step 2: get path=>',path);
+        let contactsRef =[{
+            'role':'main',
+            'contactRef':path
+        }];
+        console.log('step 3: set ref to lead=>',contactsRef);
+        newLead.setData('contacts',contactsRef);
+        console.log('step 3 result: ',newLead,'step 4 add to DB=>:');
+        newLead.add('leads');
     }
 
-}
+} //end Cless
 
-module.exports = LeadFunc
+module.exports = Lead
 

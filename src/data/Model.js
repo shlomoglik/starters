@@ -3,25 +3,48 @@ import { insertDoc, followChanges } from '../firebase/qry'
 /**
  * @param {String} id id path to this current Document
  * @param {Object} data Map object with fields and values
- * @param {Object} options another properties to set on class
+ * @param {Object} options another properties to set on top like token
  */
-class Model{
-    constructor(id,data,options){
+class Model {
+    constructor(id, data, options) {
         this.id = id;
-        this.data =data;
-        for(let opt in options){
-            this.opt = options[opt]
+        let newData = {};
+        for (let d in data) {
+            if (data[d].trim() !== '') //dont insert empty fields -- הוא הכניס לי כל מיני שדות מוזרים כמו foreach וvalues צריך למצוא דרך יותר אלגנטית לחסום את זה
+                newData[d] = data[d];
         }
-        console.log(`new ${this.constructor.name} Model is created - data is: `,this)
+        this._data = newData;
+        for (let opt in options) {
+            this[opt] = options[opt]
+        }
+        console.log(`new ${this.constructor.name} Model is created: `, this)
     }
-    add(data){
-        console.log('TODO! insert to database')
-    }
-    save(data){
+    save(data) {
         console.log('TODO! save on SessionStorage')
     }
-    delete(){
-        console.log('TODO! delete doc by id')
+    delete() {
+        console.log('TODO! delete doc by id from database and from storage/stoer etc')
+    }
+    getData() {
+        return this._data;
+    }
+    getID(){
+        return this.id;
+    }
+    setData(name,data){
+        this._data[name]=data;
+    }
+    add(col) {
+        console.log('add data to database=>', this._data);
+        return insertDoc(col, this._data)
+            .then(
+                doc => {
+                    console.log(doc)
+                    this.id = doc.path;
+                }, err => {
+                    consoles.log(err)
+                }
+            );
     }
 }
 module.exports = Model;
