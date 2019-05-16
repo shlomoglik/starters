@@ -20,6 +20,7 @@ let FormLead = (init) => {
                         let newContact = new Contact('', newContactData)
                         let newLead = new Lead('', newLeadData);
                         Lead.addLeadAndContact(newContact,newLead);
+                        e.target.reset();
                         // for (let i in form) {
                         //     let el = form[i]
                         //     if (el.value)

@@ -20,17 +20,17 @@ class Lead extends Model {
     }
     static addLeadAndContact(newContact ,newLead ){
         console.log('step 1: add Contact data=>',newContact._data);
-        newContact.add('contacts');
-        let path = newContact.getID();
-        console.log('step 2: get path=>',path);
-        let contactsRef =[{
-            'role':'main',
-            'contactRef':path
-        }];
-        console.log('step 3: set ref to lead=>',contactsRef);
-        newLead.setData('contacts',contactsRef);
-        console.log('step 3 result: ',newLead,'step 4 add to DB=>:');
-        newLead.add('leads');
+        newContact.add('contacts').then(
+            doc=>{
+                let path = newContact.getID();
+                let contactsRef =[{
+                    'role':'main',
+                    'contactRef':path
+                }];
+                newLead.setData('contacts',contactsRef);
+                newLead.add('leads');
+            }
+        )
     }
 
 } //end Cless
