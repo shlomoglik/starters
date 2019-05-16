@@ -7,26 +7,17 @@ let FormLead = (init) => {
     // console.log(new Lead)
     return {
         view: (vnode) => {
-            if (vnode.attrs.mode == 'add') {
-                console.log('add mode so enable add button');
-            }
             return (
                 <form
                     class="form addLead__form"
                     onsubmit={function (e) {
                         e.preventDefault();
-                        let newContactData = getDataByClass(vnode, 'Contact')
-                        let newLeadData = getDataByClass(vnode, 'Lead')
-                        let newContact = new Contact('', newContactData)
+                        let newContactData = getDataByClass(vnode, 'Contact');
+                        let newLeadData = getDataByClass(vnode, 'Lead');
+                        let newContact = new Contact('', newContactData);
                         let newLead = new Lead('', newLeadData);
                         Lead.addLeadAndContact(newContact,newLead);
                         e.target.reset();
-                        // for (let i in form) {
-                        //     let el = form[i]
-                        //     if (el.value)
-                        //         Contact.data[el.name] = el.value;
-                        // }
-                        // Contact.addContact(e, vnode);
                     }}
                 >
                     <div class="heading">
