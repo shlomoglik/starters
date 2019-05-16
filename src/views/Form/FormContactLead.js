@@ -28,7 +28,7 @@ let FormLead = (init) => {
                         <label for="contactName" class="form__label">שם איש קשר</label>
                     </div>
                     <div class="form__row">
-                        <input type="phone" name="phone" class="form__input Contact" placeholder="טלפון" />
+                        <input type="tel" name="phone" class="form__input Contact" pattern="[0-9]{3}-[0-9]{7}" placeholder="טלפון" />
                         <label for="contactPhone" class="form__label">טלפון איש קשר</label>
                     </div>
                     <div class="form__row">
