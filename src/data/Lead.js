@@ -3,7 +3,6 @@ import { insertDoc, followChanges } from '../firebase/qry'
 import User from '../data/User'
 import Model from '../data/Model'
 
-let Leads = {};
 class Lead extends Model {
     // id = "";
     // data = {

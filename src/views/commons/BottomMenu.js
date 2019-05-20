@@ -3,16 +3,19 @@ import m from "mithril"
 let commands = [
   {
     title:"חדש",
-    iconPath:""
+    iconPath:"/public/img/sprite.svg#icon-plus",
+    ref:"/add"
   },
   {
     title:"לטיפול",
     active:true,
-    iconPath:""
+    iconPath:"/public/img/sprite.svg#icon-flow-tree",
+    ref:"/myLeads"
   },
   {
     title:"חיפוש",
-    iconPath:""
+    iconPath:"/public/img/sprite.svg#icon-magnifying-glass",
+    ref:"/search"
   }
 ]
 
@@ -25,7 +28,7 @@ let BottomMenu = (init) => {
       console.log('Create!')
     },
     onupdate:(vnode)=>{
-      setClassActive(vnode,event); //when state change set class as active
+      // setClassActive(vnode,event); //when state change set class as active
     },
     view: (vnode) => {
       return (
@@ -38,8 +41,10 @@ let BottomMenu = (init) => {
                     onclick:e=>toggleActive(vnode,item)
                   },
                   [
-                    item.title,
-                    m("span.bottomMenu__icon",item.iconPath)
+                    m("svg.bottomMenu__icon",[
+                      m('use',{href:item.iconPath})
+                    ]),
+                    item.title
                   ])
             )
           })
@@ -56,12 +61,7 @@ function toggleActive(vnode,item){
     }
   })
   item.active = true;
-}
-
-function setClassActive(vnode,e){
-  let el = e.target;
-  vnode.dom.querySelector('.bottomMenu__btn--active').classList.remove('bottomMenu__btn--active')
-  el.classList.add('bottomMenu__btn--active');
+  m.route.set(item.ref);
 }
 
 module.exports = BottomMenu;

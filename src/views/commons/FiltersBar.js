@@ -9,7 +9,11 @@ let Filters = (init) => {
       console.log('Create!')
     },
     onupdate:(vnode)=>{
-      setClassActive(vnode,event); //when state change set class as active
+      // try{  
+      //   setClassActive(vnode,event); //when state change set class as active
+      // }catch(err){
+      //   console.error(err);
+      // }
     },
     view: (vnode) => {
       return (
@@ -18,8 +22,8 @@ let Filters = (init) => {
             return(
                 m(".filterBar__card",
                   {
-                    class:item.active?"filterBar__card--active":"",
-                    onclick:e=>toggleActive(vnode,item)
+                    onclick:e=>toggleActive(vnode,item),
+                    class:item.active?"filterBar__card--active":""
                   },
                   [
                     item.title,
@@ -46,10 +50,10 @@ function toggleActive(vnode,item){
   item.active = true;
 }
 
-function setClassActive(vnode,e){
-  let el = e.target;
-  vnode.dom.querySelector('.filterBar__card--active').classList.remove('filterBar__card--active')
-  el.classList.add('filterBar__card--active');
-}
+// function setClassActive(vnode,e){
+//   let el = e.target;
+//   vnode.dom.querySelector('.filterBar__card--active').classList.remove('filterBar__card--active')
+//   el.classList.add('filterBar__card--active');
+// }
 
 module.exports = Filters;

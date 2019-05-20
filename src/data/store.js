@@ -1,8 +1,6 @@
-import m from 'mithril'
-var store = {
-    token:"",
-    user:{}
+var Store = {
+    // storeLeads: [],
 };
 
 
-module.exports = store;
+module.exports = Store;
