@@ -9,6 +9,7 @@ import './style.css';
 //Views
 import LoginPage from "./views/LoginPage/LoginPage";
 import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
+import LeadsPage from "./views/LeadsPage/LeadsPage";
 import User from "./data/User";
 
 
@@ -21,6 +22,15 @@ m.route(root, "/login", {
             console.log(logged);
             if (logged)
                 return AddLeadPage
+            else m.route.set('/login')
+        }
+    },
+    "/myLeads":{
+        onmatch: () => {
+            let logged = User.isLoggedIn();
+            console.log(logged);
+            if (logged)
+                return LeadsPage
             else m.route.set('/login')
         }
     }

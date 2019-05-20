@@ -1,6 +1,4 @@
 import m from 'mithril'
-import { insertDoc, followChanges } from '../firebase/qry'
-import User from './User'
 import Model from '../data/Model'
 
 let Contacts = {};

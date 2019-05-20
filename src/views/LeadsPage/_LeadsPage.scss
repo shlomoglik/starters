@@ -1,0 +1,80 @@
+.container--myLeads{
+    margin-top: 8rem; 
+    background-color: var(--color-grey-light-3);
+}
+
+.myLeads{
+    margin: 0 auto;
+    min-width: 360px;
+}
+
+.leads{
+    margin-top: 3rem;
+    direction: rtl;
+    width: 100%;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    
+    &--empty {
+        height: 10rem;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &::after{
+            font-size: 1.6rem;
+            content: attr(data-empty);
+            color: var(--color-primary);
+        }
+    }
+    
+    &__heading{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 2rem;
+        font-weight: 600;
+        align-content: center;
+    }
+
+    &__row{
+        border-radius: 5px;
+        box-shadow: var(--box-shadow-1);
+        background-color: var(--color-white);
+        margin-bottom: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 2rem;
+        padding: 0 auto;
+        transition: all .15s ease-in-out;
+        &:hover{
+            transform: translateY(-.1rem);
+            background-color: var(--color-grey-light-2);
+            box-shadow: var(--box-shadow-2);
+            cursor: pointer;
+        }
+        &:active{
+            transform: translateY(0);
+            box-shadow: var(--box-shadow-1);
+        }
+    }
+    &__cell{
+        padding:1rem;
+    }
+    &__title{
+        display: flex;
+        flex-direction: column;
+    }
+    &__name{
+        font-weight: 500;
+        font-size: 1.8rem !important;
+    }
+    &__desc , &__type{
+        font-size: 1.4rem  !important;
+    }
+}

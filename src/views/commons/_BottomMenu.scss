@@ -1,0 +1,20 @@
+.bottomMenu{
+    opacity: .85;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    line-height: 8rem;
+    width: 100vw;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: orangered;
+    &:hover{
+        cursor: pointer;
+    }
+    &__btn{
+        font-size: 3rem;
+    }
+    &__icon{
+        color: #eee;
+    }
+}

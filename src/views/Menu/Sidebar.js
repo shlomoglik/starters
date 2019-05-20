@@ -1,4 +1,5 @@
 import m from "mithril"
+import { pathToFileURL } from "url";
 
 let Sidebar = (init)=>{
   return {
@@ -20,7 +21,7 @@ let Sidebar = (init)=>{
             <div class="sidebar__row">
               <a href="#" class="sidebar__link">
                 <svg class="sidebar__icon">
-                  <use xlink="/public/img/sprite.svg#icon-login"/>
+                  <use  href="/public/img/sprite.svg#icon-login"/>
                 </svg>
                 <span>התחבר למערכת</span>
               </a>
@@ -28,7 +29,7 @@ let Sidebar = (init)=>{
             <div class="sidebar__row">
               <a href="#" class="sidebar__link">
                 <svg class="sidebar__icon">
-                  <use xlink="/public/img/sprite.svg#icon-login"/>
+                  <use href="/public/img/sprite.svg#icon-login"/>
                 </svg>
                 <span>התחבר למערכת</span>
               </a>

@@ -9,6 +9,8 @@
     --color-secondary:#E05F3C;
 
     --color-tartiary:#3CBDE0;
+
+    --color-red:#eb2f64;
     
     --color-grey-light-1: #faf9f9;
     --color-grey-light-2: #f4f2f2;
@@ -27,9 +29,10 @@
 
     // FONTS
     --def-font-size: 1.6rem;
-    --def-font-family: 'Rubic';
+    --def-font-family: 'Tahoma';
 
     // BLOCKS
+    --box-shadow-light: 0 1rem 2rem rgba(0,0,0,0.2);;
     --box-shadow-1: 0 .5rem 1rem rgba(0,0,0,0.4);
     --box-shadow-2: .1rem .9rem 2rem rgba(0,0,0,0.4);
 }
