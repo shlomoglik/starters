@@ -8,7 +8,6 @@ let commands = [
   },
   {
     title: "לטיפול",
-    active: true,
     iconPath: "/public/img/sprite.svg#icon-flow-tree",
     ref: "/myLeads"
   },
@@ -23,6 +22,18 @@ let BottomMenu = (init) => {
   return {
     oninit: (vnode) => {
       vnode.state.commands = commands;
+    },oncreate:(vnode)=>{
+      let activePath = m.route.get();
+      console.log(activePath)
+      vnode.state.commands.map(item=>{
+        if(activePath===item.ref){
+          item.active = true;
+        }else{
+          item.active = false;
+        }
+      })
+      m.redraw();
+
     },
     view: (vnode) => {
       return (
