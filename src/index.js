@@ -10,16 +10,14 @@ import './style.css';
 import LoginPage from "./views/LoginPage/LoginPage";
 import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
 import LeadsPage from "./views/LeadsPage/LeadsPage";
+import SearchPage from "./views/SearchPage/SearchPage";
 import User from "./data/User";
 
-
-// let isUserLogin = User.email ? true : false;
 m.route(root, "/login", {
     "/login": LoginPage,
     "/add": {
         onmatch: () => {
             let logged = User.isLoggedIn();
-            console.log(logged);
             if (logged)
                 return AddLeadPage
             else m.route.set('/login')
@@ -28,31 +26,18 @@ m.route(root, "/login", {
     "/myLeads":{
         onmatch: () => {
             let logged = User.isLoggedIn();
-            console.log(logged);
             if (logged)
                 return LeadsPage
             else m.route.set('/login')
         }
+    },
+    "/search":{
+        onmatch: () => {
+            console.log('go to search page')
+            let logged = User.isLoggedIn();
+            if (logged)
+                return SearchPage
+            else m.route.set('/login')
+        }
     }
 });
-
-// function isUserLogin(path,page) { //Routereslover
-//     console.log('check if user logged in and route to page')
-//     path:{
-//         onmatch: {
-//             if (User._user) {
-//                 return page;
-//             } else {
-//                 return LoginPage;
-//             }
-//         }
-//     }
-// }
-// function checkUser(page) {
-//     if (User._user) {
-//         return page;
-//     } else {
-//         // m.route.set("/");
-//         return LoginPage;
-//     }
-// }

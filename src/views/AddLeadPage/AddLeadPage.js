@@ -1,6 +1,7 @@
 import m from "mithril"
 import Store from '../../data/Store'
 import Header from '../Header/Header'
+import Bottom from '../commons/BottomMenu'
 import FormContactLead from '../Form/FormContactLead'
 
 
@@ -13,6 +14,7 @@ module.exports = {
         <main class="addLead">
           <FormContactLead/>
         </main>
+        <Bottom />
       </div>
     )
   }

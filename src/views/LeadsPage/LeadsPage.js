@@ -2,7 +2,7 @@ import m from "mithril"
 import Store from '../../data/Store'
 import Header from '../Header/Header'
 import FiltersBar from '../commons/FiltersBar'
-import Bottom from '../commons/bottomMenu'
+import Bottom from '../commons/BottomMenu'
 import Leads from './Leads'
 
 
@@ -66,6 +66,8 @@ let leadsData = Store.storeLeads;
 //     follow:"היום"
 //   }
 // ]
+
+//TODO: inject group to filter data by
 let groupData = "אירועים";
 
 
@@ -76,7 +78,7 @@ module.exports = {
         <Header title="הלידים שלי" />
         <FiltersBar filters={topFilters} />
         <main class="myLeads">
-          <Leads data={leadsData} group={groupData}/>
+          <Leads data={leadsData}/>
         </main>
         <Bottom />
       </div>
