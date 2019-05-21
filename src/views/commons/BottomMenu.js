@@ -70,8 +70,8 @@ function toggleActive(vnode, item) {
     }
   });
   
-  //step 3 - active current
-  item.active = true;
+  //step 3 - active current ?? not need because when route its crete it again
+  // item.active = true;
 }
 
 module.exports = BottomMenu;

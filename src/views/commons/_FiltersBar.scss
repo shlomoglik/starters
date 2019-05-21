@@ -1,14 +1,22 @@
 .filterBar{
-    color: white;
+    position: fixed;
+    z-index: 100;
+    top: 8rem;
+    width: 100vw;
+    right: 0;
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: space-between;
     padding: 1rem 1rem .5rem 1rem;
     text-align: center;
+    opacity: .9;
+    background-color: var(--color-primary-dark);
 
     &__card{
-        border-radius: 2px;
+        border-top: 1.5px solid var(--color-primary);
+        // background-color: var(--color-primary);
+        border-radius: 10px 15px 0 0;
         line-height: 3rem;
         align-self: center;
         position: relative;
@@ -17,11 +25,11 @@
         color: var(--color-grey-dark-3);
 
         &--active{
-            color: var(--color-primary-dark);
+            color: var(--color-grey-light-1);
             font-weight: 500;
 
             &::after{
-                background-color: var(--color-primary) !important;
+                background-color: var(--color-grey-light-1) !important;
                 opacity: 1 !important;
             }
 
@@ -80,6 +88,7 @@
         align-items: center;
 
         &--done{
+            font-weight: 600;
             background-color: white;
             color:green;
         }

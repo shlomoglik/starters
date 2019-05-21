@@ -9,8 +9,7 @@ let LoginPage = {
   },
   onupdate:(vnode)=>{
     if(!vnode.state.valid){
-      let dom = vnode.dom;
-      let ref = dom.querySelector('.login__form')
+      let ref = vnode.dom.querySelector('.login__form')
       ref.classList.add("shake");
       return new Promise((resolve,reject)=> {
           vnode.dom.addEventListener("animationend", ()=>{
