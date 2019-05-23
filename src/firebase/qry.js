@@ -42,7 +42,8 @@ function followChanges(col, id, elem) {
  */
 function getLeads(groupType) {
     let leads = [];
-    let userPath = 'users/4LpdyiR7DAf4LvfLbDFTZDi1rZC3'; // User.getUser('path') || 
+    let user = JSON.parse(sessionStorage.getItem('User'));
+    let userPath = user.path; // User.getUser('path') || 
 
     let assignMain = {
         assignRef: userPath,
@@ -52,9 +53,9 @@ function getLeads(groupType) {
 
     let qry;
     qry = colRef.where('assigns', 'array-contains', assignMain);
-    if (groupType) {
-        qry.where('groupType', '==', groupType);
-    }
+    // if (groupType) {
+    //     qry.where('groupType', '==', groupType);
+    // }
 
     qry.onSnapshot(
         snap => {
