@@ -10,7 +10,7 @@ import Leads from './Leads'
 let topFilters = [
   {
     title: "קבוצות",
-    active:true,
+    active: true,
     done: false,
     count: 2
   },
@@ -31,13 +31,6 @@ let topFilters = [
   }
 ]
 
-// snap data---> fill store leadsData[{},{}]--> 
-//TODO!! create it from data controller that implement this from database!!! and assing filter on which the client activates
-let leadsData = Store.storeLeads;
-
-//TODO: inject group to filter data by
-let groupData = "אירועים";
-
 
 module.exports = {
   view: (vnode) => {
@@ -46,7 +39,7 @@ module.exports = {
         <Header title="הלידים שלי" />
         <FiltersBar filters={topFilters} />
         <main class="myLeads">
-          <Leads data={leadsData}/>
+          <Leads />
         </main>
         <Bottom />
       </div>

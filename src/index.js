@@ -1,5 +1,5 @@
-import '../src/firebase/firebaseConfig'
-const m = require('mithril');
+// import * as app from '../src/firebase/firebaseConfig';
+import m from 'mithril';
 const root = document.body;
 import './style.css';
 

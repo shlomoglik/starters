@@ -1,14 +1,17 @@
 import m from "mithril"
+import { getLeads } from '../../firebase/qry'
+import Store from '../../data/Store'
 
 let Filters = (init) => {
   return {
     oninit: (vnode) => {
-      vnode.state.data = vnode.attrs.data;
+      vnode.state.data = [];
+      console.log('TODO! get data from store',Store.storeLeads);
+      getLeads();
     },
-    oncreate: (vnode) => {
-      console.log('Create!')
-    },
-    onupdate: (vnode) => {
+    onbeforeupdate: (vnode) => {
+      console.log('UPDATE! data derived from store',Store.storeLeads);
+      vnode.state.data = Store.storeLeads;
     },
     view: (vnode) => {
       if(!vnode.state.data.length){
@@ -22,14 +25,19 @@ let Filters = (init) => {
               m(".leads__cell", "פולואפ")
             ]),
             vnode.state.data.map(item => {
+              let follow = item.followDate.toDate().getDay() + '/' + item.followDate.toDate().getMonth() + '/' + item.followDate.toDate().getFullYear();
+              let dist = (new Date().setTime(0)-item.followDate.toDate().setTime(0) );
+              if(dist ==0){
+                follow = 'היום'
+              };
               return (
                 m(".leads__row", { id: item.id }, [
                   m(".leads__cell.leads__title", [
                     m("span.leads__name", item.name),
                     m("span.leads__type", item.type)
                   ]),
-                  m(".leads__cell.leads__desc", item.desc),
-                  m(".leads__cell", item.follow)
+                  m(".leads__cell.leads__desc", item.description),
+                  m(".leads__cell.leads__follow",follow)
                 ])
               )
             })

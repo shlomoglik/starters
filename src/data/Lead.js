@@ -5,20 +5,24 @@ import Model from '../data/Model'
 
 class Lead extends Model {
     // id = "";
-    // data = {
+    // _data = {
     //     title: "",
     //     type: "",
     //     description: "",
     //     duedate: "",
     //     source: "",
-    //     contactsRef: [],
+    //     contacts: [],
     // }
     constructor(...args) {
         super(...args);
-        this._data['assignRef'] =User.getUser('path');
+        this._data['assigns'] =[{
+            'assignRef':User.getUser('path'),
+            'role':'main'
+        }];
     }
     static addLeadAndContact(newContact ,newLead ){
         console.log('step 1: add Contact data=>',newContact._data);
+
         newContact.add('contacts').then(
             doc=>{
                 let path = newContact.getID();

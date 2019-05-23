@@ -1,27 +1,25 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import auth from 'firebase/auth'
-import m from 'mithril'
+import {auth} from '../firebase/firebaseConfig'
 
-var _auth = firebase.auth();
 
 function signIn(email, password) {
-    return _auth.signInWithEmailAndPassword(email, password);
+    console.log('there is a firebase app?',firebase);
+    // console.log('there is a auth?',firebase.auth());
+    return auth.signInWithEmailAndPassword(email, password);
 }
 
 function logout() {
-    _auth.signOut().then(
+    firebase.auth.signOut().then(
         ()=>{
             console.log('user is logout');
-            console.log(`user is: ${_auth.currentUser}`)
+            console.log(`user is: ${auth.currentUser}`)
             localStorage.removeItem('token');
         },
         err=>console.error(err)
     );
 }
 function isUserLoggedIn(){
-    // console.log('check if user is logged in: ',_auth.currentUser);
-    // return _auth.currentUser?true:false;
+    // console.log('check if user is logged in: ',firebase.auth().currentUser);
+    // return firebase.auth().currentUser?true:false;
     let token = sessionStorage.getItem('token');
     console.log('token is found')
     return  token ? true : false;
