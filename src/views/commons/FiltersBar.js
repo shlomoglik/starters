@@ -1,4 +1,5 @@
 import m from "mithril"
+import Leads from '../LeadsPage/Leads'
 
 let Filters = (init) => {
   return {
@@ -48,12 +49,7 @@ function toggleActive(vnode,item){
     }
   })
   item.active = true;
+  vnode.state.active = item.title;
 }
-
-// function setClassActive(vnode,e){
-//   let el = e.target;
-//   vnode.dom.querySelector('.filterBar__card--active').classList.remove('filterBar__card--active')
-//   el.classList.add('filterBar__card--active');
-// }
 
 module.exports = Filters;
