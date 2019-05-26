@@ -1,25 +1,13 @@
 import m from "mithril"
+import settings from '../../data/settings'
 import Leads from '../LeadsPage/Leads'
 
 let Filters = (init) => {
   return {
-    oninit: (vnode) => {
-      vnode.state.filtersData = vnode.attrs.filters;
-    },
-    oncreate: (vnode) => {
-      console.log('Create!')
-    },
-    onupdate:(vnode)=>{
-      // try{  
-      //   setClassActive(vnode,event); //when state change set class as active
-      // }catch(err){
-      //   console.error(err);
-      // }
-    },
     view: (vnode) => {
       return (
         m(".filterBar",[
-          vnode.state.filtersData.map(item => {
+          settings.groupTypeFilter.map(item => {
             return(
                 m(".filterBar__card",
                   {
@@ -43,13 +31,13 @@ let Filters = (init) => {
 }
 
 function toggleActive(vnode,item){
-  vnode.state.filtersData.map(it=>{
+  settings.groupTypeFilter.map(it=>{
     if(it.active){
       it.active =false;
     }
   })
   item.active = true;
-  vnode.state.active = item.title;
+  // vnode.state.active = item.title;
 }
 
 module.exports = Filters;

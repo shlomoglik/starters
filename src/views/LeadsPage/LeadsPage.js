@@ -11,8 +11,6 @@ import Leads from './Leads'
 
 
 let leadsPage = (init)=>{
-  let topFilters = settings.groupTypeFilter;
-  let groupFilter = 'אירועים';
   return {
     oninit: (vnode) => {
       vnode.state.data = [];
@@ -20,20 +18,14 @@ let leadsPage = (init)=>{
     },
     onbeforeupdate: (vnode) => {
       vnode.state.data = Store.storeLeads;
-      function setActive(vnode,e){
-        if(e){
-          groupFilter= e.target.firstChild.data;
-        }
-      }
-      setActive(vnode,event);
     },
     view: (vnode) => {
       return (
         <div class="container--myLeads">
           <Header title="הלידים שלי" />
-          <FiltersBar filters={topFilters} />
+          <FiltersBar/>
           <main class="myLeads" >
-            <Leads data={vnode.state.data} groupFilter={groupFilter} />
+            <Leads data={vnode.state.data}/>
           </main>
           <Bottom />
         </div>

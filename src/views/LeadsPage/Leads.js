@@ -1,7 +1,16 @@
 import m from "mithril"
+import settings from '../../data/settings'
 
-let Filters = (init) => {
+let Leads = (init) => {
   return {
+    oninit:(vnode)=>{
+      settings.groupTypeFilter.map(item=>{
+        console.log(item)
+        if(item.active){
+          vnode.state.active= item.title;
+        }
+      });
+    },
     view: (vnode) => {
       if (!vnode.attrs.data.length) {
         return m('.leads.leads--empty', { "data-empty": "כל הכבוד אין לידים פתוחים" })
@@ -13,10 +22,11 @@ let Filters = (init) => {
               m(".leads__cell", "תיאור"),
               m(".leads__cell", "פולואפ")
             ]),
+    
             vnode.attrs.data.map(item => {
-              console.log('include only: ',vnode.attrs.groupFilter);
+              console.log('include only: ',vnode.state.active);
               //exclude not in filters
-              if(!item.groupType || vnode.attrs.groupFilter !== item.groupType){
+              if(!item.groupType || vnode.state.active !== item.groupType){
                 return;
               }
 
@@ -48,4 +58,4 @@ let Filters = (init) => {
   }
 }
 
-module.exports = Filters;
+module.exports = Leads;
