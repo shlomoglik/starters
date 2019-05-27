@@ -10,7 +10,6 @@ class User extends Model {
     //     super(...args);
     //   }
     static loginUser(email, pass, vnode){
-        console.log('start User.loginUser')
         let login = signIn(email, pass); // return Promise
         login.then(
             cred => {
@@ -29,7 +28,6 @@ class User extends Model {
                                     sessionStorage.setItem('User', JSON.stringify(user))
                                     sessionStorage.setItem('token', token)
                                     m.route.set("/add");
-                                    console.log('this is the User data after appending all', User) // localStorage('users/{currentUID}/email', User.email)
                                 }, err => {
                                     console.error(err)
                                 });// https://firebase.google.com/docs/reference/js/firebase.User.html#getidtoken
@@ -51,12 +49,10 @@ class User extends Model {
         )
     }
     static logOut(){
-        console.log('start User.logoutUser')
         logout();
         m.route.set('/login');
     }
     static isLoggedIn(){
-        console.log('start User.isLoggedIn')
         let logged = isUserLoggedIn();
         return logged;
     }

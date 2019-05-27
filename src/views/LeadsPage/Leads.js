@@ -3,16 +3,14 @@ import settings from '../../data/settings'
 
 let Leads = (init) => {
   return {
-    oninit:(vnode)=>{
-      settings.groupTypeFilter.map(item=>{
-        console.log(item)
-        if(item.active){
-          vnode.state.active= item.title;
-        }
-      });
+    oncreate: (vnode) => {
+    },
+    onbeforeupdate: (vnode) => {
+      setActiveState(vnode);
     },
     view: (vnode) => {
-      if (!vnode.attrs.data.length) {
+      let leadsData = filterMyLeads(vnode);
+      if (!leadsData[0]) {
         return m('.leads.leads--empty', { "data-empty": "כל הכבוד אין לידים פתוחים" })
       } else {
         return (
@@ -22,13 +20,8 @@ let Leads = (init) => {
               m(".leads__cell", "תיאור"),
               m(".leads__cell", "פולואפ")
             ]),
-    
-            vnode.attrs.data.map(item => {
-              console.log('include only: ',vnode.state.active);
-              //exclude not in filters
-              if(!item.groupType || vnode.state.active !== item.groupType){
-                return;
-              }
+
+            leadsData.map(item => {
 
               let follow = 'היום'
               if (item.followDate) {
@@ -56,6 +49,26 @@ let Leads = (init) => {
 
     }
   }
+}
+
+function filterMyLeads(vnode) {
+  let result = vnode.attrs.data || [];
+  result = result.filter  (item => {
+    if(vnode.state.active =='כללי'){
+      return !item.groupType || item.groupType == vnode.state.active
+    }else{
+      return item.groupType && item.groupType == vnode.state.active
+    }
+  });
+  return result;
+}
+
+function setActiveState(vnode) {
+  settings.groupTypeFilter.map(item => {
+    if (item.active) {
+      vnode.state.active = item.title;
+    }
+  });
 }
 
 module.exports = Leads;

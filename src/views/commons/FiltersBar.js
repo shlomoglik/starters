@@ -17,8 +17,8 @@ let Filters = (init) => {
                   [
                     item.title,
                     m("span.filterBar__card-counter",
-                      {class:item.done?"filterBar__card-counter--done":""},
-                      item.done?
+                      {class:item.done||item.count==0?"filterBar__card-counter--done":""},
+                      item.done || item.count==0?
                       String.fromCharCode(10003)
                       :[item.count])
                   ])

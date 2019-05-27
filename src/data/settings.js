@@ -3,23 +3,23 @@ let settings = {
         {
             title: "קבוצות",
             active: true,
-            done: false,
-            count: 2
+            count: 0,
         },
         {
             title: "אירועים",
-            done: false,
-            count: 2
+            count: 0
         },
         {
             title: "חוגים",
-            done: true,
-            count: 2
+            count: 0
         },
         {
             title: "כלבייה",
-            done: true,
-            count: 4
+            count: 0
+        },
+        {
+            title: "כללי",
+            count: 0,
         }
     ],
 
