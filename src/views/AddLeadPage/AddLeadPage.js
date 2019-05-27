@@ -27,6 +27,27 @@ let formDataContact = {
   }
 }
 
+let formDataLead = {
+  "meta":{heading:'פרטי פנייה',class:'Lead'},
+  "data":{
+    "type":{
+      "input":{type:"text",name:"type",placeholder:"סוג פנייה",required:true},
+      "label":{text:"סוג פנייה"}
+    },
+    "source":{
+      "input":{type:"text",name:"phone",placeholder:"מקור הגעה"},
+      "label":{text:"טלפון איש קשר (xxx-xxxxxxx)"}
+    },
+    "duedate":{
+      "input":{type:"date",name:"duedate",placeholder:"תאריך יעד"},
+      "label":{text:"תאריך יעד"}
+    },
+    "description":{
+      "textarea":{name:"description",placeholder:"תיאור והערות",required:true},
+    },
+  }
+}
+
 
 
 let AddLeadPage = (init)=>{
@@ -46,7 +67,7 @@ let AddLeadPage = (init)=>{
         <div class="container--addLead">
           <Header title="פנייה חדשה" />
           <main class="addLead">
-            <FormContactLead parent={vnode} formDataContact={formDataContact} />
+            <FormContactLead parent={vnode} formDataContact={formDataContact} formDataLead={formDataLead} />
           </main>
           <Bottom />
         </div>
