@@ -493,6 +493,7 @@ body {
     border: none;
     border-radius: 5px;
     color: var(--color-grey-dark-3);
+    background: none;
     flex: 1; }
     .form__select-item--active {
       background: var(--color-grey-light-3); }
