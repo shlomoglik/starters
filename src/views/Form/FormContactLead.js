@@ -1,10 +1,16 @@
 import m from 'mithril'
 import Contact from '../../data/Contact'
 import Lead from '../../data/Lead'
+import SearchList from '../commons/SearchList'
+
+let list = [
+    { term: 'שלמה', id: 'ased' },
+    { term: 'שלמה גליקמן', id: 'gwer' },
+    { term: 'שלמה גליקמן', id: 'jsar' },
+];
+
 
 let FormLead = (init) => {
-    console.log('start initilize FormLead Component!!')
-    // console.log(new Lead)
     return {
         view: (vnode) => {
             return (
@@ -16,16 +22,24 @@ let FormLead = (init) => {
                         let newLeadData = getDataByClass(vnode, 'Lead');
                         let newContact = new Contact('', newContactData);
                         let newLead = new Lead('', newLeadData);
-                        Lead.addLeadAndContact(newContact,newLead);
+                        Lead.addLeadAndContact(newContact, newLead);
                         e.target.reset();
                     }}
                 >
                     <div class="heading">
                         <h1 class="heading__secondary">פרטי איש קשר</h1>
                     </div>
-                    <div class="form__row">
+
+                    <div class="form__row form__select-group">
+                        <button type="button" class="form__select-item form__select-item--active" id="add">איש קשר חדש</button>
+                        <button type="button" class="form__select-item" id="exist">איש קשר קיים</button>
+                    </div>
+
+
+                    <div class="form__row" style='position:relative'>
                         <input type="text" name="name" class="form__input Contact" id="contactName" placeholder="שם" required />
                         <label for="contactName" class="form__label">שם איש קשר</label>
+                        <SearchList list={list} />
                     </div>
                     <div class="form__row">
                         <input type="tel" name="phone" class="form__input Contact" pattern="[0-9]{3}-[0-9]{7}" placeholder="טלפון" />

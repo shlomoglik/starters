@@ -67,4 +67,23 @@
         font-size: 2rem;
     }
 
+    &__select-group{
+        display: flex;
+        justify-content: space-between;
+        font-size: 3rem;
+        // box-shadow: var(--box-shadow-1);
+    }
+    &__select-item{
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        color: var(--color-grey-dark-3);
+        flex:1;
+        
+        &--active{
+            background: var(--color-grey-light-3);
+        }
+    }
+
+
 }
