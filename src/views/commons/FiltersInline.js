@@ -1,5 +1,4 @@
 import m from "mithril"
-import Leads from '../LeadsPage/Leads'
 
 let Filters = (init) => {
   return {
@@ -25,13 +24,13 @@ let Filters = (init) => {
 }
 
 function toggleActive(vnode,item){
-  // settings.groupTypeFilter.map(it=>{
-  //   if(it.active){
-  //     it.active =false;
-  //   }
-  // })
-  // item.active = true;
-  // vnode.state.active = item.title;
+  vnode.attrs.filters.map(it=>{
+    if(it.title == item.title){
+      item.active = true;
+    }else{
+      it.active = false;
+    }
+  })
 }
 
 module.exports = Filters;

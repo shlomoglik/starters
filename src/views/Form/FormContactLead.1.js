@@ -1,6 +1,7 @@
 import m from 'mithril'
 import Contact from '../../data/Contact'
 import Lead from '../../data/Lead'
+import FilterInline from '../commons/FiltersInline'
 import SearchList from '../commons/SearchList'
 
 let list = [
@@ -18,6 +19,7 @@ let FormLead = (init) => {
                         m('.heading',
                             m('.heading__secondary', vnode.attrs.formDataContact.meta.heading)
                         ),
+                        m(FilterInline,{filters:vnode.attrs.filters}),
                         renderFormData(vnode.attrs.formDataContact),
                         m('.heading',
                             m('.heading__secondary', vnode.attrs.formDataLead.meta.heading)
@@ -49,7 +51,7 @@ function submitForm(e, vnode) {
     e.target.reset();
 }
 
-function renderFormData(myData) {
+function renderFormData(myData,vnode) {
     let meta = myData.meta;
     let data = myData.data;
     return Object.keys(data).map((k, ind) => {

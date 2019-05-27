@@ -4,9 +4,9 @@ import Header from '../Header/Header'
 import Bottom from '../commons/BottomMenu'
 import FormContactLead from '../Form/FormContactLead.1'
 
-let filtersInline = [
-  {active:true,title:'איש קשר חדש'},
-  {title:'איש קשר קיים'},
+let filters = [
+  {active:true,title:'איש קשר חדש',state:'add'},
+  {title:'איש קשר קיים',state:'exist'},
 ];
 
 let formDataContact = {
@@ -17,7 +17,7 @@ let formDataContact = {
       "label":{text:"שם איש קשר"}
     },
     "phone":{
-      "input":{type:"tel",name:"phone",placeholder:"אימייל",pattern:"[0-9]{3}-[0-9]{7}"},
+      "input":{type:"tel",name:"phone",placeholder:"טלפון",pattern:"[0-9]{3}-[0-9]{7}"},
       "label":{text:"טלפון איש קשר (xxx-xxxxxxx)"}
     },
     "email":{
@@ -67,7 +67,7 @@ let AddLeadPage = (init)=>{
         <div class="container--addLead">
           <Header title="פנייה חדשה" />
           <main class="addLead">
-            <FormContactLead parent={vnode} formDataContact={formDataContact} formDataLead={formDataLead} />
+            <FormContactLead parent={vnode} formDataContact={formDataContact} formDataLead={formDataLead} filters={filters} />
           </main>
           <Bottom />
         </div>

@@ -24,26 +24,6 @@
         font-size: var(--def-font-size);
         color: var(--color-grey-dark-3);
 
-        &--active{
-            color: var(--color-grey-light-1);
-            font-weight: 500;
-
-            &::after{
-                background-color: var(--color-grey-light-1) !important;
-                opacity: 1 !important;
-            }
-
-            &:hover{
-                transform: none !important;
-                cursor: context-menu !important;
-            
-                &::after{
-                    width: 90% !important;
-                    right: 5% !important;
-                }
-            }
-                
-        }
 
         &::after{
             content: "";
@@ -69,6 +49,28 @@
                 width: 60%;
                 right: 20%;
             }
+        }
+
+        //active state
+        &--active{
+            color: var(--color-grey-light-1);
+            font-weight: 500;
+
+            &::after{
+                background-color: var(--color-grey-light-1) !important;
+                opacity: 1 !important;
+            }
+
+            &:hover{
+                transform: none !important;
+                cursor: context-menu !important;
+            
+                &::after{
+                    width: 90% !important;
+                    right: 5% !important;
+                }
+            }
+                
         }
     }
 
