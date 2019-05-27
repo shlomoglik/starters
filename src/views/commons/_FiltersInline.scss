@@ -1,0 +1,19 @@
+.filterGroup{
+    display: flex;
+    justify-content: space-between;
+    font-size: 3rem;
+
+    &__item{
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        color: var(--color-grey-dark-3);
+        background: none;
+        flex:1;
+        
+        &--active{
+            background: var(--color-grey-light-3);
+        }
+    }
+
+}

@@ -9,7 +9,6 @@ let list = [
     { term: 'שלמה גליקמן', id: 'jsar' },
 ];
 
-
 let FormLead = (init) => {
     return {
         view: (vnode) => {
@@ -35,7 +34,6 @@ let FormLead = (init) => {
                         <button type="button" class="form__select-item" id="exist">איש קשר קיים</button>
                     </div>
 
-
                     <div class="form__row" style='position:relative'>
                         <input type="text" name="name" class="form__input Contact" id="contactName" placeholder="שם" required />
                         <label for="contactName" class="form__label">שם איש קשר</label>
@@ -49,6 +47,7 @@ let FormLead = (init) => {
                         <input type="email" name="email" class="form__input Contact" id="contactMail" placeholder="אימייל" />
                         <label for="contactMail" class="form__label">אימייל איש קשר</label>
                     </div>
+                    
 
                     <div className="heading">
                         <h1 className="heading__secondary">פרטי פנייה</h1>
