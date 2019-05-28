@@ -3,15 +3,23 @@
     margin-bottom: 8rem; 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-
 }
 
 .addLead{
+    min-width: 32rem;
+    width: 90%;
+    max-width: 42rem;
+    padding: 1rem 1rem;
+    background-color: var(--color-grey-light-1);
+    box-shadow: var(--box-shadow-1);
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    background-color: var(--color-grey-light-1);
     &__form{
         &:first-child{
-            margin-top: 5rem;
+            margin-top: 1rem;
         }
     }
 }

@@ -485,33 +485,30 @@ body {
     height: 8rem; }
 
 .form {
-  max-width: 80rem;
   direction: rtl;
-  padding: 3rem 2rem;
-  background-color: var(--color-grey-light-1);
-  box-shadow: var(--box-shadow-1);
-  border-radius: 3px;
-  margin-bottom: 1rem;
-  background-color: var(--color-grey-light-1);
-  text-align: center; }
-  .form__row:not(:last-child) {
-    margin-bottom: 3rem; }
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .form__row {
+    width: 100%; }
+    .form__row:not(:last-child) {
+      margin-bottom: 2rem; }
   .form__input {
-    max-width: 40rem;
+    width: 90%;
     color: var(--color-grey-dark-1);
     height: 5rem;
     outline: none;
     text-align: center;
-    font-size: 3rem;
-    height: 4rem;
-    outline: none;
+    font-size: 2rem;
+    font-family: inherit;
     border: none;
-    width: 90%;
     border-bottom: 3px solid var(--color-grey-light-3);
     transition: all .2s ease-in; }
-    .form__input::-webkit-input-placeholder {
+    .form__input::placeholder {
       color: var(--color-grey-dark-3) !important;
-      font-size: 2rem; }
+      font-size: 2rem;
+      font-family: inherit; }
     .form__input:focus {
       outline: none;
       border-bottom: 3px solid var(--color-primary); }
@@ -534,6 +531,10 @@ body {
     color: var(--color-grey-dark-3) !important;
     font-family: inherit;
     font-size: 2rem; }
+    .form input[type="date"]::placeholder {
+      color: var(--color-grey-dark-3) !important;
+      font-size: 2rem;
+      font-family: inherit; }
   .form__select-group {
     display: flex;
     justify-content: space-between;
@@ -614,11 +615,21 @@ body {
   margin-bottom: 8rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center; }
 
-.addLead__form:first-child {
-  margin-top: 5rem; }
+.addLead {
+  min-width: 32rem;
+  width: 90%;
+  max-width: 42rem;
+  padding: 1rem 1rem;
+  background-color: var(--color-grey-light-1);
+  box-shadow: var(--box-shadow-1);
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  background-color: var(--color-grey-light-1); }
+  .addLead__form:first-child {
+    margin-top: 1rem; }
 
 .container--myLeads {
   margin-top: 13rem;

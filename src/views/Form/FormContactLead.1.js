@@ -68,7 +68,7 @@ function renderFormData(myData,vnode) {
             return [
                 m('.form__row', { key: ind },
                     [
-                        m(`textarea[class="form__input ${meta.class}"]`, curr.input)
+                        m(`textarea[class="form__input ${meta.class}"]`, curr.textarea)
                     ])
             ]
 
