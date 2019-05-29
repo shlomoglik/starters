@@ -2,7 +2,7 @@ import m from "mithril"
 import Store from '../../data/Store'
 import Header from '../Header/Header'
 import Bottom from '../commons/BottomMenu'
-import FormContactLead from '../Form/FormContactLead.1'
+import FormContactLead from '../Form/FormContactLead'
 
 let filters = [
   {active:true,title:'איש קשר חדש',state:'add'},
