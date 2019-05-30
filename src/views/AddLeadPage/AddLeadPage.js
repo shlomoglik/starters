@@ -1,8 +1,10 @@
 import m from "mithril"
 import Store from '../../data/Store'
+import {getContacts} from '../../firebase/qry'
 import Header from '../Header/Header'
 import Bottom from '../commons/BottomMenu'
-import FormContactLead from '../Form/FormContactLead'
+// import FormContactLead from '../Form/FormContactLead'
+import Form from '../Form/Form'
 
 let filters = [
   {active:true,title:'איש קשר חדש',type:'add'},
@@ -52,6 +54,9 @@ let formDataLead = {
 
 let AddLeadPage = (init)=>{
   return {
+    oninit:(vnode)=>{
+      getContacts();
+    },
     oncreate:(vnode)=>{
       let main =vnode.dom.querySelector('main');
       main.classList.add("fade-in");
@@ -67,7 +72,8 @@ let AddLeadPage = (init)=>{
         <div class="container--addLead">
           <Header title="פנייה חדשה" />
           <main class="addLead">
-            <FormContactLead parent={vnode} formDataContact={formDataContact} formDataLead={formDataLead} filters={filters} />
+            <Form parent={vnode} formData={formDataContact} filters={filters} />
+            {/* <Form parent={vnode} formData={formDataLead} /> */}
           </main>
           <Bottom />
         </div>
@@ -75,5 +81,10 @@ let AddLeadPage = (init)=>{
     }
   }
 }
+
+// TODO:
+// get all contact and store it 
+// 
+// 
 
 module.exports = AddLeadPage;

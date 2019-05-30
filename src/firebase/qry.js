@@ -70,7 +70,21 @@ function getLeads(groupType) {
         });
 }
 
+function getContacts() {
+    let colRef = db.collection('contacts');
+    let col = colRef.get();
+    col.then(
+        res=>{
+            let docs = res.docs;
+            Store.storeContacts = docs;
+            // docs.map(doc=>{
+            //     console.log(doc.data())
+            // })
+        }
+    )
+}
 
-module.exports = { getDoc, insertDoc, followChanges, getLeads };
+
+module.exports = { getDoc, insertDoc, followChanges, getLeads, getContacts };
 
 
