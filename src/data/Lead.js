@@ -35,6 +35,21 @@ class Lead extends Model {
             }
         )
     }
+    static addLeadToExistContact(newContact ,newLead ){
+        console.log('step 1: add Contact data=>',newContact._data);
+
+        newContact.add('contacts').then(
+            doc=>{
+                let path = newContact.getID();
+                let contactsRef =[{
+                    'role':'main',
+                    'contactRef':path
+                }];
+                newLead.setData('contacts',contactsRef);
+                newLead.add('leads');
+            }
+        )
+    }
 
 } //end Cless
 

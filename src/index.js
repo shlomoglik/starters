@@ -12,6 +12,10 @@ import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
 import LeadsPage from "./views/LeadsPage/LeadsPage";
 import SearchPage from "./views/SearchPage/SearchPage";
 import User from "./data/User";
+import {getLeads, getContacts } from './firebase/qry'
+
+getLeads();
+getContacts();
 
 m.route(root, "/login", {
     "/login": LoginPage,

@@ -10,7 +10,12 @@ let SearchBox = (init) => {
                             {
                                 placeholder: vnode.attrs.label || "חפש...",
                                 autofocus: true,
-                                oninput:(e)=> vnode.attrs.parent.state.term = e.target.value
+                                oninput:(e)=> vnode.attrs.parent.state.term = e.target.value,
+                                onkeydown:(e)=>{
+                                    console.log(e);
+                                    if(e.code=='ArrowDown')
+                                        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+                                }
                             }
                         ),
                         m('svg.searchBox__icon', [

@@ -1,5 +1,4 @@
 import m from "mithril"
-import { getLeads } from '../../firebase/qry'
 import Store from '../../data/Store'
 import settings from '../../data/settings'
 
@@ -15,7 +14,6 @@ let leadsPage = (init)=>{
   return {
     oninit: (vnode) => {
       vnode.state.data = [];
-      getLeads();
       setCounter();
     },
     onbeforeupdate: (vnode) => {

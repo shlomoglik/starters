@@ -9,13 +9,14 @@ let SearchList = (init) => {
             console.log(vnode.attrs.parent.state)
         },
         view: (vnode) => {
+            let displayField = vnode.attrs.displayField;
             return (
                 m('.searchList', [
                     vnode.attrs.parent.state.list.map(item => {
                         if(item){
                             return (
                                 m('.searchList__row', { id: item.id }, [
-                                    m('.searchList__item', item.data),
+                                    m('.searchList__item', item[displayField]),
                                     m('svg.searchList__select', [
                                         m('use', { href: '/public/img/sprite.svg#icon-add-to-list' })
                                     ])

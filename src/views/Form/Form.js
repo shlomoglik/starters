@@ -4,60 +4,49 @@ import SearchBox from '../commons/SearchBox'
 import SearchList from '../commons/SearchList'
 import Store from '../../data/Store'
 
-function getList(term){
-    console.log('TODO! list from store and filter by term');
-    let filter = [];
-    // Store.storeContacts.filter(el => el.toLowerCase().indexOf(query.toLowerCase()) !== -1);
-    // if(term=='שלמה'){
-    //     list = [
-    //         { data: 'שלמה רובין', id: 'ased' },
-    //         { data: 'שלמה גליקמן', id: 'gwer' },
-    //         { data: 'שלמה ארצי', id: 'jsar' },
-    //     ];
-    // }else if(term=='מזל'){
-    //         list = [
-    //             { data: 'מזל טוב', id: 'serg' },
-    //             { data: 'מזל גלוש', id: 'ibsh' },
-    //             { data: 'מזלגות וכוסות', id: 'qbtd' },
-    //         ];
-    // }
+function getList(term, field,model) {
+    if (term.length < 2) {
+        return [];
+    }
+    let filter = Store.storeContacts.filter(el => {
+        let search = el.name || '';
+        return search.indexOf(term) !== -1;
+    });
     return filter;
 }
 
 
 let Form = (init) => {
     return {
-        oninit:vnode=>{
-            vnode.state.term='';
+        oninit: vnode => {
+            vnode.state.term = '';
         },
-        onbeforeupdate:vnode=>{
-            vnode.state.list = getList(vnode.state.term);
+        onbeforeupdate: vnode => {
+            vnode.state.list = getList(vnode.state.term, name);
         },
         view: (vnode) => {
             return (
-                m('form.addContact__form form', { onsubmit: (event, vnode) => submitForm(event, vnode) }
-                    , [
+                m('form.addContact__form form',
+                    { onsubmit: (event, vnode) => submitForm(event, vnode) },
+                    [
                         m('.heading',
                             m('.heading__secondary', vnode.attrs.formData.meta.heading)
                         ),
-                        m( FilterInline , { filters: vnode.attrs.filters }),
-                        vnode.attrs.filters.map(filter=>{
-                            if(!filter){
-                                return [];
-                            }
-                            if(filter.active){
-                                if(filter.type=='add'){
+                        vnode.attrs.filters? m(FilterInline, { filters: vnode.attrs.filters }) :[],
+                        vnode.attrs.filters? vnode.attrs.filters.map(filter => {
+                            if (filter.active) {
+                                if (filter.type == 'add') {
                                     return renderFormData(vnode.attrs.formData)
-                                }else{
+                                } else {
                                     return [
-                                        m('.form__row',{style:"position:relative"},[
-                                            m(SearchBox,{label:'חפש איש קשר',parent:vnode}),
-                                            m(SearchList,{parent:vnode})
+                                        m('.form__row', { style: "position:relative" }, [
+                                            m(SearchBox, { label: 'חפש איש קשר', parent: vnode }),
+                                            m(SearchList, { parent: vnode, displayField: 'name' })
                                         ])
-                                ]
+                                    ]
                                 }
                             }
-                        }),
+                        }): renderFormData(vnode.attrs.formData),
                         m('div', [
                             m('button[class="btn btn--def"]', { type: "submit" }, "הוסף")
                         ])
@@ -79,18 +68,20 @@ function renderFormData(myData, vnode) {
     let data = myData.data;
     return Object.keys(data).map((k, ind) => {
         let curr = data[k];
+        console.log(k, ind);
         if (data[k].input) {
-            return [
-                m('.form__row', /*{ key:ind+1 },*/
-                [
-                    m(`input#${k}[class="form__input ${meta.class}"]`, 
-                            Object.assign({},curr.input,{oninput:(e)=>insertList(e)})),
+            return (
+                m('.form__row', { key: ind },
+                    [
+                        m(`input#${k}[class="form__input ${meta.class}"]`,
+                            Object.assign({}, curr.input, { oninput: (e) => insertList(e) })),
                         m('label[class="form__label"]', { for: k }, curr.label.text)
                     ])
-            ]
+            )
+
         } else if (data[k].textarea) {
             return [
-                m(`.form__row`, /*{ key:ind+1 },*/
+                m(`.form__row`, { key: ind },
                     [
                         m(`textarea[class="form__input ${meta.class}"]`, curr.textarea)
                     ])
@@ -101,8 +92,8 @@ function renderFormData(myData, vnode) {
     })
 }
 
-function insertList(e){
-    console.log('TODO! append list base on term ',e);
+function insertList(e) {
+    console.log('TODO! append list base on term ', e);
 }
 
 module.exports = Form

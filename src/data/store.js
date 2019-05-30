@@ -1,9 +1,7 @@
-import User from '../data/User'
-
-
 var Store = {
     storeLeads: [],
-    storeContacts: []
+    storeContacts: [],
 };
+
 module.exports = Store;
 

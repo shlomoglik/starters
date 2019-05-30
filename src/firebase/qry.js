@@ -75,11 +75,14 @@ function getContacts() {
     let col = colRef.get();
     col.then(
         res=>{
+            let result =[];
             let docs = res.docs;
-            Store.storeContacts = docs;
-            // docs.map(doc=>{
-            //     console.log(doc.data())
-            // })
+            docs.map(doc=>{
+                let newDoc = Object.assign(doc.data(),{id:doc.id});
+                result.push(newDoc);
+            })
+            Store.storeContacts = result;
+            m.redraw();
         }
     )
 }
