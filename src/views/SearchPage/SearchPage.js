@@ -1,7 +1,6 @@
 import m from 'mithril'
 import Header from '../Header/Header'
 import Bottom from '../commons/BottomMenu'
-import Search from './Search'
 
 module.exports = {
     view: (vnode) => {

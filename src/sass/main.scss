@@ -2,12 +2,15 @@
 @import 'button';
 @import 'heading';
 @import 'animations';
+@import 'mixins';
+
 
 @import '../views/commons/FiltersBar';
 @import '../views/commons/BottomMenu';
-@import '../views/commons/ScrollTop';
-@import '../views/commons/SearchList';
 @import '../views/commons/FiltersInline';
+@import '../views/commons/SearchBox';
+@import '../views/commons/SearchList';
+@import '../views/commons/ScrollTop';
 
 @import '../views/Menu/Menu';
 @import '../views/Menu/Sidebar';

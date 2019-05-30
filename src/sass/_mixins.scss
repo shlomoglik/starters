@@ -1,0 +1,25 @@
+@mixin placeholder-1 {
+    &::placeholder{
+        color: var(--color-grey-dark-3) !important;
+        font-size: 2rem;
+        font-family: inherit;
+    }
+    &:focus{
+        // border-bottom: 3px solid var(--color-primary);
+        &::placeholder{
+            opacity: .6;
+        }
+    }
+}
+
+@mixin input-border-bottom-1{
+    border-bottom: 3px solid var(--color-grey-light-3);
+    border-bottom-width: 90%;
+    &:focus{
+        border-bottom-width: 100%;
+        border-bottom: 3px solid var(--color-primary);
+        &:invalid {
+            border-bottom: 3px solid var(--color-secondary);
+        } 
+    }
+}

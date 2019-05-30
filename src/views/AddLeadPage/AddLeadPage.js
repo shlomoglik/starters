@@ -5,8 +5,8 @@ import Bottom from '../commons/BottomMenu'
 import FormContactLead from '../Form/FormContactLead'
 
 let filters = [
-  {active:true,title:'איש קשר חדש',state:'add'},
-  {title:'איש קשר קיים',state:'exist'},
+  {active:true,title:'איש קשר חדש',type:'add'},
+  {title:'איש קשר קיים',type:'exist'},
 ];
 
 let formDataContact = {

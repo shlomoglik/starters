@@ -1,0 +1,38 @@
+.searchBox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    // margin-bottom: 3rem;
+    color: var(--color-grey-dark-3);
+
+    &__input{
+        text-align: center;
+        font-size: 3rem;
+        font-family: inherit;
+        border: none;
+        outline: none;
+        width: 100%;
+        line-height: 4rem;
+        transition: all .2s ease-in;
+
+        @include placeholder-1;
+        @include input-border-bottom-1;
+
+    }
+    &__icon{
+        fill: currentColor;
+        position: absolute;
+        left: 2%;
+        top: 20%;
+        width: 3rem;
+        height: 3rem;
+    }
+
+    &__input:focus + &__icon{
+        display: none;
+    }
+
+
+}   

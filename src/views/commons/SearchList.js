@@ -5,21 +5,25 @@ let SearchList = (init) => {
         oninit: (vndoe) => {
             console.log('init search list')
         },
-        oncreate:(vnode)=>{
-            console.log(vnode.dom)
+        onupdate:(vnode)=>{
+            console.log(vnode.attrs.parent.state)
         },
         view: (vnode) => {
             return (
                 m('.searchList', [
-                    vnode.attrs.list.map(item => {
-                        return (
-                            m('.searchList__row',{id:item.id}, [
-                                m('.searchList__item', item.term),
-                                m('svg.searchList__select',[
-                                    m('use', { href: '/public/img/sprite.svg#icon-add-to-list'})
+                    vnode.attrs.parent.state.list.map(item => {
+                        if(item){
+                            return (
+                                m('.searchList__row', { id: item.id }, [
+                                    m('.searchList__item', item.data),
+                                    m('svg.searchList__select', [
+                                        m('use', { href: '/public/img/sprite.svg#icon-add-to-list' })
+                                    ])
                                 ])
-                            ])
-                        )
+                            )
+                        }else{
+                            return [];
+                        }
                     })
                 ])
             )

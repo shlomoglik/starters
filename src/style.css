@@ -260,66 +260,6 @@ body {
     height: 5rem;
     fill: currentColor; }
 
-.scrollTop {
-  display: none;
-  position: fixed;
-  top: 13rem;
-  right: 0;
-  color: transparent;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  transition: all .2s;
-  box-shadow: var(--box-shadow-light);
-  text-align: center;
-  animation: 1s shake; }
-  .scrollTop:hover {
-    cursor: pointer;
-    transform: translateY(-0.3rem); }
-  .scrollTop:active {
-    transform: translateY(0); }
-  .scrollTop__icon {
-    width: 3.5rem;
-    height: 3.5rem;
-    fill: var(--color-grey-dark-3); }
-
-.searchList {
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  left: 0;
-  padding-top: .5rem;
-  border-radius: 5px;
-  background-color: #ffffffce;
-  color: var(--color-grey-dark);
-  box-shadow: var(--box-shadow-2);
-  opacity: .85; }
-  .searchList__row {
-    height: 2.2rem;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-    .searchList__row:hover {
-      cursor: pointer;
-      background-color: var(--color-grey-light-3); }
-    .searchList__row:not(:last-child) {
-      margin-bottom: .5rem; }
-  .searchList__item {
-    font-size: 1.5rem;
-    flex: 1; }
-  .searchList__select {
-    border-radius: 50%;
-    margin-left: 1rem;
-    height: 2rem;
-    width: 2rem;
-    fill: var(--color-grey-dark-3);
-    transition: all .2s; }
-  .searchList__row:hover > .searchList__select {
-    fill: var(--color-primary);
-    transform: scale(1.1); }
-
 .filterGroup {
   display: flex;
   justify-content: center;
@@ -368,6 +308,105 @@ body {
         .filterGroup__item--active:hover::after {
           width: 90% !important;
           right: 5% !important; }
+
+.searchBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--color-grey-dark-3); }
+  .searchBox__input {
+    text-align: center;
+    font-size: 3rem;
+    font-family: inherit;
+    border: none;
+    outline: none;
+    width: 100%;
+    line-height: 4rem;
+    transition: all .2s ease-in;
+    border-bottom: 3px solid var(--color-grey-light-3);
+    border-bottom-width: 90%; }
+    .searchBox__input::placeholder {
+      color: var(--color-grey-dark-3) !important;
+      font-size: 2rem;
+      font-family: inherit; }
+    .searchBox__input:focus::placeholder {
+      opacity: .6; }
+    .searchBox__input:focus {
+      border-bottom-width: 100%;
+      border-bottom: 3px solid var(--color-primary); }
+      .searchBox__input:focus:invalid {
+        border-bottom: 3px solid var(--color-secondary); }
+  .searchBox__icon {
+    fill: currentColor;
+    position: absolute;
+    left: 2%;
+    top: 20%;
+    width: 3rem;
+    height: 3rem; }
+  .searchBox__input:focus + .searchBox__icon {
+    display: none; }
+
+.searchList {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  padding-top: .5rem;
+  border-radius: 5px;
+  background-color: #ffffffce;
+  color: var(--color-grey-dark);
+  box-shadow: var(--box-shadow-2);
+  opacity: .85; }
+  .searchList__row {
+    height: 2.2rem;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .searchList__row:hover {
+      cursor: pointer;
+      background-color: var(--color-grey-light-3); }
+    .searchList__row:not(:last-child) {
+      margin-bottom: .5rem; }
+  .searchList__item {
+    font-size: 1.5rem;
+    flex: 1; }
+  .searchList__select {
+    border-radius: 50%;
+    margin-left: 1rem;
+    height: 2rem;
+    width: 2rem;
+    fill: var(--color-grey-dark-3);
+    transition: all .2s; }
+  .searchList__row:hover > .searchList__select {
+    fill: var(--color-primary);
+    transform: scale(1.1); }
+
+.scrollTop {
+  display: none;
+  position: fixed;
+  top: 13rem;
+  right: 0;
+  color: transparent;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  transition: all .2s;
+  box-shadow: var(--box-shadow-light);
+  text-align: center;
+  animation: 1s shake; }
+  .scrollTop:hover {
+    cursor: pointer;
+    transform: translateY(-0.3rem); }
+  .scrollTop:active {
+    transform: translateY(0); }
+  .scrollTop__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    fill: var(--color-grey-dark-3); }
 
 .menu {
   position: relative; }
