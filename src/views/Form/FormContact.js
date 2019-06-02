@@ -26,8 +26,9 @@ let Form = (init) => {
         },
         view: (vnode) => {
             return (
-                m('form.addContact__form form',
-                    { onsubmit: (event, vnode) => submitForm(event, vnode) },
+                m('form.form',
+                    { onsubmit: (event) => submitForm(event, vnode),
+                    },
                     [
                         m('.heading',
                             m('.heading__secondary', vnode.attrs.formData.meta.heading)
@@ -48,7 +49,10 @@ let Form = (init) => {
                             }
                         }): renderFormData(vnode.attrs.formData),
                         m('div', [
-                            m('button[class="btn btn--def"]', { type: "submit" }, "הוסף")
+                            m('button[class="btn btn--def"]', 
+                                { type: "submit",
+                                onclick:(event)=> vnode.attrs.parent.state.hasUser = true
+                            }, "הוסף")
                         ])
                     ]
                 )

@@ -43,6 +43,9 @@ function followChanges(col, id, elem) {
 function getLeads(groupType) {
     let leads = [];
     let user = JSON.parse(sessionStorage.getItem('User'));
+    if(!user){
+        return;
+    }
     let userPath = user.path; // User.getUser('path') || 
 
     let assignMain = {

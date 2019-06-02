@@ -24,7 +24,6 @@ let BottomMenu = (init) => {
       vnode.state.commands = commands;
     },oncreate:(vnode)=>{
       let activePath = m.route.get();
-      console.log(activePath)
       vnode.state.commands.map(item=>{
         if(activePath===item.ref){
           item.active = true;

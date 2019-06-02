@@ -2,8 +2,8 @@ import m from "mithril"
 import Store from '../../data/Store'
 import Header from '../Header/Header'
 import Bottom from '../commons/BottomMenu'
-// import FormContactLead from '../Form/FormContactLead'
-import Form from '../Form/Form'
+import FormContact from '../Form/FormContact'
+import FormLead from '../Form/FormLead'
 
 let filters = [
   { active: true, title: 'איש קשר חדש', type: 'add' },
@@ -53,6 +53,9 @@ let formDataLead = {
 
 let AddLeadPage = (init) => {
   return {
+    oninit:(vnode)=>{
+      vnode.state.hasUser = false;
+    },
     oncreate: (vnode) => {
       let forms = vnode.dom.querySelectorAll('form');
       console.log(forms);
@@ -66,22 +69,25 @@ let AddLeadPage = (init) => {
         })
       });
     },
+    onupdate:(vnode)=>{
+      console.log(vnode.state.hasUser)
+      // if(vnode.state.hasUser){
+      //   vnode.dom.leadForm.style = 'display:none';
+      // }else{
+      //   vnode.dom.leadForm.style = 'display:block';
+      // }
+    },  
     view: (vnode) => {
       return (
         <div class="container--addLead">
           <Header title="פנייה חדשה" />
-          <Form parent={vnode} formData={formDataContact} filters={filters} />
-          <Form parent={vnode} formData={formDataLead} />
-          <Bottom />
+          <FormContact parent={vnode} formData={formDataContact} filters={filters} />
+          <FormLead parent={vnode} formData={formDataLead} style={vnode.state.hasUser?'display:block':'display:none'}/>
+          <Bottom/>
         </div>
       )
     }
   }
 }
-
-// TODO:
-// get all contact and store it 
-// 
-// 
 
 module.exports = AddLeadPage;

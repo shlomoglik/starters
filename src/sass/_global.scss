@@ -54,4 +54,8 @@ body{
     font-weight: 300;
     font-size: 2rem;
     line-height: 1.2;
+    user-select: none;
+}
+* input{
+    auto-complete:off;
 }
