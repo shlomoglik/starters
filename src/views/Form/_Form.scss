@@ -16,6 +16,7 @@
     margin-top: 1rem;
     margin-left: 5rem;
     margin-right: 5rem;
+    font-size: 2rem;
 
     &__row{
         width: 100%;
@@ -30,7 +31,7 @@
         height: 5rem;
         outline: none;
         text-align: center;
-        font-size: 2rem;
+        font-size: inherit;
         font-family: inherit;
         border: none;
         // width: 95%;
@@ -39,7 +40,7 @@
         
         &::placeholder{
             color: var(--color-grey-dark-3) !important;
-            font-size: 2rem;
+            font-size: inherit;
             font-family: inherit;
         }
 
@@ -73,10 +74,10 @@
     input[type="date"]{
         color:var(--color-grey-dark-3) !important;
         font-family: inherit;
-        font-size: 2rem;
+        font-size: inherit;
         &::placeholder{
             color: var(--color-grey-dark-3) !important;
-            font-size: 2rem;
+            font-size: inherit;
             font-family: inherit;
         }
     }
@@ -98,6 +99,4 @@
             background: var(--color-grey-light-3);
         }
     }
-
-
 }

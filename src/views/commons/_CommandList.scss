@@ -1,0 +1,53 @@
+.commandList{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateX(-90%);
+    padding-top: .5rem;
+    border-radius: 5px;
+    background-color: #ffffffce;
+    color: var(--color-grey-dark);
+    box-shadow: var(--box-shadow-2);
+    opacity: .85;
+    z-index: 100;
+    
+    &__row{
+        height: 2.2rem;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover{
+            cursor: pointer;
+            opacity: 1;
+            background-color: var(--color-grey-light-3);
+        }
+
+        &:not(:last-child){
+            margin-bottom: .5rem;
+        }
+    }
+    
+    &__item{
+        font-size: 1.5rem;
+        flex: 1;
+    }
+    &__select{
+        border-radius: 50%;
+        margin-left: 1rem;
+        height: 2rem;
+        width: 2rem;
+        fill: var(--color-grey-dark-3);
+        transition: all .2s;
+
+    }
+    &__row:hover > &__select{
+        fill: var(--color-primary);
+        transform: scale(1.1);
+
+    }
+    
+}
+

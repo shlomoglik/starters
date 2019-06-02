@@ -7,11 +7,11 @@ import FormLead from '../Form/FormLead'
 
 let filters = [
   { active: true, title: 'איש קשר חדש', type: 'add' },
-  { title: 'איש קשר קיים', type: 'exist' },
+  { title: 'איש קשר קיים', type: 'search' },
 ];
 
 let formDataContact = {
-  "meta": { heading: 'פרטי איש קשר', class: 'Contact' },
+  "meta": { heading: 'הוסף איש קשר', class: 'Contact' },
   "data": {
     "name": {
       "input": { type: "text", name: "name", placeholder: "שם", required: true },
@@ -54,11 +54,10 @@ let formDataLead = {
 let AddLeadPage = (init) => {
   return {
     oninit:(vnode)=>{
-      vnode.state.hasUser = false;
+      vnode.state.hasContact = false;
     },
     oncreate: (vnode) => {
       let forms = vnode.dom.querySelectorAll('form');
-      console.log(forms);
       forms.forEach(form=>{
         form.classList.add("fade-in");
         return new Promise((resolve, reject) => {
@@ -70,8 +69,8 @@ let AddLeadPage = (init) => {
       });
     },
     onupdate:(vnode)=>{
-      console.log(vnode.state.hasUser)
-      // if(vnode.state.hasUser){
+      console.log(vnode.state.hasContact)
+      // if(vnode.state.hasContact){
       //   vnode.dom.leadForm.style = 'display:none';
       // }else{
       //   vnode.dom.leadForm.style = 'display:block';
@@ -82,7 +81,7 @@ let AddLeadPage = (init) => {
         <div class="container--addLead">
           <Header title="פנייה חדשה" />
           <FormContact parent={vnode} formData={formDataContact} filters={filters} />
-          <FormLead parent={vnode} formData={formDataLead} style={vnode.state.hasUser?'display:block':'display:none'}/>
+          <FormLead parent={vnode} formData={formDataLead} style={vnode.state.hasContact?'display:block':'display:none'}/>
           <Bottom/>
         </div>
       )

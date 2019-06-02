@@ -4,9 +4,7 @@
     &:visited {
         text-transform: uppercase;
         text-decoration: none;
-        padding: 1.5rem 4rem;
         display: inline-block;
-        border-radius: 10rem;
         position: relative;
         font-family: 'Rubic' , sans-serif;
         font-size: var(--def-font-size);  
@@ -19,25 +17,34 @@
     }
 
     &:hover {
-        transform: translateY(-3px);
+        transform: translateY(-1.5px);
         box-shadow: var(--box-shadow-1);
     }
     &:active{
-        transform: translateY(-1px);
+        transform: translateY(-.5px);
         box-shadow: var(--box-shadow-2);
     }
     &:focus {
         outline: none;
     }
     
+    &--round{
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+    }
 
 
     &--white {
+        padding: 1.5rem 4rem;
+        border-radius: 10rem;
         background-color: var(--color-white);
         color: var(--color-grey-dark-1);
     }
 
     &--def {
+        padding: 1.5rem 4rem;
+        border-radius: 10rem;
         background-color: var(--color-primary);
         color: var(--color-white);
     }
