@@ -7,13 +7,16 @@ let settings = {
         {title: "כללי",count: 0,}
     ],
     setGroup:[
+        {title: "לידים",count: 0, groups:["סוגי לידים","קבוצות לידים","מקורות לידים","סטטוסים"],active: true},
+        {title: "אנשי קשר",count: 0, groups:["סוגי אנשי קשר"]},
+        {title: "משתמשים",count: 0, groups:["הגדרות תפקיד משתמשים"]},
         {title: "כללי",count: 0,},
-        {title: "לידים",count: 0,groups:["סוגי לידים","קבוצות לידים","מקורות לידים","סטטוסים"]},
-        {title: "אנשי קשר",count: 0,groups:["סוגי אנשי קשר"]},
-        {title: "משתמשים",count: 0,groups:["הגדרות תפקיד משתמשים"]},
     ],
-    setLeadType:[], //fill from db
-    setLeadGroup:[], //fill from db
+    //leads group fill from db
+    setLeadType:[], 
+    setLeadGroup:[], 
+    setLeadSource:[], 
+    setLeadStatus:[], 
 }
 
 module.exports = settings;
