@@ -1,5 +1,5 @@
 import m from 'mithril'
-import Store from '../../data/store'
+import Store from '../../data/Store'
 import { getDoc } from '../../firebase/qry'
 
 let SearchList = (init) => {
@@ -7,12 +7,22 @@ let SearchList = (init) => {
         oninit:(vnode)=>{
             vnode.attrs.parent.state.list = false;
         },
+        onbeforeupdate:(vnode)=>{
+            vnode.state.list = vnode.attrs.list;
+        },
+        onupdate:(vnode)=>{
+            if(vnode.dom.querySelectorAll('.searchList__row').length ==0){
+                vnode.dom.style.display ='none';
+            }else{
+                vnode.dom.style.display ='block';
+            }
+        },
         view: (vnode) => {
-            let displayField = vnode.attrs.displayField;
+            // let displayField = vnode.attrs.displayField;
             return (
-                m('.searchList', [
-                    vnode.attrs.parent.state.list ?
-                        vnode.attrs.parent.state.list.map(item => {
+                m('.searchList',{style:'display:none'}, [
+                    vnode.state.list ?
+                        vnode.state.list.map(item => {
                             return (
                                 m('.searchList__row',
                                     {
@@ -20,7 +30,10 @@ let SearchList = (init) => {
                                         onclick: e => setActiveContact(e, vnode)
                                     }
                                     , [
-                                        m('.searchList__item', item[displayField]),
+                                        Object.keys(item).map( (k,ind)=>{
+                                            if(k=='id')return; 
+                                            return m('.searchList__item', item[k]);
+                                        }),
                                         m('svg.searchList__select', [
                                             m('use', { href: '/public/img/sprite.svg#icon-add-to-list' })
                                         ])

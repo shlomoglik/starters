@@ -1,13 +1,13 @@
 import m from 'mithril'
 
 let CommandList = (init) => {
-    
+
     return {
-        oncreate:(vnode)=>{
+        oncreate: (vnode) => {
             let list = vnode.dom.querySelector('#list');
             let toggle = vnode.dom.querySelector('#toggle');
-            window.onclick = (e)=> {
-                if(list.classList.contains('commandList__list--visible') && e.target !== list && e.target !== toggle){
+            window.onclick = (e) => {
+                if (list.classList.contains('commandList__list--visible') && e.target !== list && e.target !== toggle) {
                     list.classList.remove("commandList__list--visible");
                 }
             }
@@ -20,9 +20,17 @@ let CommandList = (init) => {
                         vnode.attrs.list.map((item, ind) => {
                             if (item) {
                                 return (
-                                    m('.commandList__row', { key: ind }, [
-                                        m('.commandList__item', item.label),
-                                    ])
+                                    m('.commandList__row',
+                                        {
+                                            key: ind,
+                                            onclick: e => {
+                                                console.log('TODO! add function for each command');
+                                                item.func(e);
+                                            }
+                                        },
+                                        [
+                                            m('.commandList__item', item.label),
+                                        ])
                                 )
                             }
                         })

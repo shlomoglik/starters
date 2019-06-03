@@ -27,7 +27,7 @@ let Form = (init) => {
             return (
                 m('form#leadForm.form',
                     {   style : vnode.attrs.parent.state.activeContact?"display:block":"display:none",
-                        autocomplete:"off",
+                        autocorrect:"off", autocapitalize:"off", spellcheck:"false",autocomplete:"off",
                         onsubmit: (event) => submitForm(event,vnode) },
                     [
                         m('.heading',

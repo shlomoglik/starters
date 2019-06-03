@@ -13,7 +13,7 @@
     
     &__row{
         height: 2.2rem;
-        width: 100%;
+        // width: 100%;
         text-align: center;
         display: flex;
         justify-content: center;
@@ -41,6 +41,7 @@
     &__item{
         font-size: 1.5rem;
         flex: 1;
+        // overflow: hidden;
     }
     &__select{
         border-radius: 50%;

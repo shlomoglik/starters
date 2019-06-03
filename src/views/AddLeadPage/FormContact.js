@@ -37,7 +37,7 @@ let Form = (init) => {
                 return (
                     m('form.form',
                         {
-                            autocomplete: "off",
+                            autocorrect: "off", autocapitalize: "off", spellcheck: "false", autocomplete: "off",
                             onsubmit: (event) => submitForm(event, vnode),
                         },
                         [
@@ -46,12 +46,12 @@ let Form = (init) => {
                             vnode.attrs.filters.map(filter => {
                                 if (filter.active) {
                                     if (filter.type == 'add') {
-                                        return renderFormData(vnode.attrs.formData)
+                                        return renderFormData(vnode.attrs.formData, vnode)
                                     } else if (filter.type == 'search') {
                                         return [
                                             m('.form__row', { style: "position:relative" }, [
-                                                m(SearchBox, { label: 'חפש איש קשר', parent: vnode }),
-                                                m(SearchList, { parent: vnode, displayField: 'name' })
+                                                m(SearchBox, { label: 'חפש איש לפי שם', parent: vnode }),
+                                                m(SearchList, { parent: vnode, displayField: 'name', list: vnode.state.list })
                                             ])
                                         ]
                                     }
@@ -107,7 +107,11 @@ function submitForm(e, vnode) {
 
 
 function renderActiveContact(activeContact, vnode) {
-    let cmdList = [{ cmd: 'markAsMain', label: 'הגדר כעיקרי' }, { cmd: 'unAssign', label: 'הסר מליד זה' }, { cmd: 'edit', label: 'ערוך איש קשר' }]
+    let cmdList = [
+        { cmd: 'unAssign', label: 'הסר מליד זה', func: e => vnode.attrs.parent.state.activeContact = false },
+        { cmd: 'markAsMain', label: 'הגדר כעיקרי', func: e => console.log('TODO! change role to main') },
+        { cmd: 'edit', label: 'ערוך איש קשר', func: e => console.log('TODO! goto contact full page via contacts/:id ') },
+    ]
     return m(`.row#${activeContact.id}`, [
         m('svg.row__icon', m('use', { href: '/public/img/sprite.svg#icon-user' })),
         Object.keys(activeContact).map((k, ind) => {
@@ -124,14 +128,22 @@ function renderFormData(myData, vnode) {
     let data = myData.data;
     return Object.keys(data).map((k, ind) => {
         let curr = data[k];
+        vnode.state[`term${k}`] = '';
         if (data[k].input) {
             return (
-                m('.form__row', { key: ind },
+                m('.form__row', { key: ind, style: "position:relative" },
                     [
                         m(`input#${k}[class="form__input ${meta.class}"]`,
-                            Object.assign({}, curr.input, { oninput: (e) => insertList(e) })),
+                            Object.assign({}, curr.input,
+                                {
+                                    oninput: e => {
+                                        vnode.state[`term${k}`] = e.target.value;
+                                        vnode.state[`list${k}`] = getList(vnode.state[`term${k}`], k, 'storeContacts');
+                                    }
+                                })
+                        ),
                         m('label[class="form__label"]', { for: k }, curr.label.text),
-                        // m(SearchList, { parent: vnode, displayField: k }) // should crete is dynamicly for each input
+                        m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] }) // should crete list dynamicly for each input
                     ])
             )
 
@@ -148,8 +160,5 @@ function renderFormData(myData, vnode) {
     })
 }
 
-function insertList(e) {
-    console.log('TODO! append list base on term ', e);
-}
 
 module.exports = Form

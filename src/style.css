@@ -406,7 +406,6 @@ body {
   z-index: 100; }
   .searchList__row {
     height: 2.2rem;
-    width: 100%;
     text-align: center;
     display: flex;
     justify-content: center;
