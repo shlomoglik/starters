@@ -53,11 +53,7 @@ let formDataLead = {
 
 let AddLeadPage = (init) => {
   return {
-    oninit:(vnode)=>{
-      vnode.state.hasContact = false;
-    },
     oncreate: (vnode) => {
-      vnode.state.hasContact = false;
       let forms = vnode.dom.querySelectorAll('form');
       forms.forEach(form=>{
         form.classList.add("fade-in");
@@ -74,7 +70,7 @@ let AddLeadPage = (init) => {
         <div class="container--addLead">
           <Header title="פנייה חדשה" />
           <FormContact parent={vnode} formData={formDataContact} filters={filters} />
-          <FormLead parent={vnode} formData={formDataLead} style={vnode.state.hasContact?'display:block':'display:none'}/>
+          <FormLead parent={vnode} formData={formDataLead} style={vnode.state.activeContact?'display:block':'display:none'}/>
           <Bottom/>
         </div>
       )

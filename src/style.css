@@ -55,7 +55,6 @@ body {
     fill: currentColor;
     border-radius: 50%; }
     .row__icon:hover {
-      transform: scale(1.1);
       cursor: pointer; }
 
 .btn, .btn:link, .btn:visited {
@@ -412,7 +411,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center; }
-    .searchList__row:hover {
+    .searchList__row--active {
+      background-color: var(--color-grey-light-3); }
+      .searchList__row--active > .searchList__row--active__select {
+        transform: scale(1.1);
+        fill: var(--color-primary); }
+    .searchList__row:hover, .searchList__row:focus {
       cursor: pointer;
       background-color: var(--color-grey-light-3); }
     .searchList__row:not(:last-child) {
@@ -427,7 +431,8 @@ body {
     width: 2rem;
     fill: var(--color-grey-dark-3);
     transition: all .2s; }
-  .searchList__row:hover > .searchList__select {
+  .searchList__row:hover > .searchList__select,
+  .searchList__row:focus > .searchList__select {
     fill: var(--color-primary);
     transform: scale(1.1); }
 

@@ -22,23 +22,22 @@ let Form = (init) => {
     return {
         oninit: vnode => {
             vnode.state.term = '';
-            vnode.state.activeContact = false;
         },
         onbeforeupdate: vnode => {
-            vnode.state.list = getList(vnode.state.term, 'name' ,'storeContacts');
+            vnode.state.list = getList(vnode.state.term, 'name', 'storeContacts');
         },
         view: (vnode) => {
-            if (vnode.attrs.parent.state.hasContact) {
+            if (vnode.attrs.parent.state.activeContact) {
                 return (
                     m('.form',
-                        renderActiveContact(vnode.state.activeContact , vnode)       
+                        renderActiveContact(vnode.attrs.parent.state.activeContact, vnode)
                     )
                 )
             } else {
                 return (
                     m('form.form',
                         {
-                            autocomplete:"off",
+                            autocomplete: "off",
                             onsubmit: (event) => submitForm(event, vnode),
                         },
                         [
@@ -75,38 +74,47 @@ let Form = (init) => {
 
 function submitForm(e, vnode) {
     e.preventDefault();
-    let elements = e.target.elements;
-    let data = {};
-    for (let i in elements) {
-        let el = elements[i]
-        if (el.name && el.value) {
-            data[el.name] = el.value || ""
+    vnode.attrs.filters.map(filter => {
+        if (filter.active) {
+            if (filter.type !== 'add') {
+                return;
+            } else {
+                let elements = e.target.elements;
+                let data = {};
+                for (let i in elements) {
+                    let el = elements[i]
+                    if (el.name && el.value) {
+                        data[el.name] = el.value || ""
+                    }
+                }
+                console.log(data);
+                if (data == {}) return;
+                let newContact = new Contact('', data);
+                newContact.add('contacts').then(
+                    doc => {
+                        vnode.attrs.parent.state.activeContact = newContact._data;
+                        vnode.attrs.parent.state.activeContact['id'] = newContact.getID();
+                        e.target.reset();
+                        m.redraw();
+                    }, err => console.error(err)
+                );
+            }
         }
-    }
-    let newContact = new Contact('',data);
-    newContact.add('contacts').then(
-        res=>{
-            vnode.state.activeContact = newContact._data;
-            vnode.state.activeContact['id'] = newContact.getID();
-            console.log(vnode.state.activeContact);
-            vnode.attrs.parent.state.hasContact = true;
-            e.target.reset();
-            m.redraw();
-        },err=>console.error(err)
-    );
+    });
+
 }
 
 
 
-function renderActiveContact(activeContact,vnode) {
-    let cmdList =[{cmd:'markAsMain',label:'הגדר כעיקרי'},{cmd:'unAssign',label:'הסר מליד זה'},{cmd:'edit',label:'ערוך איש קשר'}]
-    return m(`.row#${activeContact.id}` ,[
-        m('svg.row__icon',m('use',{href:'/public/img/sprite.svg#icon-user'})),
+function renderActiveContact(activeContact, vnode) {
+    let cmdList = [{ cmd: 'markAsMain', label: 'הגדר כעיקרי' }, { cmd: 'unAssign', label: 'הסר מליד זה' }, { cmd: 'edit', label: 'ערוך איש קשר' }]
+    return m(`.row#${activeContact.id}`, [
+        m('svg.row__icon', m('use', { href: '/public/img/sprite.svg#icon-user' })),
         Object.keys(activeContact).map((k, ind) => {
-            if(k=='id') return '';
+            if (k == 'id') return '';
             return m('span.row__span', activeContact[k]);
         }),
-        m(CommandList,{list:cmdList})
+        m(CommandList, { list: cmdList })
     ]
     )
 }

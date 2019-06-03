@@ -12,6 +12,7 @@ class Lead extends Model {
     //     duedate: "",
     //     source: "",
     //     contacts: [],
+    //     assigns:[]
     // }
     constructor(...args) {
         super(...args);
@@ -20,6 +21,19 @@ class Lead extends Model {
             'role': 'main'
         }];
     }
+    /**
+     * @param {Object} newLead the new lead that creatin with new Lead keword
+     * @param {String} contactPath the path of contact which has the main role on that lead
+     */
+    addLeadToExistContact(newLead, contactPath) {
+        let contactsRef = [{
+            'role': 'main',
+            'contactRef': contactPath
+        }];
+        newLead.setData('contacts', contactsRef);
+        newLead.add('leads');
+    }
+
     static addLeadAndContact(newContact, newLead) {
         console.log('step 1: add Contact data=>', newContact._data);
 
@@ -34,14 +48,6 @@ class Lead extends Model {
                 newLead.add('leads');
             }
         )
-    }
-    addLeadToExistContact(newLead, contactPath) {
-        let contactsRef = [{
-            'role': 'main',
-            'contactRef': contactPath
-        }];
-        newLead.setData('contacts', contactsRef);
-        newLead.add('leads');
     }
 
 } //end Cless

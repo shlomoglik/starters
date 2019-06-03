@@ -4,11 +4,8 @@ import { getDoc } from '../../firebase/qry'
 
 let SearchList = (init) => {
     return {
-        oninit: (vndoe) => {
-            console.log('init search list')
-        },
-        onupdate: (vnode) => {
-            console.log(vnode.attrs.parent.state)
+        oninit:(vnode)=>{
+            vnode.attrs.parent.state.list = false;
         },
         view: (vnode) => {
             let displayField = vnode.attrs.displayField;
@@ -36,13 +33,15 @@ let SearchList = (init) => {
     }
 }
 
+
 function setActiveContact(e, vnode) {
     console.log('START function setActiveContact(e,vnode)');
+    let parent = vnode.attrs.parent;
+    let pageParent = parent.attrs.parent;
     let elemID = e.path[1].id;
     let docRef = getDoc('contacts', elemID);
     docRef.then(doc => {
-        vnode.attrs.parent.state.activeContact = Object.assign(doc.data(), { id: elemID });
-        vnode.attrs.parent.attrs.parent.state.hasContact = true;
+        pageParent.state.activeContact = Object.assign(doc.data(), { id: elemID });
         m.redraw();
     })
 }

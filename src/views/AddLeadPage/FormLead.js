@@ -26,7 +26,7 @@ let Form = (init) => {
         view: (vnode) => {
             return (
                 m('form#leadForm.form',
-                    {   style : vnode.attrs.parent.state.hasContact?"display:block":"display:none",
+                    {   style : vnode.attrs.parent.state.activeContact?"display:block":"display:none",
                         autocomplete:"off",
                         onsubmit: (event) => submitForm(event,vnode) },
                     [
@@ -46,10 +46,19 @@ let Form = (init) => {
 
 function submitForm(e, vnode) {
     e.preventDefault();
-    console.log('TODO!! collect form data and insert to database!!')
-    let newLead = new Lead()
-    newLead.addLeadToExistContact(newLead, contactPath)
+    let elements = e.target.elements;
+    let data = {};
+    for (let i in elements) {
+        let el = elements[i]
+        if (el.name && el.value) {
+            data[el.name] = el.value || ""
+        }
+    }
+    let newLead = new Lead('',data);
+    let contactPath = `contacts/${vnode.attrs.parent.state.activeContact.id}`;
+    newLead.addLeadToExistContact(newLead, contactPath);
     e.target.reset();
+    vnode.attrs.parent.state.activeContact = false;
 }
 
 function renderFormData(myData, vnode) {
