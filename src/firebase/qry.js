@@ -51,7 +51,7 @@ function getLeads(groupType) {
     if(!user){
         return;
     }
-    let userPath = user.path; // User.getUser('path') || 
+    let userPath = user.path ||""; // User.getUser('path') || 
 
     let assignMain = {
         assignRef: userPath,

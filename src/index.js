@@ -11,6 +11,7 @@ import LoginPage from "./views/LoginPage/LoginPage";
 import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
 import LeadsPage from "./views/LeadsPage/LeadsPage";
 import SearchPage from "./views/SearchPage/SearchPage";
+import SettingsPage from "./views/SettingsPage/SettingsPage";
 import User from "./data/User";
 import {getLeads, getContacts } from './firebase/qry'
 
@@ -43,5 +44,14 @@ m.route(root, "/login", {
                 return SearchPage
             else m.route.set('/login')
         }
-    }
+    },
+    "/settings":{
+        onmatch: () => {
+            console.log('go to settings page')
+            let logged = User.isLoggedIn();
+            if (logged)
+                return SettingsPage
+            else m.route.set('/login')
+        }
+    },
 });

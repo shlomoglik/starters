@@ -22,6 +22,8 @@ let settings = {
             count: 0,
         }
     ],
+    setLeadType:[],
+    setLeadGroup:[],
 
 }
 

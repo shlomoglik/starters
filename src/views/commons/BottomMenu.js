@@ -15,6 +15,11 @@ let commands = [
     title: "חיפוש",
     iconPath: "/public/img/sprite.svg#icon-magnifying-glass",
     ref: "/search"
+  },
+  {
+    title: "הגדרות",
+    iconPath: "/public/img/sprite.svg#icon-tools",
+    ref: "/settings"
   }
 ]
 
@@ -22,7 +27,8 @@ let BottomMenu = (init) => {
   return {
     oninit: (vnode) => {
       vnode.state.commands = commands;
-    },oncreate:(vnode)=>{
+    },
+    oncreate:(vnode)=>{
       let activePath = m.route.get();
       vnode.state.commands.map(item=>{
         if(activePath===item.ref){
@@ -32,7 +38,6 @@ let BottomMenu = (init) => {
         }
       })
       m.redraw();
-
     },
     view: (vnode) => {
       return (

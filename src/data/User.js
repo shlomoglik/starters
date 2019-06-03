@@ -14,17 +14,16 @@ class User extends Model {
         login.then(
             cred => {
                 console.log('step 1- login success!')
-                let docRef = getDoc('users', cred.user.uid);
-                let snap = docRef.get();
+                let snap = getDoc('users', cred.user.uid);
                 snap.then(
                     doc => {
                         console.log('step 2- search doc!')
                         if (doc.exists) {
-                            console.log('step 3- doc found so get toekt!')
+                            console.log('step 3- doc found so get token!')
                             cred.user.getIdToken().then(
                                 token => {
                                     console.log('step 4- token is here - put it on local storage!')
-                                    let user = new User(cred.user.uid  ,  doc.data()  ,  {token:token,path:docRef.path} )
+                                    let user = new User(cred.user.uid  ,  doc.data()  ,  {token:token , path:`users/${doc.id}`} )
                                     sessionStorage.setItem('User', JSON.stringify(user))
                                     sessionStorage.setItem('token', token)
                                     m.route.set("/add");
