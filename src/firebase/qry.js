@@ -66,8 +66,7 @@ function getLeads(groupType) {
             snap.forEach(doc => {
                 leads.push(doc.data())
             })
-            console.log('total docs in qry: ', snap.size);
-            console.log('result: ', leads);
+            console.log('total docs in qry: ', snap.size,'result: ', leads);
             Store.storeLeads = leads;
             m.redraw();
         });

@@ -25,7 +25,7 @@ let Form = (init) => {
         view: (vnode) => {
             return (
                 m('form#leadForm.form',
-                    {   style : vnode.attrs.parent.state.hasUser?"display:block":"display:none",
+                    {   style : vnode.attrs.parent.state.hasContact?"display:block":"display:none",
                         onsubmit: (event) => submitForm(event,vnode) },
                     [
                         m('.heading',
@@ -53,7 +53,6 @@ function renderFormData(myData, vnode) {
     let data = myData.data;
     return Object.keys(data).map((k, ind) => {
         let curr = data[k];
-        console.log(k, ind);
         if (data[k].input) {
             return (
                 m('.form__row', { key: ind },

@@ -69,14 +69,19 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    transition: all .2s;
     &__span{
         flex: 1;
     }
     &__icon{
-        width: 2rem;
+        position: relative;
+        width: 2rem;    
         height: 2rem;
         fill: currentColor;
         border-radius: 50%;
-        box-shadow: var(--box-shadow-light);
+        &:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+        }  
     }
 }

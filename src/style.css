@@ -44,15 +44,19 @@ body {
   font-family: inherit;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%; }
+  width: 100%;
+  transition: all .2s; }
   .row__span {
     flex: 1; }
   .row__icon {
+    position: relative;
     width: 2rem;
     height: 2rem;
     fill: currentColor;
-    border-radius: 50%;
-    box-shadow: var(--box-shadow-light); }
+    border-radius: 50%; }
+    .row__icon:hover {
+      transform: scale(1.1);
+      cursor: pointer; }
 
 .btn, .btn:link, .btn:visited {
   text-transform: uppercase;
@@ -427,7 +431,20 @@ body {
     fill: var(--color-primary);
     transform: scale(1.1); }
 
-.commandList {
+.commandList__icon {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  fill: currentColor;
+  border-radius: 50%;
+  transition: all .2s; }
+  .commandList__icon:hover {
+    background-color: var(--color-grey-light-3);
+    transform: scale(1.1);
+    cursor: pointer; }
+
+.commandList__list {
+  visibility: hidden;
   position: absolute;
   top: 100%;
   left: 0;
@@ -437,25 +454,32 @@ body {
   background-color: #ffffffce;
   color: var(--color-grey-dark);
   box-shadow: var(--box-shadow-2);
-  opacity: .85;
-  z-index: 100; }
-  .commandList__row {
-    padding: 1rem 1rem;
-    height: 2.5rem;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-    .commandList__row:hover {
-      cursor: pointer;
-      opacity: 1;
-      background-color: var(--color-grey-light-3); }
-    .commandList__row:not(:last-child) {
-      margin-bottom: .5rem; }
-  .commandList__item {
-    font-size: 1.5rem;
-    flex: 0 0 100%; }
+  opacity: 0;
+  z-index: 100;
+  transition: all .2s ease-in; }
+  .commandList__list--visible {
+    visibility: visible;
+    opacity: .85;
+    backface-visibility: hidden; }
+
+.commandList__row {
+  padding: 1rem 1rem;
+  height: 2.5rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .commandList__row:hover {
+    cursor: pointer;
+    opacity: 1;
+    background-color: var(--color-grey-light-3); }
+  .commandList__row:not(:last-child) {
+    margin-bottom: .5rem; }
+
+.commandList__item {
+  font-size: 1.5rem;
+  flex: 0 0 100%; }
 
 .scrollTop {
   display: none;
@@ -624,7 +648,7 @@ body {
     height: 5rem;
     outline: none;
     text-align: center;
-    font-size: inherit;
+    font-size: 2.2rem;
     font-family: inherit;
     border: none;
     border-bottom: 3px solid var(--color-grey-light-3);

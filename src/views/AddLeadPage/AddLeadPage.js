@@ -67,14 +67,6 @@ let AddLeadPage = (init) => {
           })
         })
       });
-    },
-    onupdate:(vnode)=>{
-      console.log(vnode.state.hasContact)
-      // if(vnode.state.hasContact){
-      //   vnode.dom.leadForm.style = 'display:none';
-      // }else{
-      //   vnode.dom.leadForm.style = 'display:block';
-      // }
     },  
     view: (vnode) => {
       return (
