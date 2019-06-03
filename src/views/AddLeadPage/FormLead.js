@@ -1,6 +1,7 @@
 import m from 'mithril'
 import SearchList from '../commons/SearchList'
 import Store from '../../data/Store'
+import Lead from '../../data/Lead'
 
 function getList(term, field,model) {
     if (term.length < 2) {
@@ -46,6 +47,8 @@ let Form = (init) => {
 function submitForm(e, vnode) {
     e.preventDefault();
     console.log('TODO!! collect form data and insert to database!!')
+    let newLead = new Lead()
+    newLead.addLeadToExistContact(newLead, contactPath)
     e.target.reset();
 }
 

@@ -15,40 +15,33 @@ class Lead extends Model {
     // }
     constructor(...args) {
         super(...args);
-        this._data['assigns'] =[{
-            'assignRef':User.getUser('path'),
-            'role':'main'
+        this._data['assigns'] = [{
+            'assignRef': User.getUser('path'),
+            'role': 'main'
         }];
     }
-    static addLeadAndContact(newContact ,newLead ){
-        console.log('step 1: add Contact data=>',newContact._data);
+    static addLeadAndContact(newContact, newLead) {
+        console.log('step 1: add Contact data=>', newContact._data);
 
         newContact.add('contacts').then(
-            doc=>{
+            doc => {
                 let path = newContact.getID();
-                let contactsRef =[{
-                    'role':'main',
-                    'contactRef':path
+                let contactsRef = [{
+                    'role': 'main',
+                    'contactRef': path
                 }];
-                newLead.setData('contacts',contactsRef);
+                newLead.setData('contacts', contactsRef);
                 newLead.add('leads');
             }
         )
     }
-    static addLeadToExistContact(newContact ,newLead ){
-        console.log('step 1: add Contact data=>',newContact._data);
-
-        newContact.add('contacts').then(
-            doc=>{
-                let path = newContact.getID();
-                let contactsRef =[{
-                    'role':'main',
-                    'contactRef':path
-                }];
-                newLead.setData('contacts',contactsRef);
-                newLead.add('leads');
-            }
-        )
+    addLeadToExistContact(newLead, contactPath) {
+        let contactsRef = [{
+            'role': 'main',
+            'contactRef': contactPath
+        }];
+        newLead.setData('contacts', contactsRef);
+        newLead.add('leads');
     }
 
 } //end Cless
