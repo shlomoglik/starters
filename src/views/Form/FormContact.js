@@ -62,6 +62,7 @@ let Form = (init) => {
                                         type: "submit",
                                         onclick: (event) => {
                                             vnode.attrs.parent.state.hasContact = true;
+                                            // vnode.cmdList.style.display ='block';
                                         }
                                     }
                                     , "הוסף")
@@ -80,15 +81,16 @@ function submitForm(e, vnode) {
     e.target.reset();
 }
 function renderExistData(activeContact,vnode) {
-    let commands ={'markAsMain':'הגדר כעיקרי','edit':'ערוך איש קשר','delete':'מחק איש קשר','unAssign':'הסר מליד זה'};
+    let cmdList =[{cmd:'markAsMain',label:'הגדר כעיקרי'},{cmd:'edit',label:'ערוך איש קשר'},{cmd:'delete',label:'מחק איש קשר'},{cmd:'unAssign',label:'הסר מליד זה'}]
     return m('.row',[
         m('svg.row__icon',m('use',{href:'/public/img/sprite.svg#icon-user'})),
         Object.keys(activeContact).map((k, ind) => {
             return m('span.row__span', activeContact[k])
         }),
         m('button.btn.btn--round',
-            {onclick:(e)=>insertCommands(e,commands,vnode)},
-            m('svg.row__icon',m('use',{href:'/public/img/sprite.svg#icon-dots-three-vertical'})))
+            {onclick:(e)=>showCmdList(e,vnode)},
+            m('svg.row__icon',m('use',{href:'/public/img/sprite.svg#icon-dots-three-vertical'}))),
+        m(CommandList,{list:cmdList})
     ]
     )
 }
@@ -121,9 +123,9 @@ function renderFormData(myData, vnode) {
         }
     })
 }
-function insertCommands(e,cmdList,vnode){
-    console.log('TODO! append list of commands ', e,cmdList);
-    vnode.state.cmd = m(CommandList,{list:cmdList});
+function showCmdList(e,vnode){
+    console.log('cmd list is: ',vnode.dom.querySelector('#cmdList'));
+    
 }
 function insertList(e) {
     console.log('TODO! append list base on term ', e);
