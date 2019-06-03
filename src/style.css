@@ -433,14 +433,13 @@ body {
 
 .commandList__icon {
   position: relative;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   fill: currentColor;
   border-radius: 50%;
   transition: all .2s; }
   .commandList__icon:hover {
     background-color: var(--color-grey-light-3);
-    transform: scale(1.1);
     cursor: pointer; }
 
 .commandList__list {
@@ -632,8 +631,8 @@ body {
   background-color: var(--color-grey-light-1);
   box-shadow: var(--box-shadow-1);
   border-radius: 3px;
-  margin-bottom: 1rem;
   background-color: var(--color-grey-light-1);
+  margin-bottom: 1rem;
   margin-top: 1rem;
   margin-left: 5rem;
   margin-right: 5rem;
@@ -675,11 +674,11 @@ body {
     font-weight: 500;
     display: block;
     transition: all .3s; }
-  .form input[type="date"] {
+  .form__row input[type="date"] {
     color: var(--color-grey-dark-3) !important;
-    font-family: inherit;
-    font-size: inherit; }
-    .form input[type="date"]::placeholder {
+    font-family: inherit !important;
+    font-size: 2rem !important; }
+    .form__row input[type="date"]::placeholder {
       color: var(--color-grey-dark-3) !important;
       font-size: inherit;
       font-family: inherit; }

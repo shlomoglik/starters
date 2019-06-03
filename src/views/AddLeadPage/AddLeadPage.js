@@ -2,8 +2,8 @@ import m from "mithril"
 import Store from '../../data/Store'
 import Header from '../Header/Header'
 import Bottom from '../commons/BottomMenu'
-import FormContact from '../Form/FormContact'
-import FormLead from '../Form/FormLead'
+import FormContact from './FormContact'
+import FormLead from './FormLead'
 
 let filters = [
   { active: true, title: 'איש קשר חדש', type: 'add' },
@@ -14,7 +14,7 @@ let formDataContact = {
   "meta": { heading: 'הוסף איש קשר', class: 'Contact' },
   "data": {
     "name": {
-      "input": { type: "text", name: "name", placeholder: "שם", required: true },
+      "input": { type: "text", name: "name", placeholder: "שם", required: true},
       "label": { text: "שם איש קשר" }
     },
     "phone": {
@@ -57,6 +57,7 @@ let AddLeadPage = (init) => {
       vnode.state.hasContact = false;
     },
     oncreate: (vnode) => {
+      vnode.state.hasContact = false;
       let forms = vnode.dom.querySelectorAll('form');
       forms.forEach(form=>{
         form.classList.add("fade-in");

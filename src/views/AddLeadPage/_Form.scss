@@ -11,8 +11,8 @@
     background-color: var(--color-grey-light-1);
     box-shadow: var(--box-shadow-1);
     border-radius: 3px;
-    margin-bottom: 1rem;
     background-color: var(--color-grey-light-1);
+    margin-bottom: 1rem;
     margin-top: 1rem;
     margin-left: 5rem;
     margin-right: 5rem;
@@ -71,14 +71,16 @@
         transition: all .3s;
     }
 
-    input[type="date"]{
-        color:var(--color-grey-dark-3) !important;
-        font-family: inherit;
-        font-size: inherit;
-        &::placeholder{
-            color: var(--color-grey-dark-3) !important;
-            font-size: inherit;
-            font-family: inherit;
+    &__row{
+        input[type="date"]{
+            color:var(--color-grey-dark-3) !important;
+            font-family: inherit !important;
+            font-size: 2rem !important;
+            &::placeholder{
+                color: var(--color-grey-dark-3) !important;
+                font-size: inherit;
+                font-family: inherit;
+            }
         }
     }
 

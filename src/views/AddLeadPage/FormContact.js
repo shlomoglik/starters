@@ -3,14 +3,15 @@ import FilterInline from '../commons/FiltersInline'
 import SearchBox from '../commons/SearchBox'
 import SearchList from '../commons/SearchList'
 import CommandList from '../commons/CommandList'
+import Contact from '../../data/Contact'
 import Store from '../../data/Store'
 
 function getList(term, field, model) {
     if (term.length < 2) {
         return [];
     }
-    let filter = Store.storeContacts.filter(el => {
-        let search = el.name || '';
+    let filter = Store[model].filter(el => {
+        let search = el[field] || '';
         return search.indexOf(term) !== -1;
     });
     return filter;
@@ -21,22 +22,23 @@ let Form = (init) => {
     return {
         oninit: vnode => {
             vnode.state.term = '';
-            vnode.state.activeContact = { "name": "שלמה", "email": "shlomoglik@gmail.com", "phone": "053-3393623" }
+            vnode.state.activeContact = false;
         },
         onbeforeupdate: vnode => {
-            vnode.state.list = getList(vnode.state.term, name);
+            vnode.state.list = getList(vnode.state.term, 'name' ,'storeContacts');
         },
         view: (vnode) => {
             if (vnode.attrs.parent.state.hasContact) {
                 return (
                     m('.form',
-                        renderExistData(vnode.state.activeContact , vnode)       
+                        renderActiveContact(vnode.state.activeContact , vnode)       
                     )
                 )
             } else {
                 return (
                     m('form.form',
                         {
+                            autocomplete:"off",
                             onsubmit: (event) => submitForm(event, vnode),
                         },
                         [
@@ -81,20 +83,28 @@ function submitForm(e, vnode) {
             data[el.name] = el.value || ""
         }
     }
-    console.log('TODO!! collect form data and insert to database!!')
-    console.log(data);
-    // vnode.attrs.parent.state.hasContact = true;
-    e.target.reset();
+    let newContact = new Contact('',data);
+    newContact.add('contacts').then(
+        res=>{
+            vnode.state.activeContact = newContact._data;
+            vnode.state.activeContact['id'] = newContact.getID();
+            console.log(vnode.state.activeContact);
+            vnode.attrs.parent.state.hasContact = true;
+            e.target.reset();
+            m.redraw();
+        },err=>console.error(err)
+    );
 }
 
 
 
-function renderExistData(activeContact,vnode) {
-    let cmdList =[{cmd:'markAsMain',label:'הגדר כעיקרי'},{cmd:'edit',label:'ערוך איש קשר'},{cmd:'delete',label:'מחק איש קשר'},{cmd:'unAssign',label:'הסר מליד זה'}]
-    return m('.row',[
+function renderActiveContact(activeContact,vnode) {
+    let cmdList =[{cmd:'markAsMain',label:'הגדר כעיקרי'},{cmd:'unAssign',label:'הסר מליד זה'},{cmd:'edit',label:'ערוך איש קשר'}]
+    return m(`.row#${activeContact.id}` ,[
         m('svg.row__icon',m('use',{href:'/public/img/sprite.svg#icon-user'})),
         Object.keys(activeContact).map((k, ind) => {
-            return m('span.row__span', activeContact[k])
+            if(k=='id') return '';
+            return m('span.row__span', activeContact[k]);
         }),
         m(CommandList,{list:cmdList})
     ]

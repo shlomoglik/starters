@@ -1,14 +1,13 @@
 .commandList{
     &__icon{
         position: relative;
-        width: 2rem;    
-        height: 2rem;
+        width: 3rem;    
+        height: 3rem;
         fill: currentColor;
         border-radius: 50%;
         transition: all .2s;
         &:hover{
             background-color: var(--color-grey-light-3);
-            transform: scale(1.1);
             cursor: pointer;
         }  
     }

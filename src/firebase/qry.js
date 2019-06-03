@@ -6,10 +6,15 @@ import { db } from '../firebase/firebaseConfig'
 
 // let db = firebase.firestore();
 
-
+/**
+ * insertDoc insert new document to specific collection
+ * @param {String} col collection name to find doc
+ * @param {String} id the doc id to find
+ * @return {Promise} return DocoumentReference
+ */
 function getDoc(col, id) {
     let docRef = db.collection(col).doc(id);
-    return docRef;
+    return docRef.get();
 }
 
 

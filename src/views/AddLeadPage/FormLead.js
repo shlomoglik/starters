@@ -6,8 +6,8 @@ function getList(term, field,model) {
     if (term.length < 2) {
         return [];
     }
-    let filter = Store.storeContacts.filter(el => {
-        let search = el.name || '';
+    let filter = Store[model].filter(el => {
+        let search = el[field] || '';
         return search.indexOf(term) !== -1;
     });
     return filter;
@@ -20,12 +20,13 @@ let Form = (init) => {
             vnode.state.term = '';
         },
         onbeforeupdate: vnode => {
-            vnode.state.list = getList(vnode.state.term, name);
+            vnode.state.list = getList(vnode.state.term, 'name','storeLeads');
         },
         view: (vnode) => {
             return (
                 m('form#leadForm.form',
                     {   style : vnode.attrs.parent.state.hasContact?"display:block":"display:none",
+                        autocomplete:"off",
                         onsubmit: (event) => submitForm(event,vnode) },
                     [
                         m('.heading',
@@ -77,7 +78,7 @@ function renderFormData(myData, vnode) {
 }
 
 function insertList(e) {
-    console.log('TODO! append list base on term ', e);
+    console.log('TODO! append list base on term ');
 }
 
 module.exports = Form
