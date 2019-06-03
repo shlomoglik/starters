@@ -4,10 +4,13 @@ import Leads from '../LeadsPage/Leads'
 
 let Filters = (init) => {
   return {
+    oninit:vnode=>{
+      vnode.state.filters = vnode.attrs.filters;
+    },
     view: (vnode) => {
       return (
         m(".filterBar",[
-          settings.groupTypeFilter.map(item => {
+          vnode.state.filters.map(item => {
             return(
                 m(".filterBar__card",
                   {
@@ -31,13 +34,12 @@ let Filters = (init) => {
 }
 
 function toggleActive(vnode,item){
-  settings.groupTypeFilter.map(it=>{
+  vnode.state.filters.map(it=>{
     if(it.active){
       it.active =false;
     }
   })
   item.active = true;
-  // vnode.state.active = item.title;
 }
 
 module.exports = Filters;

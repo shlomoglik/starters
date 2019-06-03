@@ -1,8 +1,6 @@
 import m from "mithril"
 import Store from '../../data/Store'
 import settings from '../../data/settings'
-
-
 import Header from '../Header/Header'
 import FiltersBar from '../commons/FiltersBar'
 import Bottom from '../commons/BottomMenu'
@@ -24,7 +22,7 @@ let leadsPage = (init)=>{
       return (
         <div class="container--myLeads">
           <Header title="הלידים שלי" />
-          <FiltersBar/>
+          <FiltersBar filters={settings.groupTypeFilter}/>
           <main class="myLeads" >
             <Leads data={vnode.state.data}/>
           </main>
