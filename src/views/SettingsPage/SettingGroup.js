@@ -9,7 +9,10 @@ let SettingGroup = (init) => {
                     m('.setGroup__title', vnode.attrs.title),
                     vnode.attrs.rows ?
                         vnode.attrs.rows.map(row => {
-                            return m('.setGroup__row', row.label)
+                            return m('.setGroup__row',[
+                                m('span.setGroup__label',row.label),
+                                m('span.setGroup__delete','X')
+                            ])
                         }) : [],
                     m('form.setGroup__form', { onsubmit: e => submitForm(e, e.target,vnode) }, [
                         m('input.setGroup__form-input', { type: "text", placeholder: "הוסף ..." }),

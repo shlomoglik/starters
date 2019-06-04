@@ -15,7 +15,7 @@ let SettingsPage = (init) => {
           settings.setGroup.map(item => {
             if (item.groups) {
               item.count = item.groups.length;
-              return item.active ? item.groups.map(group => m(SettingGroup, { title: group , rows:[{label:"א"},{label:"ב"}] })) : [];
+              return item.active ? item.groups.map(group => m(SettingGroup, { title: group.title , rows:group.data })) : [];
             }
           }),
           m(Bottom),

@@ -46,8 +46,35 @@
 
     &__row{
         width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         font: inherit;
-        margin: 1rem auto;
+        margin: .5rem auto;
+        transition: all .2s;
+        border-radius: 5px;
+        &:hover{
+            background-color:var(--color-grey-bg);
+        }
+    }
+    &__delete{
+        margin-left: 1rem;
+        font-size: 1.5rem;
+        border-radius: 50%;
+        color: var(--color-grey-dark-3);
+        &:hover{
+            color: var(--color-red);
+        }
+    }
+    &__row:hover > &__delete{
+        color: var(--color-primary);
+        font-weight: 500;
+    }
+
+    &__label{
+        font: inherit;
+        flex: 1;
+        text-align: center;
     }
 
     &__form{
@@ -62,12 +89,16 @@
             @include placeholder-1;
         }
         &-icon{
-            width: 3rem;
-            height: 3rem;
+            width: 4rem;
+            height: 4rem;
             fill: currentColor;
             outline: none;
             border: none;
             border-radius: 50%;
+            transition: all .2s;
+            &:hover{
+                background-color:var(--color-grey-bg);
+            }
         }
     }
 
