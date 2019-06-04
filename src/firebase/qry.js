@@ -1,5 +1,6 @@
 import User from '../data/User'
 import Store from '../data/Store'
+import settings from '../data/settings'
 import m from 'mithril'
 import { db } from '../firebase/firebaseConfig'
 
@@ -30,6 +31,16 @@ function insertDoc(col, doc) {
     return prom;
 }
 
+/**
+ * insertDoc insert new document to specific collection
+ * @param {String} col collection name to find doc
+ * @param {String} id the doc id to find and delete
+ */
+function deleteDoc(col, id) {
+    let docRef = db.collection(col).doc(id);
+    docRef.delete().then(d => m.redraw());
+}
+
 function followChanges(col, id, elem) {
     db.collection(col).doc(id)
         .onSnapshot(function (doc) {
@@ -48,10 +59,10 @@ function followChanges(col, id, elem) {
 function getLeads(groupType) {
     let leads = [];
     let user = JSON.parse(sessionStorage.getItem('User'));
-    if(!user){
+    if (!user) {
         return;
     }
-    let userPath = user.path ||""; // User.getUser('path') || 
+    let userPath = user.path || ""; // User.getUser('path') || 
 
     let assignMain = {
         assignRef: userPath,
@@ -64,14 +75,13 @@ function getLeads(groupType) {
     // if (groupType) {
     //     qry.where('groupType', '==', groupType);
     // }
-
     qry.onSnapshot(
         snap => {
             leads = [];
             snap.forEach(doc => {
                 leads.push(doc.data())
             })
-            console.log('total docs in qry: ', snap.size,'result: ', leads);
+            console.log('total docs in qry: ', snap.size, 'result: ', leads);
             Store.storeLeads = leads;
             m.redraw();
         });
@@ -81,11 +91,11 @@ function getContacts() {
     let colRef = db.collection('contacts');
     let col = colRef.get();
     col.then(
-        res=>{
-            let result =[];
+        res => {
+            let result = [];
             let docs = res.docs;
-            docs.map(doc=>{
-                let newDoc = Object.assign(doc.data(),{id:doc.id});
+            docs.map(doc => {
+                let newDoc = Object.assign(doc.data(), { id: doc.id });
                 result.push(newDoc);
             })
             Store.storeContacts = result;
@@ -94,7 +104,29 @@ function getContacts() {
     )
 }
 
+function getSettingGroups() {
+    settings.setGroup.map(item => {
+        if (item.groups) {
+            item.groups.map(group => {
+                group.data = [];
+                let col = group.collection;
+                let colRef = db.collection(col);
+                colRef.onSnapshot(
+                    snap => {
+                        let res = [];
+                        snap.forEach(doc => {
+                            res.push(Object.assign(doc.data(), { id: doc.id }))
+                        })
+                        group.data = res;
+                        m.redraw();
+                    }
+                )
+            })
+        }
+    })
+}
 
-module.exports = { getDoc, insertDoc, followChanges, getLeads, getContacts };
+
+module.exports = { getDoc, insertDoc, deleteDoc, followChanges, getLeads, getContacts, getSettingGroups };
 
 
