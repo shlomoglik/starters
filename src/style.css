@@ -871,13 +871,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center; }
-  .setGroup--hidden {
-    display: none !important; }
-  .setGroup__toggle-arrow {
-    margin-left: 2rem;
-    width: 2rem;
-    height: 2rem;
-    fill: var(--color-grey-dark-3); }
   .setGroup:hover {
     transform: translateY(-0.1rem);
     background-color: var(--color-grey-light-2);
@@ -900,6 +893,14 @@ body {
       font: inherit;
       color: var(--color-primary);
       font-weight: 600; }
+  .setGroup__toggle-arrow {
+    margin-left: 2rem;
+    width: 2rem;
+    height: 2rem;
+    fill: var(--color-grey-dark-3);
+    transition: all .8s; }
+  .setGroup__title:active > .setGroup__toggle-arrow {
+    transform: rotate(-180deg); }
   .setGroup__row {
     width: 100%;
     display: flex;

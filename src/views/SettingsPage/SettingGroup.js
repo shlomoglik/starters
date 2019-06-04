@@ -1,8 +1,6 @@
 import m from 'mithril'
 import { deleteDoc, insertDoc } from '../../firebase/qry'
 
-let pathToggle = { shrink: "#icon-chevron-thin-up", expend: "#icon-chevron-thin-down" };
-
 
 let SettingGroup = (init) => {
     return {
@@ -11,7 +9,7 @@ let SettingGroup = (init) => {
                 m('.setGroup', [
                     m('.setGroup__title', { onclick: e => toggleGroup(e, vnode) }, [
                         m('span', vnode.attrs.title),
-                        m('svg#arrow.setGroup__toggle-arrow', m('use', { href: vnode.state.shrink ? `/public/img/sprite.svg${pathToggle.shrink}` : `/public/img/sprite.svg${pathToggle.expend}`}))
+                        m('svg#arrow.setGroup__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down'}))
                     ]),
                     vnode.attrs.rows && !vnode.state.shrink ?
                         vnode.attrs.rows.map((row, ind) => {
@@ -51,11 +49,7 @@ function toggleGroup(e, vnode) {
         vnode.state.shrink = false;
     } else {
         vnode.state.shrink = true;
-    }    // let dom = vnode.dom;
-    // let children = dom.querySelectorAll('.setGroup > *:not(:first-child) '); 
-    // children.forEach(child=>{
-    //     child.classList.toggle('setGroup--hidden');
-    // });
+    }
 }
 
 module.exports = SettingGroup
