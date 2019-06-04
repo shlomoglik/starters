@@ -1,13 +1,13 @@
 import m from 'mithril'
 
-let SetLeadTypePage = (init) => {
+let SetLeadType = (init) => {
     return {
         view: (vnode) => {
             return (
-                m('.setLaedType','setLaedType')
+                m('.setGroup','setLaedType')
             )
         }
     }
 }
 
-module.exports = SetLeadTypePage
+module.exports = SetLeadType

@@ -18,7 +18,7 @@ let settings = {
         { title: "לידים", count: 0, groups: [setLeadType, setLeadGroup, setLeadSource, setLeadStatus], active: true },
         { title: "אנשי קשר", count: 0, groups: [setContactType] },
         { title: "משתמשים", count: 0, groups: [setUserRoles] },
-        { title: "כללי", count: 0 },
+        { title: "מתקדם", count: 0 },
     ],
     setLeadType: { meta:setLeadType , data: setLeadType.data, dataGroups: setLeadGroup.data }
 }
