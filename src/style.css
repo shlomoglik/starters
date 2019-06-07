@@ -912,16 +912,19 @@ body {
     border-radius: 5px; }
     .setGroup__row:hover {
       background-color: var(--color-grey-bg); }
-  .setGroup__delete {
-    margin-left: 1rem;
-    font-size: 1.5rem;
-    border-radius: 50%;
-    color: var(--color-grey-dark-3); }
-    .setGroup__delete:hover {
-      color: var(--color-red); }
   .setGroup__row:hover > .setGroup__delete {
     color: var(--color-primary);
-    font-weight: 500; }
+    font-weight: 600; }
+  .setGroup__delete {
+    flex: 0 0 10%;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    color: var(--color-grey-dark-3);
+    transition: all .2s; }
+    .setGroup__delete:hover {
+      color: var(--color-red) !important;
+      transform: scale(1.2);
+      font-weight: 600; }
   .setGroup__label {
     font: inherit;
     flex: 1;
@@ -953,13 +956,22 @@ body {
         font-family: inherit; }
       .setGroup__form-input:focus::placeholder {
         opacity: .6; }
-    .setGroup__form-icon {
-      width: 4rem;
-      height: 4rem;
-      fill: currentColor;
+    .setGroup__form-btn {
       outline: none;
       border: none;
       border-radius: 50%;
-      transition: all .2s; }
-      .setGroup__form-icon:hover {
-        background-color: var(--color-grey-bg); }
+      transition: all .2s;
+      background-color: none;
+      color: var(--color-primary);
+      opacity: .7; }
+      .setGroup__form-btn:hover {
+        cursor: pointer;
+        opacity: 1;
+        background-color: var(--color-grey-bg);
+        transform: translateY(-0.2rem); }
+      .setGroup__form-btn:active {
+        transform: translateY(0); }
+    .setGroup__form-icon {
+      width: 4rem;
+      height: 4rem;
+      fill: currentColor; }

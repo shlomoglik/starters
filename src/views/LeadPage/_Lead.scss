@@ -1,0 +1,9 @@
+.lead{
+    background-color: orangered;
+    width: 100vw;
+    height: 100vh;
+    &__row{
+        background-color: orchid;
+        width: 100%;
+    }
+}
