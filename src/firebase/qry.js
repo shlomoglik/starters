@@ -79,7 +79,7 @@ function getLeads(groupType) {
         snap => {
             leads = [];
             snap.forEach(doc => {
-                leads.push(doc.data())
+                leads.push(Object.assign(doc.data(), { id: doc.id }))
             })
             console.log('total docs in qry: ', snap.size, 'result: ', leads);
             store.storeLeads = leads;
