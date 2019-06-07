@@ -836,6 +836,14 @@ body {
   .leads__desc, .leads__type {
     font-size: 1.4rem  !important; }
 
+.lead {
+  background-color: orangered;
+  width: 100vw;
+  height: 100vh; }
+  .lead__row {
+    background-color: orchid;
+    width: 100%; }
+
 .container--search {
   margin-top: 8rem;
   margin-bottom: 8rem;
