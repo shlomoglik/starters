@@ -1,5 +1,5 @@
 import m from "mithril"
-import App from "../App/App"
+import Store from '../../data/Store'
 
 let LeadRow = (init) => {
     return {
@@ -7,7 +7,7 @@ let LeadRow = (init) => {
             console.log('lead data is: ', vnode.attrs.lead)
         },
         view: (vnode) => {
-            let lead = vnode.attrs.lead;
+            let lead = vnode.attrs.lead ;
             let follow = 'היום';
             if (lead.followDate) {
                 follow = lead.followDate.toDate().getDay() + '/' + lead.followDate.toDate().getMonth() + '/' + lead.followDate.toDate().getFullYear();
@@ -35,7 +35,7 @@ let LeadRow = (init) => {
 }
 
 function getContactName(vnode) {
-    let myContact = App.state.Store.storeContacts.filter(contact => {
+    let myContact = Store.storeContacts.filter(contact => {
         let contactPath = vnode.attrs.lead.contacts[0].contactRef;
         let path = `contacts/${contact.id}`;
         return path == contactPath;

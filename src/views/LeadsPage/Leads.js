@@ -1,5 +1,6 @@
 import m from "mithril"
 import settings from '../../data/settings'
+import LeadRow from './LeadRow'
 
 let Leads = (init) => {
   return {
