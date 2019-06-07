@@ -20,7 +20,7 @@ let LeadRow = (init) => {
                 m(".leads__row",
                     {
                         id: lead.id , 
-                        onclick: e=>m.route.set(`/lead-up/myLeads/${lead.id}`)
+                        onclick: e=>navigateToLead(e,vnode)
                     }, [
                         m(".leads__cell.leads__title", [
                             m("span.leads__name", getContactName(vnode)),
@@ -46,6 +46,12 @@ function getContactName(vnode) {
     } else {
         return 'ללא איש קשר'
     }
+}
+
+function navigateToLead(e,vnode){
+    console.log(`TODO!!!!!!! go to /myLeads/${vnode.attrs.lead.id}`);
+    console.log(vnode.attrs.lead)
+    // m.route.set(`/myLeads/${vnode.attrs.lead.id}`);
 }
 
 module.exports = LeadRow;

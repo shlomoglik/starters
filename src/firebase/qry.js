@@ -88,17 +88,30 @@ function getLeads(groupType) {
 }
 
 function getContacts() {
+    // let colRef = db.collection('contacts');
+    // let col = colRef.get();
+    // col.then(
+    //     res => {
+    //         let result = [];
+    //         let docs = res.docs;
+    //         docs.map(doc => {
+    //             let newDoc = Object.assign(doc.data(), { id: doc.id });
+    //             result.push(newDoc);
+    //         })
+    //         Store.storeContacts = result;
+    //         m.redraw();
+    //     }
+    // )
+    let res;
     let colRef = db.collection('contacts');
-    let col = colRef.get();
-    col.then(
-        res => {
-            let result = [];
-            let docs = res.docs;
-            docs.map(doc => {
-                let newDoc = Object.assign(doc.data(), { id: doc.id });
-                result.push(newDoc);
+    colRef.onSnapshot(
+        snap => {
+            let res = [];
+            snap.forEach(doc => {
+                console.log('total docs in qry: ', snap.size, 'result: ', res);
+                res.push(Object.assign(doc.data(), { id: doc.id }))
             })
-            Store.storeContacts = result;
+            Store.storeContacts = res;
             m.redraw();
         }
     )

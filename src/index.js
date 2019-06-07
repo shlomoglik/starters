@@ -10,10 +10,11 @@ import './style.css';
 import LoginPage from "./views/LoginPage/LoginPage";
 import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
 import LeadsPage from "./views/LeadsPage/LeadsPage";
+import LeadPage from "./views/LeadPage/Lead";
 import SearchPage from "./views/SearchPage/SearchPage";
 import SettingsPage from "./views/SettingsPage/SettingsPage";
 import User from "./data/User";
-import {getLeads, getContacts ,getSettingGroups} from './firebase/qry'
+import { getLeads, getContacts, getSettingGroups } from './firebase/qry'
 
 getLeads();
 getContacts();
@@ -29,7 +30,7 @@ m.route(root, "/login", {
             else m.route.set('/login')
         }
     },
-    "/myLeads":{
+    "/myLeads": {
         onmatch: () => {
             let logged = User.isLoggedIn();
             if (logged)
@@ -37,7 +38,15 @@ m.route(root, "/login", {
             else m.route.set('/login')
         }
     },
-    "/search":{
+    "/myLeads/:id": {
+        onmatch: () => {
+            let logged = User.isLoggedIn();
+            if (logged)
+                return LeadPage
+            else m.route.set('/login')
+        }
+    },
+    "/search": {
         onmatch: () => {
             console.log('go to search page')
             let logged = User.isLoggedIn();
@@ -46,7 +55,7 @@ m.route(root, "/login", {
             else m.route.set('/login')
         }
     },
-    "/settings":{
+    "/settings": {
         onmatch: () => {
             console.log('go to settings page')
             let logged = User.isLoggedIn();
