@@ -50,7 +50,7 @@ function getContactName(vnode) {
 
 function navigateToLead(e,vnode){
     console.log(`TODO!!!!!!! go to /myLeads/${vnode.attrs.lead.id}`);
-    console.log(vnode.attrs.lead);
+    console.log('user this data to show lead info',vnode.attrs.lead);
     m.route.set(`/myLeads/${vnode.attrs.lead.id}`);
 }
 
