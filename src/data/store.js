@@ -1,7 +1,7 @@
-var Store = {
+var store = {
     storeLeads: [],
     storeContacts: [],
 };
 
-module.exports = Store;
+module.exports = store;
 

@@ -1,7 +1,7 @@
 import m from 'mithril'
 import { signIn, logout, isUserLoggedIn } from '../firebase/auth'
 import { getDoc } from '../firebase/qry'
-import Store from './Store'
+import store from './store'
 import Model from '../data/Model'
 
 class User extends Model {

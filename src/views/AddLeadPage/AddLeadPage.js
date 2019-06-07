@@ -1,5 +1,5 @@
 import m from "mithril"
-import Store from '../../data/Store'
+import store from '../../data/store'
 import Header from '../Header/Header'
 import Bottom from '../commons/BottomMenu'
 import FormContact from './FormContact'

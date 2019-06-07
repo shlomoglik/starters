@@ -1,5 +1,5 @@
 import m from "mithril"
-import Store from '../../data/Store'
+import store from '../../data/store'
 import settings from '../../data/settings'
 import Header from '../Header/Header'
 import FiltersBar from '../commons/FiltersBar'
@@ -16,7 +16,7 @@ let leadsPage = (init)=>{
     },
     onbeforeupdate: (vnode) => {
       setCounter();
-      vnode.state.data = Store.storeLeads;
+      vnode.state.data = store.storeLeads;
     },
     view: (vnode) => {
       return (
@@ -35,7 +35,7 @@ let leadsPage = (init)=>{
 }
 
 function setCounter(vnode) {
-  let allData = Store.storeLeads;  
+  let allData = store.storeLeads;  
   if(allData[0]){
     settings.groupTypeFilter.map(item => {
       let groupTitle = item.title;

@@ -1,5 +1,5 @@
 import m from "mithril"
-import Store from '../../data/Store'
+import store from '../../data/store'
 
 let LeadRow = (init) => {
     return {
@@ -35,7 +35,7 @@ let LeadRow = (init) => {
 }
 
 function getContactName(vnode) {
-    let myContact = Store.storeContacts.filter(contact => {
+    let myContact = store.storeContacts.filter(contact => {
         let contactPath = vnode.attrs.lead.contacts[0].contactRef;
         let path = `contacts/${contact.id}`;
         return path == contactPath;

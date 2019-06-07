@@ -4,13 +4,13 @@ import SearchBox from '../commons/SearchBox'
 import SearchList from '../commons/SearchList'
 import CommandList from '../commons/CommandList'
 import Contact from '../../data/Contact'
-import Store from '../../data/Store'
+import store from '../../data/store'
 
 function getList(term, field, model) {
     if (term.length < 2) {
         return [];
     }
-    let filter = Store[model].filter(el => {
+    let filter = store[model].filter(el => {
         let search = el[field] || '';
         return search.indexOf(term) !== -1;
     });

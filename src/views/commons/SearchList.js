@@ -1,5 +1,5 @@
 import m from 'mithril'
-import Store from '../../data/Store'
+import store from '../../data/store'
 import { getDoc } from '../../firebase/qry'
 
 let SearchList = (init) => {

@@ -1,5 +1,5 @@
 import User from '../data/User'
-import Store from '../data/Store'
+import store from '../data/store'
 import settings from '../data/settings'
 import m from 'mithril'
 import { db } from '../firebase/firebaseConfig'
@@ -82,7 +82,7 @@ function getLeads(groupType) {
                 leads.push(doc.data())
             })
             console.log('total docs in qry: ', snap.size, 'result: ', leads);
-            Store.storeLeads = leads;
+            store.storeLeads = leads;
             m.redraw();
         });
 }
@@ -98,7 +98,7 @@ function getContacts() {
     //             let newDoc = Object.assign(doc.data(), { id: doc.id });
     //             result.push(newDoc);
     //         })
-    //         Store.storeContacts = result;
+    //         store.storeContacts = result;
     //         m.redraw();
     //     }
     // )
@@ -111,7 +111,7 @@ function getContacts() {
                 console.log('total docs in qry: ', snap.size, 'result: ', res);
                 res.push(Object.assign(doc.data(), { id: doc.id }))
             })
-            Store.storeContacts = res;
+            store.storeContacts = res;
             m.redraw();
         }
     )
