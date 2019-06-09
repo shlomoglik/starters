@@ -1,4 +1,5 @@
 import m from "mithril"
+import HeaderFullPage from '../commons/HeaderFullPage'
 import store from '../../data/store'
 
 let Lead = (init) => {
@@ -12,6 +13,7 @@ let Lead = (init) => {
             console.log(lead)
             return (
                 m('.lead', { id: vnode.attrs.id },[
+                    m(HeaderFullPage,'פרטי ליד'),
                     m('.lead__row.leads__title', [
                         m("span.leads__name", getContactName(vnode)),
                         m("span.leads__type", lead.type)

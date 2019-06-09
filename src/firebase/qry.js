@@ -102,7 +102,6 @@ function getContacts() {
     //         m.redraw();
     //     }
     // )
-    let res;
     let colRef = db.collection('contacts');
     colRef.onSnapshot(
         snap => {
