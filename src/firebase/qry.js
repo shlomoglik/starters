@@ -139,12 +139,21 @@ function getSettingGroups() {
 }
 function getSourceList() {
     db.collection('setLeadSource').onSnapshot(snap=>{
-        
+        let res = [];
+        snap.forEach(doc=>{
+            res.push(Object.assign(doc.data(), { id: doc.id }))
+        });
+        settings.leadSourceList = res;
     })
 }
 function getTypeList() {
-    db.collection('setLeadType')
-
+    db.collection('setLeadType').onSnapshot(snap=>{
+        let res = [];
+        snap.forEach(doc=>{
+            res.push(Object.assign(doc.data(), { id: doc.id }))
+        });
+        settings.leadTypeList = res;
+    })
 }
 
 

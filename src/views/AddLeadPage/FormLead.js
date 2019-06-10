@@ -3,7 +3,7 @@ import SearchList from '../commons/SearchList'
 import settings from '../../data/settings'
 import store from '../../data/store'
 import Lead from '../../data/Lead'
-import {getSettingGroups} from '../../firebase/qry'
+import {getSourceList,getTypeList} from '../../firebase/qry'
 
 function getList(term, field, model) {
     if (term.length < 2) {
@@ -20,7 +20,8 @@ function getList(term, field, model) {
 let Form = (init) => {
     return {
         oninit: vnode => {
-            getSettingGroups();
+            getSourceList();
+            getTypeList();
             vnode.state.term = '';
             vnode.state.sourceList = settings.leadSourceList;
             vnode.state.typeList = settings.leadTypeList;
