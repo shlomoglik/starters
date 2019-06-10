@@ -1038,7 +1038,8 @@ body {
   flex-wrap: wrap; }
 
 .contact-card__icon {
-  position: relative;
+  min-width: 100%;
+  margin: 1rem;
   width: 2rem;
   height: 2rem;
   fill: currentColor;

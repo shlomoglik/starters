@@ -9,7 +9,8 @@
         flex-wrap: wrap;
     }
     &__icon{
-        position: relative;
+        min-width: 100%;
+        margin: 1rem;
         width: 2rem;    
         height: 2rem;
         fill: currentColor;
