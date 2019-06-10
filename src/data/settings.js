@@ -20,7 +20,8 @@ let settings = {
         { title: "משתמשים", count: 0, groups: [setUserRoles] },
         { title: "מתקדם", count: 0 },
     ],
-    setLeadType: { meta:setLeadType , data: setLeadType.data, dataGroups: setLeadGroup.data }
+    leadTypeList: setLeadType.data,
+    leadSourceList: setLeadSource.data,
 }
 
 module.exports = settings;

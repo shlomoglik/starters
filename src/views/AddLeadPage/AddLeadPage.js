@@ -32,11 +32,11 @@ let formDataLead = {
   "meta": { heading: 'פרטי פנייה', class: 'Lead' },
   "data": {
     "type": {
-      "input": { type: "text", name: "type", placeholder: "סוג פנייה", required: true },
+      "input": { type: "text", name: "type", placeholder: "סוג פנייה", required: true ,list:"typeList"},
       "label": { text: "סוג פנייה" }
     },
     "source": {
-      "input": { type: "text", name: "phone", placeholder: "מקור הגעה" },
+      "input": { type: "text", name: "phone", placeholder: "מקור הגעה" , list:"sourceList" },
       "label": { text: "טלפון איש קשר (xxx-xxxxxxx)" }
     },
     "duedate": {

@@ -137,8 +137,27 @@ function getSettingGroups() {
         }
     })
 }
+function getSourceList() {
+    db.collection('setLeadSource').onSnapshot(snap=>{
+        
+    })
+}
+function getTypeList() {
+    db.collection('setLeadType')
+
+}
 
 
-module.exports = { getDoc, insertDoc, deleteDoc, followChanges, getLeads, getContacts, getSettingGroups };
+module.exports = {
+    getDoc,
+    insertDoc,
+    deleteDoc,
+    followChanges,
+    getLeads,
+    getContacts,
+    getSettingGroups,
+    getSourceList,
+    getTypeList,
+};
 
 

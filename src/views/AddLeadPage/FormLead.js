@@ -1,9 +1,11 @@
 import m from 'mithril'
 import SearchList from '../commons/SearchList'
+import settings from '../../data/settings'
 import store from '../../data/store'
 import Lead from '../../data/Lead'
+import {getSettingGroups} from '../../firebase/qry'
 
-function getList(term, field,model) {
+function getList(term, field, model) {
     if (term.length < 2) {
         return [];
     }
@@ -18,22 +20,29 @@ function getList(term, field,model) {
 let Form = (init) => {
     return {
         oninit: vnode => {
+            getSettingGroups();
             vnode.state.term = '';
+            vnode.state.sourceList = settings.leadSourceList;
+            vnode.state.typeList = settings.leadTypeList;
         },
         onbeforeupdate: vnode => {
-            vnode.state.list = getList(vnode.state.term, 'name','storeLeads');
+            vnode.state.list = getList(vnode.state.term, 'name', 'storeLeads');
+            console.log(vnode.state)
         },
         view: (vnode) => {
             return (
                 m('form#leadForm.form',
-                    {   style : vnode.attrs.parent.state.activeContact?"display:block":"display:none",
-                        autocorrect:"off", autocapitalize:"off", spellcheck:"false",autocomplete:"off",
-                        onsubmit: (event) => submitForm(event,vnode) },
+                    {
+                        style: vnode.attrs.parent.state.activeContact ? "display:block" : "display:none",
+                        autocorrect: "off", autocapitalize: "off", spellcheck: "false", autocomplete: "off",
+                        onsubmit: (event) => submitForm(event, vnode)
+                    },
                     [
                         m('.heading',
                             m('.heading__secondary', vnode.attrs.formData.meta.heading)
                         ),
                         renderFormData(vnode.attrs.formData),
+                        renderDataLists(vnode.attrs.formData),
                         m('div', [
                             m('button[class="btn btn--def"]', { type: "submit" }, "הוסף")
                         ])
@@ -54,7 +63,7 @@ function submitForm(e, vnode) {
             data[el.name] = el.value || ""
         }
     }
-    let newLead = new Lead('',data);
+    let newLead = new Lead('', data);
     let contactPath = `contacts/${vnode.attrs.parent.state.activeContact.id}`;
     newLead.addLeadToExistContact(newLead, contactPath);
     e.target.reset();
@@ -91,6 +100,21 @@ function renderFormData(myData, vnode) {
 
 function insertList(e) {
     console.log('TODO! append list base on term ');
+}
+
+function renderDataLists(vnode) {
+    return m('div[type="hidden"]', [
+        m('datalist#typeList', [
+            m('option','חתונה'),
+            m('option','בת מצווה'),
+            m('option','חינה'),
+        ]),
+        m('datalist#sourceList', [
+            m('option','פייסבוק'),
+            m('option','גוגל'),
+            m('option','פה לאוזן'),
+        ]),
+    ])
 }
 
 module.exports = Form
