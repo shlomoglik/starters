@@ -11,7 +11,7 @@ import Leads from './Leads'
 let leadsPage = (init)=>{
   return {
     oninit: (vnode) => {
-      vnode.state.data = [];
+      vnode.state.data = store.storeLeads;
       setCounter();
     },
     onbeforeupdate: (vnode) => {
