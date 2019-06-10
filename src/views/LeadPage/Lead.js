@@ -2,6 +2,7 @@ import m from "mithril"
 import HeaderFullPage from '../commons/HeaderFullPage'
 import LeadCard from './LeadCard'
 import LeadContacts from './LeadContactsCard'
+import ScrollTop from '../commons/ScrollTop'
 import store from '../../data/store'
 
 
@@ -29,11 +30,13 @@ let Lead = (init) => {
                         // })
                         m('.cards', [
                             m(LeadCard, getGeneralCard(vnode)),
-                            m(LeadCard, {title:"אנשי קשר"}),
+                            m(LeadContacts, {title:"אנשי קשר"}),
                             m(LeadCard, {title:"פולואפ"}),
                             m(LeadCard, {title:"משימות"}),
+                            m(LeadCard, {title:"סטטוס"}),
                         ])
-                        : m('span', { style: 'display:inline;direction:rtl' }, 'טוען...')
+                        : m('span.loader', 'טוען...'),
+                        m(ScrollTop)
                 ])
             )
         }

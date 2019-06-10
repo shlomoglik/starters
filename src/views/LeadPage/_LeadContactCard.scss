@@ -1,0 +1,26 @@
+.contact-card{
+    &__row{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        transition: all .2s;
+        flex-wrap: wrap;
+    }
+    &__icon{
+        position: relative;
+        width: 2rem;    
+        height: 2rem;
+        fill: currentColor;
+        border-radius: 50%;
+        &:hover{
+            cursor: pointer;
+        }  
+    }
+    &__input{
+        @include input-def;
+        font-size: 2rem;
+        min-width: 32rem;
+    }
+}

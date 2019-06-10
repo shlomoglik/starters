@@ -2,10 +2,14 @@ import m from 'mithril'
 import { deleteDoc, insertDoc } from '../../firebase/qry'
 
 
-const Card = (init) => {
+const CardContacts = (init) => {
     return {
         oninit: vnode => {
             console.log(vnode)
+            vnode.state.rows = [
+                {name:"נסיון",phone:"053-3393623",email:"shlomoglik@gmail.com",id:"sdfasasvasd"},
+                {name:"2נסיון",phone:"050-2050827",email:"glikshlomo@gmail.com",id:"haverfaeasd"},
+            ]
             vnode.state.shrink = vnode.attrs.shrink
         },
         view: (vnode) => {
@@ -15,14 +19,17 @@ const Card = (init) => {
                         m('span', vnode.attrs.title),
                         m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
-                    vnode.attrs.rows && !vnode.state.shrink ?
-                        vnode.attrs.rows.map((row, ind) => {
-                            return m('.lead-card__row', { key: ind}, [
-                                m('label.lead-card__label', row.label),
-                                m('input.lead-card__input', { value: row.data ,type:row.type || '' }),
+                    vnode.state.rows && !vnode.state.shrink ?
+                        vnode.state.rows.map((row, ind) => {
+                            return m('.contact-card__row', {id:row.id ,key: ind}, [
+                                m('svg.contact-card__icon', m('use', { href: '/public/img/sprite.svg#icon-user' })),
+                                m('input.contact-card__input', row.name),                    
+                                m('input.contact-card__input', row.phone),                    
+                                m('input.contact-card__input', row.email),                    
+                                m('input.contact-card__input', row.role),                    
                             ])
                         }) : [],
-                    vnode.attrs.rows && !vnode.state.shrink ? 
+                    vnode.state.rows && !vnode.state.shrink ? 
                         m('.lead-card__btns',[
                             m('button.btn.btn--def','עדכן') ,
                             m('button.btn.btn--def.btn--red','בטל') ,
@@ -54,4 +61,4 @@ function toggleGroup(e, vnode) {
     }
 }
 
-module.exports = Card
+module.exports = CardContacts

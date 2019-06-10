@@ -86,3 +86,15 @@ body{
         }  
     }
 }
+
+.loader{
+    position: relative;
+    font-size: 3rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    direction: rtl;
+    animation: shake 1s infinite;
+}

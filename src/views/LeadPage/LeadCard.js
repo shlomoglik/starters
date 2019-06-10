@@ -2,6 +2,7 @@ import m from 'mithril'
 import { deleteDoc, insertDoc } from '../../firebase/qry'
 
 
+
 const Card = (init) => {
     return {
         oninit: vnode => {
@@ -33,7 +34,6 @@ const Card = (init) => {
     }
 }
 
-// submitForm(e, vnode.dom.querySelector('.setGroup__form'), vnode)
 function submitForm(e, form, vnode) {
     e.preventDefault();
     // let val = form.elements[0].value;
