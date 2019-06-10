@@ -1,25 +1,39 @@
 import m from "mithril"
 import HeaderFullPage from '../commons/HeaderFullPage'
+import LeadCard from './LeadCard'
+import LeadContacts from './LeadContactsCard'
 import store from '../../data/store'
+
 
 let Lead = (init) => {
     return {
         oninit: vnode => {
-            console.log('use function getLeadByID ', vnode.attrs.id, vnode);
+            // console.log('use function getLeadByID ', vnode.attrs.id, vnode);
             getLeadByID(vnode);
         },
+        onupdate: vnode => {
+            getLeadByID(vnode);
+            vnode.state.leadTitle = getLeadTitle(vnode);
+            getContacts(vnode);
+            // console.log(vnode);
+        },
         view: (vnode) => {
-            let lead = vnode.state.lead;
-            console.log(lead)
             return (
-                m('.lead', { id: vnode.attrs.id },[
-                    m(HeaderFullPage,'פרטי ליד'),
-                    m('.lead__row.leads__title', [
-                        m("span.leads__name", getContactName(vnode)),
-                        m("span.leads__type", lead.type)
-                    ]),
-                    m(".leads__row.leads__desc", lead.description),
-                    m(".leads__row.leads__follow", 'follow'),
+                m('.lead', { id: vnode.attrs.id }, [
+                    m(HeaderFullPage, { title: 'פרטי ליד', backTo: '/myLeads' }),
+                    vnode.state.lead ?
+                        // Object.keys(vnode.state.lead).map((k, ind) => {
+                        //     return (
+                        //         m('.lead__row', { key: ind }, k + ' ' + vnode.state.lead[k])
+                        //     )
+                        // })
+                        m('.cards', [
+                            m(LeadCard, getGeneralCard(vnode)),
+                            m(LeadCard, {title:"אנשי קשר"}),
+                            m(LeadCard, {title:"פולואפ"}),
+                            m(LeadCard, {title:"משימות"}),
+                        ])
+                        : m('span', { style: 'display:inline;direction:rtl' }, 'טוען...')
                 ])
             )
         }
@@ -27,27 +41,73 @@ let Lead = (init) => {
 }
 function getLeadByID(vnode) {
     let myLeadData = store.storeLeads.filter(lead => {
-        console.log('comparte: ', lead.id, '?==', vnode.attrs.id)
+        // console.log('comparte: ', lead.id, '?==', vnode.attrs.id)
         return lead.id == vnode.attrs.id;
     })
-    console.log('filter result: ', myLeadData);
-    vnode.state.lead = myLeadData;
+    // console.log('filter result: ', myLeadData);
+    vnode.state.lead = myLeadData[0];
+    // getLeadCards(vnode);
+}
+
+function getLeadTitle(vnode) {
+    let res = 'פרטי ליד';
+    let name = getContactName(vnode);
+    let type = vnode.state.lead.type;
+    // console.log(vnode.state.lead, name, type);
+    let title = name + ' ' + type || false;
+    return title ? title : res;
 }
 
 function getContactName(vnode) {
-    return 'getName';
-    // let contactPath = vnode.state.lead.contacts[0].contactRef;
+    let contactPath = vnode.state.lead.contacts[0].contactRef;
     // console.log(contactPath);
-    // let myContact = store.storeContacts.filter(contact => {
-    //     let path = `contacts/${contact.id}`;
-    //     return path == contactPath;
-    // })
+    let myContact = store.storeContacts.filter(contact => {
+        let path = `contacts/${contact.id}`;
+        return path == contactPath;
+    })
 
-    // if (myContact[0]) {
-    //     return myContact[0].name
-    // } else {
-    //     return 'ללא איש קשר'
-    // }
+    if (myContact[0]) {
+        return myContact[0].name
+    } else {
+        return 'ללא איש קשר'
+    }
+}
+
+function toggleGroup(e, vnode) {
+    if (vnode.state.shrink) {
+        vnode.state.shrink = false;
+    } else {
+        vnode.state.shrink = true;
+    }
+}
+
+function getGeneralCard(vnode) {
+    return {
+        title: 'פרטים כלליים',
+        rows: [
+            { label: "כותרת", data: getContactName(vnode) + ' - ' + vnode.state.lead.type },
+            { label: "מקור", data: vnode.state.lead.source },
+            { label: "סוג", data: vnode.state.lead.type },
+            { label: "תיאור", data: vnode.state.lead.description },
+            { label: "תאריך יעד", data: vnode.state.lead.duedate ,type:"date"},
+        ],
+        shrink: false,
+    }
+}
+
+function getContacts(vnode){
+    let res = [];
+    let activeContacts = vnode.state.lead.contacts; //[{contactRef:'',role:'main|?'},{...}]
+    // console.log('active contacts are: ',activeContacts);
+    for(let i in activeContacts){
+        let contactFilter = store.storeContacts.filter(contact=>{
+            return activeContacts[i]['contactRef'] == `contacts/${contact.id}`;
+        })
+        // console.log('after filtering: ',contactFilter);
+        res.push(Object.assign({},contactFilter[0],{role:activeContacts[i]['role']}));
+    }
+    vnode.state.contactsData = res;
+    console.log(vnode.state.contactsData);
 }
 
 module.exports = Lead;
