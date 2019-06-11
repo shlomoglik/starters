@@ -1,9 +1,9 @@
 import m from "mithril"
 import store from '../../data/store'
 import settings from '../../data/settings'
-import Header from '../Header/Header'
+import Header from '../commons/Header/Header'
 import FiltersBar from '../commons/FiltersBar'
-import Bottom from '../commons/BottomMenu'
+import Bottom from '../commons/Menus/BottomMenu'
 import ScrollTop from '../commons/ScrollTop'
 import Leads from './Leads'
 

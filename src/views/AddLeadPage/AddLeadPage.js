@@ -1,8 +1,8 @@
 import m from "mithril"
 import store from '../../data/store'
 import settings from '../../data/settings'
-import Header from '../Header/Header'
-import Bottom from '../commons/BottomMenu'
+import Header from '../commons/Header/Header'
+import Bottom from '../commons/Menus/BottomMenu'
 import FormContact from './FormContact'
 import FormLead from './FormLead'
 

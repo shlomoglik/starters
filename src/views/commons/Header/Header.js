@@ -1,6 +1,6 @@
 import m from "mithril"
-import Menu from '../Menu/Menu'
-import User from '../../data/User'
+import Menu from '../Menus/Menu'
+import User from '../../../data/User'
 
 
 module.exports = {

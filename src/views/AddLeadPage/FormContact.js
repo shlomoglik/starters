@@ -6,17 +6,6 @@ import CommandList from '../commons/CommandList'
 import Contact from '../../data/Contact'
 import store from '../../data/store'
 
-function getList(term, field, model) {
-    if (term.length < 2) {
-        return [];
-    }
-    let filter = store[model].filter(el => {
-        let search = el[field] || '';
-        return search.indexOf(term.trim()) !== -1;
-    });
-    return filter;
-}
-
 
 let Form = (init) => {
     return {
@@ -102,6 +91,18 @@ function submitForm(e, vnode) {
         }
     });
 
+}
+
+
+function getList(term, field, model) {
+    if (term.length < 2) {
+        return [];
+    }
+    let filter = store[model].filter(el => {
+        let search = el[field] || '';
+        return search.indexOf(term.trim()) !== -1;
+    });
+    return filter;
 }
 
 

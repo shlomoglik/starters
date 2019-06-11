@@ -1,5 +1,4 @@
 import m from "mithril"
-import { pathToFileURL } from "url";
 
 let Sidebar = (init) => {
   return {

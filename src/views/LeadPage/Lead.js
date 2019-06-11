@@ -1,5 +1,5 @@
 import m from "mithril"
-import HeaderFullPage from '../commons/HeaderFullPage'
+import HeaderFullPage from '../commons/Header/HeaderFullPage'
 import LeadCard from './LeadCard'
 import LeadContacts from './LeadContactsCard'
 import ScrollTop from '../commons/ScrollTop'

@@ -1,6 +1,6 @@
 import m from 'mithril'
-import Header from '../Header/Header'
-import Bottom from '../commons/BottomMenu'
+import Header from '../commons/Header/Header'
+import Bottom from '../commons/Menus/BottomMenu'
 
 module.exports = {
     view: (vnode) => {

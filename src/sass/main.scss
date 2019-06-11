@@ -4,20 +4,22 @@
 @import 'animations';
 @import 'mixins';
 
+@import '../views/commons/Menus/BottomMenu';
+@import '../views/commons/Menus/Menu';
+@import '../views/commons/Menus/Sidebar';
+
+@import '../views/commons/Header/Header';
+@import '../views/commons/Header/HeaderFullPage';
+
 @import '../views/commons/FiltersBar';
-@import '../views/commons/BottomMenu';
 @import '../views/commons/FiltersInline';
+
 @import '../views/commons/SearchBox';
 @import '../views/commons/SearchList';
 @import '../views/commons/CommandList';
 @import '../views/commons/ScrollTop';
-@import '../views/commons/HeaderFullPage';
 
-@import '../views/Menu/Menu';
-@import '../views/Menu/Sidebar';
-@import '../views/Header/Header';
 @import '../views/AddLeadPage/Form';
-
 @import '../views/LoginPage/LoginPage';
 @import '../views/AddLeadPage/AddLeadPage';
 @import '../views/LeadsPage/LeadsPage';
