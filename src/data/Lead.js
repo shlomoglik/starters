@@ -31,7 +31,13 @@ class Lead extends Model {
             'contactRef': contactPath
         }];
         newLead.setData('contacts', contactsRef);
-        newLead.add('leads');
+        newLead.add('leads').then(d=>{
+            let reg = /\/(.+)/;
+            let id = reg.exec(newLead.getID())[1];
+            console.log(`navigate to page myLeads/${id}`)
+            m.route.set(`/myLeads/${id}`);
+            m.redraw();
+        });;
     }
 
     static addLeadAndContact(newContact, newLead) {
