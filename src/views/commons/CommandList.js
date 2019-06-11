@@ -14,7 +14,7 @@ let CommandList = (init) => {
         },
         view: (vnode) => {
             return (
-                m('.commandList', [
+                m('.commandList',{style:'position:relative'}, [
                     m('svg#toggle.row__icon.commandList__icon', { onclick: e => toggleDispaly(e, vnode) }, m('use', { href: '/public/img/sprite.svg#icon-dots-three-vertical' })),
                     m('.commandList__list#list', [
                         vnode.attrs.list.map((item, ind) => {
@@ -43,6 +43,13 @@ let CommandList = (init) => {
 function toggleDispaly(e, vnode) {
     let list = vnode.dom.querySelector('#list');
     list.classList.toggle("commandList__list--visible");
+
+    if (list.classList.contains('commandList__list--visible')){
+        let rect = list.getBoundingClientRect();
+        if(rect.left < 0){
+            list.style.transform =`translateX(${0}px)`;
+        }
+    }
 }
 
 module.exports = CommandList;

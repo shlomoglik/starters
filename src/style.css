@@ -401,6 +401,12 @@ body {
       transform: scale(1.1); }
     .header-full-page__arrow:active {
       transform: scale(1); }
+  .header-full-page__menu > svg {
+    color: var(--color-grey-light-1) !important; }
+    .header-full-page__menu > svg:hover {
+      cursor: pointer;
+      background-color: var(--color-grey-bg);
+      transform: scale(1.1); }
 
 .filterBar {
   position: fixed;
@@ -621,6 +627,11 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   transform: translateX(-95%);
   padding-top: .5rem;
   border-radius: 5px;
@@ -637,12 +648,9 @@ body {
 
 .commandList__row {
   padding: 1rem 1rem;
-  height: 2.5rem;
+  height: 3rem;
   width: 100%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
+  text-align: center; }
   .commandList__row:hover {
     cursor: pointer;
     opacity: 1;

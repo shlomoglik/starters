@@ -110,7 +110,6 @@ function getContacts(vnode){
         res.push(Object.assign({},contactFilter[0],{role:activeContacts[i]['role']}));
     }
     vnode.state.contactsData = res;
-    console.log(vnode.state.contactsData);
 }
 
 module.exports = Lead;

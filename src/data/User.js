@@ -1,6 +1,6 @@
 import m from 'mithril'
 import { signIn, logout, isUserLoggedIn } from '../firebase/auth'
-import { getDoc } from '../firebase/qry'
+import { getDoc ,getLeads } from '../firebase/qry'
 import store from './store'
 import Model from '../data/Model'
 
@@ -26,6 +26,7 @@ class User extends Model {
                                     let user = new User(cred.user.uid  ,  doc.data()  ,  {token:token , path:`users/${doc.id}`} )
                                     sessionStorage.setItem('User', JSON.stringify(user))
                                     sessionStorage.setItem('token', token)
+                                    getLeads();
                                     m.route.set("/add");
                                 }, err => {
                                     console.error(err)

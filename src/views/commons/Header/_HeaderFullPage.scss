@@ -38,6 +38,16 @@
             transform: scale(1);
         }
     }
+    &__menu{
+        & > svg{
+            color: var(--color-grey-light-1) !important;
+            &:hover{
+                cursor: pointer;
+                background-color: var(--color-grey-bg);
+                transform: scale(1.1);
+            }
+        }
+    }
 
 }
 

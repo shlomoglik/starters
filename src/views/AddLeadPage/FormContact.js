@@ -1,5 +1,5 @@
 import m from 'mithril'
-import FilterInline from '../commons/FiltersInline'
+import FilterInline from '../commons/Filters/FiltersInline'
 import SearchBox from '../commons/SearchBox'
 import SearchList from '../commons/SearchList'
 import CommandList from '../commons/CommandList'

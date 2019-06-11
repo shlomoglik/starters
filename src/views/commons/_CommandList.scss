@@ -16,6 +16,12 @@
         position: absolute;
         top: 100%;
         left: 0;
+        width: max-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+         
         transform: translateX(-95%);
         padding-top: .5rem;
         border-radius: 5px;
@@ -34,12 +40,9 @@
     }
     &__row{
         padding: 1rem 1rem;
-        height: 2.5rem;
+        height: 3rem;
         width: 100%;
         text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
         &:hover{
             cursor: pointer;

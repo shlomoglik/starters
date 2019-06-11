@@ -1,6 +1,4 @@
 import m from "mithril"
-import settings from '../../data/settings'
-import Leads from '../LeadsPage/Leads'
 
 let Filters = (init) => {
   return {
