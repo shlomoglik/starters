@@ -5,30 +5,14 @@ import store from '../../data/store'
 import Lead from '../../data/Lead'
 import {getSourceList,getTypeList} from '../../firebase/qry'
 
-function getList(term, field, model) {
-    if (term.length < 2) {
-        return [];
-    }
-    let filter = store[model].filter(el => {
-        let search = el[field] || '';
-        return search.indexOf(term) !== -1;
-    });
-    return filter;
-}
-
 
 let Form = (init) => {
     return {
         oninit: vnode => {
-            getSourceList();
-            getTypeList();
             vnode.state.term = '';
-            vnode.state.sourceList = settings.leadSourceList;
-            vnode.state.typeList = settings.leadTypeList;
         },
         onbeforeupdate: vnode => {
             vnode.state.list = getList(vnode.state.term, 'name', 'storeLeads');
-            console.log(vnode.state)
         },
         view: (vnode) => {
             return (
@@ -52,6 +36,17 @@ let Form = (init) => {
             )
         }
     }
+}
+
+function getList(term, field, model) {
+    if (term.length < 2) {
+        return [];
+    }
+    let filter = store[model].filter(el => {
+        let search = el[field] || '';
+        return search.indexOf(term) !== -1;
+    });
+    return filter;
 }
 
 function submitForm(e, vnode) {
@@ -106,14 +101,14 @@ function insertList(e) {
 function renderDataLists(vnode) {
     return m('div[type="hidden"]', [
         m('datalist#typeList', [
-            m('option','חתונה'),
-            m('option','בת מצווה'),
-            m('option','חינה'),
+            settings.leadTypeList.map((item,ind)=>{
+                return m('option',{id:item.id,key:ind},item.label)
+            })
         ]),
         m('datalist#sourceList', [
-            m('option','פייסבוק'),
-            m('option','גוגל'),
-            m('option','פה לאוזן'),
+            settings.leadSourceList.map((item,ind)=>{
+                return m('option',{id:item.id,key:ind},item.label)
+            })
         ]),
     ])
 }

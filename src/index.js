@@ -14,11 +14,13 @@ import LeadPage from "./views/LeadPage/Lead";
 import SearchPage from "./views/SearchPage/SearchPage";
 import SettingsPage from "./views/SettingsPage/SettingsPage";
 import User from "./data/User";
-import { getLeads, getContacts, getSettingGroups } from './firebase/qry'
+import { getLeads, getContacts, getSettingGroups ,getSourceList , getTypeList } from './firebase/qry'
 
 getLeads();
 getContacts();
 getSettingGroups();
+getSourceList();
+getTypeList();
 
 m.route(root, "/login", {
     "/login": LoginPage,

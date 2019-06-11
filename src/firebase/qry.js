@@ -11,7 +11,7 @@ import { db } from '../firebase/firebaseConfig'
  * insertDoc insert new document to specific collection
  * @param {String} col collection name to find doc
  * @param {String} id the doc id to find
- * @return {Promise} return DocoumentReference
+ * @return {Promise} return new Promise with DocoumentReference
  */
 function getDoc(col, id) {
     let docRef = db.collection(col).doc(id);
@@ -41,79 +41,52 @@ function deleteDoc(col, id) {
     docRef.delete().then(d => m.redraw());
 }
 
-function followChanges(col, id, elem) {
-    db.collection(col).doc(id)
-        .onSnapshot(function (doc) {
-            console.log("Current data: ", doc.data());
-            console.log("TODO=> update model on chaghes");
-            console.log('current data is: ', elem.data);
-        });
+/**
+ * 
+ * @param {String | Query} qry collection to listen on data changes (ex: let col = db.collection(col)) or query object reference that build with where clause (ex: let col = db.collection(col).where(...))
+ * @param {Object} target Object reference to fill data on snap collection
+ * @param {String} property property of target object to fill data on snap collection
+ */
+function snapCollection_(qry,target , property){
+    qry.onSnapshot(
+        snap => {
+            let res = [];
+            snap.forEach(doc => {
+                res.push(Object.assign(doc.data(), { id: doc.id }))
+            })
+            console.log('listen on collection:', qry.path ,'snap size = ',snap.size , 'result data is: ', res)
+            target[property] = res;
+            m.redraw();
+        }
+    )
 }
-
-
 
 /**
  * getLeads get all leads assign to user as main role
  * @param {String} [groupType] optinal: add group to qry by
  */
 function getLeads(groupType) {
-    let leads = [];
     let user = JSON.parse(sessionStorage.getItem('User'));
     if (!user) {
         return;
     }
     let userPath = user.path || ""; // User.getUser('path') || 
-
     let assignMain = {
         assignRef: userPath,
         role: "main"
     };
     let colRef = db.collection('leads');
-
     let qry;
     qry = colRef.where('assigns', 'array-contains', assignMain);
     // if (groupType) {
-    //     qry.where('groupType', '==', groupType);
+    //     qry.where('groupType', '==', groupType); // AND claues
     // }
-    qry.onSnapshot(
-        snap => {
-            leads = [];
-            snap.forEach(doc => {
-                leads.push(Object.assign(doc.data(), { id: doc.id }))
-            })
-            console.log('total docs in qry: ', snap.size, 'result: ', leads);
-            store.storeLeads = leads;
-            m.redraw();
-        });
+    snapCollection_(qry,store , 'storeLeads');
 }
 
 function getContacts() {
-    // let colRef = db.collection('contacts');
-    // let col = colRef.get();
-    // col.then(
-    //     res => {
-    //         let result = [];
-    //         let docs = res.docs;
-    //         docs.map(doc => {
-    //             let newDoc = Object.assign(doc.data(), { id: doc.id });
-    //             result.push(newDoc);
-    //         })
-    //         store.storeContacts = result;
-    //         m.redraw();
-    //     }
-    // )
     let colRef = db.collection('contacts');
-    colRef.onSnapshot(
-        snap => {
-            let res = [];
-            snap.forEach(doc => {
-                console.log('total docs in qry: ', snap.size, 'result: ', res);
-                res.push(Object.assign(doc.data(), { id: doc.id }))
-            })
-            store.storeContacts = res;
-            m.redraw();
-        }
-    )
+    snapCollection_(colRef,store,'storeContacts');
 }
 
 function getSettingGroups() {
@@ -138,22 +111,12 @@ function getSettingGroups() {
     })
 }
 function getSourceList() {
-    db.collection('setLeadSource').onSnapshot(snap=>{
-        let res = [];
-        snap.forEach(doc=>{
-            res.push(Object.assign(doc.data(), { id: doc.id }))
-        });
-        settings.leadSourceList = res;
-    })
+    let colRef = db.collection('setLeadSource');
+    snapCollection_(colRef,settings,'leadSourceList');
 }
 function getTypeList() {
-    db.collection('setLeadType').onSnapshot(snap=>{
-        let res = [];
-        snap.forEach(doc=>{
-            res.push(Object.assign(doc.data(), { id: doc.id }))
-        });
-        settings.leadTypeList = res;
-    })
+    let colRef = db.collection('setLeadType');
+    snapCollection_(colRef,settings,'leadTypeList');
 }
 
 
@@ -161,7 +124,6 @@ module.exports = {
     getDoc,
     insertDoc,
     deleteDoc,
-    followChanges,
     getLeads,
     getContacts,
     getSettingGroups,

@@ -37,7 +37,7 @@ let formDataLead = {
     },
     "source": {
       "input": { type: "text", name: "phone", placeholder: "מקור הגעה" , list:"sourceList" },
-      "label": { text: "טלפון איש קשר (xxx-xxxxxxx)" }
+      "label": { text: "בחר מקור הגעה של הליד מתוך רשימה" }
     },
     "duedate": {
       "input": { type: "date", name: "duedate", placeholder: "תאריך יעד" },
