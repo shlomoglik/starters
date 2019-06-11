@@ -12,7 +12,7 @@ function getList(term, field, model) {
     }
     let filter = store[model].filter(el => {
         let search = el[field] || '';
-        return search.indexOf(term) !== -1;
+        return search.indexOf(term.trim()) !== -1;
     });
     return filter;
 }
@@ -136,9 +136,10 @@ function renderFormData(myData, vnode) {
                         m(`input#${k}[class="form__input ${meta.class}"]`,
                             Object.assign({}, curr.input,
                                 {
-                                    oninput: e => {
+                                    onkeyup: e => {
                                         vnode.state[`term${k}`] = e.target.value;
                                         vnode.state[`list${k}`] = getList(vnode.state[`term${k}`], k, 'storeContacts');
+                                        validateInput(e);
                                     }
                                 })
                         ),
@@ -158,6 +159,18 @@ function renderFormData(myData, vnode) {
             return;
         }
     })
+}
+
+function validateInput(e){
+    let row = e.path[1]; //one level up = row
+    let list = row.querySelectorAll('.searchList > .searchList__row');
+    console.log(list);
+    console.log(list.length);
+    if(list.length>0){
+        e.target.setCustomValidity('כבר קיים ערך כזה , הזן ערך חדש או בחר מתוך הרשימה')
+    }else{
+        e.target.setCustomValidity('')
+    }
 }
 
 

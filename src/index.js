@@ -1,4 +1,3 @@
-// import * as app from '../src/firebase/firebaseConfig';
 import m from 'mithril';
 const root = document.body;
 import './style.css';
@@ -50,7 +49,6 @@ m.route(root, "/login", {
     },
     "/search": {
         onmatch: () => {
-            console.log('go to search page')
             let logged = User.isLoggedIn();
             if (logged)
                 return SearchPage
@@ -59,7 +57,6 @@ m.route(root, "/login", {
     },
     "/settings": {
         onmatch: () => {
-            console.log('go to settings page')
             let logged = User.isLoggedIn();
             if (logged)
                 return SettingsPage

@@ -1,9 +1,7 @@
 import m from 'mithril'
-import SearchList from '../commons/SearchList'
 import settings from '../../data/settings'
 import store from '../../data/store'
 import Lead from '../../data/Lead'
-import {getSourceList,getTypeList} from '../../firebase/qry'
 
 
 let Form = (init) => {
@@ -26,8 +24,8 @@ let Form = (init) => {
                         m('.heading',
                             m('.heading__secondary', vnode.attrs.formData.meta.heading)
                         ),
-                        renderFormData(vnode.attrs.formData),
-                        renderDataLists(vnode.attrs.formData),
+                        renderFormData(vnode.attrs.formData , vnode),
+                        renderDataLists(vnode),
                         m('div', [
                             m('button[class="btn btn--def"]', { type: "submit" }, "הוסף")
                         ])
@@ -76,7 +74,7 @@ function renderFormData(myData, vnode) {
                 m('.form__row', { key: ind },
                     [
                         m(`input#${k}[class="form__input ${meta.class}"]`,
-                            Object.assign({}, curr.input, { oninput: (e) => insertList(e) })),
+                            Object.assign({}, curr.input, { oninput: (e) => validateList(e,vnode) })),
                         m('label[class="form__label"]', { for: k }, curr.label.text)
                     ])
             )
@@ -94,8 +92,24 @@ function renderFormData(myData, vnode) {
     })
 }
 
-function insertList(e) {
-    console.log('TODO! append list base on term ');
+function validateList(e,vnode) {
+    let target = e.target;
+    let data = target.value;
+    let listID = target.getAttribute('list');
+    if(!listID)return;   
+    let datalist = vnode.dom.querySelector('#'+listID);
+    let options = datalist.options;
+    let found = false;
+    for(let i in options){
+        if(options[i].value == data){
+            found = true;
+        }
+    }
+    if (found) {
+      target.setCustomValidity('');
+    } else {
+        target.setCustomValidity('יש לבחור ערך חוקי מתוך הרשימה בלבד');
+    }
 }
 
 function renderDataLists(vnode) {
