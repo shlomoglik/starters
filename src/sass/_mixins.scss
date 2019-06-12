@@ -29,7 +29,6 @@
         font-family: inherit;
     }
     &:focus{
-        // border-bottom: 3px solid var(--color-primary);
         &::placeholder{
             opacity: .6;
         }

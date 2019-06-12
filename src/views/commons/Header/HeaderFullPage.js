@@ -14,7 +14,7 @@ let Header = (init) => {
                     String.fromCharCode(10132)
                 ),
                 m('span.header-full-page__title', vnode.attrs.title || 'כותרת'),
-                m(CommandList, {class:'header-full-page__menu', list: cmdList })
+                m(CommandList, {list: cmdList })
             ])
         }
     }

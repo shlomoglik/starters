@@ -2,17 +2,19 @@
     &__row{
         position: relative;
         display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
         align-items: center;
         transition: all .2s;
         flex-wrap: wrap;
+        margin-bottom: 1rem;
+        background-color: var(--color-white);
+        margin: 2rem;
+        border-radius: 1rem;
+        box-shadow: var(--box-shadow-light);
     }
     &__icon{
         min-width: 100%;
-        margin: 1rem;
-        width: 2rem;    
-        height: 2rem;
+        width: 3rem;    
+        height: 3rem;
         fill: currentColor;
         border-radius: 50%;
         &:hover{
@@ -20,8 +22,40 @@
         }  
     }
     &__input{
-        @include input-def;
-        font-size: 2rem;
-        min-width: 32rem;
+        position: relative;
+        margin: .5rem;
+        flex: 1;
+        border-radius: 15px;
+        margin: .5rem;
+        transition: all .2s;
+        height: 5rem;
+        color: var(--color-grey-dark-1);
+        background-color: var(--color-grey-light-3);
+        & input{
+            @include input-border-bottom-1;
+            width: 100%;
+            height: 100%;
+            background:none;
+            text-align: center;
+            font-size: 2.2rem;
+            font-family: inherit;
+            outline: none;
+            border: none;
+            width: fit-content;
+            transition: all .2s;
+        }
     }
+    &__label{
+        color: var(--color-primary-light);
+        position: absolute;
+        font-size: 1.5rem;
+        top: 0;
+        right: 5%;
+        opacity: .9;
+    }
+
+    &__input input:focus + &__label{
+        opacity: .3;
+    }
+
 }

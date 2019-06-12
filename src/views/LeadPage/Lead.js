@@ -12,12 +12,12 @@ let Lead = (init) => {
             // console.log('use function getLeadByID ', vnode.attrs.id, vnode);
             getLeadByID(vnode);
         },
-        onupdate: vnode => {
+        onbeforeupdate: vnode =>{
             getLeadByID(vnode);
             vnode.state.leadTitle = getLeadTitle(vnode);
-            getContacts(vnode);
-            // console.log(vnode);
+            getContactsData(vnode);
         },
+        onupdate: vnode => {},
         view: (vnode) => {
             return (
                 m('.lead', { id: vnode.attrs.id }, [
@@ -30,7 +30,7 @@ let Lead = (init) => {
                         // })
                         m('.cards', [
                             m(LeadCard, getGeneralCard(vnode)),
-                            m(LeadContacts, {title:"אנשי קשר"}),
+                            m(LeadContacts, {title:"אנשי קשר" , rows:vnode.state.contactsData}),
                             m(LeadCard, {title:"פולואפ"}),
                             m(LeadCard, {title:"משימות"}),
                             m(LeadCard, {title:"סטטוס"}),
@@ -98,7 +98,8 @@ function getGeneralCard(vnode) {
     }
 }
 
-function getContacts(vnode){
+function getContactsData(vnode){
+    // vnode.state.contactsData = [];
     let res = [];
     let activeContacts = vnode.state.lead.contacts; //[{contactRef:'',role:'main|?'},{...}]
     // console.log('active contacts are: ',activeContacts);
@@ -106,8 +107,9 @@ function getContacts(vnode){
         let contactFilter = store.storeContacts.filter(contact=>{
             return activeContacts[i]['contactRef'] == `contacts/${contact.id}`;
         })
-        // console.log('after filtering: ',contactFilter);
-        res.push(Object.assign({},contactFilter[0],{role:activeContacts[i]['role']}));
+        console.log('after filtering: ',contactFilter);
+        let contact = Object.assign({},contactFilter[0],{role:activeContacts[i]['role']});
+        res.push(contact);
     }
     vnode.state.contactsData = res;
 }

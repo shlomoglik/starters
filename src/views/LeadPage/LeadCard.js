@@ -6,7 +6,6 @@ import { deleteDoc, insertDoc } from '../../firebase/qry'
 const Card = (init) => {
     return {
         oninit: vnode => {
-            console.log(vnode)
             vnode.state.shrink = vnode.attrs.shrink
         },
         view: (vnode) => {
