@@ -3,6 +3,7 @@
         position: relative;
         display: flex;
         align-items: center;
+        justify-content: center;
         transition: all .2s;
         flex-wrap: wrap;
         margin-bottom: 1rem;
@@ -11,8 +12,19 @@
         border-radius: 1rem;
         box-shadow: var(--box-shadow-light);
     }
+    &__commands{
+        padding: 1rem;
+        flex-basis: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__button{
+        margin: 1rem;
+    }
+
     &__icon{
-        min-width: 100%;
+        flex: 1;
         width: 3rem;    
         height: 3rem;
         fill: currentColor;
@@ -23,8 +35,7 @@
     }
     &__input{
         position: relative;
-        margin: .5rem;
-        flex: 1;
+        // flex: 1;
         border-radius: 15px;
         margin: .5rem;
         transition: all .2s;
@@ -33,7 +44,7 @@
         background-color: var(--color-grey-light-3);
         & input{
             @include input-border-bottom-1;
-            width: 100%;
+            margin: 0 auto;
             height: 100%;
             background:none;
             text-align: center;
@@ -41,7 +52,6 @@
             font-family: inherit;
             outline: none;
             border: none;
-            width: fit-content;
             transition: all .2s;
         }
     }
@@ -54,8 +64,45 @@
         opacity: .9;
     }
 
+    &__radio{
+        box-shadow: var(--box-shadow-light);
+        background-color: var(--color-primary-light);
+        color: var(--color-white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .2s;
+        border-radius: .5rem;
+        text-align: center;
+        padding: .4rem;
+        flex: 0 0 4rem;
+        &:hover{
+            transform: translateY(-.2rem);
+            box-shadow: var(--box-shadow-1);
+        }
+        &:active{
+            transform: translateY(0);
+            box-shadow: var(--box-shadow-light);
+
+        }
+    }
+    &__radio input[type="radio"]{
+        display: none;
+    }
+    &__toggle{
+        font-size: 2rem;
+        &:hover{
+            cursor: pointer;
+        }
+
+    }
+
     &__input input:focus + &__label{
         opacity: .3;
+    }
+
+    &__btns{
+        
     }
 
 }

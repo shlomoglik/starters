@@ -9,6 +9,7 @@
         font-family: 'Tahoma' , sans-serif;
         font-size: var(--def-font-size);  
         font-weight: 500;
+        border-radius: 10rem;
         transition: all .2s;
 
 
@@ -31,28 +32,38 @@
     
     &--round{
         border-radius: 50%;
-        width: 2rem;
-        height: 2rem;
+        padding: .4rem;
     }
 
 
     &--white {
         padding: 1.5rem 4rem;
-        border-radius: 10rem;
         background-color: var(--color-white);
         color: var(--color-grey-dark-1);
     }
 
     &--def {
         padding: 1.5rem 4rem;
-        border-radius: 10rem;
         background-color: var(--color-primary);
         color: var(--color-white);
     }
     &--red {
-        padding: 1.5rem 4rem;
-        border-radius: 10rem;
         background-color: var(--color-red);
         color: var(--color-white);
+    }
+    &--green{
+        background-color: green;
+        color: var(--color-white);
+    }
+    &--grey{
+        background-color: var(--color-grey-dark-2);
+        color: var(--color-white);
+    }
+
+    &__icon{
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: currentColor;
+
     }
 }

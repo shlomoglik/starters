@@ -1,5 +1,7 @@
 import m from 'mithril'
 import { deleteDoc, insertDoc } from '../../firebase/qry'
+import  settings  from '../../data/settings';
+import CommandList from '../commons/CommandList'
 
 
 const CardContacts = (init) => {
@@ -8,6 +10,8 @@ const CardContacts = (init) => {
             vnode.state.shrink = vnode.attrs.shrink;
         },
         view: (vnode) => {
+            let objContactData = settings.formDataContact.data;
+            
             return (
                 m('form.lead-card', { onsubmit: e => submitForm(e, e.target, vnode) }, [
                     m('.lead-card__title', { onclick: e => toggleGroup(e, vnode) }, [
@@ -17,26 +21,36 @@ const CardContacts = (init) => {
                     vnode.attrs.rows && !vnode.state.shrink ?
                         vnode.attrs.rows.map((row, ind) => {
                             return m('.contact-card__row', { id: row.id, key: ind }, [
-                                m('svg.contact-card__icon', m('use', { href: '/public/img/sprite.svg#icon-user' })),
+                                m('.contact-card__commands',[
+                                    m('svg.contact-card__icon', m('use', { href: '/public/img/sprite.svg#icon-user' })),
+                                    //TODO : add some commands like delete:duplicate etc...
+                                    m('button.btn.btn--round.btn--grey.contact-card__button',   m('svg.btn__icon', m('use', { href: '/public/img/sprite.svg#icon-trash' }))  ),
+                                    m('button.btn.btn--round.btn--green.contact-card__button',  m('svg.btn__icon', m('use', { href: '/public/img/sprite.svg#icon-trash' }))  ),
+                                    m('button.btn.btn--round.btn--red.contact-card__button',   m('svg.btn__icon', m('use', { href: '/public/img/sprite.svg#icon-trash' }))   ),
+                                    m('.contact-card__radio',[
+                                        m('input[type="radio"]', { id:`role${row.id}`, value: row.role ,name:'role',checked:row.role?true:false}),
+                                        m('label.contact-card__toggle',{for:`role${row.id}`},'עיקרי'),
+                                    ]),
+                                ]),
+                                // Todo: change data to be rendered from setting.formDataContact object can use function like in add form...
                                 m('.contact-card__input',[
-                                    m('input[type="text"]', { value: row.name ,autofocus:true}),m('label.contact-card__label','שם'),
+                                    m('input', Object.assign( {value: row.name},objContactData.name.input) ),
+                                    m('label.contact-card__label','שם'),
                                 ]),
                                 m('.contact-card__input',[
-                                    m('input[type="phone"]', { value: row.phone }),m('label.contact-card__label','טלפון'),
+                                    m('input', Object.assign(  { value: row.phone } ,objContactData.phone.input) ),
+                                    m('label.contact-card__label','טלפון'),
                                 ]),
                                 m('.contact-card__input',[
-                                    m('input[type="email"]', { value: row.email }),m('label.contact-card__label','אימייל'),
+                                    m('input',Object.assign(  { value: row.email } ,objContactData.email.input)),
+                                    m('label.contact-card__label','אימייל'),
                                 ]),
-                                m('.contact-card__input',[
-                                    m('input[type="text"]',  { value: row.role }),m('label.contact-card__label','תפקיד')
+                                m('.lead-card__btns', [
+                                    m('button.btn.btn--def', 'עדכן'),
+                                    m('button.btn.btn--def.btn--red', 'בטל'),
                                 ]),
                             ])
                         }) : [],
-                    vnode.attrs.rows && !vnode.state.shrink ?
-                        m('.lead-card__btns', [
-                            m('button.btn.btn--def', 'עדכן'),
-                            m('button.btn.btn--def.btn--red', 'בטל'),
-                        ]) : []
                 ])
             )
         }
