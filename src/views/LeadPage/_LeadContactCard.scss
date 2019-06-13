@@ -1,60 +1,49 @@
 .contact-card{
-    &__row{
-        position: relative;
+    &__form{
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        transition: all .2s;
-        flex-wrap: wrap;
-        margin-bottom: 1rem;
         background-color: var(--color-white);
-        margin: 2rem;
-        border-radius: 1rem;
         box-shadow: var(--box-shadow-light);
-    }
-    &__commands{
+        transition: all .2s;
         padding: 1rem;
-        flex-basis: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    &__button{
-        margin: 1rem;
     }
 
     &__icon{
-        flex: 1;
         width: 3rem;    
         height: 3rem;
         fill: currentColor;
         border-radius: 50%;
         &:hover{
             cursor: pointer;
+            background-color: var(--color-grey-bg);
         }  
     }
-    &__input{
+
+    &__row{
         position: relative;
-        // flex: 1;
+        margin: 1rem auto;
+        flex: 1;
+        height: 5rem;
+    }
+
+
+    &__input{
+        @include input-border-bottom-1;
         border-radius: 15px;
-        margin: .5rem;
         transition: all .2s;
         height: 5rem;
         color: var(--color-grey-dark-1);
         background-color: var(--color-grey-light-3);
-        & input{
-            @include input-border-bottom-1;
-            margin: 0 auto;
-            height: 100%;
-            background:none;
-            text-align: center;
-            font-size: 2.2rem;
-            font-family: inherit;
-            outline: none;
-            border: none;
-            transition: all .2s;
-        }
+        margin: 0 auto;
+        height: 100%;
+        text-align: center;
+        font-size: 2.2rem;
+        font-family: inherit;
+        outline: none;
+        border: none;
     }
+
     &__label{
         color: var(--color-primary-light);
         position: absolute;
@@ -64,45 +53,46 @@
         opacity: .9;
     }
 
-    &__radio{
-        box-shadow: var(--box-shadow-light);
-        background-color: var(--color-primary-light);
-        color: var(--color-white);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all .2s;
-        border-radius: .5rem;
-        text-align: center;
-        padding: .4rem;
-        flex: 0 0 4rem;
-        &:hover{
-            transform: translateY(-.2rem);
-            box-shadow: var(--box-shadow-1);
-        }
-        &:active{
-            transform: translateY(0);
-            box-shadow: var(--box-shadow-light);
-
-        }
+    &__role-user{
+        // background-color: orangered;
+        transition: all .2s;    
     }
-    &__radio input[type="radio"]{
+    &__radio{
         display: none;
     }
-    &__toggle{
-        font-size: 2rem;
-        &:hover{
-            cursor: pointer;
-        }
-
+    &__radio:checked + &__role-user{
+        fill: var(--color-primary-dark);
     }
+    // &__toggle{
+    //     font-size: 2rem;
+    //     &:hover{
+    //         cursor: pointer;
+    //     }
+
+    // }
 
     &__input input:focus + &__label{
         opacity: .3;
     }
 
     &__btns{
-        
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__button{
+        @include input-def;
+        border-radius: 2rem;
+        flex:1;
+        & svg{
+            width: 2rem;
+            height: 2rem;
+        }
+        &:hover{
+            cursor: pointer;
+            transform: translateY(-.2rem);
+            box-shadow: var(--box-shadow-light);
+        }
     }
 
 }

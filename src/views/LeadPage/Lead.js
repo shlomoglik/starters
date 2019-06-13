@@ -43,10 +43,7 @@ let Lead = (init) => {
     }
 }
 function getLeadByID(vnode) {
-    let myLeadData = store.storeLeads.filter(lead => {
-        // console.log('comparte: ', lead.id, '?==', vnode.attrs.id)
-        return lead.id == vnode.attrs.id;
-    })
+    let myLeadData = store.storeLeads.filter(lead => lead.id == vnode.attrs.id);
     // console.log('filter result: ', myLeadData);
     vnode.state.lead = myLeadData[0];
     // getLeadCards(vnode);
