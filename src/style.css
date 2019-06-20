@@ -95,17 +95,19 @@ body {
 
 .btn--round {
   border-radius: 50%;
-  padding: .4rem; }
-
-.btn--white {
-  padding: 1.5rem 4rem;
-  background-color: var(--color-white);
-  color: var(--color-grey-dark-1); }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 auto !important; }
 
 .btn--def {
   padding: 1.5rem 4rem;
   background-color: var(--color-primary);
   color: var(--color-white); }
+
+.btn--white {
+  background-color: var(--color-white);
+  color: var(--color-grey-dark-1); }
 
 .btn--red {
   background-color: var(--color-red);
@@ -123,6 +125,18 @@ body {
   width: 1.5rem;
   height: 1.5rem;
   fill: currentColor; }
+
+.btn--fab {
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+  position: absolute;
+  top: 2px;
+  right: 2px; }
+  .btn--fab:hover {
+    opacity: .8; }
+  .btn--fab > .btn__icon {
+    width: 3rem;
+    height: 3rem; }
 
 .heading {
   display: flex;
@@ -574,7 +588,7 @@ body {
 .searchList {
   position: absolute;
   top: 100%;
-  width: 100%;
+  min-width: 100%;
   left: 0;
   padding-top: .5rem;
   border-radius: 5px;
@@ -584,10 +598,13 @@ body {
   opacity: .85;
   z-index: 100; }
   .searchList__row {
+    width: 100%;
+    padding: 0 1rem;
     height: 2.2rem;
+    width: 100%;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center; }
     .searchList__row--active {
       background-color: var(--color-grey-light-3); }
@@ -600,11 +617,11 @@ body {
     .searchList__row:not(:last-child) {
       margin-bottom: .5rem; }
   .searchList__item {
+    padding: 1rem auto;
     font-size: 1.5rem;
     flex: 1; }
   .searchList__select {
     border-radius: 50%;
-    margin-left: 1rem;
     height: 2rem;
     width: 2rem;
     fill: var(--color-grey-dark-3);
@@ -965,6 +982,7 @@ body {
   width: 90%;
   min-width: 32rem;
   max-width: 80rem;
+  position: relative;
   direction: rtl;
   font-size: 2rem;
   background-color: var(--color-grey-light-1);
@@ -1022,6 +1040,57 @@ body {
     align-items: center; }
     .lead-card__btns > button {
       margin: 1rem 3rem; }
+  .lead-card__commands {
+    line-height: 4rem;
+    width: 100%;
+    padding: 1rem auto;
+    background: var(--color-grey-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    display: flex; }
+  .lead-card__command {
+    height: 5rem;
+    text-align: center;
+    font-size: 2.2rem;
+    font-family: inherit;
+    color: var(--color-grey-dark-1);
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-radius: 2rem;
+    flex: 0 0 20%; }
+    .lead-card__command svg {
+      width: 2rem;
+      height: 2rem; }
+    .lead-card__command:hover {
+      cursor: pointer;
+      transform: translateY(-0.2rem);
+      box-shadow: var(--box-shadow-light); }
+    .lead-card__command:active {
+      transform: translateY(0);
+      box-shadow: none; }
+  .lead-card__button {
+    height: 5rem;
+    text-align: center;
+    font-size: 2.2rem;
+    font-family: inherit;
+    color: var(--color-grey-dark-1);
+    outline: none;
+    border: none;
+    border-radius: 2rem;
+    flex: 1; }
+    .lead-card__button svg {
+      width: 2rem;
+      height: 2rem; }
+    .lead-card__button:hover {
+      cursor: pointer;
+      transform: translateY(-0.2rem);
+      box-shadow: var(--box-shadow-light); }
+    .lead-card__button:active {
+      transform: translateY(0);
+      box-shadow: none; }
   .lead-card__input {
     flex: 0 0 90%;
     height: 5rem;
@@ -1038,6 +1107,12 @@ body {
       border-bottom: 3px solid var(--color-primary); }
       .lead-card__input:focus:invalid {
         border-bottom: 3px solid var(--color-secondary); }
+
+.contact-card__wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
 
 .contact-card__form {
   display: flex;
@@ -1126,6 +1201,9 @@ body {
     cursor: pointer;
     transform: translateY(-0.2rem);
     box-shadow: var(--box-shadow-light); }
+  .contact-card__button:active {
+    transform: translateY(0);
+    box-shadow: none; }
 
 .container--search {
   margin-top: 8rem;

@@ -1,7 +1,7 @@
 .searchList{
     position: absolute;
     top: 100%;
-    width: 100%;
+    min-width: 100%;
     left: 0;
     padding-top: .5rem;
     border-radius: 5px;
@@ -12,11 +12,13 @@
     z-index: 100;
     
     &__row{
+        width: 100%;
+        padding: 0 1rem;
         height: 2.2rem;
-        // width: 100%;
+        width: 100%;
         text-align: center;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
 
         &--active{
@@ -39,13 +41,14 @@
     }
     
     &__item{
+        padding: 1rem auto;
         font-size: 1.5rem;
         flex: 1;
         // overflow: hidden;
     }
     &__select{
         border-radius: 50%;
-        margin-left: 1rem;
+        // margin-left: 1rem;
         height: 2rem;
         width: 2rem;
         fill: var(--color-grey-dark-3);

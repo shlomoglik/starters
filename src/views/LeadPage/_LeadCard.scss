@@ -3,6 +3,8 @@
     width: 90%;
     min-width: 32rem;
     max-width: 80rem;
+    
+    position: relative;
 
     direction: rtl;
     // text-align: center;
@@ -75,6 +77,58 @@
         align-items: center;
         & > button{
             margin: 1rem 3rem;
+        }
+    }
+    &__commands{
+        line-height: 4rem;
+        width: 100%;
+        padding: 1rem auto;
+        background: var(--color-grey-bg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        display: flex;
+    }
+
+    &__command{
+        @include input-def;
+        background-color: transparent;
+        border-radius: 2rem;
+        flex: 0 0 20%;
+        & svg{
+            width: 2rem;
+            height: 2rem;
+        }
+        &:hover{
+            cursor: pointer;
+            transform: translateY(-.2rem);
+            box-shadow: var(--box-shadow-light);
+        }
+        &:active{
+            transform: translateY(0);
+            box-shadow: none;
+
+        }
+    }
+
+    &__button{
+        @include input-def;
+        border-radius: 2rem;
+        flex:1;
+        & svg{
+            width: 2rem;
+            height: 2rem;
+        }
+        &:hover{
+            cursor: pointer;
+            transform: translateY(-.2rem);
+            box-shadow: var(--box-shadow-light);
+        }
+        &:active{
+            transform: translateY(0);
+            box-shadow: none;
+
         }
     }
 

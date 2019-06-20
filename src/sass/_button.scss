@@ -32,20 +32,23 @@
     
     &--round{
         border-radius: 50%;
-        padding: .4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 auto !important;
     }
 
-
-    &--white {
-        padding: 1.5rem 4rem;
-        background-color: var(--color-white);
-        color: var(--color-grey-dark-1);
-    }
-
+    
     &--def {
         padding: 1.5rem 4rem;
         background-color: var(--color-primary);
         color: var(--color-white);
+    }
+
+    // colors
+    &--white {
+        background-color: var(--color-white);
+        color: var(--color-grey-dark-1);
     }
     &--red {
         background-color: var(--color-red);
@@ -64,6 +67,19 @@
         width: 1.5rem;
         height: 1.5rem;
         fill: currentColor;
-
+    }
+    &--fab{
+        background-color: var(--color-primary-dark);
+        color: var(--color-white);
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        &:hover{
+            opacity: .8;
+        }
+        & > .btn__icon{
+            width: 3rem;
+            height: 3rem;
+        }
     }
 }
