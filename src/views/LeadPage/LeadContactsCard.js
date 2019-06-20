@@ -12,7 +12,7 @@ const CardContacts = (init) => {
         },
         view: (vnode) => {
             let objContactData = settings.formDataContact.data;
-
+            
             return (
                 m('.lead-card', [
                     m('button.btn.btn--fab.btn--round', { onclick: e => toggleAddForm(e, vnode), style: vnode.state.add ? "display:none;" : "" }, m('svg.btn__icon', m('use', { href: '/public/img/sprite.svg#icon-plus' }))),
@@ -22,21 +22,6 @@ const CardContacts = (init) => {
                     ]),
                     vnode.attrs.rows && !vnode.state.shrink ?
                         m('.contact-card__wrapper', [
-
-                            // OPTION: ADD ROW WITH ALL COMMANDS THAT HAS GENERAL ROLES FOR CONTACTS LIKE ADD , REMOVE-MANY , CREATE GROUP ETC
-
-                            // m('.lead-card__commands', [
-                            //     m('button#addNew.lead-card__command',
-                            //         { onclick: e => addUser(e, vnode) },
-                            //         m('svg', m('use', { href: '/public/img/sprite.svg#icon-plus' })),
-                            //         m('span.lead-card__label',"הוסף חדש")
-                            //     ),
-                            //     vnode.state.selected? m('button#removeMany.lead-card__command',
-                            //         { onclick: e => removeUser(e, vnode), title: "מחק איש קשר מכל המערכת" },
-                            //         m('svg', m('use', { href: '/public/img/sprite.svg#icon-trash' }))
-                            //     ) : "",
-                            // ]),
-
                             vnode.attrs.rows.map((row, ind) => {
                                 return m('.contact-card__card', { id: row.id, key: ind, style: vnode.state.add ? "display:none;" : "" }, [
                                     // Todo: change data to be rendered from setting.formDataContact object can use function like in add form...
@@ -50,23 +35,11 @@ const CardContacts = (init) => {
                                             // render form data with setting object
                                             Object.keys(objContactData).map((k, i) => {
                                                 return m('.contact-card__row', { key: `formRow${row.id + i}`, style: "position:relative" }, [
-                                                    m('input.contact-card__input', Object.assign({},objContactData[k].input,{onkeyup: e => setListData(e, vnode, k),value: row[k],})),
+                                                    m('input.contact-card__input', Object.assign({}, objContactData[k].input, { onkeyup: e => setListData(e, vnode, k), value: row[k], })),
                                                     m('label.contact-card__label', objContactData[k].label),
                                                     m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] })
                                                 ])
                                             }),
-                                            // m('.contact-card__row', [
-                                            //     m('input.contact-card__input', Object.assign({ value: row.name }, objContactData.name.input)),
-                                            //     m('label.contact-card__label', 'שם'),
-                                            // ]),
-                                            // m('.contact-card__row', [
-                                            //     m('input.contact-card__input', Object.assign({ value: row.phone }, objContactData.phone.input)),
-                                            //     m('label.contact-card__label', 'טלפון'),
-                                            // ]),
-                                            // m('.contact-card__row', [
-                                            //     m('input.contact-card__input', Object.assign({ value: row.email }, objContactData.email.input)),
-                                            //     m('label.contact-card__label', 'אימייל'),
-                                            // ]),
                                             m('.contact-card__btns', [
                                                 //TODO : add some commands like delete:duplicate etc...
                                                 m('button.contact-card__button',
@@ -100,7 +73,7 @@ const CardContacts = (init) => {
                                     Object.keys(objContactData).map((k, ind) => {
                                         console.log(objContactData)
                                         return m('.contact-card__row', { key: `formAddRow${ind}`, style: "position:relative" }, [
-                                            m('input.contact-card__input', Object.assign({},objContactData[k].input, { onkeyup: e => setListData(e, vnode, k) })),
+                                            m('input.contact-card__input', Object.assign({}, objContactData[k].input, { onkeyup: e => setListData(e, vnode, k) })),
                                             m('label.contact-card__label', objContactData[k].label),
                                             m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] })
                                         ])
