@@ -1,6 +1,4 @@
 import m from 'mithril'
-import store from '../../data/store'
-import { getDoc } from '../../firebase/qry'
 
 let SearchList = (init) => {
     return {
@@ -18,7 +16,6 @@ let SearchList = (init) => {
             }
         },
         view: (vnode) => {
-            // let displayField = vnode.attrs.displayField;
             return (
                 m('.searchList',{style:'display:none'}, [
                     vnode.state.list ?
@@ -27,7 +24,7 @@ let SearchList = (init) => {
                                 m('.searchList__row',
                                     {
                                         id: item.id,
-                                        onclick: e => setActiveContact(e, vnode)
+                                        onclick: e => vnode.attrs.func(e)
                                     }
                                     , [
                                         Object.keys(item).map( (k,ind)=>{
@@ -44,19 +41,6 @@ let SearchList = (init) => {
             )
         }
     }
-}
-
-
-function setActiveContact(e, vnode) {
-    console.log('START function setActiveContact(e,vnode)');
-    let parent = vnode.attrs.parent;
-    let pageParent = parent.attrs.parent;
-    let elemID = e.path[1].id;
-    let docRef = getDoc('contacts', elemID);
-    docRef.then(doc => {
-        pageParent.state.activeContact = Object.assign(doc.data(), { id: elemID });
-        m.redraw();
-    })
 }
 
 module.exports = SearchList;

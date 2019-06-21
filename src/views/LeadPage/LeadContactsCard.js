@@ -1,5 +1,5 @@
 import m from 'mithril'
-import { deleteDoc, insertDoc } from '../../firebase/qry'
+import { deleteDoc, insertDoc , getDoc ,updateMapInDoc } from '../../firebase/qry'
 import settings from '../../data/settings';
 import store from '../../data/store'
 import SearchList from '../commons/SearchList'
@@ -12,7 +12,7 @@ const CardContacts = (init) => {
         },
         view: (vnode) => {
             let objContactData = settings.formDataContact.data;
-            
+
             return (
                 m('.lead-card', [
                     m('button.btn.btn--fab.btn--round', { onclick: e => toggleAddForm(e, vnode), style: vnode.state.add ? "display:none;" : "" }, m('svg.btn__icon', m('use', { href: '/public/img/sprite.svg#icon-plus' }))),
@@ -35,9 +35,9 @@ const CardContacts = (init) => {
                                             // render form data with setting object
                                             Object.keys(objContactData).map((k, i) => {
                                                 return m('.contact-card__row', { key: `formRow${row.id + i}`, style: "position:relative" }, [
-                                                    m('input.contact-card__input', Object.assign({}, objContactData[k].input, { onkeyup: e => setListData(e, vnode, k), value: row[k], })),
+                                                    m('input.contact-card__input', Object.assign({}, objContactData[k].input , {value: row[k]})),
                                                     m('label.contact-card__label', objContactData[k].label),
-                                                    m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] })
+                                                    // m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] })
                                                 ])
                                             }),
                                             m('.contact-card__btns', [
@@ -71,35 +71,37 @@ const CardContacts = (init) => {
                                 { autocorrect: "off", autocapitalize: "off", spellcheck: "false", autocomplete: "off" },
                                 [
                                     Object.keys(objContactData).map((k, ind) => {
-                                        console.log(objContactData)
                                         return m('.contact-card__row', { key: `formAddRow${ind}`, style: "position:relative" }, [
                                             m('input.contact-card__input', Object.assign({}, objContactData[k].input, { onkeyup: e => setListData(e, vnode, k) })),
                                             m('label.contact-card__label', objContactData[k].label),
-                                            m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] })
+                                            m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] ,func: e => assignUser(e,vnode)})
                                         ])
                                     }),
-                                    // m('.contact-card__row', [
-                                    //     m('input.contact-card__input', objContactData.name.input),
-                                    //     m('label.contact-card__label', 'שם'),
-                                    // ]),
-                                    // m('.contact-card__row', [
-                                    //     m('input.contact-card__input', objContactData.phone.input),
-                                    //     m('label.contact-card__label', 'טלפון'),
-                                    // ]),
-                                    // m('.contact-card__row', [
-                                    //     m('input.contact-card__input', objContactData.email.input),
-                                    //     m('label.contact-card__label', 'אימייל'),
-                                    // ]),
                                     m('.contact-card__btns', [
                                         m('button.btn.btn--def', 'הוסף'),
                                         m('button.btn.btn--def.btn--red', 'בטל'),
                                     ]), // end form btns
                                 ]), // end contact form
-                        ]) : [] // end contact card new
+                        ]) : "" // end contact card new
                 ])
             )
         }
     }
+}
+
+
+
+function assignUser(e , vnode){
+    let collection = 'leads';
+    let docID = vnode.attrs.leadID;
+    let field = 'contacts';
+
+    let contactID = e.path[1].id;
+    let value = {"role":"any","contactRef":`contacts/${contactID}`};
+    // let filter = store.storeContacts.filter(item=>item.id==e.path[1].id);
+    // console.log(filter);
+    updateMapInDoc(collection,  docID , field , value);
+    toggleAddForm(e, vnode);
 }
 
 
@@ -139,14 +141,17 @@ function toggleGroup(e, vnode) {
     if (vnode.state.shrink) {
         vnode.state.shrink = false;
     } else {
-        vnode.state.add = false; // remove add form if open
-        vnode.state.shrink = true;
+        toggleAddForm(e,vnode);
     }
 }
 
 function toggleAddForm(e, vnode) {
-    vnode.state.shrink = false;
-    vnode.state.add = true;
+    if(vnode.state.add){
+        vnode.state.add = false;
+    }else{
+        vnode.state.shrink = false;
+        vnode.state.add = true;
+    }
 }
 
 

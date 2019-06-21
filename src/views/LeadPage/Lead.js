@@ -30,7 +30,7 @@ let Lead = (init) => {
                         // })
                         m('.cards', [
                             m(LeadCard, getGeneralCard(vnode)),
-                            m(LeadContacts, {title:"אנשי קשר" , rows:vnode.state.contactsData}),
+                            m(LeadContacts, {title:"אנשי קשר" , rows:vnode.state.contactsData ,leadID:vnode.attrs.id}),
                             m(LeadCard, {title:"פולואפ"}),
                             m(LeadCard, {title:"משימות"}),
                             m(LeadCard, {title:"סטטוס"}),

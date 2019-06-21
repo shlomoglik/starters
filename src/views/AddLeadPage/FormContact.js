@@ -5,6 +5,7 @@ import SearchList from '../commons/SearchList'
 import CommandList from '../commons/CommandList'
 import Contact from '../../data/Contact'
 import store from '../../data/store'
+import { getDoc } from '../../firebase/qry'
 
 
 let Form = (init) => {
@@ -40,7 +41,7 @@ let Form = (init) => {
                                         return [
                                             m('.form__row', { style: "position:relative" }, [
                                                 m(SearchBox, { label: 'חפש איש לפי שם', parent: vnode }),
-                                                m(SearchList, { parent: vnode, displayField: 'name', list: vnode.state.list })
+                                                m(SearchList, { parent: vnode, displayField: 'name', list: vnode.state.list ,func:e=> setActiveContact(e, vnode) })
                                             ])
                                         ]
                                     }
@@ -145,7 +146,7 @@ function renderFormData(myData, vnode) {
                                 })
                         ),
                         m('label[class="form__label"]', { for: k }, curr.label.text),
-                        m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] }) // should crete list dynamicly for each input
+                        m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`]  , func: e => setActiveContact(e, vnode) } )
                     ])
             )
 
@@ -172,6 +173,16 @@ function validateInput(e){
     }else{
         e.target.setCustomValidity('')
     }
+}
+
+function setActiveContact(e, vnode) {
+    let pageParent = vnode.attrs.parent; //AddLeadPage
+    let elemID = e.path[1].id;
+    let docRef = getDoc('contacts', elemID);
+    docRef.then(doc => {
+        pageParent.state.activeContact = Object.assign(doc.data(), { id: elemID });
+        m.redraw();
+    })
 }
 
 

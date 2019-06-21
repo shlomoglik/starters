@@ -8,7 +8,7 @@ import { db } from '../firebase/firebaseConfig'
 // let db = firebase.firestore();
 
 /**
- * insertDoc insert new document to specific collection
+ * getDoc get a document from specific collection
  * @param {String} col collection name to find doc
  * @param {String} id the doc id to find
  * @return {Promise} return new Promise with DocoumentReference
@@ -16,6 +16,28 @@ import { db } from '../firebase/firebaseConfig'
 function getDoc(col, id) {
     let docRef = db.collection(col).doc(id);
     return docRef.get();
+}
+/**
+ * insertDoc insert new document to specific collection
+ * @param {String} col collection name to find doc
+ * @param {String} id the doc id to find
+ * @param {String} field the field to update value
+ * @return {Promise} return new Promise with DocoumentReference
+ */
+function updateMapInDoc(col, id, fieldRef, value) {
+    console.log(id);
+    let docRef = db.collection(col).doc(id);
+    docRef.get().then(
+        doc => {
+            if (doc.exists) {
+                let newField = doc.data()[fieldRef];
+                newField.push(value);
+                docRef.update(fieldRef, newField);
+            } else {
+                console.log('doc not exist')
+            }
+        }
+    ).catch(err => console.error(err));
 }
 
 
@@ -47,14 +69,14 @@ function deleteDoc(col, id) {
  * @param {Object} target Object reference to fill data on snap collection
  * @param {String} property property of target object to fill data on snap collection
  */
-function snapCollection_(qry,target , property){
+function snapCollection_(qry, target, property) {
     qry.onSnapshot(
         snap => {
             let res = [];
             snap.forEach(doc => {
                 res.push(Object.assign(doc.data(), { id: doc.id }))
             })
-            console.log('listen on collection:', qry.path ,'snap size = ',snap.size , 'result data is: ', res)
+            console.log('listen on collection:', qry.path, 'snap size = ', snap.size, 'result data is: ', res)
             target[property] = res;
             m.redraw();
         }
@@ -81,12 +103,12 @@ function getLeads(groupType) {
     // if (groupType) {
     //     qry.where('groupType', '==', groupType); // AND claues
     // }
-    snapCollection_(qry,store , 'storeLeads');
+    snapCollection_(qry, store, 'storeLeads');
 }
 
 function getContacts() {
     let colRef = db.collection('contacts');
-    snapCollection_(colRef,store,'storeContacts');
+    snapCollection_(colRef, store, 'storeContacts');
 }
 
 function getSettingGroups() {
@@ -112,16 +134,17 @@ function getSettingGroups() {
 }
 function getSourceList() {
     let colRef = db.collection('setLeadSource');
-    snapCollection_(colRef,settings,'leadSourceList');
+    snapCollection_(colRef, settings, 'leadSourceList');
 }
 function getTypeList() {
     let colRef = db.collection('setLeadType');
-    snapCollection_(colRef,settings,'leadTypeList');
+    snapCollection_(colRef, settings, 'leadTypeList');
 }
 
 
 module.exports = {
     getDoc,
+    updateMapInDoc,
     insertDoc,
     deleteDoc,
     getLeads,
