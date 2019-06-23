@@ -1,11 +1,13 @@
 import m from 'mithril'
+import { getDoc } from '../../firebase/qry'
+import {getFormValues} from '../../js/utils'
+
 import FilterInline from '../commons/Filters/FiltersInline'
 import SearchBox from '../commons/SearchBox'
 import SearchList from '../commons/SearchList'
 import CommandList from '../commons/CommandList'
 import Contact from '../../data/Contact'
 import store from '../../data/store'
-import { getDoc } from '../../firebase/qry'
 
 
 let Form = (init) => {
@@ -69,22 +71,15 @@ function submitForm(e, vnode) {
             if (filter.type !== 'add') {
                 return;
             } else {
-                let elements = e.target.elements;
-                let data = {};
-                for (let i in elements) {
-                    let el = elements[i]
-                    if (el.name && el.value) {
-                        data[el.name] = el.value || ""
-                    }
-                }
-                console.log(data);
-                if (data == {}) return;
+                let form = e.target;
+                let data = getFormValues(form);
+                if(!data) return; //if null then bread function
                 let newContact = new Contact('', data);
                 newContact.add('contacts').then(
                     doc => {
                         vnode.attrs.parent.state.activeContact = newContact._data;
                         vnode.attrs.parent.state.activeContact['id'] = newContact.getID();
-                        e.target.reset();
+                        form.reset();
                         m.redraw();
                     }, err => console.error(err)
                 );

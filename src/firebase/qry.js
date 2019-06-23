@@ -106,10 +106,6 @@ function getLeads(groupType) {
     snapCollection_(qry, store, 'storeLeads');
 }
 
-function getContacts() {
-    let colRef = db.collection('contacts');
-    snapCollection_(colRef, store, 'storeContacts');
-}
 
 function getSettingGroups() {
     settings.setGroup.map(item => {
@@ -131,6 +127,10 @@ function getSettingGroups() {
             })
         }
     })
+}
+function getContacts() {
+    let colRef = db.collection('contacts');
+    snapCollection_(colRef, store, 'storeContacts');
 }
 function getSourceList() {
     let colRef = db.collection('setLeadSource');

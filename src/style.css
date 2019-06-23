@@ -1173,13 +1173,16 @@ body {
   opacity: .9; }
 
 .contact-card__role-user {
-  transition: all .2s; }
+  color: var(--color-grey-dark-3);
+  transition: all .2s;
+  border-radius: 50%; }
 
 .contact-card__radio {
   display: none; }
 
 .contact-card__radio:checked + .contact-card__role-user {
-  fill: var(--color-primary-dark); }
+  background-color: var(--color-primary-light);
+  color: var(--color-grey-light-3); }
 
 .contact-card__input input:focus + .contact-card__label {
   opacity: .3; }
