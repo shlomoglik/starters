@@ -10,12 +10,14 @@ let Lead = (init) => {
     return {
         oninit: vnode => {
             // console.log('use function getLeadByID ', vnode.attrs.id, vnode);
+            vnode.state.contactsCount = 0;
             getLeadByID(vnode);
         },
         onbeforeupdate: vnode =>{
             getLeadByID(vnode);
             vnode.state.leadTitle = getLeadTitle(vnode);
             getContactsData(vnode);
+            vnode.state.contactsCount = vnode.state.contactsData.length;
         },
         onupdate: vnode => {},
         view: (vnode) => {
@@ -30,7 +32,7 @@ let Lead = (init) => {
                         // })
                         m('.cards', [
                             m(LeadCard, getGeneralCard(vnode)),
-                            m(LeadContacts, {title:"אנשי קשר" , rows:vnode.state.contactsData ,leadID:vnode.attrs.id}),
+                            m(LeadContacts, {title:`אנשי קשר ${vnode.state.contactsCount?`(${vnode.state.contactsCount})`:''}` , rows:vnode.state.contactsData ,leadID:vnode.attrs.id,leadData:vnode.state.lead}),
                             m(LeadCard, {title:"פולואפ"}),
                             m(LeadCard, {title:"משימות"}),
                             m(LeadCard, {title:"סטטוס"}),

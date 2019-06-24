@@ -17,29 +17,6 @@ function getDoc(col, id) {
     let docRef = db.collection(col).doc(id);
     return docRef.get();
 }
-/**
- * insertDoc insert new document to specific collection
- * @param {String} col collection name to find doc
- * @param {String} id the doc id to find
- * @param {String} field the field to update value
- * @return {Promise} return new Promise with DocoumentReference
- */
-function updateMapInDoc(col, id, fieldRef, value) {
-    console.log(id);
-    let docRef = db.collection(col).doc(id);
-    docRef.get().then(
-        doc => {
-            if (doc.exists) {
-                let newField = doc.data()[fieldRef];
-                newField.push(value);
-                docRef.update(fieldRef, newField);
-            } else {
-                console.log('doc not exist')
-            }
-        }
-    ).catch(err => console.error(err));
-}
-
 
 /**
  * insertDoc insert new document to specific collection
@@ -62,6 +39,69 @@ function deleteDoc(col, id) {
     let docRef = db.collection(col).doc(id);
     docRef.delete().then(d => m.redraw());
 }
+/**
+ * insertDoc insert new document to specific collection
+ * @param {String} col collection name to find doc
+ * @param {String} id the doc id to find and delete
+ * @param {Object} objToUpdate object thant include field and value to update ex: {name:"john"}
+ */
+function updateDoc(col, id, objToUpdate) {
+    let docRef = db.collection(col).doc(id);
+    docRef.get().then(
+        doc => {
+            if (doc.exists) {
+                docRef.update(objToUpdate);
+            } else {
+                console.log('doc not exist')
+            }
+        }
+    ).catch(err => console.error(err));
+}
+
+
+
+/**
+ * addToMapInDoc update map object in specific doc like-assigns,contacts etc
+ * @param {String} col collection name to find doc
+ * @param {String} id the doc id to find
+ * @param {String} fieldRef the fieldRef to update value ex: contacts
+ * @param {String} value the newData to add to the map object
+ */
+function addToMapInDoc(col, id, fieldRef, newData) {
+    console.log(id);
+    let docRef = db.collection(col).doc(id);
+    docRef.get().then(
+        doc => {
+            if (doc.exists) {
+                let updatedField = doc.data()[fieldRef];
+                updatedField.push(newData);
+                docRef.update(fieldRef, updatedField);
+            } else {
+                console.log('doc not exist')
+            }
+        }
+    ).catch(err => console.error(err));
+}
+/**
+ * UpdateMapInDoc update map object in specific doc like-assigns,contacts etc
+ * @param {String} col collection name to find doc
+ * @param {String} id the doc id to find
+ * @param {String} fieldRef the field to update value
+ * @param {String} newData the newData to replace the map object
+ */
+function updateMapInDoc(col, id, fieldRef, newData) {
+    let docRef = db.collection(col).doc(id);
+    docRef.get().then(
+        doc => {
+            if (doc.exists) {
+                docRef.update(fieldRef, newData);
+            } else {
+                console.log('doc not exist')
+            }
+        }
+    ).catch(err => console.error(err));
+}
+
 
 /**
  * 
@@ -144,9 +184,11 @@ function getTypeList() {
 
 module.exports = {
     getDoc,
-    updateMapInDoc,
     insertDoc,
     deleteDoc,
+    updateDoc,
+    addToMapInDoc,
+    updateMapInDoc,
     getLeads,
     getContacts,
     getSettingGroups,

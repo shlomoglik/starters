@@ -22,7 +22,7 @@ class Lead extends Model {
         }];
     }
     /**
-     * @param {Object} newLead the new lead that creatin with new Lead keword
+     * @param {Object} newLead the new lead that creating with new Lead keword
      * @param {String} contactPath the path of contact which has the main role on that lead
      */
     addLeadToExistContact(newLead, contactPath) {

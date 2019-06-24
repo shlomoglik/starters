@@ -1,10 +1,11 @@
 import m from 'mithril'
-import { deleteDoc, insertDoc , getDoc ,updateMapInDoc } from '../../firebase/qry'
-import {getFormValues , closestByClass} from '../../js/utils';
+import { deleteDoc, updateDoc, addToMapInDoc, updateMapInDoc } from '../../firebase/qry'
+import { getFormValues, closestByClass } from '../../js/utils';
 import settings from '../../data/settings';
-import store from '../../data/store'
-import SearchList from '../commons/SearchList'
-import CommandList from '../commons/CommandList'
+import store from '../../data/store';
+import Contact from '../../data/Contact';
+import SearchList from '../commons/SearchList';
+import CommandList from '../commons/CommandList';
 
 const CardContacts = (init) => {
     return {
@@ -23,22 +24,21 @@ const CardContacts = (init) => {
                     ]),
                     vnode.attrs.rows && !vnode.state.shrink ?
                         m('.contact-card__wrapper', [
-                            vnode.attrs.rows.map((row, ind) => {
-                                if(typeof row.id == "undefined" || row.id == "")return
+                            vnode.attrs.rows.sort(compareRoles).map((row, ind) => {
+                                if (typeof row.id == "undefined" || row.id == "") return
                                 return m('.contact-card__card', { id: row.id, key: ind, style: vnode.state.add ? "display:none;" : "" }, [
                                     m('form.contact-card__form',
-                                        { autocorrect: "off", autocapitalize: "off", spellcheck: "false", autocomplete: "off" },
+                                        { onsubmit: e => updateChanges(e, vnode), autocorrect: "off", autocapitalize: "off", spellcheck: "false", autocomplete: "off" },
                                         [
-                                            m('input[type="checkbox"].contact-card__radio', { id: `role${row.id}`, value: row.role, name: 'role', checked: row.role=='main' ? true : false }),
+                                            m('input[type="checkbox"].contact-card__radio', { onchange: e => markAsMainRole(e, vnode), id: `role${row.id}`, value: row.role, name: 'role', checked: row.role == 'main' ? true : false }),
                                             m('.contact-card__role-user', [
                                                 m('label.contact-card__toggle', { for: `role${row.id}` }, m('svg.contact-card__icon', m('use', { href: '/public/img/sprite.svg#icon-user' }))),
                                             ]),
                                             // render form data with setting object
                                             Object.keys(objContactData).map((k, i) => {
                                                 return m('.contact-card__row', { key: `formRow${row.id + i}`, style: "position:relative" }, [
-                                                    m('input.contact-card__input', Object.assign({}, objContactData[k].input , {value: row[k]})),
+                                                    m('input.contact-card__input', Object.assign({}, objContactData[k].input, { value: row[k] })),
                                                     m('label.contact-card__label', objContactData[k].label),
-                                                    // m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] })
                                                 ])
                                             }),
                                             m('.contact-card__btns', [
@@ -55,8 +55,7 @@ const CardContacts = (init) => {
                                                     { onclick: e => unAssignContact(e, vnode) },
                                                     m('svg', m('use', { href: '/public/img/sprite.svg#icon-download' }))
                                                 ),
-                                                m('button.contact-card__button',
-                                                    { onclick: e => updateChanges(e, vnode) },
+                                                m('button[type="submit"].contact-card__button',
                                                     m('svg', m('use', { href: '/public/img/sprite.svg#icon-check' }))
                                                 ),
                                                 m('button.contact-card__button',
@@ -73,18 +72,18 @@ const CardContacts = (init) => {
                         m('.contact-card__card.contact-card__card--new', { style: vnode.state.add && !vnode.state.shrink ? "" : "display:none;" }, [
                             // Todo: change data to be rendered from setting.formDataContact object can use function like in add form...
                             m('form.contact-card__form.contact-card__form--new',
-                                { onsubmit:e=>submitForm(e,vnode),autocorrect: "off", autocapitalize: "off", spellcheck: "false", autocomplete: "off" },
+                                { onsubmit: e => addNewContact(e, vnode), autocorrect: "off", autocapitalize: "off", spellcheck: "false", autocomplete: "off" },
                                 [
                                     Object.keys(objContactData).map((k, ind) => {
                                         return m('.contact-card__row', { key: `formAddRow${ind}`, style: "position:relative" }, [
                                             m('input.contact-card__input', Object.assign({}, objContactData[k].input, { onkeyup: e => setListData(e, vnode, k) })),
                                             m('label.contact-card__label', objContactData[k].label),
-                                            m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`] ,func: e => assignContact(e,vnode)})
+                                            m(SearchList, { parent: vnode, inputID: k, list: vnode.state[`list${k}`], func: e => assignContact(e, vnode) })
                                         ])
                                     }),
                                     m('.contact-card__btns', [
                                         m('button[type="submit"].btn.btn--def', 'הוסף'),
-                                        m('button.btn.btn--def.btn--red', 'בטל'),
+                                        m('button.btn.btn--def.btn--red', { onclick: e => toggleAddForm(e, vnode) }, 'בטל'),
                                     ]), // end form btns
                                 ]), // end contact form
                         ]) : "" // end contact card new
@@ -96,51 +95,98 @@ const CardContacts = (init) => {
 
 
 
-function assignContact(e , vnode){
-    console.log('TODO!!! test this function =>assignContact',e,e.path[1].id)
+function assignContact(e, vnode) {
+    let contactID = e.path[1].id;
+
+    let existContacts = vnode.attrs.leadData.contacts;
+    let exist = existContacts.filter(el => el.contactRef == `contacts/${contactID}`);
+    if (exist[0]) {
+        alert('משתמש זה כבר קיים');
+        resetChanges(e, vnode);
+        return;
+    }
 
     let collection = 'leads';
     let docID = vnode.attrs.leadID;
     let field = 'contacts';
 
-    let contactID = e.path[1].id;
-    let value = {"role":"any","contactRef":`contacts/${contactID}`};
-    // let filter = store.storeContacts.filter(item=>item.id==e.path[1].id);
-    // console.log(filter);
-    updateMapInDoc(collection,  docID , field , value);
+    let value = { "role": "any", "contactRef": `contacts/${contactID}` };
+
+    addToMapInDoc(collection, docID, field, value);
     toggleAddForm(e, vnode);
 }
 
 
-function removeContact(e, vnode) { console.log('TODO remove user from database , must check that there is at least one contact for lead') }
-function unAssignContact(e, vnode) { console.log('TODO unAssign user from curr Lead , must check that there is at least one contact assign lead') }
+function removeContact(e, vnode) { console.log('TODO remove user from database , must check that there is at least one contact for lead') };
 
+function unAssignContact(e, vnode) {
+    e.redraw = false;
+    let contactID = closestByClass(e.target, 'contact-card__card').id;
+    let contactsData = vnode.attrs.leadData.contacts.filter(el => el.contactRef !== `contacts/${contactID}`);
+    if (contactsData.length > 1) {
+        updateMapInDoc('leads', vnode.attrs.leadID, 'contacts', contactsData);
+    } else {
+        alert('יש להשאיר לפחות איש קשר אחד לכל ליד');
+        return;
+    }
+}
 
 function updateChanges(e, vnode) {
     e.preventDefault();
-    console.log('TODO updateChanges apply changes to contact data by id db.collection("contacts").doc(":id").set({...})');
+    let contactID = closestByClass(e.target, 'contact-card__card').id;
+    let form = e.target;
+    let objToUpdate = getFormValues(form);
+    updateDoc('contacts', contactID, objToUpdate);
 }
 
 
 function resetChanges(e, vnode) {
     e.preventDefault();
-    let form = closestByClass(e.target,'contact-card__form');
+    let form = closestByClass(e.target, 'contact-card__form');
     form.reset();
     m.redraw();
 }
 
-function markAsMain(e, vnode) { console.log('TODO mark user as main to this lead , if ther are more then one lead => set other to be false') }
+function markAsMainRole(e, vnode) {
+    if (!e.target.checked) {
+        return;
+    }
+    e.redraw = false;
+    let contactID = e.path[2].id;
+    let contactsData = vnode.attrs.leadData.contacts.map(el => {
+        el.contactRef == `contacts/${contactID}` ?
+            el.role = 'main' :
+            el.role = 'any';
+        return el;
+    });
+    updateMapInDoc('leads', vnode.attrs.leadID, 'contacts', contactsData);
+}
 
-function submitForm(e, vnode) {
+function addNewContact(e, vnode) {
     e.preventDefault();
     let form = e.target;
     let dataToAdd = getFormValues(form);
     console.log(dataToAdd);
-    //step 1 : add to contacts collection
-    //step 2 : add to curr lead new field with ref and role
-    form.reset();
+    //step 1 : add to contacts collection | step 2 : add to curr lead new field with ref and role
+    let newContact = new Contact('', dataToAdd);
+    newContact.addNewSubContact(newContact, vnode.attrs.leadID);
+    toggleAddForm(e, vnode);
 }
 
+function compareRoles(a, b) {
+    if (a.role && a.role == 'main') {
+        return -1;
+    } else if (b.role && b.role == 'main') {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+
+
+
+//display mode:
 function toggleGroup(e, vnode) {
     if (vnode.state.shrink) {
         vnode.state.shrink = false;
@@ -151,15 +197,18 @@ function toggleGroup(e, vnode) {
 }
 
 function toggleAddForm(e, vnode) {
-    if(vnode.state.add){
+    if (vnode.state.add) {
         vnode.state.add = false;
-    }else{
+    } else {
         vnode.state.shrink = false;
         vnode.state.add = true;
     }
 }
 
 
+
+
+//validations and lists:
 function getList(term, field, model) {
     if (term.length < 2) {
         return [];
