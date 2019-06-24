@@ -15,7 +15,6 @@ import { deleteDoc, insertDoc } from '../../firebase/qry'
 const Card = (init) => {
     return {
         oninit: vnode => {
-            console.log('asdfasdf')
             vnode.state.shrink = vnode.attrs.shrink || false;
         },
         view: (vnode) => {
@@ -26,20 +25,20 @@ const Card = (init) => {
                         m('span', vnode.attrs.title),
                         m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
-                    m('.lead-card__row', [
-                        m('input.lead-card__input',
-                            {
-                                type:"text",
-                                value: getContactName(vnode) + ' - ' + vnode.attrs.leadData.type || "",
-                                name: "title",
-                                key: 0,
-                            }
-                        ),
-                        m('label.lead-card__label', 'כותרת ליד'),
-                    ]),
+                    !vnode.state.shrink ?
+                        m('.lead-card__row', [
+                            m('input.lead-card__input',
+                                {
+                                    type: "text",
+                                    value: vnode.attrs.leadTitle || "",
+                                    name: "title",
+                                    key: 0,
+                                }
+                            ),
+                            m('label.lead-card__label', 'כותרת ליד'),
+                        ]) : [],
                     objLeadData && vnode.attrs.leadData && !vnode.state.shrink ?
                         Object.keys(objLeadData).map((k, i) => {
-                            console.log(k,i);
                             return m('.lead-card__row', { key: `formRow${i}`, style: "position:relative" }, [
                                 m('input.lead-card__input', Object.assign({}, objLeadData[k].input, { value: vnode.attrs.leadData[k] })),
                                 m('label.lead-card__label', objLeadData[k].label),
@@ -61,20 +60,33 @@ const Card = (init) => {
     }
 }
 
-function getContactName(vnode) {
-    let contactPath = vnode.attrs.leadData.contacts[0].contactRef;
-    console.log(contactPath);
-    let myContact = store.storeContacts.filter(contact => {
-        let path = `contacts/${contact.id}`;
-        return path == contactPath;
-    })
+// function getContactTitle(vnode) {
+//     let mainContact =false;
+//     vnode.attrs.contactsData.forEach(contact=>{
+//         if(contact.role =='main'){
+//             mainContact= contact.name;
+//             return; 
+//         }
+//     });
+//     vnode.state.leadTitle = 'כותרת ליד' ;
+//     vnode.state.leadTitle += mainContact ? ` - ${mainContact.name}`: '';
+// }
 
-    if (myContact[0]) {
-        return myContact[0].name
-    } else {
-        return 'ללא איש קשר'
-    }
-}
+// function getContactName(vnode) {
+//     console.log(vnode);
+//     let contactPath = vnode.attrs.leadData.contacts[0].contactRef;
+//     console.log(contactPath);
+//     let myContact = store.storeContacts.filter(contact => {
+//         let path = `contacts/${contact.id}`;
+//         return path == contactPath;
+//     })
+//     console.log(myContact);
+//     // if (myContact[0]) {
+//     //     return myContact[0].name
+//     // } else {
+//     //     return 'ללא איש קשר'
+//     // }
+// }
 
 function submitForm(e, form, vnode) {
     e.preventDefault();

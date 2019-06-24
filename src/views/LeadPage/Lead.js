@@ -9,17 +9,16 @@ import store from '../../data/store'
 let Lead = (init) => {
     return {
         oninit: vnode => {
-            // console.log('use function getLeadByID ', vnode.attrs.id, vnode);
             vnode.state.contactsCount = 0;
             getLeadByID(vnode);
         },
-        onbeforeupdate: vnode =>{
+        onbeforeupdate: vnode => {
             getLeadByID(vnode);
             vnode.state.leadTitle = getLeadTitle(vnode);
             getContactsData(vnode);
             vnode.state.contactsCount = vnode.state.contactsData.length;
         },
-        onupdate: vnode => {},
+        onupdate: vnode => { },
         view: (vnode) => {
             return (
                 m('.lead', { id: vnode.attrs.id }, [
@@ -31,14 +30,14 @@ let Lead = (init) => {
                         //     )
                         // })
                         m('.cards', [
-                            m(LeadGeneralCard, {title:"פרטים כלליים" ,leadData:vnode.state.lead }),
-                            m(LeadContacts, {title:`אנשי קשר ${vnode.state.contactsCount?`(${vnode.state.contactsCount})`:''}` , rows:vnode.state.contactsData ,leadID:vnode.attrs.id,leadData:vnode.state.lead}),
-                            m(LeadGeneralCard, {title:"פולואפ"}),
-                            m(LeadGeneralCard, {title:"משימות"}),
-                            m(LeadGeneralCard, {title:"סטטוס"}),
+                            m(LeadGeneralCard, { title: "פרטים כלליים", leadData: vnode.state.lead, leadTitle: vnode.state.leadTitle }),
+                            m(LeadContacts, { title: `אנשי קשר ${vnode.state.contactsCount ? `(${vnode.state.contactsCount})` : ''}`, rows: vnode.state.contactsData, leadID: vnode.attrs.id, leadData: vnode.state.lead }),
+                            // m(LeadFollowCard, {title:"פולואפ"}),
+                            // m(LeadTasksCard, {title:"משימות"}),
+                            // m(LeadStatueCard, {title:"סטטוס"}),
                         ])
                         : m('span.loader', 'טוען...'),
-                        m(ScrollTop)
+                    m(ScrollTop)
                 ])
             )
         }
@@ -56,7 +55,7 @@ function getLeadTitle(vnode) {
     let name = getContactName(vnode);
     let type = vnode.state.lead.type;
     // console.log(vnode.state.lead, name, type);
-    let title = name + ' ' + type || false;
+    let title = name + ' - ' + type || false;
     return title ? title : res;
 }
 
@@ -75,39 +74,17 @@ function getContactName(vnode) {
     }
 }
 
-function toggleGroup(e, vnode) {
-    if (vnode.state.shrink) {
-        vnode.state.shrink = false;
-    } else {
-        vnode.state.shrink = true;
-    }
-}
-
-function getGeneralCard(vnode) {
-    return {
-        title: 'פרטים כלליים',
-        rows: [
-            { label: "כותרת", data: getContactName(vnode) + ' - ' + vnode.state.lead.type },
-            { label: "מקור", data: vnode.state.lead.source },
-            { label: "סוג", data: vnode.state.lead.type },
-            { label: "תיאור", data: vnode.state.lead.description },
-            { label: "תאריך יעד", data: vnode.state.lead.duedate ,type:"date"},
-        ],
-        shrink: false,
-    }
-}
-
-function getContactsData(vnode){
+function getContactsData(vnode) {
     // vnode.state.contactsData = [];
     let res = [];
     let activeContacts = vnode.state.lead.contacts; //[{contactRef:'',role:'main|?'},{...}]
     // console.log('active contacts are: ',activeContacts);
-    for(let i in activeContacts){
-        let contactFilter = store.storeContacts.filter(contact=>{
+    for (let i in activeContacts) {
+        let contactFilter = store.storeContacts.filter(contact => {
             return activeContacts[i]['contactRef'] == `contacts/${contact.id}`;
         })
-        console.log('after filtering: ',contactFilter);
-        let contact = Object.assign({},contactFilter[0],{role:activeContacts[i]['role']});
+        console.log('after filtering: ', contactFilter);
+        let contact = Object.assign({}, contactFilter[0], { role: activeContacts[i]['role'] });
         res.push(contact);
     }
     vnode.state.contactsData = res;
