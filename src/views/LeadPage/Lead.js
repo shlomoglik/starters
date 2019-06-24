@@ -1,6 +1,6 @@
 import m from "mithril"
 import HeaderFullPage from '../commons/Header/HeaderFullPage'
-import LeadCard from './LeadCard'
+import LeadGeneralCard from './LeadGeneralCard'
 import LeadContacts from './LeadContactsCard'
 import ScrollTop from '../commons/ScrollTop'
 import store from '../../data/store'
@@ -31,11 +31,11 @@ let Lead = (init) => {
                         //     )
                         // })
                         m('.cards', [
-                            m(LeadCard, getGeneralCard(vnode)),
+                            m(LeadGeneralCard, {title:"פרטים כלליים" ,leadData:vnode.state.lead }),
                             m(LeadContacts, {title:`אנשי קשר ${vnode.state.contactsCount?`(${vnode.state.contactsCount})`:''}` , rows:vnode.state.contactsData ,leadID:vnode.attrs.id,leadData:vnode.state.lead}),
-                            m(LeadCard, {title:"פולואפ"}),
-                            m(LeadCard, {title:"משימות"}),
-                            m(LeadCard, {title:"סטטוס"}),
+                            m(LeadGeneralCard, {title:"פולואפ"}),
+                            m(LeadGeneralCard, {title:"משימות"}),
+                            m(LeadGeneralCard, {title:"סטטוס"}),
                         ])
                         : m('span.loader', 'טוען...'),
                         m(ScrollTop)

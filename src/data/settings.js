@@ -38,6 +38,7 @@ let settings = {
             },
         }
     },
+    
     formDataLead: {
         "meta": { heading: 'פרטי פנייה', class: 'Lead' },
         "data": {
@@ -46,7 +47,7 @@ let settings = {
                 "label": { text: "סוג פנייה" }
             },
             "source": {
-                "input": { type: "text", name: "phone", placeholder: "מקור הגעה", list: "sourceList" , autocomplete:"off"},
+                "input": { type: "text", name: "source", placeholder: "מקור הגעה", list: "sourceList" , autocomplete:"off"},
                 "label": { text: "בחר מקור הגעה של הליד מתוך רשימה" }
             },
             "duedate": {

@@ -30,7 +30,7 @@ let Form = (init) => {
                     m('form.form',
                         {
                             autocorrect: "off", autocapitalize: "off", spellcheck: "false", autocomplete: "off",
-                            onsubmit: (event) => submitForm(event, vnode),
+                            onsubmit: (event) => addContact(event, vnode),
                         },
                         [
                             m('.heading', m('.heading__secondary', vnode.attrs.formData.meta.heading)),
@@ -64,7 +64,7 @@ let Form = (init) => {
     }
 }
 
-function submitForm(e, vnode) {
+function addContact(e, vnode) {
     e.preventDefault();
     vnode.attrs.filters.map(filter => {
         if (filter.active) {
@@ -73,7 +73,7 @@ function submitForm(e, vnode) {
             } else {
                 let form = e.target;
                 let data = getFormValues(form);
-                if(!data) return; //if null then bread function
+                if(!data) return; //if null then break function
                 let newContact = new Contact('', data);
                 newContact.add('contacts').then(
                     doc => {

@@ -37,7 +37,7 @@ const CardContacts = (init) => {
                                             // render form data with setting object
                                             Object.keys(objContactData).map((k, i) => {
                                                 return m('.contact-card__row', { key: `formRow${row.id + i}`, style: "position:relative" }, [
-                                                    m('input.contact-card__input', Object.assign({}, objContactData[k].input, { value: row[k] })),
+                                                    m('input.contact-card__input', Object.assign({}, objContactData[k].input, { value: row[k] }) ),
                                                     m('label.contact-card__label', objContactData[k].label),
                                                 ])
                                             }),
