@@ -26,17 +26,6 @@ const Card = (init) => {
                         m('span', vnode.attrs.title),
                         m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
-                    !vnode.state.shrink ?
-                        m('.lead-card__row', [
-                            m('input.lead-card__input',
-                                {
-                                    type: "text",
-                                    value: vnode.attrs.leadTitle ,
-                                    name: "title",
-                                    key: 'leadTitle',
-                                }
-                            )
-                        ]) : [],
                     objLeadData && vnode.attrs.leadData && !vnode.state.shrink ?
                         Object.keys(objLeadData).map((k, i) => {
                             return m('.lead-card__row', { key: `formRow${i}`, style: "position:relative" }, [

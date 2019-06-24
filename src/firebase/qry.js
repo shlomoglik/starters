@@ -1,4 +1,3 @@
-import User from '../data/User'
 import store from '../data/store'
 import settings from '../data/settings'
 import m from 'mithril'

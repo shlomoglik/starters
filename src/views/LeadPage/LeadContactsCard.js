@@ -34,6 +34,7 @@ const CardContacts = (init) => {
                                             m('.contact-card__role-user', [
                                                 m('label.contact-card__toggle', { for: `role${row.id}` }, m('svg.contact-card__icon', m('use', { href: '/public/img/sprite.svg#icon-user' }))),
                                             ]),
+                                            m('span.contact-card__role-text',  row.role == 'main' ? "עיקרי" : ''),
                                             // render form data with setting object
                                             Object.keys(objContactData).map((k, i) => {
                                                 return m('.contact-card__row', { key: `formRow${row.id + i}`, style: "position:relative" }, [
@@ -42,15 +43,6 @@ const CardContacts = (init) => {
                                                 ])
                                             }),
                                             m('.contact-card__btns', [
-                                                //TODO : add some commands like delete:duplicate etc...
-                                                // m('button.contact-card__button',
-                                                //     { onclick: e => removeContact(e, vnode), title: "מחק איש קשר מכל המערכת" },
-                                                //     m('svg', m('use', { href: '/public/img/sprite.svg#icon-trash' }))
-                                                // ),
-                                                // m('button.contact-card__button',
-                                                //     { onclick: e => editContact(e, vnode), title: "מחק איש קשר מכל המערכת" },
-                                                //     m('svg', m('use', { href: '/public/img/sprite.svg#icon-trash' }))
-                                                // ),
                                                 m('button.contact-card__button',
                                                     { onclick: e => unAssignContact(e, vnode) },
                                                     m('svg', m('use', { href: '/public/img/sprite.svg#icon-download' }))
@@ -179,10 +171,11 @@ function compareRoles(a, b) {
 
 
 
-
 //display mode:
 function toggleGroup(e, vnode) {
+    console.log('TODO! toggle group')
     if (vnode.state.shrink) {
+        console.log('state is shrink => so make it open')
         vnode.state.shrink = false;
     } else {
         vnode.state.add = false; //first make sure no add form is active

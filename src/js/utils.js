@@ -26,8 +26,6 @@ function closestByClass(el, cls) {
 
 
 
-
-
 module.exports =
     {
         getFormValues,

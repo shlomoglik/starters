@@ -3,9 +3,6 @@ import store from '../../data/store'
 
 let LeadRow = (init) => {
     return {
-        oncreate: vnode => {
-            console.log('lead data is: ', vnode.attrs.lead)
-        },
         view: (vnode) => {
             let lead = vnode.attrs.lead ;
             let follow = 'היום';
@@ -49,7 +46,6 @@ function getContactName(vnode) {
 }
 
 function navigateToLead(e,vnode){
-    console.info('TODO!! use this data to show lead info => cant resolver without routing',vnode.attrs.lead);
     m.route.set(`/myLeads/${vnode.attrs.lead.id}`);
 }
 
