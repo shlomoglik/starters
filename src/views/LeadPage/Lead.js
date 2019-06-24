@@ -10,15 +10,15 @@ let Lead = (init) => {
     return {
         oninit: vnode => {
             vnode.state.contactsCount = 0;
+            vnode.state.leadTitle ='';
             getLeadByID(vnode);
         },
         onbeforeupdate: vnode => {
             getLeadByID(vnode);
-            vnode.state.leadTitle = getLeadTitle(vnode);
+            getLeadTitle(vnode);
             getContactsData(vnode);
             vnode.state.contactsCount = vnode.state.contactsData.length;
         },
-        onupdate: vnode => { },
         view: (vnode) => {
             return (
                 m('.lead', { id: vnode.attrs.id }, [
@@ -30,7 +30,7 @@ let Lead = (init) => {
                         //     )
                         // })
                         m('.cards', [
-                            m(LeadGeneralCard, { title: "פרטים כלליים", leadData: vnode.state.lead, leadTitle: vnode.state.leadTitle }),
+                            m(LeadGeneralCard, { title: "פרטים כלליים", leadData:vnode.state.lead, leadTitle: vnode.state.leadTitle }),
                             m(LeadContacts, { title: `אנשי קשר ${vnode.state.contactsCount ? `(${vnode.state.contactsCount})` : ''}`, rows: vnode.state.contactsData, leadID: vnode.attrs.id, leadData: vnode.state.lead }),
                             // m(LeadFollowCard, {title:"פולואפ"}),
                             // m(LeadTasksCard, {title:"משימות"}),
@@ -55,8 +55,8 @@ function getLeadTitle(vnode) {
     let name = getContactName(vnode);
     let type = vnode.state.lead.type;
     // console.log(vnode.state.lead, name, type);
-    let title = name + ' - ' + type || false;
-    return title ? title : res;
+    let title = name + ' - ' + type;
+    vnode.state.leadTitle =  title ? title : res;
 }
 
 function getContactName(vnode) {

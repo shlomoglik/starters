@@ -93,11 +93,8 @@ const CardContacts = (init) => {
     }
 }
 
-
-
 function assignContact(e, vnode) {
     let contactID = e.path[1].id;
-
     let existContacts = vnode.attrs.leadData.contacts;
     let exist = existContacts.filter(el => el.contactRef == `contacts/${contactID}`);
     if (exist[0]) {
@@ -105,13 +102,10 @@ function assignContact(e, vnode) {
         resetChanges(e, vnode);
         return;
     }
-
     let collection = 'leads';
     let docID = vnode.attrs.leadID;
     let field = 'contacts';
-
     let value = { "role": "any", "contactRef": `contacts/${contactID}` };
-
     addToMapInDoc(collection, docID, field, value);
     toggleAddForm(e, vnode);
 }
@@ -122,9 +116,10 @@ function removeContact(e, vnode) { console.log('TODO remove user from database ,
 function unAssignContact(e, vnode) {
     e.redraw = false;
     let contactID = closestByClass(e.target, 'contact-card__card').id;
-    let contactsData = vnode.attrs.leadData.contacts.filter(el => el.contactRef !== `contacts/${contactID}`);
-    if (contactsData.length > 1) {
-        updateMapInDoc('leads', vnode.attrs.leadID, 'contacts', contactsData);
+    let contactsDataAfterRemove = vnode.attrs.leadData.contacts.filter(el => el.contactRef !== `contacts/${contactID}`);
+
+    if (vnode.attrs.leadData.contacts.length > 1) {
+        updateMapInDoc('leads', vnode.attrs.leadID, 'contacts', contactsDataAfterRemove);
     } else {
         alert('יש להשאיר לפחות איש קשר אחד לכל ליד');
         return;
@@ -167,7 +162,6 @@ function addNewContact(e, vnode) {
     let form = e.target;
     let dataToAdd = getFormValues(form);
     console.log(dataToAdd);
-    //step 1 : add to contacts collection | step 2 : add to curr lead new field with ref and role
     let newContact = new Contact('', dataToAdd);
     newContact.addNewSubContact(newContact, vnode.attrs.leadID);
     toggleAddForm(e, vnode);

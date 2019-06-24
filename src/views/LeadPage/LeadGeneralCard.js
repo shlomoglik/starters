@@ -1,7 +1,8 @@
 import m from 'mithril'
-import store from '../../data/store';
+import { deleteDoc, updateDoc, addToMapInDoc, updateMapInDoc } from '../../firebase/qry'
+import { getFormValues, closestByClass } from '../../js/utils';
 import settings from '../../data/settings';
-import { deleteDoc, insertDoc } from '../../firebase/qry'
+import store from '../../data/store';
 
 // let rows= [
 //     { label: "כותרת", data: getContactName(vnode) + ' - ' + vnode.state.lead.type },
@@ -20,7 +21,7 @@ const Card = (init) => {
         view: (vnode) => {
             let objLeadData = settings.formDataLead.data;
             return (
-                m('form.lead-card', { onsubmit: e => submitForm(e, e.target, vnode) }, [
+                m('form.lead-card', { onsubmit: e => updateChanges(e, vnode) }, [
                     m('.lead-card__title', { onclick: e => toggleGroup(e, vnode) }, [
                         m('span', vnode.attrs.title),
                         m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
@@ -30,17 +31,16 @@ const Card = (init) => {
                             m('input.lead-card__input',
                                 {
                                     type: "text",
-                                    value: vnode.attrs.leadTitle || "",
+                                    value: vnode.attrs.leadTitle ,
                                     name: "title",
-                                    key: 0,
+                                    key: 'leadTitle',
                                 }
-                            ),
-                            m('label.lead-card__label', 'כותרת ליד'),
+                            )
                         ]) : [],
                     objLeadData && vnode.attrs.leadData && !vnode.state.shrink ?
                         Object.keys(objLeadData).map((k, i) => {
                             return m('.lead-card__row', { key: `formRow${i}`, style: "position:relative" }, [
-                                m('input.lead-card__input', Object.assign({}, objLeadData[k].input, { value: vnode.attrs.leadData[k] })),
+                                m('input.lead-card__input', Object.assign({}, objLeadData[k].input || objLeadData[k].textarea , { value: vnode.attrs.leadData[k] })),
                                 m('label.lead-card__label', objLeadData[k].label),
                             ])
                             // vnode.state.rows.map((row, ind) => {
@@ -60,44 +60,13 @@ const Card = (init) => {
     }
 }
 
-// function getContactTitle(vnode) {
-//     let mainContact =false;
-//     vnode.attrs.contactsData.forEach(contact=>{
-//         if(contact.role =='main'){
-//             mainContact= contact.name;
-//             return; 
-//         }
-//     });
-//     vnode.state.leadTitle = 'כותרת ליד' ;
-//     vnode.state.leadTitle += mainContact ? ` - ${mainContact.name}`: '';
-// }
-
-// function getContactName(vnode) {
-//     console.log(vnode);
-//     let contactPath = vnode.attrs.leadData.contacts[0].contactRef;
-//     console.log(contactPath);
-//     let myContact = store.storeContacts.filter(contact => {
-//         let path = `contacts/${contact.id}`;
-//         return path == contactPath;
-//     })
-//     console.log(myContact);
-//     // if (myContact[0]) {
-//     //     return myContact[0].name
-//     // } else {
-//     //     return 'ללא איש קשר'
-//     // }
-// }
-
-function submitForm(e, form, vnode) {
+function updateChanges(e, vnode) {
     e.preventDefault();
-    // let val = form.elements[0].value;
-    // let col = vnode.attrs.collection;
-    // let doc = { label: val };
-    // insertDoc(col, doc).then(r => {
-    //     console.log('new doc added', r.path);
-    //     m.redraw();
-    // });
-    form.reset();
+    let leadID = vnode.attrs.leadData.id;
+    let form = e.target;
+    let objToUpdate = getFormValues(form);
+    // console.log('TODO!! aplly changes data should be',JSON.stringify(objToUpdate) ,' updata id => ',leadID);
+    updateDoc('leads', leadID, objToUpdate);
 }
 
 function toggleGroup(e, vnode) {

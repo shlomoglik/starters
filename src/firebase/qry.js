@@ -50,7 +50,8 @@ function updateDoc(col, id, objToUpdate) {
     docRef.get().then(
         doc => {
             if (doc.exists) {
-                docRef.update(objToUpdate);
+                let merge = { merge: true };
+                docRef.set(objToUpdate , merge );
             } else {
                 console.log('doc not exist')
             }
