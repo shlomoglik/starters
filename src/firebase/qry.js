@@ -133,10 +133,7 @@ function getLeads(groupType) {
         return;
     }
     let userPath = user.path || ""; // User.getUser('path') || 
-    let assignMain = {
-        assignRef: userPath,
-        role: "main"
-    };
+    let assignMain = {assignRef: userPath , role: "main"};
     let colRef = db.collection('leads');
     let qry;
     qry = colRef.where('assigns', 'array-contains', assignMain);

@@ -106,11 +106,14 @@ function assignContact(e, vnode) {
 function removeContact(e, vnode) { console.log('TODO remove user from database , must check that there is at least one contact for lead') };
 
 function unAssignContact(e, vnode) {
+    // console.log('START function unAssignContact : \rbefore:',vnode.attrs.leadData.contacts)
     e.redraw = false;
     let contactID = closestByClass(e.target, 'contact-card__card').id;
     let contactsDataAfterRemove = vnode.attrs.leadData.contacts.filter(el => el.contactRef !== `contacts/${contactID}`);
-
+    // console.log('\rafter',vnode.attrs.leadData.contacts)
+    
     if (vnode.attrs.leadData.contacts.length > 1) {
+        vnode.attrs.leadData.contacts = contactsDataAfterRemove;
         updateMapInDoc('leads', vnode.attrs.leadID, 'contacts', contactsDataAfterRemove);
     } else {
         alert('יש להשאיר לפחות איש קשר אחד לכל ליד');

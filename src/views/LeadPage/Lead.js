@@ -16,12 +16,14 @@ let Lead = (init) => {
         onbeforeupdate: vnode => {
             getLeadByID(vnode);
             getContactsData(vnode);
+            getMainContactName(vnode);
+            // console.log(vnode.state.contactData[0].name);
             vnode.state.contactsCount = vnode.state.contactsData.length;
         },
         view: (vnode) => {
             return (
                 m('.lead', { id: vnode.attrs.id }, [
-                    m(HeaderFullPage, { title: 'פרטי ליד', backTo: '/myLeads' }),
+                    m(HeaderFullPage, { title: `פרטי ליד ${vnode.state.mainContactName ? ' - '+ vnode.state.mainContactName:''}`, backTo: '/myLeads' }),
                     vnode.state.lead ?
                         m('.cards', [
                             m(LeadGeneralCard, { title: "פרטים כלליים", leadData:vnode.state.lead, leadTitle: vnode.state.leadTitle}),
@@ -46,15 +48,18 @@ function getContactsData(vnode) {
     let res = [];
     let activeContacts = vnode.state.lead.contacts; //[{contactRef:'',role:'main|?'},{...}]
     for (let i in activeContacts) {
-        console.log('find this contact data in store',activeContacts[i])
         let contactFilter = store.storeContacts.filter(contact => {
-            console.log(`contacts/${contact.id}`);
             return activeContacts[i]['contactRef'] == `contacts/${contact.id}`
         })
         let contact = Object.assign({}, contactFilter[0], { role: activeContacts[i]['role'] });
         res.push(contact);
     }
     vnode.state.contactsData = res;
+}
+function getMainContactName(vnode){
+    let activeContactsData = vnode.state.contactsData;
+    let mainContact = activeContactsData.filter(contact=>contact.role =='main');
+    vnode.state.mainContactName = mainContact[0].name;
 }
 
 module.exports = Lead;
