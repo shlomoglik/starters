@@ -13,18 +13,11 @@ const Card = (init) => {
                         m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
                     !vnode.state.shrink ?
-                        m('.lead-follow',[
-                            m('.lead-follow__list',[
-                                m('.lead-follow__row',[
-                                    m('span','11/7'),
-                                    m('p','שיחה טלפונית טובה מאוד , רוצה לבוא לפגישה'),
-                                    m('input[type="file"]','הקלטה'),
-                                ])
-                            ]),
-                            m('form.lead-follow__form',[
-                                m('input.lead-follow__input',{type:'text'}),
-                                m('button[type="submit"]','הוסף')
-                            ])
+                        m('div', "פה יש להוסיף נתונים שונים") : [],
+                    !vnode.state.shrink ?
+                        m('.lead-card__btns', [
+                            m('button.btn.btn--def', 'עדכן'),
+                            m('button.btn.btn--def.btn--red', 'בטל'),
                         ]) : []
                 ])
             )

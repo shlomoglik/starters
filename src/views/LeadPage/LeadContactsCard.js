@@ -57,7 +57,7 @@ const CardContacts = (init) => {
                                             ]), // end form btns
                                         ]), // end contact form
                                 ]) // end contact card
-                            }) // end map
+                            }) //s end map
                         ]) : [],
 
                     vnode.state.add ?

@@ -1,0 +1,38 @@
+.form-list{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__input{
+        @include input-def;
+        @include input-border-bottom-1;
+        @include placeholder-1;
+        flex:1;
+    }
+    &__btn{
+        // width: 4rem;
+        // height: 4rem;
+        outline: none;
+        border: none;
+        border-radius: 50%;
+        transition: all .2s;
+        background-color: none;
+        color: var(--color-primary);
+        opacity: .7;
+        &:hover{
+            cursor: pointer;
+            opacity: 1;
+            background-color:var(--color-grey-bg);
+            transform: translateY(-.2rem);
+        }
+        &:active{
+            transform: translateY(0);
+        }
+    }
+    &__icon{
+        width: 4rem;
+        height: 4rem;
+        fill: currentColor;
+    }
+}

@@ -1,5 +1,6 @@
 import m from 'mithril'
 import { deleteDoc, insertDoc } from '../../firebase/qry'
+import FormList from '../commons/Forms/FormList'
 
 
 let SettingGroup = (init) => {
@@ -22,15 +23,7 @@ let SettingGroup = (init) => {
                             ])
                         }) : [],
                     !vnode.state.shrink ?
-                        m('form.setGroup__form', { onsubmit: e => submitForm(e, e.target, vnode) }, [
-                            m('input.setGroup__form-input', { type: "text", placeholder: "הוסף ...", required: true, minlength: 3 }),
-                            m('button[type="submit"].setGroup__form-btn',[
-                                m('svg.setGroup__form-icon', { onclick: e => vnode.dom.querySelector('.setGroup__form').submit() },
-                                    m('use', { href: '/public/img/sprite.svg#icon-triangle-left' })
-                                )
-                            ])
-                        ]
-                        ) : []
+                        m(FormList,{submitFunc: e =>addToList(e,vnode)}) : []
                 ])
             )
         }
@@ -38,8 +31,9 @@ let SettingGroup = (init) => {
 }
 
 // submitForm(e, vnode.dom.querySelector('.setGroup__form'), vnode)
-function submitForm(e, form, vnode) {
+function addToList(e, vnode) {
     e.preventDefault();
+    let form = e.target;
     let val = form.elements[0].value;
     let col = vnode.attrs.collection;
     let doc = { label: val };

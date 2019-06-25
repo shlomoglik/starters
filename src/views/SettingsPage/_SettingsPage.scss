@@ -114,6 +114,7 @@
             @include input-def;
             @include input-border-bottom-1;
             @include placeholder-1;
+            flex:1;
         }
         &-btn{
             // width: 4rem;
