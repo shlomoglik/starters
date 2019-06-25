@@ -1,4 +1,27 @@
 .lead-follow{
-    display: flex;
+    &__list{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+    }
+    &__row{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        margin-bottom: 1rem;
+    }
+
+    &__date{
+        font-size: 2rem;    
+        margin-left: 1.5rem;
+    }
     
+    &__text{
+        font-size: 2rem;
+        margin-left: 1.5rem;
+        overflow-wrap: break-word;
+        flex: 1; 
+    }
 }

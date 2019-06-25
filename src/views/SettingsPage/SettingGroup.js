@@ -23,7 +23,8 @@ let SettingGroup = (init) => {
                             ])
                         }) : [],
                     !vnode.state.shrink ?
-                        m(FormList,{submitFunc: e =>addToList(e,vnode)}) : []
+                        m(FormList,{submitFunc: e =>addToList(e,vnode)})
+                    : []
                 ])
             )
         }

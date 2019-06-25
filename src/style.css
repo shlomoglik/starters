@@ -1267,8 +1267,28 @@ body {
     transform: translateY(0);
     box-shadow: none; }
 
-.lead-follow {
-  display: flex; }
+.lead-follow__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch; }
+
+.lead-follow__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: right;
+  margin-bottom: 1rem; }
+
+.lead-follow__date {
+  font-size: 2rem;
+  margin-left: 1.5rem; }
+
+.lead-follow__text {
+  font-size: 2rem;
+  margin-left: 1.5rem;
+  overflow-wrap: break-word;
+  flex: 1; }
 
 .container--search {
   margin-top: 8rem;

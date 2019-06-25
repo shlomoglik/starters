@@ -1,4 +1,5 @@
 import m from 'mithril'
+import FormList from '../commons/Forms/FormList'
 
 const Card = (init) => {
     return {
@@ -16,20 +17,27 @@ const Card = (init) => {
                         m('.lead-follow',[
                             m('.lead-follow__list',[
                                 m('.lead-follow__row',[
-                                    m('span','11/7'),
-                                    m('p','שיחה טלפונית טובה מאוד , רוצה לבוא לפגישה'),
-                                    m('input[type="file"]','הקלטה'),
-                                ])
+                                    m('.lead-follow__date','11/7'),
+                                    m('.lead-follow__text','שיחה טלפונית טובה מאוד , רוצה לבוא לפגישה'),
+                                ]),
+                                m('.lead-follow__row',[
+                                    m('.lead-follow__date','12/7'),
+                                    m('.lead-follow__text','הייתה פגישה מדהימה , רוצים לסגור רק מבררים תאריך'),
+                                ]),
+                                m('.lead-follow__row',[
+                                    m('.lead-follow__date','13/7'),
+                                    m('.lead-follow__text','נשלחה הצעת מחיר והזמנה לחתימה'),
+                                ]),
                             ]),
-                            m('form.lead-follow__form',[
-                                m('input.lead-follow__input',{type:'text'}),
-                                m('button[type="submit"]','הוסף')
-                            ])
+                            m(FormList,{submitFunc: e =>addToList(e,vnode)})
                         ]) : []
                 ])
             )
         }
     }
+}
+function addToList(e,vnode){
+    console.log('TODO ! add to list')
 }
 function toggleGroup(e, vnode) {
     if (vnode.state.shrink) {
