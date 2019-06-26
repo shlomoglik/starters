@@ -28,7 +28,7 @@ let Lead = (init) => {
                         m('.cards', [
                             m(LeadGeneralCard, { title: "פרטים כלליים", leadData:vnode.state.lead, leadTitle: vnode.state.leadTitle}),
                             m(LeadContacts, { title: `אנשי קשר ${vnode.state.contactsCount ? `(${vnode.state.contactsCount})` : ''}`, rows: vnode.state.contactsData, leadID: vnode.attrs.id, leadData: vnode.state.lead }),
-                            m(LeadFollowCard, {title:"פולואפ"}),
+                            m(LeadFollowCard, {title:"פולואפ" , leadID: vnode.attrs.id}),
                             m(LeadFollowCard, {title:"משימות"}),
                             m(LeadFollowCard, {title:"סטטוס"}),
                         ])

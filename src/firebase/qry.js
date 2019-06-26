@@ -178,6 +178,11 @@ function getTypeList() {
     snapCollection_(colRef, settings, 'leadTypeList');
 }
 
+function getFollowUps(leadID , vnode){
+    let colRef = db.collection(`leads/${leadID}/followUps`);
+    snapCollection_(colRef, vnode.state, 'followUps');
+}
+
 
 module.exports = {
     getDoc,
@@ -191,6 +196,7 @@ module.exports = {
     getSettingGroups,
     getSourceList,
     getTypeList,
+    getFollowUps,
 };
 
 
