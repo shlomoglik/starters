@@ -182,6 +182,10 @@ function getFollowUps(leadID , vnode){
     let colRef = db.collection(`leads/${leadID}/followUps`);
     snapCollection_(colRef, vnode.state, 'followUps');
 }
+function getTasks(leadID , vnode){
+    let colRef = db.collection(`leads/${leadID}/tasks`);
+    snapCollection_(colRef, vnode.state, 'tasks');
+}
 
 
 module.exports = {
@@ -197,6 +201,7 @@ module.exports = {
     getSourceList,
     getTypeList,
     getFollowUps,
+    getTasks,
 };
 
 

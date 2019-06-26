@@ -3,6 +3,7 @@ import HeaderFullPage from '../commons/Header/HeaderFullPage'
 import LeadGeneralCard from './LeadGeneralCard'
 import LeadContacts from './LeadContactsCard'
 import LeadFollowCard from './LeadFollowCard'
+import LeadTasksCard from './LeadTasksCard'
 import ScrollTop from '../commons/ScrollTop'
 import store from '../../data/store'
 
@@ -29,7 +30,7 @@ let Lead = (init) => {
                             m(LeadGeneralCard, { title: "פרטים כלליים", leadData:vnode.state.lead, leadTitle: vnode.state.leadTitle}),
                             m(LeadContacts, { title: `אנשי קשר ${vnode.state.contactsCount ? `(${vnode.state.contactsCount})` : ''}`, rows: vnode.state.contactsData, leadID: vnode.attrs.id, leadData: vnode.state.lead }),
                             m(LeadFollowCard, {title:"פולואפ" , leadID: vnode.attrs.id}),
-                            m(LeadFollowCard, {title:"משימות"}),
+                            m(LeadTasksCard, {title:"משימות" , leadID: vnode.attrs.id}),
                             m(LeadFollowCard, {title:"סטטוס"}),
                         ])
                         : m('span.loader', 'טוען...'),
