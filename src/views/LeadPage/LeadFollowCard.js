@@ -75,10 +75,8 @@ function compareDates(a, b) {
     let aNum = +a.date.toDate();
     let bNum = +b.date.toDate();
     if (aNum > bNum) {
-        console.log('a > b')
         return -1; // swap
     } else if (aNum < bNum) {
-        console.log('a < b')
         return 1;
     } else {
         return 0; //dont do nothing
