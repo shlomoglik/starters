@@ -25,9 +25,18 @@ function closestByClass(el, cls) {
 }
 
 
+//Layout helpers
+function toggleGroup(e, vnode) {
+    if (vnode.state.shrink) {
+        vnode.state.shrink = false;
+    } else {
+        vnode.state.shrink = true;
+    }
+}
 
 module.exports =
     {
         getFormValues,
-        closestByClass
+        closestByClass,
+        toggleGroup
     }

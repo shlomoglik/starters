@@ -1,6 +1,7 @@
 import m from 'mithril'
-import FormList from '../commons/Forms/FormList'
-import {insertDoc , getFollowUps} from '../../firebase/qry'
+import FormList from '../commons/Forms/FormList';
+import {insertDoc , getFollowUps} from '../../firebase/qry';
+import {toggleGroup} from '../../js/utils';
 
 const Card = (init) => {
     return {
@@ -71,17 +72,20 @@ function getDist(vnode){
 }
 
 function compareDates(a, b) {
-    if (a.date.toDate() > b.date.toDate()) {
-        return -1;
-    } else if (a.date.toDate() < b.date.toDate()) {
+    let aNum = +a.date.toDate();
+    let bNum = +b.date.toDate();
+    if (aNum > bNum) {
+        console.log('a > b')
+        return -1; // swap
+    } else if (aNum < bNum) {
+        console.log('a < b')
         return 1;
     } else {
-        return 0;
+        return 0; //dont do nothing
     }
 }
 
 function addToList(e,vnode){
-    console.log('TODO ! add to list');
     e.preventDefault();
     let form = e.target;
     let val = form.elements[0].value;
@@ -93,13 +97,6 @@ function addToList(e,vnode){
         m.redraw();
     });
     form.reset();
-}
-function toggleGroup(e, vnode) {
-    if (vnode.state.shrink) {
-        vnode.state.shrink = false;
-    } else {
-        vnode.state.shrink = true;
-    }
 }
 
 module.exports = Card
