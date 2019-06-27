@@ -1,6 +1,6 @@
 import m from 'mithril'
 import settings from '../../data/settings'
-import { addOrUpdateDoc, getStatus } from '../../firebase/qry';
+import { addOrUpdateDoc, getStatus , insertDoc } from '../../firebase/qry';
 import { toggleGroup, mapToObj } from '../../js/utils';
 
 const Card = (init) => {
@@ -62,13 +62,23 @@ function setNewStatus(e, vnode) {
     let statusID = el.id;
     let col = `leads/${vnode.attrs.leadID}/status`;
     let done = true;
+    let docText = 'עודכן סטטוס ל - ' + status;
     if(el.classList.contains('lead-status__button--done')){
-        console.log('re open this one')
         done = false;
+        docText = 'פתיחה מחדש של סטטוס ' + status;
     }
     let objToUpdate = {status,done};
     addOrUpdateDoc(col, statusID, objToUpdate);
+    addFollowDoc(docText , vnode)
 }
 
+function addFollowDoc(docText, vnode){
+    let ref = `leads/${vnode.attrs.leadID}/followUps`;
+    let docToAdd = {date: new Date()  , text:docText};
+    insertDoc(ref, docToAdd).then(r => {
+        console.log('new doc added', r.path);
+        m.redraw();
+    });
+}
 
 module.exports = Card

@@ -29,13 +29,15 @@ const Card = (init) => {
                         m('.lead-tasks', [
                             m('.lead-tasks__list', [
                                 vnode.state.openTasks ?
-                                    vnode.state.openTasks.map((doc, ind) => {
-                                        let date = doc.dueDate.toDate();
+                                    vnode.state.openTasks.sort(compareDates).map((doc, ind) => {
+                                        let date = doc.date.toDate();
                                         let d = date.getDate() + '/' + date.getMonth() /*  + '/' + item.date.toDate().getFullYear() */;
+                                        let due = (new Date().setTime(0) - doc.dueDate.toDate().setTime(0))
                                         return (
                                             m('.lead-tasks__row', { key: ind, id: doc.id }, [
                                                 m('.lead-tasks__date', d),
                                                 m('.lead-tasks__text', doc.text),
+                                                m('.lead-tasks__due', due),
                                                 m('button.lead-tasks__button', { onclick: e => closeTask(e, vnode) }, 'בוצע')
                                             ])
                                         )
@@ -49,8 +51,8 @@ const Card = (init) => {
                             ]) : [],
                             m('div#doneList.lead-tasks__list.lead-tasks__list--done',{style:"display:none;"} ,  [
                                 vnode.state.closedTasks ?
-                                    vnode.state.closedTasks.map((doc, ind) => {
-                                        let date = doc.dueDate.toDate();
+                                    vnode.state.closedTasks.sort(compareDates).map((doc, ind) => {
+                                        let date = doc.date.toDate();
                                         let d = date.getDate() + '/' + date.getMonth() /*  + '/' + item.date.toDate().getFullYear() */;
                                         return (
                                             m('.lead-tasks__row.lead-tasks__row--done', { key: ind, id: doc.id }, [
@@ -111,12 +113,13 @@ function reOpenTask(e, vnode){
 }
 
 function compareDates(a, b) {
-    let aNum = +a.date.toDate();
-    let bNum = +b.date.toDate();
+    let aNum = +a.dueDate.toDate();
+    let bNum = +b.dueDate.toDate();
+    console.log('compare ' , aNum , bNum);
     if (aNum > bNum) {
-        return -1; // swap
+        return 1; // swap
     } else if (aNum < bNum) {
-        return 1;
+        return -1;
     } else {
         return 0; //dont do nothing
     }
