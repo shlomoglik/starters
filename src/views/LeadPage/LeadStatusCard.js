@@ -58,13 +58,15 @@ function buildStatusObj(vnode) {
 
 function setNewStatus(e, vnode) {
     let el = e.target;
-    let text = el.innerText;
+    let status = el.innerText;
     let statusID = el.id;
     let col = `leads/${vnode.attrs.leadID}/status`;
-    let objToUpdate = {
-        status: text,
-        done: true
-    };
+    let done = true;
+    if(el.classList.contains('lead-status__button--done')){
+        console.log('re open this one')
+        done = false;
+    }
+    let objToUpdate = {status,done};
     addOrUpdateDoc(col, statusID, objToUpdate);
 }
 
