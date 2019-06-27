@@ -67,8 +67,18 @@ let settings = {
         { title: "משתמשים", count: 0, groups: [setUserRoles] },
         { title: "מתקדם", count: 0 },
     ],
+
     leadTypeList: [],
     leadSourceList: [],
+
+    setLeadStatus : [
+        {status:'ליד חדש' , id:'newLead' , done:true },
+        {status:'פגישה' , id:'meeting' },
+        {status:'הצעת מחיר' , id:'priceQuote' },
+        {status:'סגור' , id:'invitation' },
+        {status:'הזמנה חתומה' , id:'invitationSigned' },
+        {status:'שולמה מקדמה' , id:'downPayment' },
+    ]
 }
 
 module.exports = settings;

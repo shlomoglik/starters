@@ -24,7 +24,6 @@ function closestByClass(el, cls) {
     return el;
 }
 
-
 //Layout helpers
 function toggleGroup(e, vnode) {
     if (vnode.state.shrink) {
@@ -34,9 +33,18 @@ function toggleGroup(e, vnode) {
     }
 }
 
+function mapToObj(mapObj){
+    let obj ={};
+    mapObj.forEach(el=> obj[el.id] = el);
+    return obj;
+}
+
+
+
 module.exports =
     {
         getFormValues,
         closestByClass,
-        toggleGroup
+        toggleGroup,
+        mapToObj,
     }

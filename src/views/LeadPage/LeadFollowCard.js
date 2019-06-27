@@ -65,23 +65,23 @@ function getCounter(vnode){
 }
 function getDist(vnode){
     if(vnode.state.followUps !== []){
-        console.log('before sorting: ',vnode.state.followUps);
-        let sorted = vnode.state.followUps.sort(compareDates);
-        console.log('after sorting: ',sorted);
+        // console.log('before sorting: ',vnode.state.followUps);
+        // let sorted = vnode.state.followUps.sort(compareDates);
+        // console.log('after sorting: ',sorted);
     }
 }
 
-function compareDates(a, b) {
-    let aNum = +a.date.toDate();
-    let bNum = +b.date.toDate();
-    if (aNum > bNum) {
-        return -1; // swap
-    } else if (aNum < bNum) {
-        return 1;
-    } else {
-        return 0; //dont do nothing
-    }
-}
+// function compareDates(a, b) {
+//     let aNum = +a.date.toDate();
+//     let bNum = +b.date.toDate();
+//     if (aNum > bNum) {
+//         return -1; // swap
+//     } else if (aNum < bNum) {
+//         return 1;
+//     } else {
+//         return 0; //dont do nothing
+//     }
+// }
 
 function addToList(e,vnode){
     e.preventDefault();

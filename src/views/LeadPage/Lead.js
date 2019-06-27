@@ -4,6 +4,7 @@ import LeadGeneralCard from './LeadGeneralCard'
 import LeadContacts from './LeadContactsCard'
 import LeadFollowCard from './LeadFollowCard'
 import LeadTasksCard from './LeadTasksCard'
+import LeadStatusCard from './LeadStatusCard'
 import ScrollTop from '../commons/ScrollTop'
 import store from '../../data/store'
 
@@ -31,7 +32,7 @@ let Lead = (init) => {
                             m(LeadContacts, { title: `אנשי קשר ${vnode.state.contactsCount ? `(${vnode.state.contactsCount})` : ''}`, rows: vnode.state.contactsData, leadID: vnode.attrs.id, leadData: vnode.state.lead }),
                             m(LeadFollowCard, {title:"פולואפ" , leadID: vnode.attrs.id}),
                             m(LeadTasksCard, {title:"משימות" , leadID: vnode.attrs.id}),
-                            m(LeadFollowCard, {title:"סטטוס"}),
+                            m(LeadStatusCard, {title:"סטטוס" , leadID: vnode.attrs.id}),
                         ])
                         : m('span.loader', 'טוען...'),
                     m(ScrollTop)

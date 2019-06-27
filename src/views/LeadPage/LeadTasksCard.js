@@ -12,7 +12,7 @@ const Card = (init) => {
             vnode.state.counter = 0;
         },
         onbeforeupdate: vnode => {
-            getOpenTasksCount(vnode);
+            getFilterTasks(vnode);
             getDist(vnode);
         },
         oncreate: vnode => {
@@ -28,8 +28,8 @@ const Card = (init) => {
                     !vnode.state.shrink ?
                         m('.lead-tasks', [
                             m('.lead-tasks__list', [
-                                vnode.state.tasks ?
-                                    vnode.state.tasks.filter(el=>el.done==false).map((doc, ind) => {
+                                vnode.state.openTasks ?
+                                    vnode.state.openTasks.map((doc, ind) => {
                                         let date = doc.dueDate.toDate();
                                         let d = date.getDate() + '/' + date.getMonth() /*  + '/' + item.date.toDate().getFullYear() */;
                                         return (
@@ -42,13 +42,14 @@ const Card = (init) => {
                                     })
                                     : [] ,
                             ]),
+                            vnode.state.closedTasks.length > 0 ?
                             m('.lead-tasks__section-row',{onclick:e=>toggleNext(e,vnode)},[
                                 m('.lead-tasks__section-title',`משימות שנסגרו (${vnode.state.countClosed ? vnode.state.countClosed : '' })`),
                                 m('svg#arrow.setGroup__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down'}))
-                            ]),
-                            m('.lead-tasks__list.lead-tasks__list--done',{style:"display:none;"} ,  [
-                                vnode.state.tasks ?
-                                    vnode.state.tasks.filter(el=>el.done==true).map((doc, ind) => {
+                            ]) : [],
+                            m('div#doneList.lead-tasks__list.lead-tasks__list--done',{style:"display:none;"} ,  [
+                                vnode.state.closedTasks ?
+                                    vnode.state.closedTasks.map((doc, ind) => {
                                         let date = doc.dueDate.toDate();
                                         let d = date.getDate() + '/' + date.getMonth() /*  + '/' + item.date.toDate().getFullYear() */;
                                         return (
@@ -69,21 +70,23 @@ const Card = (init) => {
     }
 }
 
-function getOpenTasksCount(vnode) {
+function getFilterTasks(vnode) {
     if (vnode.state.tasks) {
         let openTasks = vnode.state.tasks.filter(d=>d.done==false);
         let closedTasks = vnode.state.tasks.filter(d=>d.done==true);
 
+        vnode.state.openTasks = openTasks;
+        vnode.state.closedTasks = closedTasks;
         vnode.state.counter = openTasks.length;
         vnode.state.countClosed = closedTasks.length;
     }
 }
 function toggleNext(e,vnode){
-    let next = e.target.nextSibling;
-    if(next.style.display =='none'){
-        next.style.display = "block";
+    let list = vnode.dom.querySelector('#doneList');
+    if(list.style.display =='none'){
+        list.style.display = "block";
     }else{
-        next.style.display = "none";
+        list.style.display = "none";
     }
 }
 function getDist(vnode) {

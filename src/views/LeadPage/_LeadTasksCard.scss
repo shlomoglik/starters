@@ -9,12 +9,10 @@
     }
 
     &__section-row{
-        margin: 2rem auto;
+        margin: 2rem auto 1rem;
         text-align: center;
-        font-size: 1.4rem;
-        border-bottom: 1px solid lightgray;
-        border-bottom-width: 80%;
-        background-color: var(--color-grey-bg);
+        font-size: 1.2rem;
+        text-align: center;
         color: var(--color-grey-dark-3);
         transition: all .4s;
         display: flex;
@@ -25,13 +23,20 @@
             background-color: var(--color-grey-dark-3);
             transform: translateY(-.2rem);
             color: var(--color-white);
+            & > #arrow{
+                fill: var(--color-white);
+            }
         }
         &:active{
             transform: translateY(0);
+            & > #arrow{
+                transform: rotate(-180deg);
+            }
         }
     }
     &__section-title{
         font-size: 1.2rem;
+        flex: 1;
     }
 
     &__row{
@@ -63,10 +68,6 @@
         font-size: 1.8rem;
         overflow-wrap: break-word;
         flex: 2; 
-
-        // &--done{
-        //     color: var(--color-grey-dark-3);
-        // }
     }
 
     &__button{

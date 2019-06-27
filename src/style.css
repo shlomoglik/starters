@@ -5,6 +5,7 @@
   --color-secondary:#E05F3C;
   --color-tartiary:#3CBDE0;
   --color-red:#eb2f64;
+  --color-red-trs:hsla(343, 82%, 55%, .6);
   --color-grey-light-1: #faf9f9;
   --color-grey-light-2: #f4f2f2;
   --color-grey-light-3: #f0eeee;
@@ -1300,12 +1301,10 @@ body {
     justify-content: space-between;
     align-items: stretch; }
   .lead-tasks__section-row {
-    margin: 2rem auto;
+    margin: 2rem auto 1rem;
     text-align: center;
-    font-size: 1.4rem;
-    border-bottom: 1px solid lightgray;
-    border-bottom-width: 80%;
-    background-color: var(--color-grey-bg);
+    font-size: 1.2rem;
+    text-align: center;
     color: var(--color-grey-dark-3);
     transition: all .4s;
     display: flex;
@@ -1313,13 +1312,18 @@ body {
     align-items: center; }
     .lead-tasks__section-row:hover {
       font-size: 1.8rem;
-      color: var(--color-white);
       background-color: var(--color-grey-dark-3);
-      transform: translateY(-0.2rem); }
+      transform: translateY(-0.2rem);
+      color: var(--color-white); }
+      .lead-tasks__section-row:hover > #arrow {
+        fill: var(--color-white); }
     .lead-tasks__section-row:active {
       transform: translateY(0); }
+      .lead-tasks__section-row:active > #arrow {
+        transform: rotate(-180deg); }
   .lead-tasks__section-title {
-    font-size: 2rem; }
+    font-size: 1.2rem;
+    flex: 1; }
   .lead-tasks__row {
     display: flex;
     justify-content: space-between;
@@ -1358,6 +1362,36 @@ body {
       background: var(--color-primary);
       opacity: 1;
       cursor: pointer; }
+
+.lead-status {
+  display: flex;
+  width: 100%;
+  justify-content: space-between; }
+  .lead-status__button {
+    flex: 1;
+    border-radius: 15px;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    background-color: transparent;
+    color: var(--color-grey-dark-1);
+    transition: all .2s; }
+  .lead-status__button--done {
+    background-color: var(--color-primary-light); }
+    .lead-status__button--done:hover {
+      cursor: pointer;
+      background-color: var(--color-red-trs); }
+  .lead-status__button--open:hover {
+    cursor: pointer;
+    font-size: 2.1rem;
+    color: var(--color-primary);
+    background-color: var(--color-grey-bg); }
+  .lead-status__button--open:active {
+    cursor: progress;
+    font-size: 2rem;
+    color: var(--color-grey-dark-1);
+    background-color: var(--color-grey-bg); }
 
 .container--search {
   margin-top: 8rem;

@@ -29,6 +29,7 @@ function insertDoc(col, doc) {
     return prom;
 }
 
+
 /**
  * insertDoc insert new document to specific collection
  * @param {String} col collection name to find doc
@@ -50,12 +51,23 @@ function updateDoc(col, id, objToUpdate) {
         doc => {
             if (doc.exists) {
                 let merge = { merge: true };
-                docRef.set(objToUpdate , merge );
+                docRef.set(objToUpdate, merge);
             } else {
                 console.log('doc not exist')
             }
         }
     ).catch(err => console.error(err));
+}
+/**
+ * find document in specific collection with id - if exist then update else add
+ * @param {String} col collection name to find doc
+ * @param {String} id the doc id to modify 
+ * @param {Object} objToUpdate object thant include field and value to modify ex: {name:"john"}
+ */
+function addOrUpdateDoc(col, id, objToUpdate) {
+    let docRef = db.collection(col).doc(id);
+    let merge = { merge: true };
+    docRef.set(objToUpdate, merge);
 }
 
 
@@ -133,7 +145,7 @@ function getLeads(groupType) {
         return;
     }
     let userPath = user.path || ""; // User.getUser('path') || 
-    let assignMain = {assignRef: userPath , role: "main"};
+    let assignMain = { assignRef: userPath, role: "main" };
     let colRef = db.collection('leads');
     let qry;
     qry = colRef.where('assigns', 'array-contains', assignMain);
@@ -178,14 +190,21 @@ function getTypeList() {
     snapCollection_(colRef, settings, 'leadTypeList');
 }
 
-function getFollowUps(leadID , vnode){
+function getFollowUps(leadID, vnode) {
     let colRef = db.collection(`leads/${leadID}/followUps`);
     snapCollection_(colRef, vnode.state, 'followUps');
 }
-function getTasks(leadID , vnode){
+function getTasks(leadID, vnode) {
     let colRef = db.collection(`leads/${leadID}/tasks`);
     snapCollection_(colRef, vnode.state, 'tasks');
 }
+
+function getStatus(leadID , vnode){
+    let colRef = db.collection(`leads/${leadID}/status`);
+    snapCollection_(colRef, vnode.state, 'status');
+}
+
+
 
 
 module.exports = {
@@ -193,6 +212,7 @@ module.exports = {
     insertDoc,
     deleteDoc,
     updateDoc,
+    addOrUpdateDoc,
     addToMapInDoc,
     updateMapInDoc,
     getLeads,
@@ -202,6 +222,7 @@ module.exports = {
     getTypeList,
     getFollowUps,
     getTasks,
+    getStatus,
 };
 
 
