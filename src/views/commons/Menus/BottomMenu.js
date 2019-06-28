@@ -9,7 +9,7 @@ let commands = [
   {
     title: "לטיפול",
     iconPath: "/public/img/sprite.svg#icon-flow-tree",
-    ref: "/myLeads"
+    ref: "/myTasks"
   },
   {
     title: "חיפוש",
@@ -17,11 +17,13 @@ let commands = [
     ref: "/search"
   },
   {
-    title: "הגדרות",
-    iconPath: "/public/img/sprite.svg#icon-tools",
-    ref: "/settings"
+    title: "לידים",
+    iconPath: "/public/img/sprite.svg#icon-layers",
+    ref: "/myLeads"
   }
 ]
+
+
 
 let BottomMenu = (init) => {
   return {

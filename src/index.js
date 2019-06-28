@@ -8,6 +8,7 @@ import './style.css';
 //Views
 import LoginPage from "./views/LoginPage/LoginPage";
 import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
+import TasksPage from "./views/TasksPage/TasksPage";
 import LeadsPage from "./views/LeadsPage/LeadsPage";
 import LeadPage from "./views/LeadPage/Lead";
 import SearchPage from "./views/SearchPage/SearchPage";
@@ -28,6 +29,14 @@ m.route(root, "/login", {
             let logged = User.isLoggedIn();
             if (logged)
                 return AddLeadPage
+            else m.route.set('/login')
+        }
+    },
+    "/myTasks": {
+        onmatch: () => {
+            let logged = User.isLoggedIn();
+            if (logged)
+                return TasksPage
             else m.route.set('/login')
         }
     },
