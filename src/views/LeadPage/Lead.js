@@ -7,11 +7,15 @@ import LeadTasksCard from './LeadTasksCard'
 import LeadStatusCard from './LeadStatusCard'
 import ScrollTop from '../commons/ScrollTop'
 import store from '../../data/store'
+import {deleteDoc} from '../../firebase/qry'
 
 
 let Lead = (init) => {
     return {
         oninit: vnode => {
+            vnode.state.cmdList = [
+                {cmd:'deleteLead', label: 'מחק ליד', func: e => deleteLead( e , vnode.attrs.id)},
+            ];
             vnode.state.contactsCount = 0;
             getLeadByID(vnode);
         },
@@ -25,7 +29,7 @@ let Lead = (init) => {
         view: (vnode) => {
             return (
                 m('.lead', { id: vnode.attrs.id }, [
-                    m(HeaderFullPage, { title: `פרטי ליד ${vnode.state.mainContactName ? ' - '+ vnode.state.mainContactName:''}`, backTo: '/myLeads' }),
+                    m(HeaderFullPage, { title: `פרטי ליד ${vnode.state.mainContactName ? ' - '+ vnode.state.mainContactName:''}`, backTo: '/myLeads' ,cmdList:vnode.state.cmdList  }),
                     vnode.state.lead ?
                         m('.cards', [
                             m(LeadGeneralCard, { title: "פרטים כלליים", leadData:vnode.state.lead, leadTitle: vnode.state.leadTitle}),
@@ -62,6 +66,11 @@ function getMainContactName(vnode){
     let activeContactsData = vnode.state.contactsData;
     let mainContact = activeContactsData.filter(contact=>contact.role =='main');
     vnode.state.mainContactName = mainContact[0].name;
+}
+
+function deleteLead( e , leadID){
+    deleteDoc('leads',leadID);
+    m.route.set('/myLeads');
 }
 
 module.exports = Lead;

@@ -1,10 +1,6 @@
 import m from "mithril"
 import CommandList from '../CommandList'
 
-let cmdList = [
-    { cmd: 'deleteLead', label: 'מחק ליד', func: e => console.log('TODO! delete lead + nav back to myLeads') },
-]
-
 let Header = (init) => {
     return {
         view: (vnode) => {
@@ -14,7 +10,7 @@ let Header = (init) => {
                     String.fromCharCode(10132)
                 ),
                 m('span.header-full-page__title', vnode.attrs.title || 'כותרת'),
-                m(CommandList, {list: cmdList })
+                m(CommandList, {list: vnode.attrs.cmdList })
             ])
         }
     }
