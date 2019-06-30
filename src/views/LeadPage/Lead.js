@@ -45,6 +45,8 @@ let Lead = (init) => {
         }
     }
 }
+
+
 function getLeadByID(vnode) {
     let myLeadData = store.storeLeads.filter(lead => lead.id == vnode.attrs.id);
     vnode.state.lead = myLeadData[0];

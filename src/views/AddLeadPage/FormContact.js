@@ -5,7 +5,7 @@ import {getFormValues} from '../../js/utils'
 import FilterInline from '../commons/Filters/FiltersInline'
 import SearchBox from '../commons/SearchBox'
 import SearchList from '../commons/SearchList'
-import CommandList from '../commons/CommandList'
+import CommandList from '../commons/Menus/CommandList'
 import Contact from '../../data/Contact'
 import store from '../../data/store'
 

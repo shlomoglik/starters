@@ -5,7 +5,7 @@ import settings from '../../data/settings';
 import store from '../../data/store';
 import Contact from '../../data/Contact';
 import SearchList from '../commons/SearchList';
-import CommandList from '../commons/CommandList';
+import CommandList from '../commons/Menus/CommandList';
 
 const CardContacts = (init) => {
     return {

@@ -1,5 +1,5 @@
 import m from "mithril"
-import CommandList from '../CommandList'
+import CommandList from '../Menus/CommandList'
 
 let Header = (init) => {
     return {
