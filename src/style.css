@@ -374,6 +374,57 @@ body {
     width: 1.8rem;
     height: 1.8rem; }
 
+.commandList__icon {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  fill: currentColor;
+  border-radius: 50%;
+  transition: all .2s; }
+  .commandList__icon:hover {
+    background-color: var(--color-grey-light-3);
+    cursor: pointer; }
+
+.commandList__list {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(-95%);
+  padding-top: .5rem;
+  border-radius: 5px;
+  background-color: #ffffffce;
+  color: var(--color-grey-dark);
+  box-shadow: var(--box-shadow-2);
+  opacity: 0;
+  z-index: 100;
+  transition: all .2s ease-in; }
+  .commandList__list--visible {
+    visibility: visible;
+    opacity: .85;
+    backface-visibility: hidden; }
+
+.commandList__row {
+  padding: 1rem 1rem;
+  height: 3rem;
+  width: 100%;
+  text-align: center; }
+  .commandList__row:hover {
+    cursor: pointer;
+    opacity: 1;
+    background-color: var(--color-grey-light-3); }
+  .commandList__row:not(:last-child) {
+    margin-bottom: .5rem; }
+
+.commandList__item {
+  font-size: 1.5rem;
+  flex: 0 0 100%; }
+
 .header {
   padding: 2rem;
   background-color: var(--color-primary-dark);
@@ -686,57 +737,6 @@ body {
     fill: var(--color-primary);
     transform: scale(1.1); }
 
-.commandList__icon {
-  position: relative;
-  width: 3rem;
-  height: 3rem;
-  fill: currentColor;
-  border-radius: 50%;
-  transition: all .2s; }
-  .commandList__icon:hover {
-    background-color: var(--color-grey-light-3);
-    cursor: pointer; }
-
-.commandList__list {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: max-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transform: translateX(-95%);
-  padding-top: .5rem;
-  border-radius: 5px;
-  background-color: #ffffffce;
-  color: var(--color-grey-dark);
-  box-shadow: var(--box-shadow-2);
-  opacity: 0;
-  z-index: 100;
-  transition: all .2s ease-in; }
-  .commandList__list--visible {
-    visibility: visible;
-    opacity: .85;
-    backface-visibility: hidden; }
-
-.commandList__row {
-  padding: 1rem 1rem;
-  height: 3rem;
-  width: 100%;
-  text-align: center; }
-  .commandList__row:hover {
-    cursor: pointer;
-    opacity: 1;
-    background-color: var(--color-grey-light-3); }
-  .commandList__row:not(:last-child) {
-    margin-bottom: .5rem; }
-
-.commandList__item {
-  font-size: 1.5rem;
-  flex: 0 0 100%; }
-
 .scrollTop {
   display: none;
   position: fixed;
@@ -916,8 +916,61 @@ body {
 .myTasks {
   margin: 0 auto;
   min-width: 320px;
-  min-height: 100vh;
-  background-color: orangered; }
+  min-height: 100vh; }
+
+.tasks--empty {
+  height: 10rem;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .tasks--empty::after {
+    font-size: 1.6rem;
+    content: attr(data-empty);
+    color: var(--color-primary); }
+
+.tasks__heading {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2rem;
+  font-weight: 600;
+  align-content: center; }
+
+.tasks__row {
+  border-radius: 5px;
+  box-shadow: var(--box-shadow-1);
+  background-color: var(--color-white);
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2rem;
+  padding: 0 auto;
+  transition: all .15s ease-in-out; }
+  .tasks__row:hover {
+    transform: translateY(-0.1rem);
+    background-color: var(--color-grey-light-2);
+    box-shadow: var(--box-shadow-2);
+    cursor: pointer; }
+  .tasks__row:active {
+    transform: translateY(0);
+    box-shadow: var(--box-shadow-1); }
+
+.tasks__cell {
+  padding: 1rem; }
+
+.tasks__title {
+  display: flex;
+  flex-direction: column; }
+
+.tasks__name {
+  font-weight: 500;
+  font-size: 1.8rem !important; }
+
+.tasks__desc, .tasks__type {
+  font-size: 1.4rem  !important; }
 
 .container--myLeads {
   margin-top: 13rem;
