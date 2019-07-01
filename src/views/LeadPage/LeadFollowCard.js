@@ -29,7 +29,7 @@ const Card = (init) => {
                             m('.lead-follow__list',[
                                 vnode.state.followUps.map((item,ind)=>{
                                     let date = item.date.toDate();
-                                    let followDate = date.getDate() + '/' + date.getMonth() /*  + '/' + item.date.toDate().getFullYear() */;
+                                    let followDate = date.getDate() + '/' + Number(date.getMonth()+1) /*  + '/' + item.date.toDate().getFullYear() */;
                                     return(
                                         m('.lead-follow__row',{key:ind , id:item.id},[
                                             m('.lead-follow__date',followDate),

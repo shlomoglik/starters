@@ -11,7 +11,7 @@ let TaskRow = (init) => {
             let task = vnode.attrs.task;
             let follow = 'היום';
             if (task.followDate) {
-                follow = task.followDate.toDate().getDate() + '/' + task.followDate.toDate().getMonth() + '/' + task.followDate.toDate().getFullYear();
+                follow = task.followDate.toDate().getDate() + '/' + Number(task.followDate.toDate().getMonth()+1) + '/' + task.followDate.toDate().getFullYear();
                 let dist = (new Date().setTime(0) - task.followDate.toDate().setTime(0));
                 console.log(dist);
                 if (dist == 0) {

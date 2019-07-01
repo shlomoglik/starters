@@ -31,7 +31,7 @@ const Card = (init) => {
                                 vnode.state.openTasks ?
                                     vnode.state.openTasks.sort(compareDates).map((doc, ind) => {
                                         let date = doc.date.toDate();
-                                        let d = date.getDate() + '/' + date.getMonth() /*  + '/' + item.date.toDate().getFullYear() */;
+                                        let d = date.getDate() + '/' + Number(date.getMonth()+1) /*  + '/' + item.date.toDate().getFullYear() */;
                                         let due = (new Date().setTime(0) - doc.dueDate.toDate().setTime(0))
                                         return (
                                             m('.lead-tasks__row', { key: ind, id: doc.id }, [
@@ -53,7 +53,7 @@ const Card = (init) => {
                                 vnode.state.closedTasks ?
                                     vnode.state.closedTasks.sort(compareDates).map((doc, ind) => {
                                         let date = doc.date.toDate();
-                                        let d = date.getDate() + '/' + date.getMonth() /*  + '/' + item.date.toDate().getFullYear() */;
+                                        let d = date.getDate() + '/' + Number(date.getMonth()+1) /*  + '/' + item.date.toDate().getFullYear() */;
                                         return (
                                             m('.lead-tasks__row.lead-tasks__row--done', { key: ind, id: doc.id }, [
                                                 m('.lead-tasks__date.lead-tasks__date--done', d),

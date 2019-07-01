@@ -7,7 +7,7 @@ let LeadRow = (init) => {
             let lead = vnode.attrs.lead ;
             let follow = 'היום';
             if (lead.followDate) {
-                follow = lead.followDate.toDate().getDate() + '/' + lead.followDate.toDate().getMonth() + '/' + lead.followDate.toDate().getFullYear();
+                follow = lead.followDate.toDate().getDate() + '/' + Number(lead.followDate.toDate().getMonth()+1) + '/' + lead.followDate.toDate().getFullYear();
                 let dist = (new Date().setTime(0) - lead.followDate.toDate().setTime(0));
                 if (dist == 0) {
                     follow = 'היום'
