@@ -7,7 +7,7 @@ const Card = (init) => {
     return {
         oninit: vnode => {
             vnode.state.tasks = [];
-            vnode.state.shrink = vnode.attrs.shrink || true;
+            vnode.state.shrink = vnode.attrs.shrink || false;
         },
         oncreate: vnode => {
             getStatus(vnode.attrs.leadID, vnode);
