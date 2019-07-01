@@ -4,7 +4,11 @@ import Bottom from '../commons/Menus/BottomMenu'
 import store from '../../data/store'
 import settings from '../../data/settings'
 
-const SearchPage = {
+const SearchPage = (init)=>{
+  return {
+    oninit: vnode =>{
+      window.scrollTo(0, document.body.scrollHeight);
+    },
     view: (vnode) => {
       return (
         m('.container--search' , [
@@ -34,6 +38,7 @@ const SearchPage = {
         ])
       )
     }
+  }
 }
 
 function startSearch(e,vnode){
@@ -54,13 +59,9 @@ function startSearch(e,vnode){
   
   console.log(store.storeTasks);
   let tasksRes = store.storeTasks.filter(task => {
-    console.log(task);
     let fields = ["text"];
     return getResults(task ,fields , term);
   }).map(el=>{return {"text":el.text ,"id":el.id} });
-
-  console.log(tasksRes);
-
 
   res.push(...contactRes);
   res.push(...leadsRes);
@@ -68,6 +69,7 @@ function startSearch(e,vnode){
 
   vnode.state.results = res;
   form.reset();
+  window.scrollTo(0, document.body.scrollHeight);
 }
 function getResults(obj ,fields , term){
   for(let f in fields){

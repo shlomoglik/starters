@@ -11,6 +11,7 @@ let SettingsPage = (init) => {
   return {
     oninit: vnode => {
       vnode.state.groups = settings.setGroup;
+        window.scrollTo(0,0);
     },
     onbeforeupdata: (vnode) => {
       vnode.state.groups = settings.setGroup;

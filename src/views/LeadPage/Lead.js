@@ -13,6 +13,7 @@ import {deleteDoc} from '../../firebase/qry'
 let Lead = (init) => {
     return {
         oninit: vnode => {
+            window.scrollTo(0, document.body.scrollHeight);
             vnode.state.cmdList = [
                 {cmd:'deleteLead', label: 'מחק ליד', func: e => deleteLead( e , vnode.attrs.id)},
             ];

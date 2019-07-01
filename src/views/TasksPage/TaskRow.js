@@ -13,6 +13,7 @@ let TaskRow = (init) => {
             if (task.followDate) {
                 follow = task.followDate.toDate().getDate() + '/' + task.followDate.toDate().getMonth() + '/' + task.followDate.toDate().getFullYear();
                 let dist = (new Date().setTime(0) - task.followDate.toDate().setTime(0));
+                console.log(dist);
                 if (dist == 0) {
                     follow = 'היום'
                 }
@@ -25,7 +26,7 @@ let TaskRow = (init) => {
                     }, [
                         m(".tasks__cell.tasks__follow", follow),
                         m(".tasks__cell", task.text),
-                        m(".tasks__cell.tasks__link", {onclick: e=>navigateToLead(e,vnode)} , vnode.state.leadData.description),
+                        m(".tasks__cell.tasks__link", {onclick: e=>navigateToLead(e,vnode)} , vnode.state.leadData?vnode.state.leadData.description:'לא משוייך לליד' ),
                         m('button.tasks__cell.tasks__button', { onclick: e => closeTask(e, vnode) }, 'בוצע')
                     ])
             )
@@ -34,7 +35,11 @@ let TaskRow = (init) => {
 }
 
 function navigateToLead(e,vnode){
-    m.route.set(`/myLeads/${vnode.state.leadID}`);
+    if(e.target.innerText=="לא משוייך לליד"){
+        return;
+    }else{
+        m.route.set(`/myLeads/${vnode.state.leadID}`);
+    }
 }
 function navigateToTask(e,vnode){
     console.log('TODO nav to task popup or page by set task id as param to routes ',vnode.dom.id);

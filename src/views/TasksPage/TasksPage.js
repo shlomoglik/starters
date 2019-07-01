@@ -6,6 +6,9 @@ import ScrollTop from '../commons/ScrollTop'
 
 const TasksPage = (init)=>{
     return{
+        oninit: vnode =>{
+            window.scrollTo(0,0);
+        },
         view: vnode =>{
             return (
                 m(".container--myTasks",[

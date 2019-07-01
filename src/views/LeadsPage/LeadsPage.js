@@ -11,6 +11,7 @@ import Leads from './Leads';
 let leadsPage = (init)=>{
   return {
     oninit: (vnode) => {
+      window.scrollTo(0,0);
       vnode.state.data = store.storeLeads;
       setCounter();
     },
