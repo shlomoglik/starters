@@ -115,7 +115,7 @@ function reOpenTask(e, vnode){
 function compareDates(a, b) {
     let aNum = +a.dueDate.toDate();
     let bNum = +b.dueDate.toDate();
-    console.log('compare ' , aNum , bNum);
+    // console.log('compare ' , aNum , bNum);
     if (aNum > bNum) {
         return 1; // swap
     } else if (aNum < bNum) {

@@ -5,12 +5,14 @@ import store from '../../data/store'
 
 const Tasks = (init) => {
     return {
-        oninit: vnode => {
-            getAllTasks();
+        oninit: vnode =>{
+            vnode.state.openTasks = [];
+        },
+        onbeforeupdate: vnode =>{
+            vnode.state.openTasks = store.storeTasks.filter(task=>task.done !== true);
         },
         view: vnode => {
-            let openTasksData = store.storeTasks.filter(task=>task.done !== true);
-            if (!openTasksData[0]) {
+            if (!vnode.state.openTasks[0]) {
                 return m('.tasks.tasks--empty', { "data-empty": "כל הכבוד אין משימות פתוחות" })
             } else {
                 return (
@@ -21,7 +23,7 @@ const Tasks = (init) => {
                             m(".tasks__cell", "שיוך לליד"),
                             m(".tasks__cell", "ביצוע"),
                         ]),
-                        openTasksData.map(task => {
+                        vnode.state.openTasks.map(task => {
                             return (
                                 m(TaskRow, { task: task })
                             )

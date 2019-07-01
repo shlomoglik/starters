@@ -689,7 +689,7 @@ body {
     width: 3rem;
     height: 3rem; }
   .searchBox__input:focus + .searchBox__icon {
-    display: none; }
+    opacity: .3; }
 
 .searchList {
   position: absolute;
@@ -707,7 +707,6 @@ body {
     width: 100%;
     padding: 0 1rem;
     height: 2.2rem;
-    width: 100%;
     text-align: center;
     display: flex;
     justify-content: space-between;
@@ -1484,11 +1483,79 @@ body {
   margin-top: 8rem;
   margin-bottom: 8rem;
   background-color: var(--color-grey-light-3);
-  height: 100vh; }
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative; }
 
 .mySearch {
-  margin: 0 auto;
-  min-width: 360px; }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  direction: rtl; }
+  .mySearch__results {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    direction: rtl;
+    margin-bottom: 8rem; }
+  .mySearch__row {
+    border-radius: 5px;
+    line-height: 5rem;
+    box-shadow: var(--box-shadow-light);
+    background-color: var(--color-white);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2rem;
+    padding: 0 auto;
+    transition: all .15s ease-in-out; }
+    .mySearch__row:hover {
+      transform: translateY(-0.1rem);
+      background-color: var(--color-grey-light-2);
+      box-shadow: var(--box-shadow-2);
+      cursor: pointer; }
+    .mySearch__row:active {
+      transform: translateY(0);
+      box-shadow: var(--box-shadow-1); }
+  .mySearch__search-box {
+    position: fixed;
+    bottom: 8rem;
+    border-radius: 15px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-grey-bg);
+    color: var(--color-grey-dark-3);
+    box-shadow: var(--box-shadow-light); }
+  .mySearch__input {
+    flex: 1;
+    line-height: 5rem;
+    border-radius: 0 15px 15px 0;
+    padding: 1.5rem;
+    text-align: right;
+    font-size: 3rem;
+    font-family: inherit;
+    border: none;
+    outline: none;
+    width: 100%;
+    transition: all .2s ease-in; }
+    .mySearch__input::placeholder {
+      color: var(--color-grey-light-3); }
+  .mySearch__icon {
+    fill: currentColor;
+    width: 4rem;
+    height: 4rem; }
+  .mySearch__input:focus + .mySearch__icon {
+    opacity: .3; }
 
 .container--settings {
   margin-top: 13rem;

@@ -52,12 +52,15 @@ function updateDoc(col, id, objToUpdate) {
             if (doc.exists) {
                 let merge = { merge: true };
                 docRef.set(objToUpdate, merge);
+                m.redraw();
             } else {
                 console.log('doc not exist')
             }
         }
     ).catch(err => console.error(err));
 }
+
+
 /**
  * find document in specific collection with id - if exist then update else add
  * @param {String} col collection name to find doc
@@ -68,6 +71,7 @@ function addOrUpdateDoc(col, id, objToUpdate) {
     let docRef = db.collection(col).doc(id);
     let merge = { merge: true };
     docRef.set(objToUpdate, merge);
+    m.redraw();
 }
 
 
@@ -88,6 +92,7 @@ function addToMapInDoc(col, id, fieldRef, newData) {
                 let updatedField = doc.data()[fieldRef];
                 updatedField.push(newData);
                 docRef.update(fieldRef, updatedField);
+                m.redraw();
             } else {
                 console.log('doc not exist')
             }
@@ -107,6 +112,7 @@ function updateMapInDoc(col, id, fieldRef, newData) {
         doc => {
             if (doc.exists) {
                 docRef.update(fieldRef, newData);
+                m.redraw();
             } else {
                 console.log('doc not exist')
             }
@@ -210,13 +216,14 @@ function getAllTasks() {
     let assignMain = { assignRef: userPath, role: "main" };
     let qry = db.collectionGroup('tasks');
     qry.where('assigns', 'array-contains', assignMain);
-    qry.onSnapshot( snap => {
+    qry.onSnapshot(snap => {
         let res = [];
         snap.forEach((doc) => {
-            res.push(Object.assign(doc.data(), { id: doc.id  , ref:doc.ref.path}))
+            res.push(Object.assign(doc.data(), { id: doc.id, ref: doc.ref.path }))
         });
         store.storeTasks = res;
         console.log(' listen on collectionGroup tasks.   snap size = ', snap.size, 'result data is: ', res)
+        m.redraw();
     });
 }
 
