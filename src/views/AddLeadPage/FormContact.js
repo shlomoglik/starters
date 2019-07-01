@@ -106,7 +106,6 @@ function getList(term, field, model) {
 function renderActiveContact(activeContact, vnode) {
     let cmdList = [
         { cmd: 'unAssign', label: 'הסר מליד זה', func: e => vnode.attrs.parent.state.activeContact = false },
-        { cmd: 'markAsMain', label: 'הגדר כעיקרי', func: e => console.log('TODO! change role to main') },
         { cmd: 'edit', label: 'ערוך איש קשר', func: e => console.log('TODO! goto contact full page via contacts/:id ') },
     ]
     return m(`.row#${activeContact.id}`, [
