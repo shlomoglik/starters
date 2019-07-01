@@ -9,7 +9,6 @@ import ScrollTop from '../commons/ScrollTop'
 import store from '../../data/store'
 import {deleteDoc} from '../../firebase/qry'
 
-
 let Lead = (init) => {
     return {
         oninit: vnode => {
@@ -34,10 +33,10 @@ let Lead = (init) => {
                     vnode.state.lead ?
                         m('.cards', [
                             m(LeadGeneralCard, { title: "פרטים כלליים", leadData:vnode.state.lead, leadTitle: vnode.state.leadTitle}),
-                            m(LeadContacts, { title: `אנשי קשר ${vnode.state.contactsCount ? `(${vnode.state.contactsCount})` : ''}`, rows: vnode.state.contactsData, leadID: vnode.attrs.id, leadData: vnode.state.lead }),
-                            m(LeadFollowCard, {title:"פולואפ" , leadID: vnode.attrs.id}),
-                            m(LeadTasksCard, {title:"משימות" , leadID: vnode.attrs.id}),
                             m(LeadStatusCard, {title:"סטטוס" , leadID: vnode.attrs.id}),
+                            m(LeadTasksCard, {title:"משימות" , leadID: vnode.attrs.id}),
+                            m(LeadFollowCard, {title:"פולואפ" , leadID: vnode.attrs.id}),
+                            m(LeadContacts, { title: `אנשי קשר ${vnode.state.contactsCount ? `(${vnode.state.contactsCount})` : ''}`, rows: vnode.state.contactsData, leadID: vnode.attrs.id, leadData: vnode.state.lead }),
                         ])
                         : m('span.loader', 'טוען...'),
                     m(ScrollTop)
