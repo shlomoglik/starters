@@ -1,6 +1,6 @@
 import m from "mithril"
 import TaskRow from './TaskRow'
-import { getAllTasks } from '../../firebase/qry'
+import Snackbar from '../commons/Snackbar';
 import store from '../../data/store'
 
 const Tasks = (init) => {
@@ -27,7 +27,8 @@ const Tasks = (init) => {
                             return (
                                 m(TaskRow, { task: task })
                             )
-                        })
+                        }),
+                        m(Snackbar , {oncreate:node=>node.dom.classList.add('snackbar__show')  , text:`שים לב! יש לך ${vnode.state.openTasks.length} משימות פתוחות לטיפול`})
                     ])
                 )
             }
