@@ -1530,6 +1530,7 @@ body {
     bottom: 8rem;
     border-radius: 15px;
     width: 90%;
+    max-width: 80rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1549,7 +1550,8 @@ body {
     width: 100%;
     transition: all .2s ease-in; }
     .mySearch__input::placeholder {
-      color: var(--color-grey-light-3); }
+      color: var(--color-grey-light-3);
+      text-align: center; }
   .mySearch__icon {
     fill: currentColor;
     width: 4rem;
