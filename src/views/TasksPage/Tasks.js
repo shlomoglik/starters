@@ -1,21 +1,27 @@
 import m from "mithril"
-import settings from '../../data/settings'
+import TaskRow from './TaskRow'
+import { getAllTasks } from '../../firebase/qry'
+import store from '../../data/store'
 
 const Tasks = (init) => {
     return {
+        onbeforeupdate: vnode => {
+            getAllTasks();
+        },
         view: vnode => {
-            let tasksData = getMyTasks(vnode);
-            if (!tasksData[0]) {
+            let openTasksData = store.storeTasks.filter(task=>task.done !== true);
+            if (!openTasksData[0]) {
                 return m('.tasks.tasks--empty', { "data-empty": "כל הכבוד אין משימות פתוחות" })
             } else {
                 return (
                     m(".tasks", [
                         m('.tasks__heading', [
+                            m(".tasks__cell", "פולואפ"),
                             m(".tasks__cell", "משימה"),
-                            m(".tasks__cell", "תיאור"),
-                            m(".tasks__cell", "פולואפ")
+                            m(".tasks__cell", "שיוך לליד"),
+                            m(".tasks__cell", "ביצוע"),
                         ]),
-                        tasksData.map(task => {
+                        openTasksData.map(task => {
                             return (
                                 m(TaskRow, { task: task })
                             )
@@ -27,10 +33,5 @@ const Tasks = (init) => {
     }
 }
 
-
-function getMyTasks(vnode) {
-    // add filter to get my tasks
-    return [];
-}
 
 module.exports = Tasks;

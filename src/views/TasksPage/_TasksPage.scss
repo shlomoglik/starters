@@ -1,14 +1,14 @@
 .container--myTasks{
-    margin-top: 13rem; 
+    margin-top: 8rem; 
     background-color: var(--color-grey-light-3);
     margin-bottom: 8rem;
     min-height: 100vh;
 }
 
 .myTasks{
+    direction: rtl;
     margin: 0 auto;
     min-width: 320px;
-    min-height: 100vh;
 }
 
 .tasks{    
@@ -60,15 +60,26 @@
     &__cell{
         padding:1rem;
     }
-    &__title{
-        display: flex;
-        flex-direction: column;
-    }
-    &__name{
-        font-weight: 500;
-        font-size: 1.8rem !important;
-    }
-    &__desc , &__type{
-        font-size: 1.4rem  !important;
+
+    &__button{
+        border-radius: 1rem;
+        border: none;
+        outline: none;
+        font-size: 2rem;
+        background: var(--color-primary-light);
+        color: var(--color-white);
+        flex: 0 0 10%;
+        opacity: .6;
+        transition: all .2s;
+        
+        &--done{
+            background: var(--color-red);
+        }
+        
+        &:hover{
+            background: var(--color-primary);
+            opacity: 1;
+            cursor: pointer;
+        }
     }
 }

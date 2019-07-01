@@ -129,7 +129,14 @@ function addToList(e, vnode) {
     e.preventDefault();
     let form = e.target;
     let val = form.elements[0].value;
-    let doc = { date: new Date(), dueDate: new Date(), text: val, done: false };
+
+    //user assign to task
+    let user = JSON.parse(sessionStorage.getItem('User'));
+    if (!user) return;
+    let userPath = user.path || ""; // User.getUser('path') || 
+    let assignMain = { assignRef: userPath, role: "main" };
+
+    let doc = { date: new Date(), dueDate: new Date(), text: val, done: false , assigns:[assignMain]};
     let ref = `leads/${vnode.attrs.leadID}/tasks`;
     console.log('add to this ref ', ref, '\rthis doc', JSON.stringify(doc));
     insertDoc(ref, doc).then(r => {

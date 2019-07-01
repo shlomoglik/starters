@@ -1,7 +1,12 @@
 import m from "mithril"
+import store from '../../data/store'
+import {updateDoc} from '../../firebase/qry'
 
 let TaskRow = (init) => {
     return {
+        oninit: vnode =>{
+            getLeadData(vnode);
+        },
         view: (vnode) => {
             let task = vnode.attrs.task;
             let follow = 'היום';
@@ -15,12 +20,13 @@ let TaskRow = (init) => {
             return (
                 m(".tasks__row",
                     {
-                        id: task.leadID , 
+                        id: task.id, 
                         onclick: e=>navigateToLead(e,vnode)
                     }, [
-                        m(".tasks__cell",task.title),
-                        m(".tasks__cell.tasks__desc", task.description),
-                        m(".tasks__cell.tasks__follow", follow)
+                        m(".tasks__cell.tasks__follow", follow),
+                        m(".tasks__cell", task.text),
+                        m(".tasks__cell", vnode.state.leadData? vnode.state.leadData.description : ''),
+                        m('button.tasks__cell.tasks__button', { onclick: e => closeTask(e, vnode) }, 'בוצע')
                     ])
             )
         }
@@ -28,7 +34,24 @@ let TaskRow = (init) => {
 }
 
 function navigateToLead(e,vnode){
-    m.route.set(`/myLeads/${vnode.attrs.task.leadID}`);
+    m.route.set(`/myLeads/${vnode.state.leadID}`);
 }
+function closeTask(e,vnode){
+    let col = `leads/${vnode.state.leadID}/tasks`;
+    let taskID = e.path[1].id;
+    let objToUpdate = {"done":true};
+    updateDoc(col, taskID, objToUpdate);
+}
+
+function getLeadData(vnode){
+    let ref = vnode.attrs.task.ref;
+    let regex = /leads\/([^\/]+)/.exec(ref);
+    let leadID = regex[1]
+    vnode.state.leadID = leadID;
+    let filter = store.storeLeads.filter(lead=> lead.id ==vnode.state.leadID);
+    vnode.state.leadData = filter; 
+    console.log(vnode.state)
+}
+
 
 module.exports = TaskRow;

@@ -199,9 +199,25 @@ function getTasks(leadID, vnode) {
     snapCollection_(colRef, vnode.state, 'tasks');
 }
 
-function getStatus(leadID , vnode){
+function getStatus(leadID, vnode) {
     let colRef = db.collection(`leads/${leadID}/status`);
     snapCollection_(colRef, vnode.state, 'status');
+}
+function getAllTasks() {
+    let user = JSON.parse(sessionStorage.getItem('User'));
+    if (!user) return;
+    let userPath = user.path || ""; // User.getUser('path') || 
+    let assignMain = { assignRef: userPath, role: "main" };
+    let qry = db.collectionGroup('tasks');
+    qry.where('assigns', 'array-contains', assignMain);
+    qry.onSnapshot( snap => {
+        let res = [];
+        snap.forEach((doc) => {
+            res.push(Object.assign(doc.data(), { id: doc.id  , ref:doc.ref.path}))
+        });
+        store.storeTasks = res;
+        console.log(' listen on collectionGroup tasks.   snap size = ', snap.size, 'result data is: ', res)
+    });
 }
 
 
@@ -223,6 +239,7 @@ module.exports = {
     getFollowUps,
     getTasks,
     getStatus,
+    getAllTasks,
 };
 
 
