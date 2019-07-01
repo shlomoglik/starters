@@ -61,6 +61,16 @@
         padding:1rem;
     }
 
+    &__link{
+        color: blue;
+        text-decoration: underline;
+        transition: all .1s;
+        &:hover{
+            font-weight: 600;
+            background:var(--color-grey-bg);
+        }
+    }
+
     &__button{
         border-radius: 1rem;
         border: none;

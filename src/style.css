@@ -961,6 +961,14 @@ body {
 .tasks__cell {
   padding: 1rem; }
 
+.tasks__link {
+  color: blue;
+  text-decoration: underline;
+  transition: all .1s; }
+  .tasks__link:hover {
+    font-weight: 600;
+    background: var(--color-grey-bg); }
+
 .tasks__button {
   border-radius: 1rem;
   border: none;

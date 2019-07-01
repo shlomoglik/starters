@@ -5,7 +5,7 @@ import store from '../../data/store'
 
 const Tasks = (init) => {
     return {
-        onbeforeupdate: vnode => {
+        oninit: vnode => {
             getAllTasks();
         },
         view: vnode => {
