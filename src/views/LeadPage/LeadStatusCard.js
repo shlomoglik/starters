@@ -62,10 +62,10 @@ function setNewStatus(e, vnode) {
     let statusID = el.id;
     let col = `leads/${vnode.attrs.leadID}/status`;
     let done = true;
-    let docText = 'עודכן סטטוס ל - ' + status;
+    let docText = 'עדכון סטטוס ל - ' + status;
     if(el.classList.contains('lead-status__button--done')){
         done = false;
-        docText = 'פתיחה מחדש של סטטוס ' + status;
+        docText = 'ביטול סטטוס - ' + status;
     }
     let objToUpdate = {status,done};
     addOrUpdateDoc(col, statusID, objToUpdate);
