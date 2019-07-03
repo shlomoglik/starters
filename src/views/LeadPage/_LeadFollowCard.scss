@@ -19,7 +19,16 @@
             background-color:var(--color-grey-bg);
         }
     }
-
+    &__last-follow{
+        padding: .5rem;
+        font-size: 1.4rem;    
+        background-color: var(--color-grey-bg);
+        color: var(--color-grey-dark-2);
+        font-weight: 500;
+        text-align: center;
+        font-style: italic; 
+        flex:1;
+    }
     &__date{
         font-size: 1.8rem;    
         margin-left: 2rem;

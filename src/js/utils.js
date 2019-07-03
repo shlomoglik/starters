@@ -40,6 +40,27 @@ function mapToObj(mapObj){
 }
 
 
+//Dates 
+function dateDiffDays(d1 , d2){
+    if(!d2) d2 = new Date();
+    let dist = parseInt((d2-d1)/(24*3600*1000));
+    if(dist === 0){
+        return 'היום'
+    }else if(dist > 0){
+        return `עברו ${dist} ימים`
+    }else {
+        return `נותר עוד ${dist} ימים`
+    }
+}
+
+function formatTime(date) {
+    let h = date.getHours();
+    if (h < 10) h = "0" + h;
+    let m = date.getMinutes();
+    if (m < 10) m = "0" + m;
+    return h + ":" + m;
+}
+
 
 module.exports =
     {
@@ -47,4 +68,6 @@ module.exports =
         closestByClass,
         toggleGroup,
         mapToObj,
+        dateDiffDays,
+        formatTime,
     }

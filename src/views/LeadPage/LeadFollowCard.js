@@ -1,18 +1,19 @@
 import m from 'mithril'
 import FormList from '../commons/Forms/FormList';
 import { insertDoc, getFollowUps } from '../../firebase/qry';
-import { toggleGroup } from '../../js/utils';
+import { toggleGroup , dateDiffDays , formatTime } from '../../js/utils';
 
 const Card = (init) => {
     return {
         oninit: vnode => {
+            vnode.state.dist = false;
             vnode.state.followUps = [];
             vnode.state.shrink = vnode.attrs.shrink || true;
             vnode.state.counter = 0;
         },
         onbeforeupdate: vnode => {
             getCounter(vnode);
-            getDist(vnode);
+            getLastFollow(vnode);
         },
         oncreate: vnode => {
             let stop = getFollowUps(vnode.attrs.leadID, vnode); // how to stop it!!
@@ -27,7 +28,7 @@ const Card = (init) => {
                     !vnode.state.shrink ?
                         m('.lead-follow', [
                             m('.lead-follow__list', [
-                                m('.lead-follow__last-follow', 'נעקב לפני 11 ימים'),
+                                m('.lead-follow__last-follow', vnode.state.lastFollow ? `נעקב לאחרונה: ${vnode.state.lastFollow}` : ''),
                                 vnode.state.followUps.sort(compareDates).map((item, ind) => {
                                     let date = item.date.toDate();
                                     let time = formatTime(date);
@@ -53,9 +54,9 @@ function getCounter(vnode) {
         vnode.state.counter = vnode.state.followUps.length
     }
 }
-function getDist(vnode) {
-    if (vnode.state.followUps !== []) {
-        let follows = vnode.state.followUps;
+function getLastFollow(vnode) {
+    let follows = vnode.state.followUps;
+    if (follows.length > 0) {
         let last = follows[0];
         if (follows.length > 0) {
             for (let i = 1; i < follows.length; i++) {
@@ -63,7 +64,8 @@ function getDist(vnode) {
                     last = follows[i];
             }
         }
-        console.log('TODO!! apply last saw and compare to followDate in lead doc',last);
+        let lastDate = last.date.toDate();
+        vnode.state.lastFollow = dateDiffDays(lastDate);
     }
 }
 
@@ -91,15 +93,6 @@ function addToList(e, vnode) {
         m.redraw();
     });
     form.reset();
-}
-
-function formatTime(date) {
-    let h = date.getHours();
-    if (h < 10) h = "0" + h;
-    let m = date.getMinutes();
-    if (m < 10) m = "0" + m;
-    return h + ":" + m;
-
 }
 
 module.exports = Card
