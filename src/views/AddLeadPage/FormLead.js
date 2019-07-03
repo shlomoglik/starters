@@ -13,6 +13,7 @@ let Form = (init) => {
             vnode.state.list = getList(vnode.state.term, 'name', 'storeLeads');
         },
         view: (vnode) => {
+            let obj = settings["formDataLeadArr"];
             return (
                 m('form#leadForm.form',
                     {
@@ -24,8 +25,37 @@ let Form = (init) => {
                         m('.heading',
                             m('.heading__secondary', vnode.attrs.formData.meta.heading)
                         ),
-                        renderFormData(vnode.attrs.formData , vnode),
-                        renderDataLists(vnode),
+                        // renderFormData(vnode.attrs.formData , vnode),
+                        // renderDataLists(vnode),
+                        obj ?
+                        obj.map((curr, ind) => {
+                            let inputType = curr["meta"]["inputType"];
+                            let inputKey = curr["meta"]["inputID"];
+                            let labelText = curr["label"] ? curr["label"] : '';
+                            switch (true) {
+                                case inputType == 'input':
+                                    return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                                        m(`${inputType}#${inputKey}.form__input`,curr["options"]),
+                                        m('label.form__label',{for:inputKey}, labelText),
+                                    ]);
+                                case inputType == 'textarea':
+                                    return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                                        m(`${inputType}.form__input`,curr["options"]),
+                                    ]);
+                                case inputType == 'select':
+                                    console.log('asdfasd')
+                                    let dataList = curr["meta"]["list"];
+                                    return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                                        m(`select.form__input`, Object.assign({}, curr["options"]), [
+                                            m('option',{value:''} ,'--בחר--'),
+                                                settings[dataList].map( (item,ind)=>{
+                                                    return m('option',{key:`opt${ind}`,value:item.id} ,item.label)
+                                                }
+                                            )
+                                        ]),
+                                    ]);
+                            }
+                        }) : [],
                         m('div', [
                             m('button[class="btn btn--def"]', { type: "submit" }, "הוסף")
                         ])
