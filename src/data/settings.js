@@ -63,22 +63,22 @@ let settings = {
 
     formDataLeadArr:[
         {
-            "meta" : {"inputID" : "type" , "inputType": "select" },
-            "options": {name: "type", placeholder: "סוג פנייה", required: true , autocomplete:"off"},
-            "label": { text: "סוג פנייה" }
+            "meta" : {inputID : "type" , inputType: "select" , list: "leadTypeList" },
+            "options": {name: "type", required: true , autocomplete:"off"},
+            "label": { text: "סוג ליד" }
         },
         {
-            "meta" : {"inputID" : "source" , "inputType": "input" },
-            "options": { type: "text", name: "source", placeholder: "מקור הגעה", list: "sourceList" , autocomplete:"off"},
-            "label": { text: "בחר מקור הגעה של הליד מתוך רשימה" }
+            "meta" : {inputID : "source" , inputType: "select" , list: "leadSourceList" },
+            "options": { name: "source", required: true ,autocomplete:"off"},
+            "label": { text: "מקור הגעה של הליד" }
         },
         {
-            "meta" : {"inputID" : "duedate" , "inputType": "input" },
+            "meta" : {inputID : "duedate" , inputType: "input" },
             "options": { type: "date", name: "duedate", placeholder: "תאריך יעד" },
             "label": { text: "תאריך יעד" }
         },
         {
-            "meta" : {"inputID" : "description" , "inputType": "textarea" },
+            "meta" : {inputID : "description" , inputType: "textarea" },
             "options": { name: "description", placeholder: "תיאור והערות", required: true },
         }
     ],

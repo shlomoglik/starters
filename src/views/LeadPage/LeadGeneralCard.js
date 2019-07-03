@@ -43,11 +43,14 @@ const Card = (init) => {
                                         m(`${inputType}.lead-card__input`, Object.assign({}, curr["options"], { value: vnode.attrs.leadData[inputKey] })),
                                     ]);
                                 case inputType == 'select':
+                                    let dataList = curr["meta"]["list"];
                                     return m('.lead-card__row', { key: `formRow${ind}`, style: "position:relative" }, [
                                         m(`select.lead-card__input`, Object.assign({}, curr["options"]), [
                                             m('option',{value:''} ,'--בחר--'),
-                                            m('option',{value:'one'} ,'אפשרות אחת'),
-                                            m('option',{value:'two'} ,'אפשרות שתיים'),
+                                                settings[dataList].map( (item,ind)=>{
+                                                    return m('option',{key:`opt${ind}`,value:item.id} ,item.label)
+                                                }
+                                            )
                                         ]),
                                     ]);
                             }
