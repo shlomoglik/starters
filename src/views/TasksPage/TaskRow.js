@@ -10,7 +10,7 @@ let TaskRow = (init) => {
         },
         view: (vnode) => {
             let task = vnode.attrs.task;
-            let follow = '';
+            let follow = 'לא הוגדר';
             if (task.followDate) {
                 // follow = task.followDate.toDate().getDate() + '/' + Number(task.followDate.toDate().getMonth()+1) + '/' + task.followDate.toDate().getFullYear();
                 follow =  dateDiffDays(task.followDate.toDate());

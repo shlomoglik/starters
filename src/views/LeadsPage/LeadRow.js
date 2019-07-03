@@ -1,11 +1,13 @@
 import m from "mithril"
 import store from '../../data/store'
+import {dateDiffDays} from '../../js/utils'
 
 let LeadRow = (init) => {
     return {
         view: (vnode) => {
             let lead = vnode.attrs.lead ;
             let follow ='לא הוגדר';
+            console.log(follow)
             if (lead.followDate) {
                 // follow = lead.followDate.toDate().getDate() + '/' + Number(lead.followDate.toDate().getMonth()+1) + '/' + lead.followDate.toDate().getFullYear();
                 follow =  dateDiffDays(lead.followDate.toDate());
