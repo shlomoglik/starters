@@ -63,8 +63,8 @@ let settings = {
 
     formDataLeadArr:[
         {
-            "meta" : {"inputID" : "type" , "inputType": "input" },
-            "options": { type: "text", name: "type", placeholder: "סוג פנייה", required: true, list: "typeList" ,autocomplete:"off"},
+            "meta" : {"inputID" : "type" , "inputType": "select" },
+            "options": {name: "type", placeholder: "סוג פנייה", required: true , autocomplete:"off"},
             "label": { text: "סוג פנייה" }
         },
         {

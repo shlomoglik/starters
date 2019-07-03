@@ -28,22 +28,29 @@ const Card = (init) => {
                         m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
                     obj && vnode.attrs.leadData && !vnode.state.shrink ?
-                        // Object.keys(objLeadData).map((k, i) => {
-                        //     let inputType =objLeadData[k].input ? "input" : objLeadData[k].textarea ? "textarea" :'' ;
-                        //     let labelText = objLeadData[k].label ? objLeadData[k].label.text:"";
-                        //     return m('.lead-card__row', { key: `formRow${i}`, style: "position:relative" }, [
-                        //         m(`${inputType}.lead-card__input`, Object.assign({}, objLeadData[k].input || objLeadData[k].textarea , { value: vnode.attrs.leadData[k] })),
-                        //         m('label.lead-card__label', labelText),
-                        //     ])
-                        obj.map((curr,ind)=>{
+                        obj.map((curr, ind) => {
                             let inputType = curr["meta"]["inputType"];
                             let inputKey = curr["meta"]["inputID"];
-                            let labelText = curr["label"] ? curr["label"] : '' ;
-                            console.log(inputType,inputKey,labelText);
-                            return m('.lead-card__row', { key: `formRow${ind}`, style: "position:relative" }, [
-                                m(`${inputType}.lead-card__input`, Object.assign({}, curr["options"], { value: vnode.attrs.leadData[inputKey] })),
-                                m('label.lead-card__label', labelText),
-                            ])
+                            let labelText = curr["label"] ? curr["label"] : '';
+                            switch (true) {
+                                case inputType == 'input':
+                                    return m('.lead-card__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                                        m(`${inputType}.lead-card__input`, Object.assign({}, curr["options"], { value: vnode.attrs.leadData[inputKey] })),
+                                        m('label.lead-card__label', labelText),
+                                    ]);
+                                case inputType == 'textarea':
+                                    return m('.lead-card__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                                        m(`${inputType}.lead-card__input`, Object.assign({}, curr["options"], { value: vnode.attrs.leadData[inputKey] })),
+                                    ]);
+                                case inputType == 'select':
+                                    return m('.lead-card__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                                        m(`select.lead-card__input`, Object.assign({}, curr["options"]), [
+                                            m('option',{value:''} ,'--בחר--'),
+                                            m('option',{value:'one'} ,'אפשרות אחת'),
+                                            m('option',{value:'two'} ,'אפשרות שתיים'),
+                                        ]),
+                                    ]);
+                            }
                         }) : [],
                     vnode.attrs.leadData && !vnode.state.shrink ?
                         m('.lead-card__btns', [
