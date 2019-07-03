@@ -60,6 +60,30 @@ let settings = {
         }
     },
 
+
+    formDataLeadArr:[
+        {
+            "meta" : {"inputID" : "type" , "inputType": "input" },
+            "options": { type: "text", name: "type", placeholder: "סוג פנייה", required: true, list: "typeList" ,autocomplete:"off"},
+            "label": { text: "סוג פנייה" }
+        },
+        {
+            "meta" : {"inputID" : "source" , "inputType": "input" },
+            "options": { type: "text", name: "source", placeholder: "מקור הגעה", list: "sourceList" , autocomplete:"off"},
+            "label": { text: "בחר מקור הגעה של הליד מתוך רשימה" }
+        },
+        {
+            "meta" : {"inputID" : "duedate" , "inputType": "input" },
+            "options": { type: "date", name: "duedate", placeholder: "תאריך יעד" },
+            "label": { text: "תאריך יעד" }
+        },
+        {
+            "meta" : {"inputID" : "description" , "inputType": "textarea" },
+            "options": { name: "description", placeholder: "תיאור והערות", required: true },
+        }
+    ],
+
+
     //SETTINGS GROUPS:
     setGroup: [
         { title: "לידים", count: 0, groups: [setLeadType, setLeadGroup, setLeadSource, setLeadStatus], active: true },

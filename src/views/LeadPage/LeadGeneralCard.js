@@ -19,24 +19,31 @@ const Card = (init) => {
             vnode.state.shrink = vnode.attrs.shrink || false;
         },
         view: (vnode) => {
-            let objLeadData = settings.formDataLead.data;
+            // let objLeadData = settings.formDataLead.data;
+            let obj = settings.formDataLeadArr;
             return (
                 m('form.lead-card', { onsubmit: e => updateChanges(e, vnode) }, [
                     m('.lead-card__title', { onclick: e => toggleGroup(e, vnode) }, [
                         m('span', vnode.attrs.title),
                         m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
-                    objLeadData && vnode.attrs.leadData && !vnode.state.shrink ?
-                        Object.keys(objLeadData).map((k, i) => {
-                            return m('.lead-card__row', { key: `formRow${i}`, style: "position:relative" }, [
-                                m('input.lead-card__input', Object.assign({}, objLeadData[k].input || objLeadData[k].textarea , { value: vnode.attrs.leadData[k] })),
-                                m('label.lead-card__label', objLeadData[k].label),
+                    obj && vnode.attrs.leadData && !vnode.state.shrink ?
+                        // Object.keys(objLeadData).map((k, i) => {
+                        //     let inputType =objLeadData[k].input ? "input" : objLeadData[k].textarea ? "textarea" :'' ;
+                        //     let labelText = objLeadData[k].label ? objLeadData[k].label.text:"";
+                        //     return m('.lead-card__row', { key: `formRow${i}`, style: "position:relative" }, [
+                        //         m(`${inputType}.lead-card__input`, Object.assign({}, objLeadData[k].input || objLeadData[k].textarea , { value: vnode.attrs.leadData[k] })),
+                        //         m('label.lead-card__label', labelText),
+                        //     ])
+                        obj.map((curr,ind)=>{
+                            let inputType = curr["meta"]["inputType"];
+                            let inputKey = curr["meta"]["inputID"];
+                            let labelText = curr["label"] ? curr["label"] : '' ;
+                            console.log(inputType,inputKey,labelText);
+                            return m('.lead-card__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                                m(`${inputType}.lead-card__input`, Object.assign({}, curr["options"], { value: vnode.attrs.leadData[inputKey] })),
+                                m('label.lead-card__label', labelText),
                             ])
-                            // vnode.state.rows.map((row, ind) => {
-                            //     return m('.lead-card__row', { key: ind}, [
-                            //         m('label.lead-card__label', row.label),
-                            //         m('input.lead-card__input', Object.assign({}, objLeadtData[k].input, { value: row[k] }) ),
-                            //     ])
                         }) : [],
                     vnode.attrs.leadData && !vnode.state.shrink ?
                         m('.lead-card__btns', [

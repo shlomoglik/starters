@@ -1147,7 +1147,6 @@ body {
 
 .lead-card {
   margin: 1rem auto;
-  width: 90%;
   min-width: 32rem;
   max-width: 80rem;
   position: relative;
@@ -1189,19 +1188,22 @@ body {
   .lead-card__title:active > .lead-card__toggle-arrow {
     transform: rotate(-180deg); }
   .lead-card__row {
+    flex: 1;
     padding: 1rem;
     width: 100%;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between; }
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; }
   .lead-card__label {
     flex: 0 0 10%;
     font-size: 1.5rem;
     text-align: center;
     font-family: inherit;
     color: var(--color-grey-dark-1);
-    font-weight: 600;
+    font-weight: 200;
     color: var(--color-primary); }
   .lead-card__btns {
     display: flex;
@@ -1260,7 +1262,7 @@ body {
       transform: translateY(0);
       box-shadow: none; }
   .lead-card__input {
-    flex: 0 0 90%;
+    width: 50%;
     height: 5rem;
     text-align: center;
     font-size: 2.2rem;

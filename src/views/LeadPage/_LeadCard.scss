@@ -1,13 +1,11 @@
 .lead-card{
     margin: 1rem auto;
-    width: 90%;
     min-width: 32rem;
     max-width: 80rem;
     
     position: relative;
 
     direction: rtl;
-    // text-align: center;
     font-size: 2rem;
 
     background-color: var(--color-grey-light-1);
@@ -55,20 +53,21 @@
     }
 
     &__row{
+        flex: 1;
         padding: 1rem;
         width: 100%;
+        text-align: center;
         display: flex;
         flex-direction: column;
-        align-items: stretch;
-        justify-content: space-between;
-        // flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;;
+        flex-wrap: wrap;
     }
 
     &__label{
-        // margin: 2rem;
         flex: 0 0 10%;
         @include font-def-small;
-        font-weight: 600; 
+        font-weight: 200; 
         color: var(--color-primary);     
     }
 
@@ -108,7 +107,6 @@
         &:active{
             transform: translateY(0);
             box-shadow: none;
-
         }
     }
 
@@ -133,8 +131,9 @@
     }
 
     &__input{
-        flex: 0 0 90%;
+        // flex: 0 0 90%;
         // width: 90%;
+        width: 50%;
         @include input-def;
         @include input-border-bottom-1;
     }
