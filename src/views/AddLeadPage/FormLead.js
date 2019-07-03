@@ -25,37 +25,35 @@ let Form = (init) => {
                         m('.heading',
                             m('.heading__secondary', vnode.attrs.formData.meta.heading)
                         ),
-                        // renderFormData(vnode.attrs.formData , vnode),
-                        // renderDataLists(vnode),
-                        obj ?
-                        obj.map((curr, ind) => {
-                            let inputType = curr["meta"]["inputType"];
-                            let inputKey = curr["meta"]["inputID"];
-                            let labelText = curr["label"] ? curr["label"] : '';
-                            switch (true) {
-                                case inputType == 'input':
-                                    return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
-                                        m(`${inputType}#${inputKey}.form__input`,curr["options"]),
-                                        m('label.form__label',{for:inputKey}, labelText),
-                                    ]);
-                                case inputType == 'textarea':
-                                    return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
-                                        m(`${inputType}.form__input`,curr["options"]),
-                                    ]);
-                                case inputType == 'select':
-                                    console.log('asdfasd')
-                                    let dataList = curr["meta"]["list"];
-                                    return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
-                                        m(`select.form__input`, Object.assign({}, curr["options"]), [
-                                            m('option',{value:''} ,'--בחר--'),
-                                                settings[dataList].map( (item,ind)=>{
-                                                    return m('option',{key:`opt${ind}`,value:item.id} ,item.label)
-                                                }
-                                            )
-                                        ]),
-                                    ]);
-                            }
-                        }) : [],
+                        renderFormData(vnode.attrs.formData , vnode),
+                        renderDataLists(vnode),
+                        // obj ?
+                        //     obj.map((curr, ind) => {
+                        //         let inputType = curr["meta"]["inputType"];
+                        //         let inputKey = curr["meta"]["inputID"];
+                        //         let labelText = curr["label"] ? curr["label"] : '';
+                        //         switch (true) {
+                        //             case inputType == 'input':
+                        //                 return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                        //                     m(`${inputType}#${inputKey}.form__input`, curr["options"]),
+                        //                     m('label.form__label', { for: inputKey }, labelText),
+                        //                 ]);
+                        //             case inputType == 'textarea':
+                        //                 return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                        //                     m(`${inputType}.form__input`, curr["options"]),
+                        //                 ]);
+                        //             case inputType == 'select':
+                        //                 let dataList = curr["meta"]["list"];
+                        //                 return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                        //                     m(`select.form__input`, curr["options"], [
+                        //                         m('option', { value: '' }, '--בחר--'),
+                        //                         settings[dataList].map((item, ind) => {
+                        //                             return m('option', { key: `opt${ind}`, value: item.id }, item.label);
+                        //                         })
+                        //                     ]),
+                        //                 ]);
+                        //         }
+                            // }) : [],
                         m('div', [
                             m('button[class="btn btn--def"]', { type: "submit" }, "הוסף")
                         ])
@@ -104,7 +102,7 @@ function renderFormData(myData, vnode) {
                 m('.form__row', { key: ind },
                     [
                         m(`input#${k}[class="form__input ${meta.class}"]`,
-                            Object.assign({}, curr.input, { oninput: (e) => validateList(e,vnode) })),
+                            Object.assign({}, curr.input, { oninput: (e) => validateList(e, vnode) })),
                         m('label[class="form__label"]', { for: k }, curr.label.text)
                     ])
             )
@@ -122,21 +120,21 @@ function renderFormData(myData, vnode) {
     })
 }
 
-function validateList(e,vnode) {
+function validateList(e, vnode) {
     let target = e.target;
     let data = target.value;
     let listID = target.getAttribute('list');
-    if(!listID)return;   
-    let datalist = vnode.dom.querySelector('#'+listID);
+    if (!listID) return;
+    let datalist = vnode.dom.querySelector('#' + listID);
     let options = datalist.options;
     let found = false;
-    for(let i in options){
-        if(options[i].value == data){
+    for (let i in options) {
+        if (options[i].value == data) {
             found = true;
         }
     }
     if (found) {
-      target.setCustomValidity('');
+        target.setCustomValidity('');
     } else {
         target.setCustomValidity('יש לבחור ערך חוקי מתוך הרשימה בלבד');
     }
@@ -145,13 +143,13 @@ function validateList(e,vnode) {
 function renderDataLists(vnode) {
     return m('div[type="hidden"]', [
         m('datalist#typeList', [
-            settings.leadTypeList.map((item,ind)=>{
-                return m('option',{id:item.id,key:ind},item.label)
+            settings.leadTypeList.map((item, ind) => {
+                return m('option', { id: item.id, key: ind }, item.label)
             })
         ]),
         m('datalist#sourceList', [
-            settings.leadSourceList.map((item,ind)=>{
-                return m('option',{id:item.id,key:ind},item.label)
+            settings.leadSourceList.map((item, ind) => {
+                return m('option', { id: item.id, key: ind }, item.label)
             })
         ]),
     ])
