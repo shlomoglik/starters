@@ -6,7 +6,7 @@ import { toggleGroup , dateDiffDays , formatTime } from '../../js/utils';
 const Card = (init) => {
     return {
         oninit: vnode => {
-            vnode.state.dist = false;
+            vnode.state.lastFollow = false;
             vnode.state.followUps = [];
             vnode.state.shrink = vnode.attrs.shrink || true;
             vnode.state.counter = 0;

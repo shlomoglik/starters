@@ -1,6 +1,7 @@
 import m from "mithril"
 import store from '../../data/store'
 import {updateDoc} from '../../firebase/qry'
+import {dateDiffDays} from '../../js/utils'
 
 let TaskRow = (init) => {
     return {
@@ -9,14 +10,11 @@ let TaskRow = (init) => {
         },
         view: (vnode) => {
             let task = vnode.attrs.task;
-            let follow = 'היום';
+            let follow = '';
             if (task.followDate) {
-                follow = task.followDate.toDate().getDate() + '/' + Number(task.followDate.toDate().getMonth()+1) + '/' + task.followDate.toDate().getFullYear();
-                let dist = (new Date().setTime(0) - task.followDate.toDate().setTime(0));
-                console.log(dist);
-                if (dist == 0) {
-                    follow = 'היום'
-                }
+                // follow = task.followDate.toDate().getDate() + '/' + Number(task.followDate.toDate().getMonth()+1) + '/' + task.followDate.toDate().getFullYear();
+                follow =  dateDiffDays(task.followDate.toDate());
+                console.log(follow)
             };
             return (
                 m(".tasks__row",

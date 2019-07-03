@@ -5,13 +5,11 @@ let LeadRow = (init) => {
     return {
         view: (vnode) => {
             let lead = vnode.attrs.lead ;
-            let follow = 'היום';
+            let follow ='לא הוגדר';
             if (lead.followDate) {
-                follow = lead.followDate.toDate().getDate() + '/' + Number(lead.followDate.toDate().getMonth()+1) + '/' + lead.followDate.toDate().getFullYear();
-                let dist = (new Date().setTime(0) - lead.followDate.toDate().setTime(0));
-                if (dist == 0) {
-                    follow = 'היום'
-                }
+                // follow = lead.followDate.toDate().getDate() + '/' + Number(lead.followDate.toDate().getMonth()+1) + '/' + lead.followDate.toDate().getFullYear();
+                follow =  dateDiffDays(lead.followDate.toDate());
+                console.log(follow)
             };
             return (
                 m(".leads__row",
