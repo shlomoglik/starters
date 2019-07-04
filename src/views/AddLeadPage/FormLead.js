@@ -25,35 +25,37 @@ let Form = (init) => {
                         m('.heading',
                             m('.heading__secondary', vnode.attrs.formData.meta.heading)
                         ),
-                        renderFormData(vnode.attrs.formData , vnode),
-                        renderDataLists(vnode),
-                        // obj ?
-                        //     obj.map((curr, ind) => {
-                        //         let inputType = curr["meta"]["inputType"];
-                        //         let inputKey = curr["meta"]["inputID"];
-                        //         let labelText = curr["label"] ? curr["label"] : '';
-                        //         switch (true) {
-                        //             case inputType == 'input':
-                        //                 return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
-                        //                     m(`${inputType}#${inputKey}.form__input`, curr["options"]),
-                        //                     m('label.form__label', { for: inputKey }, labelText),
-                        //                 ]);
-                        //             case inputType == 'textarea':
-                        //                 return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
-                        //                     m(`${inputType}.form__input`, curr["options"]),
-                        //                 ]);
-                        //             case inputType == 'select':
-                        //                 let dataList = curr["meta"]["list"];
-                        //                 return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
-                        //                     m(`select.form__input`, curr["options"], [
-                        //                         m('option', { value: '' }, '--בחר--'),
-                        //                         settings[dataList].map((item, ind) => {
-                        //                             return m('option', { key: `opt${ind}`, value: item.id }, item.label);
-                        //                         })
-                        //                     ]),
-                        //                 ]);
-                        //         }
-                            // }) : [],
+                        // renderFormData(vnode.attrs.formData , vnode),
+                        // renderDataLists(vnode),
+                        obj.map((curr, ind) => {
+                            let inputType = curr["meta"]["inputType"];
+                            let inputKey = curr["meta"]["inputID"];
+                            let labelText = curr["label"] ? curr["label"]["text"] : '';
+                            switch (true) {
+                                case (inputType == 'input'):
+                                    console.log(inputKey)
+                                    return m('.form__row',{key:`formRow${ind}`}, [
+                                        m(`input#${inputKey}.form__input`,curr["options"]),
+                                        m('labe.form__label',{for: inputKey},labelText)
+                                    ]);
+                                case (inputType == 'textarea'):
+                                    return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                                        m(`textarea.form__input`, curr["options"]),
+                                    ]);
+                                    // return m('div', "text area")
+                                case (inputType == 'select'):
+                                    let dataList = curr["meta"]["list"];
+                                    return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
+                                        m(`select.form__input`, curr["options"], [
+                                            m('option', { value: '' }, '--בחר--'),
+                                            settings[dataList].map((item, i) => {
+                                                return m('option', { key: `opt${i}`, value: item.id }, item.label);
+                                            })
+                                        ]),
+                                    ]);
+                                    // return m('div', "select")
+                            }
+                        }),
                         m('div', [
                             m('button[class="btn btn--def"]', { type: "submit" }, "הוסף")
                         ])

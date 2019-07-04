@@ -160,8 +160,6 @@ function renderFormData(myData, vnode) {
 function validateInput(e){
     let row = e.path[1]; //one level up = row
     let list = row.querySelectorAll('.searchList > .searchList__row');
-    console.log(list);
-    console.log(list.length);
     if(list.length>0){
         e.target.setCustomValidity('כבר קיים ערך כזה , הזן ערך חדש או בחר מתוך הרשימה')
     }else{
