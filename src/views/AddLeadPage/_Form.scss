@@ -62,6 +62,13 @@
         visibility: hidden;
     }
 
+    &__select{
+        & option{
+            color: var(--color-primary);
+            font-size: 2rem;
+        }
+    }
+
     &__label {
         color:var(--color-grey-dark-1);
         text-align: center;

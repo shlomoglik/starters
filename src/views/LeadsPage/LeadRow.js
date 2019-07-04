@@ -1,5 +1,6 @@
 import m from "mithril"
 import store from '../../data/store'
+import settings from '../../data/settings'
 import {dateDiffDays} from '../../js/utils'
 
 let LeadRow = (init) => {
@@ -21,7 +22,7 @@ let LeadRow = (init) => {
                     }, [
                         m(".leads__cell.leads__title", [
                             m("span.leads__name", getContactName(vnode)),
-                            m("span.leads__type", lead.type)
+                            m("span.leads__type", getLeadTypeLabel(lead.type))
                         ]),
                         m(".leads__cell.leads__desc", lead.description),
                         m(".leads__cell.leads__follow", follow)
@@ -32,17 +33,18 @@ let LeadRow = (init) => {
 }
 
 function getContactName(vnode) {
-    let myContact = store.storeContacts.filter(contact => {
+    let filter = store.storeContacts.filter(contact => {
         let contactPath = vnode.attrs.lead.contacts[0].contactRef;
         let path = `contacts/${contact.id}`;
         return path == contactPath;
     })
 
-    if (myContact[0]) {
-        return myContact[0].name
-    } else {
-        return 'ללא איש קשר'
-    }
+    return  filter[0] ? filter[0].name : '';
+}
+
+function getLeadTypeLabel(typeID){
+    let filter = settings.leadTypeList.filter(type=>type.id == typeID);
+    return  filter[0] ? filter[0].label : '';
 }
 
 function navigateToLead(e,vnode){

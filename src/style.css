@@ -843,6 +843,9 @@ body {
     transform: translateY(-4rem);
     opacity: 0;
     visibility: hidden; }
+  .form__select option {
+    color: var(--color-primary);
+    font-size: 2rem; }
   .form__label {
     color: var(--color-grey-dark-1);
     text-align: center;

@@ -46,7 +46,7 @@ let Form = (init) => {
                                 case (inputType == 'select'):
                                     let dataList = curr["meta"]["list"];
                                     return m('.form__row', { key: `formRow${ind}`, style: "position:relative" }, [
-                                        m(`select.form__input`, curr["options"], [
+                                        m(`select.form__input.form__select`, curr["options"], [
                                             m('option', { value: '' }, '--בחר--'),
                                             settings[dataList].map((item, i) => {
                                                 return m('option', { key: `opt${i}`, value: item.id }, item.label);
