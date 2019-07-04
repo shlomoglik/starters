@@ -20,6 +20,7 @@ class Lead extends Model {
             'assignRef': User.getUser('path'),
             'role': 'main'
         }];
+        this._data["followDate"] = new Date();
     }
     /**
      * @param {Object} newLead the new lead that creating with new Lead keword

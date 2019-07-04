@@ -33,7 +33,6 @@ let Form = (init) => {
                             let labelText = curr["label"] ? curr["label"]["text"] : '';
                             switch (true) {
                                 case (inputType == 'input'):
-                                    console.log(inputKey)
                                     return m('.form__row',{key:`formRow${ind}`}, [
                                         m(`input#${inputKey}.form__input`,curr["options"]),
                                         m('labe.form__label',{for: inputKey},labelText)
@@ -94,67 +93,67 @@ function submitForm(e, vnode) {
     vnode.attrs.parent.state.activeContact = false;
 }
 
-function renderFormData(myData, vnode) {
-    let meta = myData.meta;
-    let data = myData.data;
-    return Object.keys(data).map((k, ind) => {
-        let curr = data[k];
-        if (data[k].input) {
-            return (
-                m('.form__row', { key: ind },
-                    [
-                        m(`input#${k}[class="form__input ${meta.class}"]`,
-                            Object.assign({}, curr.input, { oninput: (e) => validateList(e, vnode) })),
-                        m('label[class="form__label"]', { for: k }, curr.label.text)
-                    ])
-            )
+// function renderFormData(myData, vnode) {
+//     let meta = myData.meta;
+//     let data = myData.data;
+//     return Object.keys(data).map((k, ind) => {
+//         let curr = data[k];
+//         if (data[k].input) {
+//             return (
+//                 m('.form__row', { key: ind },
+//                     [
+//                         m(`input#${k}[class="form__input ${meta.class}"]`,
+//                             Object.assign({}, curr.input, { oninput: (e) => validateList(e, vnode) })),
+//                         m('label[class="form__label"]', { for: k }, curr.label.text)
+//                     ])
+//             )
 
-        } else if (data[k].textarea) {
-            return [
-                m(`.form__row`, { key: ind },
-                    [
-                        m(`textarea[class="form__input ${meta.class}"]`, curr.textarea)
-                    ])
-            ]
-        } else {
-            return;
-        }
-    })
-}
+//         } else if (data[k].textarea) {
+//             return [
+//                 m(`.form__row`, { key: ind },
+//                     [
+//                         m(`textarea[class="form__input ${meta.class}"]`, curr.textarea)
+//                     ])
+//             ]
+//         } else {
+//             return;
+//         }
+//     })
+// }
 
-function validateList(e, vnode) {
-    let target = e.target;
-    let data = target.value;
-    let listID = target.getAttribute('list');
-    if (!listID) return;
-    let datalist = vnode.dom.querySelector('#' + listID);
-    let options = datalist.options;
-    let found = false;
-    for (let i in options) {
-        if (options[i].value == data) {
-            found = true;
-        }
-    }
-    if (found) {
-        target.setCustomValidity('');
-    } else {
-        target.setCustomValidity('יש לבחור ערך חוקי מתוך הרשימה בלבד');
-    }
-}
+// function validateList(e, vnode) {
+//     let target = e.target;
+//     let data = target.value;
+//     let listID = target.getAttribute('list');
+//     if (!listID) return;
+//     let datalist = vnode.dom.querySelector('#' + listID);
+//     let options = datalist.options;
+//     let found = false;
+//     for (let i in options) {
+//         if (options[i].value == data) {
+//             found = true;
+//         }
+//     }
+//     if (found) {
+//         target.setCustomValidity('');
+//     } else {
+//         target.setCustomValidity('יש לבחור ערך חוקי מתוך הרשימה בלבד');
+//     }
+// }
 
-function renderDataLists(vnode) {
-    return m('div[type="hidden"]', [
-        m('datalist#typeList', [
-            settings.leadTypeList.map((item, ind) => {
-                return m('option', { id: item.id, key: ind }, item.label)
-            })
-        ]),
-        m('datalist#sourceList', [
-            settings.leadSourceList.map((item, ind) => {
-                return m('option', { id: item.id, key: ind }, item.label)
-            })
-        ]),
-    ])
-}
+// function renderDataLists(vnode) {
+//     return m('div[type="hidden"]', [
+//         m('datalist#typeList', [
+//             settings.leadTypeList.map((item, ind) => {
+//                 return m('option', { id: item.id, key: ind }, item.label)
+//             })
+//         ]),
+//         m('datalist#sourceList', [
+//             settings.leadSourceList.map((item, ind) => {
+//                 return m('option', { id: item.id, key: ind }, item.label)
+//             })
+//         ]),
+//     ])
+// }
 
 module.exports = Form
