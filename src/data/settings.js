@@ -13,7 +13,7 @@ let settings = {
         { title: 'איש קשר קיים', type: 'search' },
     ],
     groupTypeFilter: [
-        { title: "קבוצות", count: 0, active: true },
+        { title: "קבוצות", count: 0, active: true  },
         { title: "אירועים", count: 0 },
         { title: "חוגים", count: 0 },
         { title: "כלבייה", count: 0 },
@@ -86,14 +86,18 @@ let settings = {
 
     //SETTINGS GROUPS:
     setGroup: [
-        { title: "לידים", count: 0, groups: [setLeadType, setLeadGroup, setLeadSource, setLeadStatus], active: true },
-        { title: "אנשי קשר", count: 0, groups: [setContactType] },
-        { title: "משתמשים", count: 0, groups: [setUserRoles] },
-        { title: "מתקדם", count: 0 },
+        { label: "לידים", count: 0, groups: [setLeadSource, setLeadStatus], active: true },
+        { label: "אנשי קשר", count: 0, groups: [setContactType] },
+        { label: "משתמשים", count: 0, groups: [setUserRoles] },
+        { label: "כללי", count: 0 },
+        { label: "פילוח לידים", count: 0 },
     ],
 
+
+    // setLeadType, setLeadGroup, 
     leadTypeList: [],
     leadSourceList: [],
+    leadGroupsList:[],
 
     setLeadStatus : [
         {status:'ליד חדש' , id:'newLead' , done:true },

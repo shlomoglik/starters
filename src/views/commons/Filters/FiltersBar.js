@@ -16,7 +16,7 @@ let Filters = (init) => {
                   class: item.active ? "filterBar__card--active" : ""
                 },
                 [
-                  item.title,
+                  item.label,
                   m("span.filterBar__card-counter",
                     { class: item.done || item.count == 0 ? "filterBar__card-counter--done" : "" },
                     item.done || item.count == 0 ?
@@ -39,5 +39,7 @@ function toggleActive(vnode, item) {
   })
   item.active = true;
 }
+
+
 
 module.exports = Filters;

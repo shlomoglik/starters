@@ -14,7 +14,7 @@ import LeadPage from "./views/LeadPage/Lead";
 import SearchPage from "./views/SearchPage/SearchPage";
 import SettingsPage from "./views/SettingsPage/SettingsPage";
 import User from "./data/User";
-import {getLeads, getContacts, getSettingGroups ,getSourceList , getTypeList  , getAllTasks} from './firebase/qry'
+import {getLeads, getContacts, getSettingGroups ,getSourceList , getTypeList  , getAllTasks , getGroupLeadsList } from './firebase/qry'
 
 getLeads();
 getContacts();
@@ -22,6 +22,7 @@ getAllTasks();
 getSettingGroups();
 getSourceList();
 getTypeList();
+getGroupLeadsList();
 
 m.route(root, "/login", {
     "/login": LoginPage,
