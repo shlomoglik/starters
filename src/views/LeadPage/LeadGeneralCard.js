@@ -4,14 +4,6 @@ import { getFormValues, closestByClass } from '../../js/utils';
 import settings from '../../data/settings';
 import store from '../../data/store';
 
-// let rows= [
-//     { label: "כותרת", data: getContactName(vnode) + ' - ' + vnode.state.lead.type },
-//     { label: "מקור", data: vnode.state.lead.source },
-//     { label: "סוג", data: vnode.state.lead.type },
-//     { label: "תיאור", data: vnode.state.lead.description },
-//     { label: "תאריך יעד", data: vnode.state.lead.duedate ,type:"date"},
-// ];
-
 
 const Card = (init) => {
     return {
@@ -19,7 +11,6 @@ const Card = (init) => {
             vnode.state.shrink = vnode.attrs.shrink || false;
         },
         view: (vnode) => {
-            // let objLeadData = settings.formDataLead.data;
             let obj = settings.formDataLeadArr;
             return (
                 m('form.lead-card', { onsubmit: e => updateChanges(e, vnode) }, [
@@ -48,7 +39,7 @@ const Card = (init) => {
                                         m(`select.lead-card__input`, Object.assign({}, curr["options"]), [
                                             m('option',{value:''} ,'--בחר--'),
                                                 settings[dataList].map( (item,ind)=>{
-                                                    return m('option',{key:`opt${ind}`,value:item.id} ,item.label)
+                                                    return m('option',{key:`opt${ind}`,value:item.id , selected:item.id==vnode.attrs.leadData[inputKey]} ,item.label)
                                                 }
                                             )
                                         ]),
