@@ -12,17 +12,20 @@ let leadsPage = (init)=>{
   return {
     oninit: (vnode) => {
       window.scrollTo(0,0);
+      vnode.state.filters = settings.leadGroupsList;
+      setCounter(vnode);
     },
     onbeforeupdate: (vnode) => {
+      vnode.state.filters = settings.leadGroupsList;
       setCounter(vnode);
     },
     view: (vnode) => {
       return (
         m('container--myLeads' , [
           m(Header , {title:"הלידים שלי"}),
-          m(FiltersBar , {filters:settings.leadGroupsList}),
+          m(FiltersBar , {filters:vnode.state.filters}),
           m('main.myLeads',
-            m(Leads , {filters:settings.leadGroupsList} )
+            m(Leads , {filters:vnode.state.filters} )
           ),
           m(Bottom),
           m(ScrollTop)
@@ -32,21 +35,37 @@ let leadsPage = (init)=>{
   }
 }
 
-function setCounter(vnode) {
-  let allData = store.storeLeads;  
-  if(allData[0]){
-    settings.leadGroupsList.map(item => {
-      let groupID = item.id;
-      let group= allData.filter(it=>{
-        // console.log(it.type , groupID)
-        if(groupID=='general')
-          return !it.type || it.type==groupID
-        return it.type == groupID;
-      });
-      item.count = group.length > 0 ? group.length : false;
-    });
+function setCounter(vnode ) {
+  vnode.state.filters.forEach(group => {
+    let filter = store.storeLeads.filter( lead=>{
+        let groupID = getTypeGroup(lead.type);
+        return group.id == groupID;
+      })
+    group.count = filter.length
+  })
+}
+
+function getTypeGroup(typeID){
+  let filter = settings.allLeadTypes.filter(t=>t.id == typeID);
+  if(filter.length>0){
+    let regex = /setLeadGroup\/([^\/]+)/.exec(filter[0].col);
+    let colID = regex[1];
+    return colID;
+  }else{
+    return 'notAssign';
   }
 }
 
+// function setDefActive(vnode){
+//   console.log('TODO set a defult state to one filter',vnode.state.filters)
+//   let defActive = "notAssign";
+//   if(vnode.state.filters){
+//     vnode.state.filters.forEach(filter=>{
+//       if(filter.id ==defActive ){
+//         filter.active = true;
+//       }
+//     })
+//   }
+// }
 
 module.exports = leadsPage;

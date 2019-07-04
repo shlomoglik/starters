@@ -5,8 +5,6 @@ import LeadRow from './LeadRow'
 
 let Leads = (init) => {
   return {
-    oncreate: (vnode) => {
-    },
     onbeforeupdate: (vnode) => {
       setActiveState(vnode);
     },
@@ -30,8 +28,6 @@ let Leads = (init) => {
           ])
         )
       }
-
-
     }
   }
 }

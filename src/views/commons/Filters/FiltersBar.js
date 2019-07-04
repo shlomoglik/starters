@@ -40,5 +40,4 @@ function toggleActive(vnode, item) {
 }
 
 
-
 module.exports = Filters;
