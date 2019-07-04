@@ -1,5 +1,6 @@
 import m from "mithril"
 import settings from '../../data/settings'
+import store from '../../data/store'
 import LeadRow from './LeadRow'
 
 let Leads = (init) => {
@@ -36,23 +37,35 @@ let Leads = (init) => {
 }
 
 function filterMyLeads(vnode) {
-  let result = vnode.attrs.data || [];
-  result = result.filter(item => {
-    if (vnode.state.active == 'כללי') {
-      return !item.groupType || item.groupType == vnode.state.active
-    } else {
-      return item.groupType && item.groupType == vnode.state.active
+  let result = store.storeLeads.filter(lead => {
+    let typeID = lead.type;
+    let group = getTypeGroup(typeID);
+    if(vnode.state.active){
+      return vnode.state.active==group
+    }else{
+      return group == 'notAssign'
     }
   });
   return result;
 }
 
 function setActiveState(vnode) {
-  settings.groupTypeFilter.map(item => {
+  settings.leadGroupsList.map(item => {
     if (item.active) {
-      vnode.state.active = item.title;
+      vnode.state.active = item.id;
     }
   });
+}
+
+function getTypeGroup(typeID){
+  let filter = settings.allLeadTypes.filter(t=>t.id == typeID);
+  if(filter.length>0){
+    let regex = /setLeadGroup\/([^\/]+)/.exec(filter[0].col);
+    let colID = regex[1];
+    return colID;
+  }else{
+    return 'notAssign';
+  }
 }
 
 module.exports = Leads;

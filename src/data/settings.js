@@ -1,6 +1,6 @@
 //leads group  helpers
 let setLeadType = { title: "סוגי לידים", collection: "setLeadType", data: [] }
-let setLeadGroup = { title: "קבוצות לידים", collection: "setLeadGroup", data: [] }
+// let setLeadGroup = { title: "קבוצות לידים", collection: "setLeadGroup", data: [] }
 let setLeadSource = { title: "מקורות לידים", collection: "setLeadSource", data: [] }
 let setLeadStatus = { title: "סטטוסים", collection: "setLeadStatus", data: [] }
 let setContactType = { title: "סוגי אנשי קשר", collection: "setContactType", data: [] }
@@ -63,7 +63,7 @@ let settings = {
 
     formDataLeadArr:[
         {
-            "meta" : {inputID : "type" , inputType: "select" , list: "leadTypeList" },
+            "meta" : {inputID : "type" , inputType: "select" , list: "allLeadTypes" },
             "options": {name: "type", required: true , autocomplete:"off"},
             "label": { text: "סוג ליד" }
         },
@@ -86,16 +86,15 @@ let settings = {
 
     //SETTINGS GROUPS:
     setGroup: [
-        { label: "לידים", count: 0, groups: [setLeadSource, setLeadStatus], active: true },
+        { label: "לידים", count: 0, groups: [setLeadSource, setLeadStatus , setLeadType], active: true },
         { label: "אנשי קשר", count: 0, groups: [setContactType] },
         { label: "משתמשים", count: 0, groups: [setUserRoles] },
         { label: "כללי", count: 0 },
         { label: "פילוח לידים", count: 0 },
     ],
 
-
-    // setLeadType, setLeadGroup, 
-    leadTypeList: [],
+    // { label: "לא הוגדר", id:"notAssign",count: 0 },
+    allLeadTypes: [],
     leadSourceList: [],
     leadGroupsList:[],
 

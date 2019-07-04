@@ -35,6 +35,7 @@ const Card = (init) => {
                                     ]);
                                 case inputType == 'select':
                                     let dataList = curr["meta"]["list"];
+                                    console.log(dataList)
                                     return m('.lead-card__row', { key: `formRow${ind}`, style: "position:relative" }, [
                                         m(`select.lead-card__input`, Object.assign({}, curr["options"]), [
                                             m('option',{value:''} ,'--בחר--'),

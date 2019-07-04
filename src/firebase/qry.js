@@ -191,16 +191,14 @@ function getSourceList() {
     let colRef = db.collection('setLeadSource');
     snapCollection_(colRef, settings, 'leadSourceList');
 }
-function getTypeList() {
-    let colRef = db.collection('setLeadType');
-    snapCollection_(colRef, settings, 'leadTypeList');
-}
+// function getTypeList() {
+//     let colRef = db.collection('setLeadType');
+//     snapCollection_(colRef, settings, 'leadTypeList');
+// }
 function getGroupLeadsList() {
     let colRef = db.collection('setLeadGroup');
     snapCollection_(colRef, settings, 'leadGroupsList');
 }
-
-
 
 function getFollowUps(leadID, vnode) {
     let colRef = db.collection(`leads/${leadID}/followUps`);
@@ -215,6 +213,20 @@ function getStatus(leadID, vnode) {
     let colRef = db.collection(`leads/${leadID}/status`);
     snapCollection_(colRef, vnode.state, 'status');
 }
+
+function getAllTypeList(){
+    let qry = db.collectionGroup('types');
+    qry.onSnapshot(snap => {
+        let res = [];
+        snap.forEach((doc) => {
+            res.push(Object.assign(doc.data(), { id: doc.id, ref: doc.ref.path ,col: doc.ref.parent.path}))
+        });
+        settings.allLeadTypes = res;
+        console.log(' listen on collectionGroup lead types.   snap size = ', snap.size, 'result data is: ', res)
+        m.redraw();
+    });
+}
+
 function getAllTasks() {
     let user = JSON.parse(sessionStorage.getItem('User'));
     if (!user) return;
@@ -248,12 +260,12 @@ module.exports = {
     getContacts,
     getSettingGroups,
     getSourceList,
-    getTypeList,
     getGroupLeadsList,
     getFollowUps,
     getTasks,
     getStatus,
     getAllTasks,
+    getAllTypeList,
 };
 
 

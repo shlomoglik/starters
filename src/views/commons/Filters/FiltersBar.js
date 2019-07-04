@@ -2,13 +2,10 @@ import m from "mithril"
 
 let Filters = (init) => {
   return {
-    oninit: vnode => {
-      vnode.state.filters = vnode.attrs.filters;
-    },
     view: (vnode) => {
       return (
         m(".filterBar", [
-          vnode.state.filters.map(item => {
+          vnode.attrs.filters.map(item => {
             return (
               m(".filterBar__card",
                 {
@@ -32,12 +29,14 @@ let Filters = (init) => {
 }
 
 function toggleActive(vnode, item) {
-  vnode.state.filters.map(it => {
-    if (it.active) {
-      it.active = false;
+  vnode.attrs.filters.forEach((it,ind) => {
+    switch (true){
+      case (it.id == item.id):
+        return vnode.attrs.filters[ind].active = true;
+      default :
+      vnode.attrs.filters[ind].active = false;
     }
   })
-  item.active = true;
 }
 
 

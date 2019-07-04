@@ -1,24 +1,22 @@
 import m from "mithril"
 import store from '../../data/store'
 import settings from '../../data/settings'
-import {dateDiffDays} from '../../js/utils'
+import { dateDiffDays } from '../../js/utils'
 
 let LeadRow = (init) => {
     return {
         view: (vnode) => {
-            let lead = vnode.attrs.lead ;
-            let follow ='לא הוגדר';
-            console.log(follow)
+            let lead = vnode.attrs.lead;
+            let follow = 'לא  הוגדר';
             if (lead.followDate) {
                 // follow = lead.followDate.toDate().getDate() + '/' + Number(lead.followDate.toDate().getMonth()+1) + '/' + lead.followDate.toDate().getFullYear();
-                follow =  dateDiffDays(lead.followDate.toDate());
-                console.log(follow)
+                follow = dateDiffDays(lead.followDate.toDate());
             };
             return (
                 m(".leads__row",
                     {
-                        id: lead.id , 
-                        onclick: e=>navigateToLead(e,vnode)
+                        id: lead.id,
+                        onclick: e => navigateToLead(e, vnode)
                     }, [
                         m(".leads__cell.leads__title", [
                             m("span.leads__name", getContactName(vnode)),
@@ -39,15 +37,15 @@ function getContactName(vnode) {
         return path == contactPath;
     })
 
-    return  filter[0] ? filter[0].name : '';
+    return filter[0] ? filter[0].name : '';
 }
 
-function getLeadTypeLabel(typeID){
-    let filter = settings.leadTypeList.filter(type=>type.id == typeID);
-    return  filter[0] ? filter[0].label : '';
+function getLeadTypeLabel(typeID) {
+    let filter = settings.allLeadTypes.filter(type => type.id == typeID);
+    return filter[0] ? filter[0].label : '';
 }
 
-function navigateToLead(e,vnode){
+function navigateToLead(e, vnode) {
     m.route.set(`/myLeads/${vnode.attrs.lead.id}`);
 }
 

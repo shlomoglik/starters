@@ -22,7 +22,6 @@ let SettingsPage = (init) => {
           m(Header, { title: "הגדרות" }),
           m(Filters, { filters: vnode.state.groups }),
           vnode.state.groups.map(item => {
-            console.log(item);
             switch (true) {
               case (item.label == 'כללי'):
                 return item.active ? [
@@ -30,7 +29,8 @@ let SettingsPage = (init) => {
                   m('.setGroup' , 'another adv one')
                 ] : [];
               case (item.label == 'פילוח לידים'):
-                return item.active? m(SetLeadType) : ''
+                return item.active ? 
+                  m(SetLeadType): []
               default:
                 item.count = item.groups.length;
                 return item.active ?
