@@ -31,6 +31,7 @@ const Card = (init) => {
                                     return (
                                         m('button.lead-status__button',
                                             {
+                                                disabled:curr.id =="newLead",
                                                 key: ind,
                                                 id: curr.id,
                                                 class: isDone ? 'lead-status__button--done' : 'lead-status__button--open',
@@ -52,6 +53,7 @@ function buildStatusObj(vnode) {
             let id = set.id;
             return obj[id] ? obj[id] : set;
         })
+        console.log(statusObj)
         vnode.state.statusObj = statusObj;
     }
 }
