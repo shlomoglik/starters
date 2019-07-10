@@ -12,25 +12,46 @@ class Lead extends Model {
     //     duedate: "",
     //     source: "",
     //     contacts: [],
+    //     assigns:[]
     // }
     constructor(...args) {
         super(...args);
-        this._data['assigns'] =[{
-            'assignRef':User.getUser('path'),
-            'role':'main'
+        this._data['assigns'] = [{
+            'assignRef': User.getUser('path'),
+            'role': 'main'
         }];
+        this._data["followDate"] = new Date();
     }
-    static addLeadAndContact(newContact ,newLead ){
-        console.log('step 1: add Contact data=>',newContact._data);
+    /**
+     * @param {Object} newLead the new lead that creating with new Lead keword
+     * @param {String} contactPath the path of contact which has the main role on that lead
+     */
+    addLeadToExistContact(newLead, contactPath) {
+        let contactsRef = [{
+            'role': 'main',
+            'contactRef': contactPath
+        }];
+        newLead.setData('contacts', contactsRef);
+        newLead.add('leads').then(d=>{
+            let reg = /\/(.+)/;
+            let id = reg.exec(newLead.getID())[1];
+            console.log(`navigate to page myLeads/${id}`)
+            m.route.set(`/myLeads/${id}`);
+            m.redraw();
+        });;
+    }
+
+    static addLeadAndContact(newContact, newLead) {
+        console.log('step 1: add Contact data=>', newContact._data);
 
         newContact.add('contacts').then(
-            doc=>{
+            doc => {
                 let path = newContact.getID();
-                let contactsRef =[{
-                    'role':'main',
-                    'contactRef':path
+                let contactsRef = [{
+                    'role': 'main',
+                    'contactRef': path
                 }];
-                newLead.setData('contacts',contactsRef);
+                newLead.setData('contacts', contactsRef);
                 newLead.add('leads');
             }
         )

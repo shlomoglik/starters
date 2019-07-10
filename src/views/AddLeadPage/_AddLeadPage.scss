@@ -3,15 +3,6 @@
     margin-bottom: 8rem; 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-
-}
-
-.addLead{
-    &__form{
-        &:first-child{
-            margin-top: 5rem;
-        }
-    }
 }

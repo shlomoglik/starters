@@ -1,0 +1,17 @@
+.user{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(-1000px);
+    visibility: hidden;
+    opacity: 0;
+    transition: all .2s ease-in;
+    &--show{
+        transform: translateX(0);
+        visibility: visible;
+        opacity: 1;
+    }
+    & > * {
+        background-color: orangered;
+    }
+}

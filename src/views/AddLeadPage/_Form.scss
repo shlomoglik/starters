@@ -1,0 +1,111 @@
+.form{
+    direction: rtl;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 32rem;
+    width: 90%;
+    max-width: 42rem;
+    padding: 1rem 1rem;
+    background-color: var(--color-grey-light-1);
+    box-shadow: var(--box-shadow-1);
+    border-radius: 3px;
+    background-color: var(--color-grey-light-1);
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    font-size: 2rem;
+
+    &__row{
+        width: 100%;
+        &:not(:last-child){
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__input {
+        width: 90%;
+        color: var(--color-grey-dark-1);
+        height: 5rem;
+        outline: none;
+        border: none;
+        text-align: center;
+        font-size: 2.2rem;
+        font-family: inherit;
+        // width: 95%;
+        border-bottom: 3px solid var(--color-grey-light-3);
+        transition: all .2s ease-in;
+        
+        &::placeholder{
+            color: var(--color-grey-dark-3) !important;
+            font-size: inherit;
+            font-family: inherit;
+        }
+
+        &:focus {
+            outline: none;
+            border-bottom: 3px solid var(--color-primary);
+            &::placeholder{
+            opacity: .6;
+            }
+            &:invalid {
+                border-bottom: 3px solid var(--color-secondary);
+            }
+        }
+    }
+
+    &__input:placeholder-shown + &__label {
+        transform: translateY(-4rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &__select{
+        & option{
+            color: var(--color-primary);
+            font-size: 2rem;
+        }
+    }
+
+    &__label {
+        color:var(--color-grey-dark-1);
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 500;
+        display: block;
+        transition: all .3s;
+    }
+
+    &__row{
+        input[type="date"]{
+            color:var(--color-grey-dark-3) !important;
+            font-family: inherit !important;
+            font-size: 2rem !important;
+            &::placeholder{
+                color: var(--color-grey-dark-3) !important;
+                font-size: inherit;
+                font-family: inherit;
+            }
+        }
+    }
+
+    &__select-group{
+        display: flex;
+        justify-content: space-between;
+        font-size: 3rem;
+    } 
+    &__select-item{
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        color: var(--color-grey-dark-3);
+        background: none;
+        flex:1;
+        
+        &--active{
+            background: var(--color-grey-light-3);
+        }
+    }
+}

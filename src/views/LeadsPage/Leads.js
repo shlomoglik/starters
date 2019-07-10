@@ -1,9 +1,16 @@
 import m from "mithril"
+import settings from '../../data/settings'
+import store from '../../data/store'
+import LeadRow from './LeadRow'
 
-let Filters = (init) => {
+let Leads = (init) => {
   return {
+    onbeforeupdate: (vnode) => {
+      setActiveState(vnode);
+    },
     view: (vnode) => {
-      if (!vnode.attrs.data.length) {
+      let leadsData = filterMyLeads(vnode);
+      if (!leadsData[0]) {
         return m('.leads.leads--empty', { "data-empty": "כל הכבוד אין לידים פתוחים" })
       } else {
         return (
@@ -13,39 +20,48 @@ let Filters = (init) => {
               m(".leads__cell", "תיאור"),
               m(".leads__cell", "פולואפ")
             ]),
-            vnode.attrs.data.map(item => {
-              console.log('include only: ',vnode.attrs.groupFilter);
-              //exclude not in filters
-              if(!item.groupType || vnode.attrs.groupFilter !== item.groupType){
-                return;
-              }
-
-              let follow = 'היום'
-              if (item.followDate) {
-                follow = item.followDate.toDate().getDay() + '/' + item.followDate.toDate().getMonth() + '/' + item.followDate.toDate().getFullYear();
-                let dist = (new Date().setTime(0) - item.followDate.toDate().setTime(0));
-                if (dist == 0) {
-                  follow = 'היום'
-                }
-              };
+            leadsData.map(lead => {
               return (
-                m(".leads__row", { id: item.id }, [
-                  m(".leads__cell.leads__title", [
-                    m("span.leads__name", item.name),
-                    m("span.leads__type", item.type)
-                  ]),
-                  m(".leads__cell.leads__desc", item.description),
-                  m(".leads__cell.leads__follow", follow)
-                ])
+                m(LeadRow, { lead: lead })
               )
             })
           ])
         )
       }
-
-
     }
   }
 }
 
-module.exports = Filters;
+function filterMyLeads(vnode) {
+  let result = store.storeLeads.filter(lead => {
+    let typeID = lead.type;
+    let group = getTypeGroup(typeID);
+    if(vnode.state.active){
+      return vnode.state.active==group
+    }else{
+      return group == 'notAssign'
+    }
+  });
+  return result;
+}
+
+function setActiveState(vnode) {
+  settings.leadGroupsList.map(item => {
+    if (item.active) {
+      vnode.state.active = item.id;
+    }
+  });
+}
+
+function getTypeGroup(typeID){
+  let filter = settings.allLeadTypes.filter(t=>t.id == typeID);
+  if(filter.length>0){
+    let regex = /setLeadGroup\/([^\/]+)/.exec(filter[0].col);
+    let colID = regex[1];
+    return colID;
+  }else{
+    return 'notAssign';
+  }
+}
+
+module.exports = Leads;

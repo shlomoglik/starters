@@ -1,6 +1,6 @@
-// import * as app from '../src/firebase/firebaseConfig';
 import m from 'mithril';
 const root = document.body;
+
 import './style.css';
 
 //functions
@@ -9,9 +9,23 @@ import './style.css';
 //Views
 import LoginPage from "./views/LoginPage/LoginPage";
 import AddLeadPage from "./views/AddLeadPage/AddLeadPage";
+import TasksPage from "./views/TasksPage/TasksPage";
 import LeadsPage from "./views/LeadsPage/LeadsPage";
+import LeadPage from "./views/LeadPage/Lead";
 import SearchPage from "./views/SearchPage/SearchPage";
+import SettingsPage from "./views/SettingsPage/SettingsPage";
+import UserPage from './views/UserPage/UserPage';
 import User from "./data/User";
+import {getLeads, getContacts, getSettingGroups ,getSourceList   , getAllTasks , getGroupLeadsList , getAllTypeList } from './firebase/qry'
+
+
+getLeads();
+getContacts();
+getAllTasks();
+getSettingGroups();
+getSourceList();
+getGroupLeadsList();
+getAllTypeList();
 
 m.route(root, "/login", {
     "/login": LoginPage,
@@ -23,7 +37,15 @@ m.route(root, "/login", {
             else m.route.set('/login')
         }
     },
-    "/myLeads":{
+    "/myTasks": {
+        onmatch: () => {
+            let logged = User.isLoggedIn();
+            if (logged)
+                return TasksPage
+            else m.route.set('/login')
+        }
+    },
+    "/myLeads": {
         onmatch: () => {
             let logged = User.isLoggedIn();
             if (logged)
@@ -31,13 +53,28 @@ m.route(root, "/login", {
             else m.route.set('/login')
         }
     },
-    "/search":{
+    "/myLeads/:id": {
         onmatch: () => {
-            console.log('go to search page')
+            let logged = User.isLoggedIn();
+            if (logged)
+                return LeadPage
+            else m.route.set('/login')
+        }
+    },
+    "/search": {
+        onmatch: () => {
             let logged = User.isLoggedIn();
             if (logged)
                 return SearchPage
             else m.route.set('/login')
         }
-    }
+    },
+    "/settings": {
+        onmatch: () => {
+            let logged = User.isLoggedIn();
+            if (logged)
+                return SettingsPage
+            else m.route.set('/login')
+        }
+    },
 });

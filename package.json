@@ -9,7 +9,7 @@
     "size": "webpack -p --config ‏‏webpack.size.js",
     "open": "start chrome  http://localhost:3000 ",
     "sass:watch": "node-sass src/sass/main.scss src/style.css -w",
-    "start": "npm-run-all --parallel sass:watch dev:watch",
+    "start": "npm-run-all --parallel dev:watch",
     "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' src/sass/style.css -o public/style.prefix.css",
     "compress:css": "node-sass public/style.prefix.css public/style.comp.css --output-style compressed",
     "build:css": "npm-run-all  prefix:css compress:css"

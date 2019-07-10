@@ -1,0 +1,95 @@
+.container--myTasks{
+    margin-top: 8rem; 
+    background-color: var(--color-grey-light-3);
+    margin-bottom: 8rem;
+    min-height: 100vh;
+}
+
+.myTasks{
+    direction: rtl;
+    margin: 0 auto;
+    min-width: 320px;
+}
+
+.tasks{    
+    &--empty {
+        height: 10rem;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &::after{
+            font-size: 1.6rem;
+            content: attr(data-empty);
+            color: var(--color-primary);
+        }
+    }
+
+    &__heading{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 2rem;
+        font-weight: 600;
+        align-content: center;
+    }
+
+    &__row{
+        border-radius: 5px;
+        box-shadow: var(--box-shadow-1);
+        background-color: var(--color-white);
+        margin-bottom: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 2rem;
+        padding: 0 auto;
+        transition: all .15s ease-in-out;
+        &:hover{
+            transform: translateY(-.1rem);
+            background-color: var(--color-grey-light-2);
+            box-shadow: var(--box-shadow-2);
+            cursor: pointer;
+        }
+        &:active{
+            transform: translateY(0);
+            box-shadow: var(--box-shadow-1);
+        }
+    }
+    &__cell{
+        padding:1rem;
+    }
+
+    &__link{
+        color: blue;
+        text-decoration: underline;
+        transition: all .1s;
+        &:hover{
+            font-weight: 600;
+            background:var(--color-grey-bg);
+        }
+    }
+
+    &__button{
+        border-radius: 1rem;
+        border: none;
+        outline: none;
+        font-size: 2rem;
+        background: var(--color-primary-light);
+        color: var(--color-white);
+        flex: 0 0 10%;
+        opacity: .6;
+        transition: all .2s;
+        
+        &--done{
+            background: var(--color-red);
+        }
+        
+        &:hover{
+            background: var(--color-primary);
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+}

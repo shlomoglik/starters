@@ -1,31 +1,38 @@
 import m from "mithril"
-import Store from '../../data/Store'
-import Header from '../Header/Header'
-import Bottom from '../commons/BottomMenu'
-import FormContactLead from '../Form/FormContactLead'
+import store from '../../data/store'
+import settings from '../../data/settings'
+import Header from '../commons/Header/Header'
+import Bottom from '../commons/Menus/BottomMenu'
+import FormContact from './FormContact'
+import FormLead from './FormLead'
 
 
 
-module.exports = {
-  oncreate:(vnode)=>{
-    let main =vnode.dom.querySelector('main');
-    main.classList.add("fade-in");
-    return new Promise((resolve,reject)=> {
-        vnode.dom.addEventListener("animationend", ()=>{
-          main.classList.remove("fade-in");
-          // resolve; 
+let AddLeadPage = (init) => {
+  return {
+    oncreate: (vnode) => {
+      let forms = vnode.dom.querySelectorAll('form');
+      forms.forEach(form=>{
+        form.classList.add("fade-in");
+        return new Promise((resolve, reject) => {
+          vnode.dom.addEventListener("animationend", () => {
+            form.classList.remove("fade-in");
+            // resolve; 
+          })
         })
-    })
-  },
-  view: (vnode) => {
-    return (
-      <div class="container--addLead">
-        <Header title="פנייה חדשה" />
-        <main class="addLead">
-          <FormContactLead />
-        </main>
-        <Bottom />
-      </div>
-    )
+      });
+    },  
+    view: (vnode) => {
+      return (
+        <div class="container--addLead">
+          <Header title="פנייה חדשה" />
+          <FormContact parent={vnode} formData={settings.formDataContact} filters={settings.filtersAddContact} />
+          <FormLead parent={vnode} formData={settings.formDataLead} style={vnode.state.activeContact?'display:block':'display:none'}/>
+          <Bottom/>
+        </div>
+      )
+    }
   }
 }
+
+module.exports = AddLeadPage;

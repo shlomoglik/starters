@@ -1,0 +1,98 @@
+.filterBar{
+    position: fixed;
+    z-index: 100;
+    top: 8rem;
+    width: 100vw;
+    right: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    padding: 1rem 1rem .5rem 1rem;
+    text-align: center;
+    opacity: .9;
+    background-color: var(--color-primary-dark);
+
+    &__card{
+        border-top: 1.5px solid var(--color-primary);
+        // background-color: var(--color-primary);
+        border-radius: 10px 15px 0 0;
+        line-height: 3rem;
+        align-self: center;
+        position: relative;
+        flex: 1;
+        font-size: var(--def-font-size);
+        color: var(--color-grey-dark-3);
+
+
+        &::after{
+            content: "";
+            position: absolute;
+            padding: 1px;
+            text-align: center;
+            bottom:-1px;
+            background-color: var(--color-primary-light);
+            width: 90%;
+            right: 5%;
+            height: 2px;
+            opacity: 0;
+            transition: all .2s ease-in;
+            
+        }
+        
+        &:hover{
+            transform: translateY(-.1rem);
+            cursor: pointer;
+            
+            &::after{
+                opacity: 1;
+                width: 60%;
+                right: 20%;
+            }
+        }
+
+        //active state
+        &--active{
+            color: var(--color-grey-light-1);
+            font-weight: 500;
+
+            &::after{
+                background-color: var(--color-grey-light-1) !important;
+                opacity: 1 !important;
+            }
+
+            &:hover{
+                transform: none !important;
+                cursor: context-menu !important;
+            
+                &::after{
+                    width: 90% !important;
+                    right: 5% !important;
+                }
+            }
+                
+        }
+    }
+
+    &__card-counter{
+        font-size: 1.8rem;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background-color: var(--color-red);
+        color: #fff;
+        position: absolute;
+        top: -.9rem;
+        left: 1.1rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &--done{
+            font-weight: 600;
+            background-color: white;
+            color:green;
+        }
+    }
+}
