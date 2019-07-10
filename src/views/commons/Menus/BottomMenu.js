@@ -3,22 +3,22 @@ import m from "mithril"
 let commands = [
   {
     title: "חדש",
-    iconPath: "/public/img/sprite.svg#icon-plus",
+    iconPath: "/img/sprite.svg#icon-plus",
     ref: "/add"
   },
   {
     title: "לטיפול",
-    iconPath: "/public/img/sprite.svg#icon-flow-tree",
+    iconPath: "/img/sprite.svg#icon-flow-tree",
     ref: "/myTasks"
   },
   {
     title: "חיפוש",
-    iconPath: "/public/img/sprite.svg#icon-magnifying-glass",
+    iconPath: "/img/sprite.svg#icon-magnifying-glass",
     ref: "/search"
   },
   {
     title: "לידים",
-    iconPath: "/public/img/sprite.svg#icon-layers",
+    iconPath: "/img/sprite.svg#icon-layers",
     ref: "/myLeads"
   }
 ]

@@ -17,10 +17,10 @@ const CardContacts = (init) => {
 
             return (
                 m('.lead-card', [
-                    m('button.btn.btn--fab.btn--round', { onclick: e => toggleAddForm(e, vnode), style: vnode.state.add ? "display:none;" : "" }, m('svg.btn__icon', m('use', { href: '/public/img/sprite.svg#icon-plus' }))),
+                    m('button.btn.btn--fab.btn--round', { onclick: e => toggleAddForm(e, vnode), style: vnode.state.add ? "display:none;" : "" }, m('svg.btn__icon', m('use', { href: '/img/sprite.svg#icon-plus' }))),
                     m('.lead-card__title', { onclick: e => toggleGroup(e, vnode) }, [
                         m('span', vnode.attrs.title),
-                        m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
+                        m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
                     vnode.attrs.rows && !vnode.state.shrink ?
                         m('.contact-card__wrapper', [
@@ -32,7 +32,7 @@ const CardContacts = (init) => {
                                         [
                                             m('input[type="checkbox"].contact-card__radio', { onchange: e => markAsMainRole(e, vnode), id: `role${row.id}`, value: row.role, name: 'role', checked: row.role == 'main' ? true : false }),
                                             m('.contact-card__role-user', [
-                                                m('label.contact-card__toggle', { for: `role${row.id}` }, m('svg.contact-card__icon', m('use', { href: '/public/img/sprite.svg#icon-user' }))),
+                                                m('label.contact-card__toggle', { for: `role${row.id}` }, m('svg.contact-card__icon', m('use', { href: '/img/sprite.svg#icon-user' }))),
                                             ]),
                                             m('span.contact-card__role-text',  row.role == 'main' ? "עיקרי" : ''),
                                             // render form data with setting object
@@ -45,14 +45,14 @@ const CardContacts = (init) => {
                                             m('.contact-card__btns', [
                                                 m('button.contact-card__button',
                                                     { onclick: e => unAssignContact(e, vnode) },
-                                                    m('svg', m('use', { href: '/public/img/sprite.svg#icon-download' }))
+                                                    m('svg', m('use', { href: '/img/sprite.svg#icon-download' }))
                                                 ),
                                                 m('button[type="submit"].contact-card__button',
-                                                    m('svg', m('use', { href: '/public/img/sprite.svg#icon-check' }))
+                                                    m('svg', m('use', { href: '/img/sprite.svg#icon-check' }))
                                                 ),
                                                 m('button.contact-card__button',
                                                     { onclick: e => resetChanges(e, vnode) },
-                                                    m('svg', m('use', { href: '/public/img/sprite.svg#icon-circle-with-cross' }))
+                                                    m('svg', m('use', { href: '/img/sprite.svg#icon-circle-with-cross' }))
                                                 ),
                                             ]), // end form btns
                                         ]), // end contact form

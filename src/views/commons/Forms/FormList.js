@@ -8,7 +8,7 @@ const Form = (vnode)=>{
                     m('input.form-list__input', { autofocus:true,type: "text", placeholder: "הוסף ...", required: true, minlength: 3 }),
                     m('button[type="submit"].form-list__btn', [
                         m('svg.form-list__icon', { onclick: () => vnode.dom.submit()  },
-                            m('use', { href: '/public/img/sprite.svg#icon-triangle-left' })
+                            m('use', { href: '/img/sprite.svg#icon-triangle-left' })
                         )
                     ])
                 ])

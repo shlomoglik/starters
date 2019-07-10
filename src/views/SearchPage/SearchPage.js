@@ -22,7 +22,7 @@ const SearchPage = (init)=>{
                   placeholder:"חפש איש קשר או ליד"
                 }
               ),
-              m('svg.mySearch__icon', m('use', { href: '/public/img/sprite.svg#icon-magnifying-glass' })),
+              m('svg.mySearch__icon', m('use', { href: '/img/sprite.svg#icon-magnifying-glass' })),
             ]),
             m('.mySearch__results',[
               vnode.state.results ? 

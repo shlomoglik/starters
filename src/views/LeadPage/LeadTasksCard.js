@@ -23,7 +23,7 @@ const Card = (init) => {
                 m('.lead-card', [
                     m('.lead-card__title', { onclick: e => toggleGroup(e, vnode) }, [
                         m('span', vnode.attrs.title + ` (${vnode.state.counter})`),
-                        m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
+                        m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
                     !vnode.state.shrink ?
                         m('.lead-tasks', [
@@ -47,7 +47,7 @@ const Card = (init) => {
                             vnode.state.closedTasks.length > 0 ?
                             m('.lead-tasks__section-row',{onclick:e=>toggleNext(e,vnode)},[
                                 m('.lead-tasks__section-title',`משימות שנסגרו (${vnode.state.countClosed ? vnode.state.countClosed : '' })`),
-                                m('svg#arrow.setGroup__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down'}))
+                                m('svg#arrow.setGroup__toggle-arrow', m('use', { href: '/img/sprite.svg#icon-chevron-thin-down'}))
                             ]) : [],
                             m('div#doneList.lead-tasks__list.lead-tasks__list--done',{style:"display:none;"} ,  [
                                 vnode.state.closedTasks ?

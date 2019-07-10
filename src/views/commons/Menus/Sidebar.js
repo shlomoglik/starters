@@ -1,7 +1,11 @@
 import m from 'mithril'
+import UserPage from '../../UserPage/UserPage'
 
 const Sidebar = (init) => {
   return {
+    oninit:vnode=>{
+      vnode.state.showUser =false;
+    },
     oncreate: (vnode) => {
       let checkbox = document.querySelector("#navi-toggle");
       checkbox.addEventListener('change', function () {
@@ -13,56 +17,30 @@ const Sidebar = (init) => {
       });
     },
     view: (vnode) => {
-      return (
+      return [
         m('.sidebar', [
           m('.sidebar__row', { onclick: e => m.route.set('/') }, [
             m('span.sidebar__label', "צא מהמערכת"),
             m('.sidebar__link', [
-              m('svg.sidebar__icon', m('use', { href: "/public/img/sprite.svg#icon-login" })),
+              m('svg.sidebar__icon', m('use', { href: "/img/sprite.svg#icon-login" })),
             ]),
           ]),
-          m('.sidebar__row', { onclick: e => console.log('TODO!!! go to user page') }, [
+          m('.sidebar__row', { onclick: e => {vnode.state.showUser = true ;m.redraw()} }, [
             m('span.sidebar__label', "הפרופיל שלי"),
             m('.sidebar__link', [
-              m('svg.sidebar__icon', m('use', { href: "/public/img/sprite.svg#icon-user" })),
+              m('svg.sidebar__icon', m('use', { href: "/img/sprite.svg#icon-user" })),
             ]),
           ]),
           m('.sidebar__row', { onclick: e => m.route.set('/settings') }, [
             m('span.sidebar__label', "הגדרות"),
             m('.sidebar__link', [
-              m('svg.sidebar__icon', m('use', { href: "/public/img/sprite.svg#icon-tools" })),
+              m('svg.sidebar__icon', m('use', { href: "/img/sprite.svg#icon-tools" })),
             ]),
           ])
-        ])
-      )
-      // return (
-      // <div class="sidebar">
-      //   <div class="sidebar__row">
-      //     <a href="#" class="sidebar__link">
-      //       <svg class="sidebar__icon">
-      //         <use href="/public/img/sprite.svg#icon-login" />
-      //       </svg>
-      //       <span>צא מהמערכת</span>
-      //     </a>
-      //   </div>
-      //   <div class="sidebar__row">
-      //     <a href="#" class="sidebar__link">
-      //       <svg class="sidebar__icon">
-      //         <use href="/public/img/sprite.svg#icon-user" />
-      //       </svg>
-      //       <span>הפרופיל שלי</span>
-      //     </a>
-      //   </div>
-      //   <div class="sidebar__row">
-      //     <a class="sidebar__link">
-      //       <svg class="sidebar__icon">
-      //         <use href="/public/img/sprite.svg#icon-tools" />
-      //       </svg>
-      //       <span>הגדרות מערכת</span>
-      //     </a>
-      //   </div>
-      // </div>
-      // )
+        ]),
+
+        m(UserPage , {class:`userPageModal ${vnode.state.showUser?'user--show':''}`})
+      ]
     }
   }
 }

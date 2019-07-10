@@ -18,7 +18,7 @@ let ScrollTop = (init) => {
                         window.scrollTo(0, 0);
                     }},
                     m('svg.scrollTop__icon',
-                        m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-up' })
+                        m('use', { href: '/img/sprite.svg#icon-chevron-thin-up' })
                     )
                 )
             )

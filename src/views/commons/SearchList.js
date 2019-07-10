@@ -32,7 +32,7 @@ let SearchList = (init) => {
                                             return m('.searchList__item', item[k]);
                                         }),
                                         m('svg.searchList__select', [
-                                            m('use', { href: '/public/img/sprite.svg#icon-add-to-list' })
+                                            m('use', { href: '/img/sprite.svg#icon-add-to-list' })
                                         ])
                                     ])
                             )

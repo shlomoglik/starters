@@ -23,7 +23,7 @@ const Card = (init) => {
                 m('form.lead-card', { onsubmit: e => updateChanges(e, vnode) }, [
                     m('.lead-card__title', { onclick: e => toggleGroup(e, vnode) }, [
                         m('span', vnode.attrs.title + ` (${vnode.state.counter})`),
-                        m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
+                        m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
                     !vnode.state.shrink ?
                         m('.lead-follow', [

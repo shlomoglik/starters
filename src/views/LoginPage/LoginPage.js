@@ -2,6 +2,7 @@ import m from "mithril"
 import Header from '../commons/Header/Header'
 import User from '../../data/User'
 
+
 let LoginPage = {
   oninit:(vnode)=>{
     console.log('initialize login page');

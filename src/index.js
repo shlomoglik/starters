@@ -1,5 +1,6 @@
 import m from 'mithril';
 const root = document.body;
+
 import './style.css';
 
 //functions
@@ -13,8 +14,10 @@ import LeadsPage from "./views/LeadsPage/LeadsPage";
 import LeadPage from "./views/LeadPage/Lead";
 import SearchPage from "./views/SearchPage/SearchPage";
 import SettingsPage from "./views/SettingsPage/SettingsPage";
+import UserPage from './views/UserPage/UserPage';
 import User from "./data/User";
 import {getLeads, getContacts, getSettingGroups ,getSourceList   , getAllTasks , getGroupLeadsList , getAllTypeList } from './firebase/qry'
+
 
 getLeads();
 getContacts();

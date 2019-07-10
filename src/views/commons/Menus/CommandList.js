@@ -15,7 +15,7 @@ let CommandList = (init) => {
         view: (vnode) => {
             return (
                 m('.commandList',{style:'position:relative'}, [
-                    m('svg#toggle.row__icon.commandList__icon', { onclick: e => toggleDispaly(e, vnode) }, m('use', { href: '/public/img/sprite.svg#icon-dots-three-vertical' })),
+                    m('svg#toggle.row__icon.commandList__icon', { onclick: e => toggleDispaly(e, vnode) }, m('use', { href: '/img/sprite.svg#icon-dots-three-vertical' })),
                     m('.commandList__list#list', [
                         vnode.attrs.list.map((item, ind) => {
                             if (item) {

@@ -1,6 +1,4 @@
 const path = require('path');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
 
 module.exports = {
     entry: './src/index.js',
@@ -13,11 +11,10 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader'
             },
-
             {
                 test: /\.(s*)css$/,
-                use: ['style-loader', 'css-loader','sass-loader']
-            }
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            },
         ]
 
     },

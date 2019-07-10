@@ -109,7 +109,7 @@ function renderActiveContact(activeContact, vnode) {
         { cmd: 'edit', label: 'ערוך איש קשר', func: e => console.log('TODO! goto contact full page via contacts/:id ') },
     ]
     return m(`.row#${activeContact.id}`, [
-        m('svg.row__icon', m('use', { href: '/public/img/sprite.svg#icon-user' })),
+        m('svg.row__icon', m('use', { href: '/img/sprite.svg#icon-user' })),
         Object.keys(activeContact).map((k, ind) => {
             if (k == 'id') return '';
             return m('span.row__span', activeContact[k]);

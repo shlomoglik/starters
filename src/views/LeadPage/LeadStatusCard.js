@@ -20,7 +20,7 @@ const Card = (init) => {
                 m('.lead-card', [
                     m('.lead-card__title', { onclick: e => toggleGroup(e, vnode) }, [
                         m('span', vnode.attrs.title),
-                        m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down' }))
+                        m('svg#arrow.lead-card__toggle-arrow', m('use', { href: '/img/sprite.svg#icon-chevron-thin-down' }))
                     ]),
                     !vnode.state.shrink ?
                         m('.lead-status', [

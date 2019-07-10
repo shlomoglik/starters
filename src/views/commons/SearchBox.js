@@ -41,7 +41,7 @@ let SearchBox = (init) => {
                             }
                         ),
                         m('svg.searchBox__icon', [
-                            m('use', { href: '/public/img/sprite.svg#icon-magnifying-glass' })
+                            m('use', { href: '/img/sprite.svg#icon-magnifying-glass' })
                         ]),
                     ])
             )

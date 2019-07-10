@@ -13,7 +13,7 @@ let SettingGroup = (init) => {
                 m('.setGroup', [
                     m('.setGroup__title', { onclick: e => toggleGroup(e, vnode) }, [
                         m('span', vnode.attrs.title),
-                        m('svg#arrow.setGroup__toggle-arrow', m('use', { href: '/public/img/sprite.svg#icon-chevron-thin-down'}))
+                        m('svg#arrow.setGroup__toggle-arrow', m('use', { href: '/img/sprite.svg#icon-chevron-thin-down'}))
                     ]),
                     vnode.attrs.rows && !vnode.state.shrink ?
                         vnode.attrs.rows.map((row, ind) => {
