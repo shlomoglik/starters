@@ -15,10 +15,12 @@ import LeadPage from "./views/LeadPage/Lead";
 import SearchPage from "./views/SearchPage/SearchPage";
 import SettingsPage from "./views/SettingsPage/SettingsPage";
 import UserPage from './views/UserPage/UserPage';
+
+//data
 import User from "./data/User";
 import {getLeads, getContacts, getSettingGroups ,getSourceList   , getAllTasks , getGroupLeadsList , getAllTypeList } from './firebase/qry'
 
-
+//get all data the user need
 getLeads();
 getContacts();
 getAllTasks();
@@ -27,6 +29,7 @@ getSourceList();
 getGroupLeadsList();
 getAllTypeList();
 
+//routes config
 m.route(root, "/login", {
     "/login": LoginPage,
     "/add": {
@@ -74,6 +77,14 @@ m.route(root, "/login", {
             let logged = User.isLoggedIn();
             if (logged)
                 return SettingsPage
+            else m.route.set('/login')
+        }
+    },
+    "/user": {
+        onmatch: () => {
+            let logged = User.isLoggedIn();
+            if (logged)
+                return UserPage
             else m.route.set('/login')
         }
     },

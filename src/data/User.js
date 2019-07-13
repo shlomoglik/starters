@@ -1,6 +1,6 @@
 import m from 'mithril'
 import { signIn, logout, isUserLoggedIn } from '../firebase/auth'
-import { getDoc ,getLeads } from '../firebase/qry'
+import { getDoc ,getLeads , getAllTasks } from '../firebase/qry'
 import store from './store'
 import Model from '../data/Model'
 
@@ -27,6 +27,7 @@ class User extends Model {
                                     sessionStorage.setItem('User', JSON.stringify(user))
                                     sessionStorage.setItem('token', token)
                                     getLeads();
+                                    getAllTasks();
                                     m.route.set("/add");
                                 }, err => {
                                     console.error(err)

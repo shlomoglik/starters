@@ -33,3 +33,42 @@
 [debug] [2019-07-09T22:40:40.764Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
 [debug] [2019-07-09T22:40:40.886Z] firebase-admin has been stubbed.
 [info] Ignoring trigger "createStatus" because the Cloud Firestore emulator is not running.
+[debug] [2019-07-13T21:18:21.733Z] ----------------------------------------------------------------------
+[debug] [2019-07-13T21:18:21.736Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\User\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-07-13T21:18:21.736Z] CLI Version:   7.0.2
+[debug] [2019-07-13T21:18:21.736Z] Platform:      win32
+[debug] [2019-07-13T21:18:21.736Z] Node Version:  v10.15.2
+[debug] [2019-07-13T21:18:21.738Z] Time:          Sun Jul 14 2019 00:18:21 GMT+0300 (GMT+03:00)
+[debug] [2019-07-13T21:18:21.738Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-07-13T21:18:21.763Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-07-13T21:18:21.763Z] > authorizing via signed-in user
+[debug] [2019-07-13T21:18:21.763Z] [iam] checking project lead-up-ad9c4 for permissions ["firebase.projects.get"]
+[debug] [2019-07-13T21:18:21.765Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-07-13T21:18:21.765Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-07-13T21:18:22.221Z] <<< HTTP RESPONSE 200
+[debug] [2019-07-13T21:18:22.228Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/lead-up-ad9c4:testIamPermissions  
+
+[debug] [2019-07-13T21:18:23.348Z] <<< HTTP RESPONSE 200
+[debug] [2019-07-13T21:18:23.349Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/lead-up-ad9c4  
+ 
+[debug] [2019-07-13T21:18:24.287Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\User\Desktop\developing\lead up\lead-up'...
+[info] 
+[warn] !  Your requested "node" version "8" doesn't match your global version "10"
+[debug] [2019-07-13T21:18:24.299Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/620824153004/clients/_:getWebAppConfig  
+ 
+[debug] [2019-07-13T21:18:24.300Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/620824153004:getServerAppConfig  
+ 
+[debug] [2019-07-13T21:18:24.870Z] <<< HTTP RESPONSE 200
+[info] +  functions: Emulator started at http://localhost:5001
+[debug] [2019-07-13T21:18:25.046Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "C:\Users\User\Desktop\developing\lead up\lead-up\functions" for Cloud Functions...
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+[debug] [2019-07-13T21:18:25.934Z] Functions runtime initialized.
+[debug] [2019-07-13T21:18:25.935Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-07-13T21:18:26.208Z] firebase-admin has been stubbed.
+[info] Ignoring trigger "createStatus" because the Cloud Firestore emulator is not running.
