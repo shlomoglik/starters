@@ -4,23 +4,34 @@ import Header from '../commons/Header/HeaderFullPage'
 
 
 const UserPage=(init)=>{
+
     const getUserData = (vnode)=>{
         vnode.state.user = User.getUser()["_data"];
         console.log(User.getUser());
     }
 
+    const getPhoto = ()=>{
+        if(false){
+            console.log('bla bla bla')
+            return m('img.user__photo',{src:"#",alt:""})
+        }else{
+            return m('svg.user__photo',m('use',{href:"/img/sprite.svg#icon-user"}))
+        }
+    }
+
     return {
         oninit:vnode=>{
             getUserData(vnode);
+            console.log(m.route.get());
         },
         view:vnode=>{
             let user = vnode.state.user;
             return (
                 m('.user',[
-                    m(Header , {title:"פרופיל משתמש",backTo:m.route.get()}),
+                    m(Header , {title:"פרופיל משתמש",backTo:false}),
                     m('form.user__form',[
                         m('.user__row',[
-                            m('img.user__photo',{src:"#",alt:""}),
+                            getPhoto()
                         ]),
                         m('.user__row',[
                             m('input[type="text"].user__input user__name',{value:user.name ||''}),

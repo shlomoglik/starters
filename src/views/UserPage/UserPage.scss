@@ -1,4 +1,5 @@
 .user{
+    margin-top: 8rem;
     &__form{
         margin: 5rem;
         border-radius: 2rem;
@@ -10,7 +11,7 @@
     }
     &__photo{
         border-radius: 50%;
-        background-color: var(--color-primary-light);
+        background-color: #ccc;
         width: 8rem;
         height: 8rem;
     }
