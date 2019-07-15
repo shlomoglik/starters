@@ -1,4 +1,4 @@
-import m from './mithril';
+import m from 'mithril';
 import Header from '../commons/Header/HeaderFullPage';
 import { getFormValues } from '../../js/utils';
 import { updateDoc } from '../../firebase/qry';

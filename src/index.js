@@ -15,7 +15,7 @@ import LeadPage from "./views/LeadPage/Lead";
 import SearchPage from "./views/SearchPage/SearchPage";
 import SettingsPage from "./views/SettingsPage/SettingsPage";
 import UserPage from './views/UserPage/UserPage';
-// import ContactPage from './views/ContactPage/ContactPage'; 
+import ContactPage from './views/ContactPage/ContactPage'; 
 
 //data
 import User from "./data/User";
