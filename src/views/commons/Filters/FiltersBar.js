@@ -34,7 +34,6 @@ const Filters = (init) => {
 function toggleActive(vnode, item) {
   console.log('triggerd item is: ',item)
   vnode.attrs.filters.forEach((it, ind) => {
-    console.log('check == to this item',it)
     if ((it.id && it.id == item.id) || (it.label && it.label == item.label) ) {
       vnode.attrs.filters[ind].active = true;
       return;
