@@ -450,9 +450,12 @@ body {
     height: 8rem; }
 
 .header-full-page {
+  --text: var(--color-grey-dark-1);
+  --bg: var(--color-grey-light-4);
+  --hover: var(--color-grey-bg);
   direction: rtl;
   padding: 2rem;
-  background-color: var(--color-primary-dark);
+  background-color: var(--bg);
   height: 8rem;
   opacity: .9;
   width: 100vw;
@@ -464,7 +467,7 @@ body {
   justify-content: space-between;
   z-index: 1000; }
   .header-full-page__title {
-    color: var(--color-grey-light-1);
+    color: var(--text);
     flex: 1;
     font-size: 3rem;
     font-weight: 400;
@@ -472,20 +475,27 @@ body {
     text-transform: uppercase;
     text-transform: uppercase; }
   .header-full-page__arrow {
-    font-size: 3rem;
-    color: var(--color-grey-light-1);
+    width: 5rem;
+    height: 5rem;
+    font-size: 4rem;
+    color: var(--text);
     font-weight: 700;
     text-align: center;
     border-radius: 50%;
     transition: all .1s; }
     .header-full-page__arrow:hover {
       cursor: pointer;
-      background-color: var(--color-grey-bg);
+      background-color: var(--hover);
       transform: scale(1.1); }
     .header-full-page__arrow:active {
       transform: scale(1); }
 
 .filterBar {
+  --bg: var(--color-primary-dark);
+  --border-top: var(--color-primary);
+  --border-bottom: var(--color-primary-light);
+  --text: var(--color-grey-dark-3);
+  --active: var(--color-grey-light-1);
   position: fixed;
   z-index: 100;
   top: 8rem;
@@ -498,23 +508,29 @@ body {
   padding: 1rem 1rem .5rem 1rem;
   text-align: center;
   opacity: .9;
-  background-color: var(--color-primary-dark); }
+  background-color: var(--bg); }
+  .filterBar--light {
+    --bg: var(--color-grey-light-4);
+    --border-top: var(--color-primary);
+    --border-bottom: var(--color-primary-light);
+    --text: var(--color-grey-dark-1);
+    --active: var(--color-primary); }
   .filterBar__card {
-    border-top: 1.5px solid var(--color-primary);
+    border-top: 1.5px solid var(--border-top);
     border-radius: 10px 15px 0 0;
     line-height: 3rem;
     align-self: center;
     position: relative;
     flex: 1;
     font-size: var(--def-font-size);
-    color: var(--color-grey-dark-3); }
+    color: var(--text); }
     .filterBar__card::after {
       content: "";
       position: absolute;
       padding: 1px;
       text-align: center;
       bottom: -1px;
-      background-color: var(--color-primary-light);
+      background-color: var(--border-bottom);
       width: 90%;
       right: 5%;
       height: 2px;
@@ -528,10 +544,10 @@ body {
         width: 60%;
         right: 20%; }
     .filterBar__card--active {
-      color: var(--color-grey-light-1);
+      color: var(--active);
       font-weight: 500; }
       .filterBar__card--active::after {
-        background-color: var(--color-grey-light-1) !important;
+        background-color: var(--active) !important;
         opacity: 1 !important; }
       .filterBar__card--active:hover {
         transform: none !important;
@@ -774,6 +790,8 @@ body {
   z-index: 1000;
   left: 50%;
   bottom: 3rem; }
+  .snackbar__error {
+    background-color: var(--color-red); }
   .snackbar__show {
     visibility: visible;
     animation: fadein .5s, fadeout .5s 2.5s; }
@@ -1720,6 +1738,12 @@ body {
     text-align: center;
     font-size: 3rem;
     font-family: inherit; }
+  .user__btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .user__btns > * {
+      margin: 1rem; }
   .user__input {
     text-align: center;
     font: inherit;

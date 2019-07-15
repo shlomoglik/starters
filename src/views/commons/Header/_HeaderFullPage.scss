@@ -1,7 +1,11 @@
 .header-full-page{
+    --text: var(--color-grey-dark-1);
+    --bg: var(--color-grey-light-4);
+    --hover: var(--color-grey-bg);
+
     direction: rtl;
     padding: 2rem;
-    background-color:var(--color-primary-dark);
+    background-color:var(--bg);
     height: 8rem;
     opacity: .9;
     width: 100vw;
@@ -14,7 +18,7 @@
     z-index: 1000;
         
     &__title{
-        color: var(--color-grey-light-1);
+        color: var(--text);
         flex: 1;
         font-size: 3rem;
         font-weight: 400;
@@ -23,15 +27,17 @@
         text-transform: uppercase;
     }
     &__arrow{
-        font-size: 3rem;
-        color: var(--color-grey-light-1);
+        width: 5rem;
+        height: 5rem;
+        font-size: 4rem;
+        color: var(--text);
         font-weight: 700;
         text-align: center;
         border-radius: 50%;
         transition: all .1s;
         &:hover{
             cursor: pointer;
-            background-color: var(--color-grey-bg);
+            background-color: var(--hover);
             transform: scale(1.1);
         }
         &:active{

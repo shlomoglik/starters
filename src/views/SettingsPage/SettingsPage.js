@@ -1,8 +1,7 @@
 import m from 'mithril'
 import settings from '../../data/settings'
-import Header from '../commons/Header/Header'
-import Filters from '../commons/Filters/FiltersBar'
-import Bottom from '../commons/Menus/BottomMenu'
+import Header from '../commons/Header/HeaderFullPage'
+import FiltersBar from '../commons/Filters/FiltersBar'
 import ScrollTop from '../commons/ScrollTop'
 import SettingGroup from './SettingGroup'
 import SetLeadType from './SetLeadType'
@@ -10,33 +9,31 @@ import SetLeadType from './SetLeadType'
 let SettingsPage = (init) => {
   return {
     oninit: vnode => {
-      vnode.state.groups = settings.setGroup;
+      vnode.state.filters = settings.setGroup;
       window.scrollTo(0, 0);
     },
     onbeforeupdata: (vnode) => {
-      vnode.state.groups = settings.setGroup;
+      vnode.state.filters = settings.setGroup;
     },
     view: (vnode) => {
       return (
         m('.container--settings', [
-          m(Header, { title: "הגדרות" }),
-          m(Filters, { filters: vnode.state.groups }),
-          vnode.state.groups.map(item => {
+          m(Header, { title: "הגדרות", backTo: false }),
+          m(FiltersBar, { filters: vnode.state.filters, oncreate: node => node.dom.classList.add("filterBar--light") }),
+          vnode.state.filters.map(item => {
             switch (true) {
-              case (item.label == 'כללי'):
-                return item.active ? [
+              case (item.label == 'כללי' && item.active):
+                return [
                   m('.setGroup', 'advancedItem2'),
-                  m('.setGroup' , 'another adv one')
-                ] : [];
-              case (item.label == 'פילוח לידים'):
-                return item.active ? 
-                  m(SetLeadType): []
-              default:
+                  m('.setGroup', 'another adv one')
+                ]
+              case (item.label == 'פילוח לידים' && item.active):
+                return m(SetLeadType)
+              case (item.active):
                 item.count = item.groups.length;
-                return item.active ?
-                  item.groups.map(group => {
-                    return m(SettingGroup, { title: group.title, rows: group.data, collection: group.collection })
-                  }) : [];
+                item.groups ? item.groups.map(group => {
+                  return m(SettingGroup, { title: group.title, rows: group.data, collection: group.collection })
+                }) : [];
             }
             // if (item.groups && item.label !== 'מתקדם') {
             //   return item.active ?
@@ -51,7 +48,6 @@ let SettingsPage = (init) => {
             //     : [];
             // }
           }),
-          m(Bottom),
           m(ScrollTop)
         ])
       )

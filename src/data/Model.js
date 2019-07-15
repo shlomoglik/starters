@@ -23,7 +23,7 @@ class Model {
         console.log('TODO! save on SessionStorage')
     }
     delete() {
-        console.log('TODO! delete doc by id from database and from storage/stoer etc')
+        console.log('TODO! delete doc by id from database and from storage / store etc')
     }
     getData() {
         return this._data;

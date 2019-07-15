@@ -15,6 +15,7 @@ import LeadPage from "./views/LeadPage/Lead";
 import SearchPage from "./views/SearchPage/SearchPage";
 import SettingsPage from "./views/SettingsPage/SettingsPage";
 import UserPage from './views/UserPage/UserPage';
+// import ContactPage from './views/ContactPage/ContactPage'; 
 
 //data
 import User from "./data/User";
@@ -85,6 +86,14 @@ m.route(root, "/login", {
             let logged = User.isLoggedIn();
             if (logged)
                 return UserPage
+            else m.route.set('/login')
+        }
+    },
+    "/contacts/:id": {
+        onmatch: () => {
+            let logged = User.isLoggedIn();
+            if (logged)
+                return ContactPage
             else m.route.set('/login')
         }
     },

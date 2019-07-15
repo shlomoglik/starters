@@ -1,7 +1,10 @@
 import m from "mithril"
 
-let Filters = (init) => {
+const Filters = (init) => {
   return {
+    onbeforeupdate:vnode=>{
+      console.log('filters are: ',vnode.attrs.filters);
+    },
     view: (vnode) => {
       return (
         m(".filterBar", [

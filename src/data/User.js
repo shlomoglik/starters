@@ -24,8 +24,8 @@ class User extends Model {
                                 token => {
                                     console.log('step 4- token is here - put it on local storage!')
                                     let user = new User(cred.user.uid  ,  doc.data()  ,  {token:token , path:`users/${doc.id}`} )
-                                    sessionStorage.setItem('User', JSON.stringify(user))
-                                    sessionStorage.setItem('token', token)
+                                    sessionStorage.setItem('User', JSON.stringify(user));
+                                    sessionStorage.setItem('token' , token);
                                     getLeads();
                                     getAllTasks();
                                     m.route.set("/add");
