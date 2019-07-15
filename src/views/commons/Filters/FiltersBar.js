@@ -2,8 +2,8 @@ import m from "mithril"
 
 const Filters = (init) => {
   return {
-    onbeforeupdate:vnode=>{
-      console.log('filters are: ',vnode.attrs.filters);
+    onbeforeupdate: vnode => {
+      console.log('filters are: ', vnode.attrs.filters);
     },
     view: (vnode) => {
       return (
@@ -32,11 +32,13 @@ const Filters = (init) => {
 }
 
 function toggleActive(vnode, item) {
-  vnode.attrs.filters.forEach((it,ind) => {
-    switch (true){
-      case (it.id == item.id):
-        return vnode.attrs.filters[ind].active = true;
-      default :
+  console.log('triggerd item is: ',item)
+  vnode.attrs.filters.forEach((it, ind) => {
+    console.log('check == to this item',it)
+    if ((it.id && it.id == item.id) || (it.label && it.label == item.label) ) {
+      vnode.attrs.filters[ind].active = true;
+      return;
+    } else {
       vnode.attrs.filters[ind].active = false;
     }
   })
