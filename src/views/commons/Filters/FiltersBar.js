@@ -2,9 +2,6 @@ import m from "mithril"
 
 const Filters = (init) => {
   return {
-    onbeforeupdate: vnode => {
-      console.log('filters are: ', vnode.attrs.filters);
-    },
     view: (vnode) => {
       return (
         m(".filterBar", [
@@ -32,7 +29,6 @@ const Filters = (init) => {
 }
 
 function toggleActive(vnode, item) {
-  console.log('triggerd item is: ',item)
   vnode.attrs.filters.forEach((it, ind) => {
     if ((it.id && it.id == item.id) || (it.label && it.label == item.label) ) {
       vnode.attrs.filters[ind].active = true;

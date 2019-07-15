@@ -15,10 +15,11 @@ let AddLeadPage = (init) => {
       forms.forEach(form=>{
         form.classList.add("fade-in");
         return new Promise((resolve, reject) => {
-          vnode.dom.addEventListener("animationend", () => {
-            form.classList.remove("fade-in");
-            // resolve; 
+          resolve( 
+            vnode.dom.addEventListener("animationend", () => {
+            form.classList.remove("fade-in"); 
           })
+          )
         })
       });
     },  

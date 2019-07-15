@@ -1629,7 +1629,6 @@ body {
 
 .container--settings {
   margin-top: 13rem;
-  margin-bottom: 8rem;
   background-color: var(--color-grey-light-3);
   min-height: 100vh;
   display: flex;

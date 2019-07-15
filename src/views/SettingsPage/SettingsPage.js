@@ -29,9 +29,9 @@ let SettingsPage = (init) => {
                 ];
               case (item.label == 'פילוח לידים' && item.active):
                   return m(SetLeadType)
-              case (item.active):
-                item.count = item.groups.length || 0;
-                return item.groups ? item.groups.map(group => {
+              default :
+                item.count = item.groups ? item.groups.length : 0;
+                return item.groups && item.active ? item.groups.map(group => {
                   return m(SettingGroup, { title: group.title, rows: group.data, collection: group.collection })
                 }) : [];
             }
