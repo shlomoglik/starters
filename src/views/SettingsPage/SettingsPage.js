@@ -27,11 +27,11 @@ let SettingsPage = (init) => {
                   m('.setGroup', 'advancedItem2'),
                   m('.setGroup', 'another adv one')
                 ];
-                case (item.label == 'פילוח לידים' && item.active):
+              case (item.label == 'פילוח לידים' && item.active):
                   return m(SetLeadType)
               case (item.active):
-                item.count = item.groups.length;
-                item.groups ? item.groups.map(group => {
+                item.count = item.groups.length || 0;
+                return item.groups ? item.groups.map(group => {
                   return m(SettingGroup, { title: group.title, rows: group.data, collection: group.collection })
                 }) : [];
             }
