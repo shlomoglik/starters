@@ -1,18 +1,32 @@
 import m from 'mithril';
 import Header from '../commons/Header/HeaderFullPage';
 import { getFormValues } from '../../js/utils';
-import { updateDoc } from '../../firebase/qry';
+import { updateDoc , getContacts } from '../../firebase/qry';
 import Snackbar from '../commons/Snackbar';
+import store from '../../data/store';
+
 
 
 const Contact = (init) => {
-    const getContact = () => {
+    getContacts();
+    const getContact = (vnode) => {
+        let contactID = m.route.param("id");
         const mockContact = {
-            name:"משתמש לדוגמא",
-            phone:"010-1234567",
-            email:"testContact@test.co.il"
+            name: "משתמש לדוגמא",
+            phone: "010-1234567",
+            email: "testContact@test.co.il"
         }
-        init.state.contact = mockContact;
+        let allContacts = store.storeContacts;
+        console.log(allContacts);
+        let contactFilter = allContacts.filter(contact => {
+            console.log(contact.id , contactID);
+            return contact.id == contactID;
+        })
+        console.log(contactFilter,'length prop',contactFilter.length , contactFilter)
+        if (contactFilter.length == 1) {
+            return contactFilter[0];
+        }
+        return mockContact; //else case
     }
 
     const updateContact = (e, vnode) => {
@@ -21,12 +35,12 @@ const Contact = (init) => {
         let form = e.target;
         let contactID = form.id;
         let data = getFormValues(form);
-        const prom = new Promise (resolve=> resolve(updateDoc('contacts', contactID, data)) );
-        prom.then(res=>{            
-            let msg = m(Snackbar , {oncreate:node=>node.dom.classList.add('snackbar__show')  , text:`פרטי איש קשר עודכנו בהצלחה!!`})
+        const prom = new Promise(resolve => resolve(updateDoc('contacts', contactID, data)));
+        prom.then(res => {
+            let msg = m(Snackbar, { oncreate: node => node.dom.classList.add('snackbar__show'), text: `פרטי איש קשר עודכנו בהצלחה!!` })
             vnode.state.msgs.push(msg);
         })
-        prom.catch(err=>alert(err))
+        prom.catch(err => alert(err))
     }
 
     const getPhoto = () => {
@@ -39,8 +53,8 @@ const Contact = (init) => {
     }
 
     return {
-        oninit: vnode=>{
-            getContact();
+        oninit: vnode => {
+            vnode.state.contact = getContact();
             vnode.state.msgs = [];
         },
         oncreate: vnode => {
@@ -63,15 +77,15 @@ const Contact = (init) => {
                                 getPhoto()
                             ]),
                             m('.contact__row', [
-                                m('input[type="text"].contact__input contact__name', { name: "name", value: contact._data.name || '' }),
+                                m('input[type="text"].contact__input contact__name', { name: "name", value: contact.name || '' }),
                                 m('label.contact__label', 'שם')
                             ]),
                             m('.contact__row', [
-                                m('input[type="phone"].contact__input contact__phone', { name: "phone", value: contact._data.phone || '' }),
+                                m('input[type="phone"].contact__input contact__phone', { name: "phone", value: contact.phone || '' }),
                                 m('label.contact__label', 'טלפון')
                             ]),
                             m('.contact__row', [
-                                m('input[type="email"].contact__input contact__email', { name: "email", value: contact._data.email || '' }),
+                                m('input[type="email"].contact__input contact__email', { name: "email", value: contact.email || '' }),
                                 m('label.contact__label', 'אימייל')
                             ]),
                             m('.contact__btns', [
@@ -79,7 +93,7 @@ const Contact = (init) => {
                                 m('button[type="button"].btn.btn--def.btn--red', { onclick: e => m.redraw() }, 'אפס'),
                             ])
                         ]),
-                        vnode.state.msgs.map(msg=>msg)
+                    vnode.state.msgs.map(msg => msg)
                 ])
             )
         }

@@ -106,7 +106,7 @@ function getList(term, field, model) {
 function renderActiveContact(activeContact, vnode) {
     let cmdList = [
         { cmd: 'unAssign', label: 'הסר מליד זה', func: e => vnode.attrs.parent.state.activeContact = false },
-        { cmd: 'edit', label: 'ערוך איש קשר', func: e => console.log('TODO! goto contact full page via contacts/:id ',`contacts/${activeContact.id}`) },
+        { cmd: 'edit', label: 'ערוך איש קשר', func: e => m.route.set(`/contacts/${activeContact.id}`) },
     ]
     return m(`.row#${activeContact.id}`, [
         m('svg.row__icon', m('use', { href: '/img/sprite.svg#icon-user' })),
