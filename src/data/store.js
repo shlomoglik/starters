@@ -1,7 +1,4 @@
-var store = {
-    storeLeads: [],
-    storeContacts: [],
-    storeTasks: [],
+const store = {
 };
 
 module.exports = store;

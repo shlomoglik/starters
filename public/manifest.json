@@ -1,6 +1,6 @@
 {
-    "short_name": "lead-up",
-    "name": "lead-up",
+    "short_name": "starter",
+    "name": "starter-app-mithril-and-firebase",
     "icons": [
         {
             "src": "./img/logo.png",

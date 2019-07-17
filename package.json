@@ -1,7 +1,7 @@
 {
-  "name": "starter",
+  "name": "starter-mitrhil-and-firebase",
   "version": "0.0.1",
-  "description": "some useful files for starter project in mithril",
+  "description": "some useful files for starter project in mithril as frontend with firebase",
   "main": "app.js",
   "scripts": {
     "dev:watch": "webpack -d --config webpack.dev.js --watch",
