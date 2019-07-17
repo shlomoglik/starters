@@ -4,19 +4,6 @@ admin.initializeApp(functions.config().firebase);
 
 const db = admin.firestore();
 
-exports.createStatus = functions.firestore.document('leads/{leadID}').onCreate((doc, context) => {
-    console.log('doc has been created should add status collection', doc);
-    addStatusCollection(context.params.leadID);
+exports.notifyMeOnUserCreate = functions.firestore.document('users/{user}').onCreate((doc, context) => {
+    console.log('new user created', doc);
 })
-
-function addStatusCollection(leadID) {
-    let colRef = db.collection(`leads/${leadID}/status`);
-    let defStatus = settings.setLeadStatus;
-    let batch = db.batch();
-    defStatus.forEach(statusDoc => {
-        var newDoc = colRef.doc();
-        batch.set(newDoc, statusDoc);
-    })
-    batch.commit()
-        .then(() => console.log('addStatusCollection finished'));
-}

@@ -1,15 +1,9 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyCFAQbuy-jB3z3nr0TlKjk5NWndrPoYBak",
-    authDomain: "lead-up-ad9c4.firebaseapp.com",
-    databaseURL: "https://lead-up-ad9c4.firebaseio.com",
-    projectId: "lead-up-ad9c4",
-    storageBucket: "lead-up-ad9c4.appspot.com",
-    messagingSenderId: "620824153004",
-    appId: "1:620824153004:web:9764cb899bf456ab"
+  // copy config from firestore
   };
+  
   // Initialize Firebase
   const app = firebase.initializeApp(firebaseConfig);
-
   const auth = firebase.auth(app);
   const db = firebase.firestore();
 
