@@ -1,6 +1,4 @@
 import m from 'mithril';
-import User from '../../data/User';
-import Header from '../commons/Header/HeaderFullPage';
 import { getFormValues } from '../../js/utils';
 import { updateDoc } from '../../firebase/getData';
 import Snackbar from '../commons/UI/Snackbar';
